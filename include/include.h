@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:58:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/03/16 15:59:38 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/03/18 18:45:35 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ typedef struct argument
 
 typedef struct file
 {
-    t_argument_type arg_type;
+	t_argument_type arg_type;
     char			*a_file;
 }t_file;
 
 typedef struct command
 {
 	char			*cmd;
-    t_arguments     *arg;
+	t_list			*arg;
 	int				cmd_in;
 	int				cmd_out;	
 }t_cmd;
@@ -56,16 +56,24 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
 char	*ft_strjoin(char *s1, char *s2);
 
 // helper to check input
-int	    iswhitespace(char c);
-char	*next_arg(char *str, int *index);
 
+char	*get_single_quote(char *s, int *index);
+char	*get_double_quote(char *s, int *index);
+char	*get_simple_arg(char *str, int *index);
+char	*expand_env_var(char *s, char *res,int k);
+int		check_quotes_validity(char *input);
 // split
 char	*ft_strdup(const char *s1);
 size_t	ft_strlen(const char *s);
 char	**ft_split(char const *s, char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 
+void	*ft_realloc(void *ptr, size_t size);
+void	ft_strncat(char *s1, const char *s2, size_t n);
 // character checker
-int	ft_isdigit(int c);
-int	ft_isalpha(int c);
+int		ft_isdigit(int c);
+int		ft_isalpha(int c);
+int		ft_isalnum(int c);
+int		ft_isprint(int c);
+int		iswhitespace(char c);
 #endif

@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 08:27:26 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/03/18 16:01:27 by hsaktiwy         ###   ########.fr       */
+/*   Created: 2022/10/11 08:29:00 by hsaktiwy          #+#    #+#             */
+/*   Updated: 2023/03/18 18:08:28 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_isprint(int c)
 {
-	size_t	i;
-
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i])
-		i++;
-	return (i);
+	if (c >= ' ' && c <= '~')
+		return (1);
+	return (0);
 }

@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 08:27:26 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/03/18 16:01:27 by hsaktiwy         ###   ########.fr       */
+/*   Created: 2023/03/18 12:50:27 by hsaktiwy          #+#    #+#             */
+/*   Updated: 2023/03/18 16:07:33 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-size_t	ft_strlen(const char *s)
+void    *ft_realloc(void *ptr, size_t size)
 {
-	size_t	i;
+    char	*res;
+	char	*str;
+    int		i;
+	int		j;
 
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i])
-		i++;
-	return (i);
+    if ((!ptr) && size >= 0)
+    {
+		res = malloc(size);
+		return (res);	
+	}else if (size > 0)
+	{
+		res = malloc(size);
+		i = -1;
+		str = (char *)ptr;
+		j = ft_strlen(str);
+		while (++i < j)
+			res[i] = str[i];
+		res[i] = '\0';
+		free(ptr);
+		return (res);
+	}
+	return (ptr);
 }
