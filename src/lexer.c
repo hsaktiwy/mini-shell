@@ -30,7 +30,7 @@ int		lexer(t_list **tokens, char *input)
 				return (1);
 			i = i + 2;
 			token->type = HERE_DOC;
-			token->value = next_arg(&input[i], &i);
+			token->value = get_file(&input[i], &i);
 			ft_lstadd_back(tokens,ft_lstnew(token));
 		}else if (input[i] == '<' && input[i + 1] && input[i + 1] != '<')
 		{
@@ -40,10 +40,10 @@ int		lexer(t_list **tokens, char *input)
 				return (1);
 			++i;
 			token->type = IN_REDIRECT;
-			token->value = next_arg(&input[i], &i);
+			token->value = get_file(&input[i], &i);
 			ft_lstadd_back(tokens,ft_lstnew(token));
 		}
-		if (input[i] == '>' && input[i + 1] && input[i + 1] == '>')
+		else if (input[i] == '>' && input[i + 1] && input[i + 1] == '>')
 		{
 			// arg is a EOF
 			token = (t_token *)malloc(sizeof(t_token));
@@ -51,7 +51,7 @@ int		lexer(t_list **tokens, char *input)
 				return (1);
 			i = i + 2;
 			token->type = APPEND_REDIRECT;
-			token->value = next_arg(&input[i], &i);
+			token->value = get_file(&input[i], &i);
 			ft_lstadd_back(tokens,ft_lstnew(token));
 		}else if (input[i] == '>' && input[i + 1] && input[i + 1] != '>')
 		{
@@ -61,7 +61,7 @@ int		lexer(t_list **tokens, char *input)
 				return (1);
 			++i;
 			token->type = OUT_REDIRECT;
-			token->value = next_arg(&input[i], &i);
+			token->value = get_file(&input[i], &i);
 			ft_lstadd_back(tokens,ft_lstnew(token));
 		}else if (input[i] == '|')
 		{
@@ -71,12 +71,13 @@ int		lexer(t_list **tokens, char *input)
 			token->type = PIPE;
 			token->value = NULL;
 			ft_lstadd_back(tokens,ft_lstnew(token));
+			i++;
 		}else{
 			token = (t_token *)malloc(sizeof(t_token));
 			if (!token)
 				return (1);
 			token->type = COMMAND;
-			//token->value =	get_cmd(&input[i], &i);
+			token->value =	get_cmd(&input[i], &i);
 			ft_lstadd_back(tokens,ft_lstnew(token));
 		}
 	}

@@ -17,7 +17,7 @@ char	*get_single_quote(char *s, int *index)
 	char	c;
 	char	*res;
 	int		i;
-	int		k;
+	//int		k;
 
 	i = 0;
 	c = '\0';

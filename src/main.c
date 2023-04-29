@@ -21,7 +21,7 @@ int	main(int argc, char **argv, char **env)
 	(void)env;
 	while (1)
 	{
-		input = readline("username@hostname:[path/current/directory]$");
+		input = readline("username@hostname:[path/current/directory]$ ");
 		if (input)
 			executer(input);
 	}

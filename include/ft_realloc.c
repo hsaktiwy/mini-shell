@@ -19,7 +19,7 @@ void    *ft_realloc(void *ptr, size_t size)
     int		i;
 	int		j;
 
-    if ((!ptr) && size >= 0)
+    if ((!ptr))
     {
 		res = malloc(size);
 		return (res);	

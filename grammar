@@ -15,3 +15,16 @@ Word -> [a-zA-Z0-9._-]+
 QuotedString -> '"' [^"]* '"'
 Variable -> "$"VarName
 VarName -> [a-zA-Z_][a-zA-Z0-9_]*
+
+////
+Input -> Command
+Command -> SimpleCommand Pipeline
+Pipline -> EMPTY | Pipe Command
+SimpleCommand -> Redirection? Cmd | Cmd Redirection?
+Cmd -> Word (Argument)*
+Argument -> Word | QuotedString | Variable
+Redirection -> InRedirect | OutRedirect | Here_doc | AppendRedirect
+InRedirect -> "<" File
+OutRedirect -> ">" File
+Here_doc -> "<<" Endof
+AppendRedirect -> ">>" File

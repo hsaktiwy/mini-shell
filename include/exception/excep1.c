@@ -12,13 +12,25 @@
 
 #include "exception.h"
 
+void	put_string(char *str)
+{
+	write(STDERR_FILENO, str,ft_strlen(str));
+}
+
 void	error(void)
 {
-	printf("\33[31mmini_shell : \33[00m");
+	put_string("\33[31mmini_shell : \33[00m");
 }
 
 void	no_mem(void)
 {
 	error();
-	printf("\33[33mCannot allocate memory\33[00m\n");
+	put_string("\33[33mCannot allocate memory\33[00m\n");
+}
+
+void	lexer_err(char *str)
+{
+	put_string("\33[33mParse Error near: \33[00m\33[30m");
+	put_string(str);
+	put_string("\33[00m\n");
 }

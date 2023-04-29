@@ -19,7 +19,7 @@ char	*get_simple_arg(char *str, int *index)
 	char	*arg;
 
 	i = 0;
-		arg = ft_strdup("");
+	arg = ft_strdup("");
 	while (str[i] && iswhitespace(str[i]))
 		i++;
 	while (str[i] && !iswhitespace(str[i]) && str[i] != '|'  && str[i] != '<'  && str[i] != '>')

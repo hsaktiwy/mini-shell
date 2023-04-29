@@ -40,9 +40,9 @@ int	check_quotes_validity(char *input)
 t_file	*get_file(char *input, int *index)
 {
 	t_file	*file;
-	int	i;
+	//int	i;
 
-	i = 0;
+	//i = 0;
 	file = NULL;
 	if(!input)
 	{

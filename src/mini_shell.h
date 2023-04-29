@@ -39,4 +39,5 @@ void	executer(char *input);
 
 // lexer
 int		lexer(t_list **tokens, char *input);
+void    free_tokens(t_list **list);
 #endif

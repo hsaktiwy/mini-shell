@@ -14,7 +14,10 @@
 # define EXCEPTION_H
 
 # include <stdio.h>
+# include <unistd.h>
+# include "../include.h"
 
 void	error(void);
 void	no_mem(void);
+void	lexer_err(char *str);
 #endif

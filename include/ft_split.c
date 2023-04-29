@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "include.h"
 
 static int	lentdusplit(const char *s, char c)
 {
