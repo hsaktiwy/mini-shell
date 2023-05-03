@@ -1,0 +1,37 @@
+Expression-> Terme
+Terme -> Redirection_T Pipeline |  Pipeline Redirection_T
+Pipeline -> Expression '|' | '|' Expression | empty
+Redirection_T -> Redirection Simple_cmd | Simple_cmd Redirection | Redirection | empty
+Redirection -> '<<' DATA | '>>' DATA | '<' DATA | '>' DATA
+Simple_cmd -> CMD Arguments
+CMD -> WORD | empty
+Arguments -> Data | empty
+
+
+\/////////////
+Start -> Command
+Command -> Redirection? SimpleCommand (Pipe SimpleCommand)*
+SimpleCommand -> Word (Argument)*
+Redirection -> InRedirect | OutRedirect
+InRedirect -> "<" File
+OutRedirect -> ">" File
+Pipe -> "|"
+Word -> [a-zA-Z0-9]+
+Argument -> Word | QuotedString
+QuotedString -> '"' [^"]* '"'
+File -> [a-zA-Z0-9._-]+
+// sfngkfash
+Input -> Command
+Command -> Redirection? SimpleCommand (Pipe SimpleCommand)* |  SimpleCommand Redirection? (Pipe SimpleCommand)*
+SimpleCommand -> Word (Argument)*
+Redirection -> InRedirect | OutRedirect | Here_doc | AppendRedirect
+InRedirect -> "<" File
+OutRedirect -> ">" File
+Here_doc -> "<<" Endof
+AppendRedirect -> ">>" File
+File -> [a-zA-Z0-9._-]+
+Endof -> [a-zA-Z0-9]+
+Pipe -> "|"
+Word -> [a-zA-Z0-9]+
+Argument -> Word | QuotedString
+QuotedString -> '"' [^"]* '"'
