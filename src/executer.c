@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/03/16 10:31:13 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/04/30 19:33:16 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,26 @@ void	display_tokens(t_list	*tokens)
 	}
 }
 
+void display_ast_types(t_ast *node, char *str) {
+    if (node == NULL) {
+        return;
+    }
+	if (node->type == CMD)
+    	printf("Type:[%s] Command ",str);
+	else if (node->type == REDIRECTION)
+    	printf("Type:[%s] REDIRECTION ",str);
+	else if (node->type == PIPELINE)
+		printf("\nType:[%s] PIPELINE - > ",str);
+	else if (node->type == G_COMMAND)
+    	printf("\nType:[%s] G_Command -> ",str);
+	else if (node->type == S_COMMAND)
+    	printf("	\nType:[%s] S_Command -> \n",str);
+	else
+		printf("  ????  ");
+    display_ast_types(node->left, "left");
+    display_ast_types(node->right, "right");
+}
+
 int	lexical_erreur(char	*input)
 {
 	int		i;
@@ -100,6 +120,7 @@ void	executer(char *input)
 {
 	t_list	*tokens;
 	int		err_lex;
+	t_ast	*ast_tree;
 	
 	tokens = NULL;
 	// lexer erreur traitement'
@@ -109,7 +130,13 @@ void	executer(char *input)
 	else
 		lexer(&tokens, input);
 	if (err_lex == -1)
+	{
+		ast_tree = parser(tokens);
 		display_tokens(tokens);
+		display_ast_types(ast_tree, "root");
+	}
 	// free tokens next;
 	free_tokens(&tokens);
+	// checkj leaks
+	//system("leaks mini_shell");
 }

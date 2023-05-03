@@ -22,9 +22,22 @@ Command -> SimpleCommand Pipeline
 Pipline -> EMPTY | Pipe Command
 SimpleCommand -> Redirection? Cmd | Cmd Redirection?
 Cmd -> Word (Argument)*
-Argument -> Word | QuotedString | Variable
+Argument -> Word
 Redirection -> InRedirect | OutRedirect | Here_doc | AppendRedirect
 InRedirect -> "<" File
 OutRedirect -> ">" File
 Here_doc -> "<<" Endof
 AppendRedirect -> ">>" File
+Pipe ->  "|"
+//
+Command -> SimpleCommand Pipeline
+Pipline -> Pipe Command | EMPTY 
+SimpleCommand -> Redirection Cmd | Cmd Redirection | Cmd
+Cmd -> Word (Argument)*
+Argument -> Word
+Redirection -> InRedirect | OutRedirect | Here_doc | AppendRedirect
+InRedirect -> "<" File
+OutRedirect -> ">" File
+Here_doc -> "<<" Endof
+AppendRedirect -> ">>" File
+Pipe ->  "|"
