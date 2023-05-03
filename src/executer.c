@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/04/30 19:33:16 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/03 12:39:15 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	executer(char *input)
 		lexer(&tokens, input);
 	if (err_lex == -1)
 	{
-		ast_tree = parser(tokens);
+		ast_tree = parser(tokens, input);
 		display_tokens(tokens);
 		display_ast_types(ast_tree, "root");
 	}

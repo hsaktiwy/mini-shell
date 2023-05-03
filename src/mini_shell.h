@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:53:21 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/04/30 19:26:31 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/03 12:38:48 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		lexer(t_list **tokens, char *input);
 void    free_tokens(t_list **list);
 
 // parser
-t_ast	*parser(t_list *tokens);
+t_ast	*parser(t_list *tokens, char *input);
 t_ast	*command(t_list **current);
 // ast tools
 t_ast	*ast_new_node();

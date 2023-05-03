@@ -4,14 +4,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-int main(int argc, char **argv, char **env)
-{
-    //printf("%s\n", getenv(argv[1]));
-    char c;
-    while (1)
-    {
-        read(STDIN_FILENO, &c, 1);
-        write(STDOUT_FILENO, &c, 1);
-    }
-    return (0);
+#include <stdlib.h>
+#include <readline/readline.h>
+
+int main() {
+    char* line;
+
+    line = readline("Enter a line: ");
+
+    printf("Line: %s", line);
+
+    free(line);
+
+    return 0;
 }

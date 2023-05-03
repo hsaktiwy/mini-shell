@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:03:39 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/01 16:24:43 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/03 12:36:59 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,11 +163,11 @@ int lexer(t_list **tokens, char *input)
 	{
 		if (input[i] == '<' && input[i + 1] && input[i + 1] == '<')
 			handleHereDoc(tokens, input, &i);
-		else if (input[i] == '<' && input[i + 1] && input[i + 1] != '<')
+		else if (input[i] == '<' && input[i + 1] != '<')
 			handleInRedirect(tokens, input, &i);
 		else if (input[i] == '>' && input[i + 1] && input[i + 1] == '>')
 			handleAppendRedirect(tokens, input, &i);
-		else if (input[i] == '>' && input[i + 1] && input[i + 1] != '>')
+		else if (input[i] == '>' && input[i + 1] != '>')
 			handleOutRedirect(tokens, input, &i);
 		else if (input[i] == '|')
 			handlePipe(tokens, &i);
@@ -176,6 +176,7 @@ int lexer(t_list **tokens, char *input)
 		
 		if (iswhitespace(input[i]))
 			i++;
+		// printf("here(i = %d)[%c and to int %d]\n", i,input[i],input[i]);
 	}
 	return 0;
 }
