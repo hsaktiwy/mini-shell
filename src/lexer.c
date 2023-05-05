@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:03:39 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/03 12:36:59 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/05 16:58:46 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void handleOutRedirect(t_list **tokens, char *input, int *index)
 	ft_lstadd_back(tokens, ft_lstnew(token));
 }
 
-void handlePipe(t_list **tokens, int *index)
+void handlePipe(t_list **tokens, int *index, int *cmd)
 {
 	t_token *token = (t_token *)malloc(sizeof(t_token));
 	if (!token)
@@ -143,22 +143,16 @@ void handlePipe(t_list **tokens, int *index)
 	token->value = NULL;
 	ft_lstadd_back(tokens, ft_lstnew(token));
 	(*index)++;
-}
-
-void handleCommand(t_list **tokens, char *input, int *index)
-{
-	t_token *token = (t_token *)malloc(sizeof(t_token));
-	if (!token)
-		return;
-		
-	token->type = COMMAND;
-	token->value = get_cmd(&input[*index], index);
-	ft_lstadd_back(tokens, ft_lstnew(token));
+	*cmd = 0;
 }
 
 int lexer(t_list **tokens, char *input)
 {
-	int i = 0;
+	int i;
+	int	cmd;
+
+	i = 0;
+	cmd = 0;
 	while (input[i])
 	{
 		if (input[i] == '<' && input[i + 1] && input[i + 1] == '<')
@@ -170,13 +164,14 @@ int lexer(t_list **tokens, char *input)
 		else if (input[i] == '>' && input[i + 1] != '>')
 			handleOutRedirect(tokens, input, &i);
 		else if (input[i] == '|')
-			handlePipe(tokens, &i);
+			handlePipe(tokens, &i, &cmd);
+		else if (cmd == 0)
+			handleCommand(tokens, input, &i, &cmd);
 		else
-			handleCommand(tokens, input, &i);
-		
+			handleArg(tokens, input, &i);
 		if (iswhitespace(input[i]))
 			i++;
-		// printf("here(i = %d)[%c and to int %d]\n", i,input[i],input[i]);
+		// display_tokens(*tokens);
 	}
 	return 0;
 }
