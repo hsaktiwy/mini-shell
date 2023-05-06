@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/05 21:46:26 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/06 19:15:12 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	display_tokens(t_list	*tokens)
 			printf("		Data :");
 			while (arg)
 			{
-				printf("	%s",(char *)arg->content);
+				printf("|	%s|",(char *)arg->content);
 				arg = arg->next;
 			}
 			printf("\n");
@@ -134,6 +134,7 @@ void	executer(char *input)
 	if (err_lex == -1)
 	{
 		// ta9ribane ra wajade plus hdi rasake m3a environement tal rada on gado
+		fix_expanding_issue(&tokens);
 		ast_tree = parser(&tokens, input);
 		display_tokens(tokens);
 		display_ast_types(ast_tree, "root");

@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iswhitespace.c                                  :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/18 18:16:48 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/06 17:45:16 by hsaktiwy         ###   ########.fr       */
+/*   Created: 2022/10/19 09:33:28 by hsaktiwy          #+#    #+#             */
+/*   Updated: 2023/05/06 17:29:52 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-int	iswhitespace(char c)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	return (c == 32 || (c >= 9 && c <= 13));
-}
-
-int	str_iswhitespaced(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if(iswhitespace(str[i]))
-			return (1);
-		i++;
-	}
-	return (0);		
+	new->next = *lst;
+	*lst = new;
 }

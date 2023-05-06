@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:58:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/05 19:53:08 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/06 19:06:21 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,32 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "exception/exception.h"
-typedef enum arg_type{
+typedef enum s_arg_type{
 	WORD,
 	SINGLE_QUOTE,
 	DOUBLE_QUOTE,
 	VARIABLE
 }t_argument_type;
 
-typedef struct	list
+typedef struct	s_list
 {
 	void		    *content;
-	struct list     *next;	
+	struct s_list     *next;	
 }t_list;
 
-typedef struct argument
+typedef struct s_argument
 {
     t_argument_type arg_type;
     char			**args;
 }t_arguments;
 
-typedef struct file
+typedef struct s_file
 {
 	t_argument_type arg_type;
     char			*a_file;
 }t_file;
 
-typedef struct command
+typedef struct s_command
 {
 	char			*cmd;
 	t_list			*arg;
@@ -55,7 +55,10 @@ t_list	*ft_lstnew(void *content);
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstadd_back(t_list **lst, t_list *new);
 char	*ft_strjoin(char *s1, char *s2);
-
+void	ft_lstadd_front(t_list **lst, t_list *new);\
+void	ft_lstadd_in_index(t_list **list, t_list *new, int index);
+void	ft_lstdelete_index(t_list **list, int index);
+void	ft_lstfree_node(t_list **node);
 // helper to check input
 
 char	*get_single_quote(char *s, int *index);
@@ -79,7 +82,7 @@ int		ft_isalpha(int c);
 int		ft_isalnum(int c);
 int		ft_isprint(int c);
 int		iswhitespace(char c);
-
+int		str_iswhitespaced(char *str);
 // get next line 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 5

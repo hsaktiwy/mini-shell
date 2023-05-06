@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:53:21 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/05 19:52:50 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/06 15:54:46 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,17 @@ int		lexer(t_list **tokens, char *input);
 void    free_tokens(t_list **list);
 void	handleCommand(t_list **tokens, char *input, int *index, int *cmd);
 void	handleArg(t_list **tokens, char *input, int *index);
+void	fix_expanding_issue(t_list **tokens);
 // parser
 t_ast	*parser(t_list **tokens, char *input);
 t_ast	*command(t_list **current);
 void	redirection_habdling(t_list **tokens);
+//		redirection parte
+int		out_append_red(t_file *tmp, int out_app);
+int		here_doc_red(t_file *tmp);
+int		heredoc(char *delimiter, int h_fd);
+int		in_redirection(t_file *tmp);
+int		find_delimeter(char *line, char *needle);
 // ast tools
 t_ast	*ast_new_node();
 void	ast_add_l_r(t_ast *node, t_ast *n_left, t_ast *n_right);
