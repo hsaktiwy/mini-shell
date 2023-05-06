@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:53:21 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/03 12:38:48 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/05 19:52:50 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 # define MINI_SHELL_H
 
 # include <stdlib.h>
-# include <unistd.h>
 # include <stdio.h>
 # include <readline/readline.h>
 # include "../include/include.h"
+# include <fcntl.h>
+# include <errno.h>
 
 typedef enum types{
 	COMMAND,
@@ -59,12 +60,17 @@ void	executer(char *input);
 // lexer
 int		lexer(t_list **tokens, char *input);
 void    free_tokens(t_list **list);
-
+void	handleCommand(t_list **tokens, char *input, int *index, int *cmd);
+void	handleArg(t_list **tokens, char *input, int *index);
 // parser
-t_ast	*parser(t_list *tokens, char *input);
+t_ast	*parser(t_list **tokens, char *input);
 t_ast	*command(t_list **current);
+void	redirection_habdling(t_list **tokens);
 // ast tools
 t_ast	*ast_new_node();
 void	ast_add_l_r(t_ast *node, t_ast *n_left, t_ast *n_right);
 void	ast_set_data(t_ast *node, t_g_types type, void *content);
+
+// tests
+void	display_tokens(t_list	*tokens);
 #endif

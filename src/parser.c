@@ -6,22 +6,36 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:48:28 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/03 18:14:08 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/05 21:32:00 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_shell.h"
 
-int good_piping(char *input, int *i)
+int check_piping(char *input)
 {
 	int	c;
+	int	open;
 
+	open = -1;
 	c = 0;
-	while (input[c + *i] && ft_isprint(input[c + *i]) && input[c + *i] != '|')
+	if (input[c] == '|')
+		return (0);
+	while (input[c] && ft_isprint(input[c]))
+	{
+		if (input[c] == '|' && open != 1)
+		{
+			open = 1;
+		}
+		else if (input[c] != '|' && !iswhitespace(input[c]) && open == 1)
+		{
+			open = 0;
+		}
 		c++;
-	if (input[c + *i] == '|' && c == 0)
-		return (*i += c,0);
-	return (*i += c ,1);
+	}
+	if (open == 1)
+		return (0);
+	return (1);
 }
 
 int printf_error(int boolean)
@@ -46,14 +60,14 @@ void	printf_error_redi(t_token *token, t_list *list)
 		printf("mini-shell:	syntax error near unexpected token `newline'\n");
 }
 
-int redirection_error(t_list *tokens)
+int redirection_error(t_list *tokens, int display)
 {
 	t_token	*token;
 	t_list	*list;
 	t_file	*file;
 
 	list = tokens;
-	if(list)
+	while (list)
 	{
 		token = list->content;
 		if (token->type != COMMAND && token->type != PIPE)
@@ -61,12 +75,13 @@ int redirection_error(t_list *tokens)
 			file = token->value;
 			if (!ft_strlen(file->a_file))
 			{
+				if (display != 1)
+					return (1);
 				return (printf_error_redi(token, list->next),1);
 			}
 		}
+		list = list->next;
 	}
-	if(list->next)
-		redirection_error(list->next);
 	return (0);
 }
 
@@ -74,26 +89,35 @@ int	syntax_error(char *input, t_list *tokens)
 {
 	int	i;
 	int	boolean;
-
+	int r;
+	
+	r = 1;
 	i = 0;
-	boolean = 1;
-	while (boolean && input[i])
-		boolean = good_piping(input, &i);
+	boolean = check_piping(input);
 	if (printf_error(boolean))
-		return (0);
-	if(redirection_error(tokens) > 0)
-		return (-1);
-	return (1);
+		r *= -1;
+	printf("r1 = %d\n",r);
+	if(redirection_error(tokens, r))
+		r += -1;
+	printf("r2 = %d\n",r);
+	return (r);
 }
 
-t_ast	*parser(t_list *tokens, char *input)
+t_ast	*parser(t_list **tokens, char *input)
 {
 	t_ast   *tree;
-	t_list  **current;
+	t_list  *current;
+	int		err;
 
 	tree = NULL;
-	current = &tokens;
-	syntax_error(input, tokens);
-	tree = command(current);
+	current = *tokens;
+	err = syntax_error(input, *tokens);
+	// if (err != -1)
+	// {
+		//printf("Error : %d\n", err);
+		redirection_habdling(tokens);
+		if (err == 1)
+			tree = command(&current);
+	//}
 	return (tree);
 }

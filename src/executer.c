@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/03 12:39:15 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/05 21:46:26 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	display_tokens(t_list	*tokens)
 				arg = arg->next;
 			}
 			printf("\n");
+			printf("		cmd_in : %d\n", ((t_cmd *)token->value)->cmd_in);
+			printf("		cmd_out : %d\n", ((t_cmd *)token->value)->cmd_out);
 		}
 		list = list->next;
 	}
@@ -131,12 +133,10 @@ void	executer(char *input)
 		lexer(&tokens, input);
 	if (err_lex == -1)
 	{
-		ast_tree = parser(tokens, input);
+		// ta9ribane ra wajade plus hdi rasake m3a environement tal rada on gado
+		ast_tree = parser(&tokens, input);
 		display_tokens(tokens);
 		display_ast_types(ast_tree, "root");
 	}
-	// free tokens next;
 	free_tokens(&tokens);
-	// checkj leaks
-	//system("leaks mini_shell");
 }

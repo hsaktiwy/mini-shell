@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:58:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/04 19:08:33 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/06 18:42:21 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define INCLUDE_H
 
 # include <stdlib.h>
+# include <unistd.h>
 # include "exception/exception.h"
 typedef enum arg_type{
 	WORD,
@@ -80,7 +81,19 @@ int		ft_isalnum(int c);
 int		ft_isprint(int c);
 int		iswhitespace(char c);
 
+<<<<<<< HEAD
 //
 int	ft_strcmp(const char *s1, const char *s2);
+=======
+// get next line 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 5
+# endif
+char	*get_next_line(int fd);
+size_t	ft_strlen_nln(char *str);
+void	*ft_calloc(size_t count);
+void	clean(char *s);
+void	*free_rest(char **rest);
+>>>>>>> fa09970a2a678018264e0dcf64f33c4584a4f238
 
 #endif
