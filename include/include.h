@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:58:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/03/18 18:45:35 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/04 19:08:33 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct command
 {
 	char			*cmd;
 	t_list			*arg;
+	size_t			arg_count;
 	int				cmd_in;
 	int				cmd_out;	
 }t_cmd;
@@ -78,4 +79,8 @@ int		ft_isalpha(int c);
 int		ft_isalnum(int c);
 int		ft_isprint(int c);
 int		iswhitespace(char c);
+
+//
+int	ft_strcmp(const char *s1, const char *s2);
+
 #endif
