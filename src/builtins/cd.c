@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:50:22 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/06 18:41:03 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/07 15:37:58 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	print_error(char *command, char *str_error, int print_error)
 char	*get_path(t_cmd *command, char **env)
 {
 	char *path;
-
+	(void)env;
+	
 	if (command->arg_count <= 0)
 	{
 		path = getenv("HOME");
@@ -74,11 +75,4 @@ int	cd(t_cmd *command, char **env)
 		printf("%s\n", path);
 	}
 	return (0);
-}
-
-int	main(int ac, char **av, char **env)
-{
-	t_cmd	command;
-
-	cd(&command, env);
 }

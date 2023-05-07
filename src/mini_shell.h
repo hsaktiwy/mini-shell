@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:53:21 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/06 15:54:46 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/07 16:41:04 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "../include/include.h"
 # include <fcntl.h>
 # include <errno.h>
+# include "builtins/builtins.h"
 
 typedef enum types{
 	COMMAND,
@@ -54,7 +55,7 @@ typedef struct token
 }t_token;
 
 // execution
-void	executer(char *input);
+t_ast	*executer(char *input);
 
 
 // lexer
@@ -63,6 +64,7 @@ void    free_tokens(t_list **list);
 void	handleCommand(t_list **tokens, char *input, int *index, int *cmd);
 void	handleArg(t_list **tokens, char *input, int *index);
 void	fix_expanding_issue(t_list **tokens);
+void	ini_arg_count(t_list **tokens);
 // parser
 t_ast	*parser(t_list **tokens, char *input);
 t_ast	*command(t_list **current);
@@ -80,4 +82,5 @@ void	ast_set_data(t_ast *node, t_g_types type, void *content);
 
 // tests
 void	display_tokens(t_list	*tokens);
+void display_ast_types(t_ast *node, char *str);
 #endif

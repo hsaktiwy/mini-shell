@@ -1,7 +1,7 @@
 [ ]Expand variables in here doc
 [ ]Expand env using our one env (it must be a linked list [key = "", value = ""])
 [ ]fix all erreur printf to print in stderror
-
+[ ] fix this cases : bash3-2$ ls 1>/dev/NULL
 notes : i made a expand_issue file to fix the problems like:
 $a = "ls -la"
 $b = "| wc -l"

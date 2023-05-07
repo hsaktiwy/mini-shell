@@ -1,0 +1,6 @@
+{
+	"files.associations": {
+		"builtins.h": "c",
+		"stdlib.h": "c"
+	}
+}

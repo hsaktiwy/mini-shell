@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/06 19:57:11 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/07 16:41:51 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	display_tokens(t_list	*tokens)
 			printf("		Data :");
 			while (arg)
 			{
-				printf("|	%s|",(char *)arg->content);
+				printf("|%s|",(char *)arg->content);
 				arg = arg->next;
 			}
 			printf("\n");
@@ -72,7 +72,17 @@ void display_ast_types(t_ast *node, char *str) {
         return;
     }
 	if (node->type == CMD)
-    	printf("Type:[%s] Command ",str);
+	{
+    	printf("Type:[%s] Command \n",str);
+		printf("Command name = %s\n", ((t_cmd *)(((t_token *)(node->content))->value))->cmd);
+		printf("Command count arg = %zu\n", ((t_cmd *)(((t_token *)(node->content))->value))->arg_count);
+		t_cmd *cmd  = ((t_cmd *)(((t_token *)(node->content))->value));
+		while(cmd->arg)
+		{
+			printf("arg = %s\n", (char *)(cmd->arg->content));
+			cmd->arg = cmd->arg->next;
+		}
+	}
 	else if (node->type == REDIRECTION)
     	printf("Type:[%s] REDIRECTION ",str);
 	else if (node->type == PIPELINE)
@@ -118,11 +128,11 @@ int	lexical_erreur(char	*input)
 	return (-1);
 }
 
-void	executer(char *input)
+t_ast	*executer(char *input)
 {
 	t_list	*tokens;
 	int		err_lex;
-	t_ast	*ast_tree;
+	t_ast	*ast_tree =  NULL;
 	
 	tokens = NULL;
 	// lexer erreur traitement'
@@ -135,9 +145,11 @@ void	executer(char *input)
 	{
 		// ta9ribane ra wajade plus hdi rasake m3a environement tal rada on gado
 		fix_expanding_issue(&tokens);
+		ini_arg_count(&tokens);
 		ast_tree = parser(&tokens, input);
 		display_tokens(tokens);
-		display_ast_types(ast_tree, "root");
+		//display_ast_types(ast_tree, "root");
 	}
-	free_tokens(&tokens);
+	//free_tokens(&tokens);
+	return (ast_tree);
 }

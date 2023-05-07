@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:46:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/05 16:56:59 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/07 16:40:53 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,36 @@ void	handleArg(t_list **tokens, char *input, int *index)
 	}
 	node = ft_lstnew(get_simple_arg(&input[*index], index));
 	ft_lstadd_back(&(((t_cmd *)cmd->value)->arg), node);
+}
+
+void	ini_count(t_token **token)
+{
+	t_cmd	*cmd;
+	t_list	*current;
+
+	cmd = (*token)->value;
+	cmd->arg_count = 0;
+	current = cmd->arg;
+
+	while (current)
+	{
+		if (ft_strlen(current->content))
+			cmd->arg_count++;
+		current = current->next;
+	}
+}
+
+void	ini_arg_count(t_list **tokens)
+{
+	t_list	*current;
+	t_token	*token;
+
+	current = *tokens;
+	while (current)
+	{
+		token = current->content;
+		if (token->type == COMMAND)
+			ini_count(&token);
+		current = current->next;
+	}
 }
