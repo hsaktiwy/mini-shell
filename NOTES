@@ -1,3 +1,8 @@
+// urgente task
+[ ]replace ast with a simple list only (t_cmd)
+[ ]fix the problem where u need to keep argument type (is it from "" or '' or $, not "$"-> is from "" ...)
+// task to be done 
+[x]do redirection in all types(Parcinf fase)
 [ ]Expand variables in here doc
 [ ]Expand env using our one env (it must be a linked list [key = "", value = ""])
 [ ]fix all erreur printf to print in stderror
