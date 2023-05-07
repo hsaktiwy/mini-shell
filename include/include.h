@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:58:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/06 19:06:21 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/07 14:57:13 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_command
 {
 	char			*cmd;
 	t_list			*arg;
+	size_t			arg_count;
 	int				cmd_in;
 	int				cmd_out;	
 }t_cmd;
@@ -82,7 +83,15 @@ int		ft_isalpha(int c);
 int		ft_isalnum(int c);
 int		ft_isprint(int c);
 int		iswhitespace(char c);
+<<<<<<< HEAD
 int		str_iswhitespaced(char *str);
+=======
+
+<<<<<<< HEAD
+//
+int	ft_strcmp(const char *s1, const char *s2);
+=======
+>>>>>>> 88b3d092ed7088f038f8c2081b63bcc5d2f77326
 // get next line 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 5
@@ -92,5 +101,6 @@ size_t	ft_strlen_nln(char *str);
 void	*ft_calloc(size_t count);
 void	clean(char *s);
 void	*free_rest(char **rest);
+>>>>>>> fa09970a2a678018264e0dcf64f33c4584a4f238
 
 #endif
