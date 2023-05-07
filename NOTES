@@ -2,6 +2,7 @@
 [ ]Expand env using our one env (it must be a linked list [key = "", value = ""])
 [ ]fix all erreur printf to print in stderror
 [ ] fix this cases : bash3-2$ ls 1>/dev/NULL
+[ ]organize the working directory [include->libft + others if neccessary; in src-> seperate each step to it folder]
 notes : i made a expand_issue file to fix the problems like:
 $a = "ls -la"
 $b = "| wc -l"
@@ -50,3 +51,7 @@ bash-3.2$ ls -la << here_doc > output file
 	> here_doc
 	ls: file: No such file or directory
 where the 'file' input in the case1 will behave like a argument for our first detected commad
+
+
+COMMAND THAT DOESN'T WORK:
+[ ]ls -la "|"
