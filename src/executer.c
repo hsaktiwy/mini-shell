@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/07 16:41:51 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/07 18:57:29 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,12 @@ void display_ast_types(t_ast *node, char *str) {
 		printf("Command name = %s\n", ((t_cmd *)(((t_token *)(node->content))->value))->cmd);
 		printf("Command count arg = %zu\n", ((t_cmd *)(((t_token *)(node->content))->value))->arg_count);
 		t_cmd *cmd  = ((t_cmd *)(((t_token *)(node->content))->value));
-		while(cmd->arg)
+		t_list *arg;
+		arg = cmd->arg;
+		while(arg)
 		{
-			printf("arg = %s\n", (char *)(cmd->arg->content));
-			cmd->arg = cmd->arg->next;
+			printf("arg = %s\n", (char *)(arg->content));
+			arg = arg->next;
 		}
 	}
 	else if (node->type == REDIRECTION)

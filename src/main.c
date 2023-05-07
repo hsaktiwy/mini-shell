@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/07 16:28:08 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/07 18:58:03 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,13 @@ int	main(int argc, char **argv, char **env)
 				cmd =((t_cmd *)(((t_token *)(node->content))->value));
 				printf("not here\n");
 				printf("cmd->cmd : %s\n",cmd->cmd);
-				if (cmd)
-					printf("cdm  = %s\n", cmd->cmd);
-				else
-					printf("NULL value\n");
+				// if (cmd)
+				// {
+				// 	printf("cmd  = %s\n", cmd->cmd);
+				// 	printf("cmd_arg  = %s\n",(char *)cmd->arg->content);
+				// }
+				// else
+				// 	printf("NULL value\n");
 				cd(cmd,env);
 			}
 			add_history(input);

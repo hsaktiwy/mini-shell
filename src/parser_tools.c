@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:40:00 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/07 16:00:59 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/07 17:22:05 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ t_ast	*create_ast_node(t_list	**current, t_g_types type)
 	node = ast_new_node();
 	if (!node && (*current) == NULL)
 		return (NULL);
-	printf("This in \n");
-	printf("in prasing %s\n", ((t_cmd *)(((t_token *)((*current)->content))->value))->cmd);
 	node->content = (*current)->content;
 	node->type = type;
 	(*current) = (*current)->next;
