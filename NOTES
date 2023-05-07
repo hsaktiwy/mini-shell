@@ -1,62 +1,65 @@
-// urgente task
-[ ]replace ast with a simple list only (t_cmd)
-[ ]fix the problem where u need to keep argument type (is it from "" or '' or $, not "$"-> is from "" ...)
-// task to be done 
-[x]do redirection in all types(Parcinf fase)
-[ ]Expand variables in here doc
-[ ]Expand env using our one env (it must be a linked list [key = "", value = ""])
-[ ]fix all erreur printf to print in stderror
-[ ] fix this cases : bash3-2$ ls 1>/dev/NULL
-[ ]organize the working directory [include->libft + others if neccessary; in src-> seperate each step to it folder]
-notes : i made a expand_issue file to fix the problems like:
-$a = "ls -la"
-$b = "| wc -l"
-bash-3.2$ $a
-output : 
-	total 168
-	-rw-r--r--   1 hsaktiwy  candidate      0 May  6 19:26         >     
-	drwxr-xr-x  22 hsaktiwy  candidate    748 May  6 19:35 .
-	drwxr-xr-x   4 hsaktiwy  candidate    136 May  3 17:07 ..
-	drwxr-xr-x  15 hsaktiwy  candidate    510 May  6 19:42 .git
-	-rw-r--r--   1 hsaktiwy  candidate     14 May  6 15:21 .here_doc
-	-rw-r--r--   1 hsaktiwy  candidate      0 May  6 19:26 >
-	-rw-r--r--   1 hsaktiwy  candidate   2279 May  6 19:06 Makefile
-	-rw-r--r--   1 hsaktiwy  candidate    360 May  3 10:06 README.md
-	drwxr-xr-x   4 hsaktiwy  candidate    136 May  3 10:06 TESTING
-	-rwxr-xr-x   1 hsaktiwy  candidate   8960 May  6 19:04 a.out
-	-rw-r--r--   1 hsaktiwy  candidate      0 May  6 19:35 a1
-	-rw-r--r--   1 hsaktiwy  candidate      0 May  6 19:35 a2
-	-rw-r--r--   1 hsaktiwy  candidate      0 May  6 19:35 a3
-	-rw-r--r--   1 hsaktiwy  candidate      0 May  6 19:35 append.txt
-	-rw-r--r--   1 hsaktiwy  candidate   1166 May  3 10:06 concept_paper
-	-rwxr-xr-x   1 hsaktiwy  candidate   8600 May  6 19:17 echo
-	-rw-r--r--   1 hsaktiwy  candidate   1250 May  3 10:06 grammar
-	drwxr-xr-x  32 hsaktiwy  candidate   1088 May  6 19:05 include
-	-rwxr-xr-x   1 hsaktiwy  candidate  33796 May  6 19:17 mini_shell
-	drwxr-xr-x  15 hsaktiwy  candidate    510 May  6 19:17 obj
-	drwxr-xr-x  15 hsaktiwy  candidate    510 May  6 15:53 src
-	-rw-r--r--   1 hsaktiwy  candidate   1993 May  6 19:04 test.c
-bash-3.2$ $a $b
-output :
-	ls: -l: No such file or directory
-	ls: wc: No such file or directory
-	ls: |: No such file or directory
-the problem is that we will need to be carfull about this cases
-bash-3.2$ $a "$b"
-output:
-	ls: | wc -l: No such file or directory
-where in this case we will need to identifie the diffrence between a argument where it was walled bye \' \" and where there is just simple $variables
+urgent task:
+	[x]do redirection in all types(Parcinf fase)
+	[ ]replace ast with a simple list only (t_cmd)
+	[ ]fix the problem where u need to keep argument type (is it from "" or '' or $, not "$"-> is from "" ...)
+	[ ]Expand variables in here doc
+	[ ]Expand env using our one env (it must be a linked list [key = "", value = ""])
+normal task: 
+	[ ]fix all erreur printf to print in stderror
+	[ ] fix this cases : bash3-2$ ls 1>/dev/NULL
+	[ ]organize the working directory [include->libft + others if neccessary; in src-> seperate each step to it folder]
+notes : i made a expand_issue file to fix the problems like:(made bye hsaktiwy)
+	$a = "ls -la"
+	$b = "| wc -l"
+	bash-3.2$ $a
+	output : 
+		total 168
+		-rw-r--r--   1 hsaktiwy  candidate      0 May  6 19:26         >     
+		drwxr-xr-x  22 hsaktiwy  candidate    748 May  6 19:35 .
+		drwxr-xr-x   4 hsaktiwy  candidate    136 May  3 17:07 ..
+		drwxr-xr-x  15 hsaktiwy  candidate    510 May  6 19:42 .git
+		-rw-r--r--   1 hsaktiwy  candidate     14 May  6 15:21 .here_doc
+		-rw-r--r--   1 hsaktiwy  candidate      0 May  6 19:26 >
+		-rw-r--r--   1 hsaktiwy  candidate   2279 May  6 19:06 Makefile
+		-rw-r--r--   1 hsaktiwy  candidate    360 May  3 10:06 README.md
+		drwxr-xr-x   4 hsaktiwy  candidate    136 May  3 10:06 TESTING
+		-rwxr-xr-x   1 hsaktiwy  candidate   8960 May  6 19:04 a.out
+		-rw-r--r--   1 hsaktiwy  candidate      0 May  6 19:35 a1
+		-rw-r--r--   1 hsaktiwy  candidate      0 May  6 19:35 a2
+		-rw-r--r--   1 hsaktiwy  candidate      0 May  6 19:35 a3
+		-rw-r--r--   1 hsaktiwy  candidate      0 May  6 19:35 append.txt
+		-rw-r--r--   1 hsaktiwy  candidate   1166 May  3 10:06 concept_paper
+		-rwxr-xr-x   1 hsaktiwy  candidate   8600 May  6 19:17 echo
+		-rw-r--r--   1 hsaktiwy  candidate   1250 May  3 10:06 grammar
+		drwxr-xr-x  32 hsaktiwy  candidate   1088 May  6 19:05 include
+		-rwxr-xr-x   1 hsaktiwy  candidate  33796 May  6 19:17 mini_shell
+		drwxr-xr-x  15 hsaktiwy  candidate    510 May  6 19:17 obj
+		drwxr-xr-x  15 hsaktiwy  candidate    510 May  6 15:53 src
+		-rw-r--r--   1 hsaktiwy  candidate   1993 May  6 19:04 test.c
+	bash-3.2$ $a $b
+	output :
+		ls: -l: No such file or directory
+		ls: wc: No such file or directory
+		ls: |: No such file or directory
+	the problem is that we will need to be carfull about this cases
+	bash-3.2$ $a "$b"
+	output:
+		ls: | wc -l: No such file or directory
+	where in this case we will need to identifie the diffrence between a argument where it was walled bye \' \" and where there is just simple $variables
 
-plus i linked the extra argument that apear in this wierd cases :
-case1 : 
-bash-3.2$ ls -la << here_doc > output file
-	> jshdja
-	> asjkdga
-	> kk
-	> here_doc
-	ls: file: No such file or directory
-where the 'file' input in the case1 will behave like a argument for our first detected commad
-
+	plus i linked the extra argument that apear in this wierd cases :
+	case1 : 
+	bash-3.2$ ls -la << here_doc > output file
+		> jshdja
+		> asjkdga
+		> kk
+		> here_doc
+		ls: file: No such file or directory
+	where the 'file' input in the case1 will behave like a argument for our first detected commad
 
 COMMAND THAT DOESN'T WORK:
 [ ]ls -la "|"
+
+NOTE= "You can devide task needed to be don't to 2 type urgent one and the normale one"
+
+REPORTS: add a report if u find some bugs or something here pls 

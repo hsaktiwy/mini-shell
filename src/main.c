@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/07 18:01:22 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/07 19:00:12 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ t_ast	*search(t_ast *ast)
 int	main(int argc, char **argv, char **env)
 {
 	char	*input;
-	t_ast	*ast;
 	(void)argc;
 	(void)argv;
 	(void)env;
@@ -39,7 +38,7 @@ int	main(int argc, char **argv, char **env)
 		if (input &&  input[0])
 		{
 			
-			ast = executer(input);
+			executer(input);
 			// display_ast_types(ast, "root");
 			// printf("\n");
 			// t_ast *node = search(ast);

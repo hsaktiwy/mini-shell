@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/07 16:41:51 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/07 18:59:36 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,14 +128,13 @@ int	lexical_erreur(char	*input)
 	return (-1);
 }
 
-t_ast	*executer(char *input)
+void	executer(char *input)
 {
 	t_list	*tokens;
 	int		err_lex;
-	t_ast	*ast_tree =  NULL;
+	t_list	*list;
 	
 	tokens = NULL;
-	// lexer erreur traitement'
 	err_lex = lexical_erreur(input);
 	if (err_lex != -1)
 		lexer_err(&input[err_lex]);
@@ -146,10 +145,9 @@ t_ast	*executer(char *input)
 		// ta9ribane ra wajade plus hdi rasake m3a environement tal rada on gado
 		fix_expanding_issue(&tokens);
 		ini_arg_count(&tokens);
-		ast_tree = parser(&tokens, input);
+		list = parser(&tokens, input);
 		display_tokens(tokens);
-		//display_ast_types(ast_tree, "root");
+		display_tokens(list);
 	}
-	//free_tokens(&tokens);
-	return (ast_tree);
+	free_tokens(&tokens);
 }
