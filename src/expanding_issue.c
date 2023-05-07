@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:53:52 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/06 19:17:02 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/06 19:58:21 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,10 @@ void	fix_expanding_issue(t_list **tokens)
 	while (list)
 	{
 		token = list->content;
+		printf("no\n");
 		if (token->type == COMMAND)
 			fix_if_whitspace((t_cmd **)&(token->value));
+		printf("nope\n");
 		list =list->next;
 	}
 }
