@@ -24,7 +24,7 @@ char	*get_simple_arg(char *str, int *index)
 		i++;
 	while (str[i] && !iswhitespace(str[i]) && str[i] != '|'  && str[i] != '<'  && str[i] != '>')
 	{
-		if (str[i] == '$' && !iswhitespace(str[i + 1]))
+		if (str[i] == '$' && str[i + 1] && !iswhitespace(str[i + 1]))
 		{
 			k = 0;
 			while (str[k + i + 1] && !iswhitespace(str[k + i + 1]) && str[k + i + 1] != '$')
