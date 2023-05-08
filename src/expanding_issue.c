@@ -29,39 +29,47 @@ void	fix_in_cmd(t_cmd **command)
 	{
 		i--;
 		while(i > 0 && tab[i])
-			ft_lstadd_front(&(cmd->arg), ft_lstnew(tab[i--]));
+			ft_lstadd_front(&(cmd->arg), ft_lstnew(creat_arg(tab[i--], WORD)));
 	}
 }
 
-void	fix_in_arg(t_list **arg, char *str, int index)
+void	fix_in_arg(t_list **arg, t_file *str, int index)
 {
 	char	**tab;
 	int 	i;
 
 	i = -1;
-	tab = ft_split(str, ' ');
-	ft_lstdelete_index(arg, index);
+	tab = ft_split(str->a_file, ' ');
+	ft_lstdelete_index(arg, index,ft_lstfree_t_file);
 	while(tab[++i])
-		ft_lstadd_in_index(arg, ft_lstnew(tab[i]), index++);
+	{
+		ft_lstadd_in_index(arg,
+			ft_lstnew(creat_arg(tab[i], WORD)), index++);
+	}
 }
 
 void	fix_if_whitspace(t_cmd **command)
 {
 	t_cmd		*cmd;
 	int			i;
-	char		*str;
+	t_file		*str;
 	t_list		*current;
 
 	i = 0;
 	cmd = *command;
-	if (str_iswhitespaced(cmd->cmd))
+	if (str_iswhitespaced(cmd->cmd)
+			&& cmd->cmd_type == VARIABLE)
 		fix_in_cmd(command);
 	current = cmd->arg;
 	while (current)
 	{
 		str = current->content;
-		if (str_iswhitespaced(str))
+		if (str_iswhitespaced(str->a_file)
+			&& str->arg_type == VARIABLE)
+		{
 			fix_in_arg(&(cmd->arg), str, i);
+			current = cmd->arg;
+		}
 		current = current->next;
 		i++;
 	}
@@ -76,10 +84,8 @@ void	fix_expanding_issue(t_list **tokens)
 	while (list)
 	{
 		token = list->content;
-		printf("no\n");
 		if (token->type == COMMAND)
 			fix_if_whitspace((t_cmd **)&(token->value));
-		printf("nope\n");
 		list =list->next;
 	}
 }

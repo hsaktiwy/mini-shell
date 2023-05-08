@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/07 18:57:29 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/08 14:11:26 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,13 @@ void	display_tokens(t_list	*tokens)
 			printf("	type : COMMOND\n");
 			printf("		CMD : %s\n", ((t_cmd *)token->value)->cmd);
 			t_list 	*arg = ((t_cmd *)token->value)->arg;
+			printf("	CMD type cmd(token) = %d\n", ((t_cmd *)(token->value))->cmd_type);
+			printf("	CMD count arg = %zu\n", ((t_cmd *)(token->value))->arg_count);
 			printf("		Data :");
 			while (arg)
 			{
-				printf("|%s|",(char *)arg->content);
+				printf("|%s|->[%d]",(char *)((t_file *)arg->content)->a_file,
+					(int)((t_file *)arg->content)->arg_type);
 				arg = arg->next;
 			}
 			printf("\n");
@@ -76,6 +79,7 @@ void display_ast_types(t_ast *node, char *str) {
     	printf("Type:[%s] Command \n",str);
 		printf("Command name = %s\n", ((t_cmd *)(((t_token *)(node->content))->value))->cmd);
 		printf("Command count arg = %zu\n", ((t_cmd *)(((t_token *)(node->content))->value))->arg_count);
+		printf("Command type cmd(token) = %d\n", ((t_cmd *)(((t_token *)(node->content))->value))->cmd_type);
 		t_cmd *cmd  = ((t_cmd *)(((t_token *)(node->content))->value));
 		t_list *arg;
 		arg = cmd->arg;
@@ -130,14 +134,13 @@ int	lexical_erreur(char	*input)
 	return (-1);
 }
 
-t_ast	*executer(char *input)
+void	executer(char *input)
 {
 	t_list	*tokens;
 	int		err_lex;
-	t_ast	*ast_tree =  NULL;
+	t_list	*list;
 	
 	tokens = NULL;
-	// lexer erreur traitement'
 	err_lex = lexical_erreur(input);
 	if (err_lex != -1)
 		lexer_err(&input[err_lex]);
@@ -148,10 +151,9 @@ t_ast	*executer(char *input)
 		// ta9ribane ra wajade plus hdi rasake m3a environement tal rada on gado
 		fix_expanding_issue(&tokens);
 		ini_arg_count(&tokens);
-		ast_tree = parser(&tokens, input);
-		display_tokens(tokens);
-		//display_ast_types(ast_tree, "root");
+		list = parser(&tokens, input);
+		//display_tokens(tokens);
+		display_tokens(list);
 	}
-	//free_tokens(&tokens);
-	return (ast_tree);
+	free_tokens(&tokens);
 }

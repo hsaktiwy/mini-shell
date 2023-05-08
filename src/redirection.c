@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:42:55 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/07 17:08:45 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/07 18:08:57 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,33 +62,29 @@ int	in_red_cmd(t_token **red, t_token **command)
 	return (1);
 }
 
-int	redirect(t_list **list)
+int	redirect(t_list **list, t_token **cmd)
 {
 	t_list  *start;
-	t_token *cmd;
 	t_token *red;
 	t_token *tmp;
 
 	start = *list;
-	cmd = NULL;
 	while (start)
 	{
 		tmp = (start)->content;
-		if (tmp->type == COMMAND)
-			cmd = tmp;
-		else if (tmp->type == IN_REDIRECT || tmp->type == HERE_DOC)
+		if (tmp->type == IN_REDIRECT || tmp->type == HERE_DOC)
 		{
 			red = tmp;
-			if (!in_red_cmd(&red, &cmd))
+			if (!in_red_cmd(&red, cmd))
 				return(0);
 		}
 		else if (tmp->type == OUT_REDIRECT || tmp->type == APPEND_REDIRECT)
 		{
 			red = tmp;
-			if (!out_red_cmd(&red, &cmd))
+			if (!out_red_cmd(&red, cmd))
 				return(0);
 		}
-		else
+		else if (tmp->type == PIPE)
 			break;
 		start = (start)->next;
 	}
@@ -99,12 +95,23 @@ void    redirection_habdling(t_list **tokens)
 {
 	t_list	*list;
 	t_token	*token;
+	t_list	*current;
+	t_token	*cmd;
 
 	list = *tokens;
 	while (list)
 	{
-		if (!redirect(&list))
-			return ;
+		current = list;
+		cmd = NULL;
+		while (current && !cmd)
+		{
+			token = current->content;
+			if (token->type == COMMAND)
+				cmd = token;
+			current = current->next;
+		}
+		if (!redirect(&list, &cmd))
+				return ;
 		while(list)
 		{
 			token = list->content;

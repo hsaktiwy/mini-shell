@@ -12,6 +12,18 @@
 
 #include "include.h"
 
+t_file	*creat_arg(char *file_name, t_argument_type type)
+{
+	t_file	*arg;
+
+	arg = (t_file *)malloc(sizeof(t_file));
+	if (!arg)
+		return (NULL);
+	arg->a_file = file_name;
+	arg->arg_type = type;
+	return (arg);
+}
+
 int	check_quotes_validity(char *input)
 {
 	char	c;
@@ -19,7 +31,7 @@ int	check_quotes_validity(char *input)
 
 	i = 0;
 	c = '\0';
-	while (input[i] && input[i] != '|')
+	while (input[i])
 	{
 		if(input[i] == '\'' && !c)
 			c = '\'';
@@ -29,6 +41,8 @@ int	check_quotes_validity(char *input)
 			c = '\"';
 		else if (input[i] == '\"' && c == '\"')
 			c = '\0';
+		else if (input[i] == '|' && c == '\0')
+			break;
 		i++;
 	}
 	if (!c)
@@ -40,66 +54,30 @@ int	check_quotes_validity(char *input)
 t_file	*get_file(char *input, int *index)
 {
 	t_file	*file;
-	//int	i;
 
-	//i = 0;
 	file = NULL;
 	if(!input)
 	{
-		file = (t_file *)malloc(sizeof(t_file));
-		if (!file)
-			return (NULL);
-		file->a_file = ft_strdup("\0");
-		file->arg_type = WORD;
+		file = creat_arg(ft_strdup("\0"), WORD);
 		return (file);
 	}
 	else if (input[0] == '\''
 		&& check_quotes_validity(input))
 	{
-		file = (t_file *)malloc(sizeof(t_file));
-		if (!file)
-			return (NULL);
 		(*index)++;
-		file->a_file = get_single_quote(&input[(*index)], index);
-		
+		file = creat_arg(get_single_quote(&input[(*index)], index),SINGLE_QUOTE);
 	}else if (input[0] == '\"'
 		&& check_quotes_validity(input))
 	{
-		file = (t_file *)malloc(sizeof(t_file));
-		if (!file)
-			return (NULL);
 		(*index)++;
-		file->a_file = get_double_quote(&input[(*index)], index);
+		file = creat_arg(get_double_quote(&input[(*index)], index), DOUBLE_QUOTE);
 	}
 	else if (check_quotes_validity(input))
 	{
-		file = (t_file *)malloc(sizeof(t_file));
-		if (!file)
-			return (NULL);
-		file->a_file = get_simple_arg( input, index);
+		if(input[0] == '$')
+			file = creat_arg(get_simple_arg( input, index), VARIABLE);
+		else
+			file = creat_arg(get_simple_arg( input, index), WORD);
 	}
 	return (file);
 }
-
-// void	leaks_func()
-// {
-// 	system("leaks a.out");
-// }
-
-// int main(int argc, char **argv)
-// {
-// 	t_file *file;
-// 	int index;
-// 	atexit(leaks_func);
-// 	index = 0;
-// 	file = get_file("\"$HOME/$PATH\"$_ asjkhgjkashdjk", &index);
-// 	if (file)
-// 		printf("%s_%d\n",file->a_file, index);
-// 	else
-// 		printf("(NULL)\n");
-// 	if	(file)
-// 		free(file->a_file);
-// 		free(file);
-// 	return (0);
-// }
-// compiling : gcc ft_next_arg.c ft_strlen.c ft_strncat.c ft_realloc.c ft_strdup.c ft_strjoin.c ft_is*

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:53:21 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/07 16:41:04 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/07 18:58:37 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <readline/readline.h>
+# include <readline/history.h>
 # include "../include/include.h"
 # include <fcntl.h>
 # include <errno.h>
@@ -55,7 +56,7 @@ typedef struct token
 }t_token;
 
 // execution
-t_ast	*executer(char *input);
+void	executer(char *input);
 
 
 // lexer
@@ -66,7 +67,7 @@ void	handleArg(t_list **tokens, char *input, int *index);
 void	fix_expanding_issue(t_list **tokens);
 void	ini_arg_count(t_list **tokens);
 // parser
-t_ast	*parser(t_list **tokens, char *input);
+t_list	*parser(t_list **tokens, char *input);
 t_ast	*command(t_list **current);
 void	redirection_habdling(t_list **tokens);
 //		redirection parte
@@ -82,5 +83,5 @@ void	ast_set_data(t_ast *node, t_g_types type, void *content);
 
 // tests
 void	display_tokens(t_list	*tokens);
-void display_ast_types(t_ast *node, char *str);
+void 	display_ast_types(t_ast *node, char *str);
 #endif

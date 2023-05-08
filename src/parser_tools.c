@@ -35,6 +35,7 @@ int	check_token(t_list	**current, t_g_types g_type)
 	}
 	return (0);
 }
+
 t_ast	*create_ast_node(t_list	**current, t_g_types type)
 {
 	t_ast	*node;

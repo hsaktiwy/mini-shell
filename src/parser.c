@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:48:28 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/05 21:32:00 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/07 18:53:12 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,29 +87,43 @@ int redirection_error(t_list *tokens, int display)
 
 int	syntax_error(char *input, t_list *tokens)
 {
-	int	i;
 	int	boolean;
 	int r;
 	
 	r = 1;
-	i = 0;
 	boolean = check_piping(input);
 	if (printf_error(boolean))
 		r *= -1;
-	printf("r1 = %d\n",r);
 	if(redirection_error(tokens, r))
 		r += -1;
-	printf("r2 = %d\n",r);
 	return (r);
 }
 
-t_ast	*parser(t_list **tokens, char *input)
+t_list	*creat_cmd_list(t_list	**tokens)
 {
-	t_ast   *tree;
+	t_list	*list;
+	t_list	*current;
+	t_token	*token;
+
+	current = *tokens;
+	list = NULL;
+	while (current)
+	{
+		token = current->content;
+		if (token->type == COMMAND)
+			ft_lstadd_back(&list, ft_lstnew(token));
+		current = current->next;
+	}
+	return (list);
+}
+
+t_list	*parser(t_list **tokens, char *input)
+{
+	t_list   *list;
 	t_list  *current;
 	int		err;
 
-	tree = NULL;
+	list = NULL;
 	current = *tokens;
 	err = syntax_error(input, *tokens);
 	// if (err != -1)
@@ -117,7 +131,7 @@ t_ast	*parser(t_list **tokens, char *input)
 		//printf("Error : %d\n", err);
 		redirection_habdling(tokens);
 		if (err == 1)
-			tree = command(&current);
+			list = creat_cmd_list(&current);
 	//}
-	return (tree);
+	return (list);
 }
