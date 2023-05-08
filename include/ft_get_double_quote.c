@@ -20,11 +20,8 @@ char	*expand_env_var(char *s, char *res,int k)
 
 	env[0] = '\0';
 	ft_strncat(env, s, k);
-	//printf("env = %s\n",env);
 	size = ft_strlen(getenv(env));
-	//printf("size expanded_env = %d(res = %s || env = %s)\n",size, res, getenv(env));
 	re = ft_realloc(res, ft_strlen(res) + size + 1);
-	//printf("re = %s\n",re);
 	ft_strncat(re, getenv(env), size);
 	return (re);
 }
