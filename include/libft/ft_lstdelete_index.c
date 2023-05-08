@@ -12,18 +12,6 @@
 
 #include "libft.h"
 
-void	ft_lstfree_f_file(t_list **node)
-{
-	t_file	*file;
-
-	if (*node)
-	{
-		file = (*node)->content;
-		free(file->a_file);
-		ft_lstfree_node(node);
-	}
-}
-
 void	ft_lstfree_node(t_list **node)
 {
 	if (*node)
