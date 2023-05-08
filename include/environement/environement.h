@@ -3,6 +3,7 @@
 
 # include "../libft/libft.h"
 # include "../exception/exception.h"
+
 // envirement variable
 typedef struct s_holder
 {
@@ -14,7 +15,7 @@ typedef struct s_env
 {
 	t_list	*l_env;
 	char 	**env;
-}t_env;
+}	t_env;
 
 // function that initialize the t_env from env
 t_env		*ft_init_env(char **env);

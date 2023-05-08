@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/09 13:57:11 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/09 14:22:23 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ int	lexical_erreur(char	*input)
 	return (-1);
 }
 
-void	executer(char *input, char **env)
+void	executer(char *input, t_env *env)
 {
 	t_list	*tokens;
 	int		err_lex;
@@ -155,7 +155,7 @@ void	executer(char *input, char **env)
 		ini_arg_count(&tokens);
 		list = parser(env, &tokens, input);
 		//execution
-		execute(list, env);
+		// execute(list, env);
 		//display_tokens(tokens);
 		display_tokens(list);
 	}

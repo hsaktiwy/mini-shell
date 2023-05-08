@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exception.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:13:17 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/03/16 15:43:50 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/09 14:27:25 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # include <stdio.h>
 # include <unistd.h>
-# include "../include.h"
+# include "../libft/libft.h"
+// # include "../include.h"
 
 void	error(void);
 void	no_mem(void);

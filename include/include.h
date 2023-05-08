@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:58:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/09 13:56:28 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/09 14:12:38 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,6 @@ typedef struct s_command
 	char			*file_in;
 	char			*file_out;
 }t_cmd;
-
-//
-typedef struct s_env
-{
-	/* data */
-	t_list 	*l_env;
-	char 	*env;
-}	t_env;
 
 // helper to check input
 void	ft_lstfree_t_file(t_list **node);
