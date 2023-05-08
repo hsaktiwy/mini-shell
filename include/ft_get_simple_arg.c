@@ -24,10 +24,10 @@ char	*get_simple_arg(char *str, int *index)
 		i++;
 	while (str[i] && !iswhitespace(str[i]) && str[i] != '|'  && str[i] != '<'  && str[i] != '>')
 	{
-		if (str[i] == '$' && !iswhitespace(str[i + 1]))// && (ft_isalnum(str[i + 1]) || str[i + 1] == '?' ||  str[i + 1] == '_'))
+		if (str[i] == '$' && !iswhitespace(str[i + 1]))
 		{
 			k = 0;
-			while (str[k + i + 1] && !iswhitespace(str[k + i + 1]))//&& (ft_isalnum(str[k + i + 1]) || str[k +i + 1] == '?' ||  str[k + i + 1] == '_'))
+			while (str[k + i + 1] && !iswhitespace(str[k + i + 1]) && str[k + i + 1] != '$')
 				k++;
 			arg = expand_env_var(&str[i + 1], arg, k);
 			i += k + 1;			
@@ -48,7 +48,6 @@ char	*get_simple_arg(char *str, int *index)
 			ft_strncat(arg, &str[i], 1);
 			i++;
 		}
-		
 	}
 	return ((*index) += i,arg);
 }

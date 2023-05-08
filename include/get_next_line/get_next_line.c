@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include.h"
+#include "get_next_line.h"
 
 static int	ft_line_exist(char *s)
 {

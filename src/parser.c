@@ -87,19 +87,15 @@ int redirection_error(t_list *tokens, int display)
 
 int	syntax_error(char *input, t_list *tokens)
 {
-	int	i;
 	int	boolean;
 	int r;
 	
 	r = 1;
-	i = 0;
 	boolean = check_piping(input);
 	if (printf_error(boolean))
 		r *= -1;
-	printf("r1 = %d\n",r);
 	if(redirection_error(tokens, r))
 		r += -1;
-	printf("r2 = %d\n",r);
 	return (r);
 }
 

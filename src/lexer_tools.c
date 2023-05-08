@@ -40,7 +40,14 @@ void	handleArg(t_list **tokens, char *input, int *index)
 			cmd = tmp;
 		list = list->next;
 	}
-	node = ft_lstnew(get_simple_arg(&input[*index], index));
+	if (input[*index] == '$')
+	{
+		node = ft_lstnew(creat_arg(get_simple_arg(&input[*index], index), VARIABLE));
+	}
+	else
+	{
+		node = ft_lstnew(creat_arg(get_simple_arg(&input[*index], index), WORD));
+	}
 	ft_lstadd_back(&(((t_cmd *)cmd->value)->arg), node);
 }
 

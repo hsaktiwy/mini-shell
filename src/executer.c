@@ -53,10 +53,13 @@ void	display_tokens(t_list	*tokens)
 			printf("	type : COMMOND\n");
 			printf("		CMD : %s\n", ((t_cmd *)token->value)->cmd);
 			t_list 	*arg = ((t_cmd *)token->value)->arg;
+			printf("	CMD type cmd(token) = %d\n", ((t_cmd *)(token->value))->cmd_type);
+			printf("	CMD count arg = %zu\n", ((t_cmd *)(token->value))->arg_count);
 			printf("		Data :");
 			while (arg)
 			{
-				printf("|%s|",(char *)arg->content);
+				printf("|%s|->[%d]",(char *)((t_file *)arg->content)->a_file,
+					(int)((t_file *)arg->content)->arg_type);
 				arg = arg->next;
 			}
 			printf("\n");
@@ -76,6 +79,7 @@ void display_ast_types(t_ast *node, char *str) {
     	printf("Type:[%s] Command \n",str);
 		printf("Command name = %s\n", ((t_cmd *)(((t_token *)(node->content))->value))->cmd);
 		printf("Command count arg = %zu\n", ((t_cmd *)(((t_token *)(node->content))->value))->arg_count);
+		printf("Command type cmd(token) = %d\n", ((t_cmd *)(((t_token *)(node->content))->value))->cmd_type);
 		t_cmd *cmd  = ((t_cmd *)(((t_token *)(node->content))->value));
 		while(cmd->arg)
 		{
@@ -146,7 +150,7 @@ void	executer(char *input)
 		fix_expanding_issue(&tokens);
 		ini_arg_count(&tokens);
 		list = parser(&tokens, input);
-		display_tokens(tokens);
+		//display_tokens(tokens);
 		display_tokens(list);
 	}
 	free_tokens(&tokens);
