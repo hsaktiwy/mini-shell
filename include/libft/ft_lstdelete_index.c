@@ -12,6 +12,18 @@
 
 #include "include.h"
 
+void	ft_lstfree_f_file(t_list **node)
+{
+	t_file	*file;
+
+	if (*node)
+	{
+		file = (*node)->content;
+		free(file->a_file);
+		ft_lstfree_node(node);
+	}
+}
+
 void	ft_lstfree_node(t_list **node)
 {
 	if (*node)
@@ -22,7 +34,7 @@ void	ft_lstfree_node(t_list **node)
 	}
 }
 
-void	ft_lstdelete_index(t_list **list, int index)
+void	ft_lstdelete_index(t_list **list, int index, void (*del)(t_list **))
 {
 	t_list	*previous;
 	t_list	*node;
@@ -33,7 +45,7 @@ void	ft_lstdelete_index(t_list **list, int index)
 	{
 		node = *list;
 		*list = (*list)->next;
-		ft_lstfree_node(&node);
+		del(&node);
 		return ;
 	}
 	node = *list;
@@ -44,5 +56,5 @@ void	ft_lstdelete_index(t_list **list, int index)
 	}
 	previous->next = node->next;
 	node->next = NULL;
-	ft_lstfree_node(&node);
+	del(&node);
 }
