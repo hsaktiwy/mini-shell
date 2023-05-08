@@ -12,7 +12,7 @@
 
 #include "include.h"
 
-char	*get_single_quote(char *s, int *index)
+char	*get_single_quote(t_env *env, char *s, int *index)
 {
 	char	c;
 	char	*res;
@@ -32,7 +32,7 @@ char	*get_single_quote(char *s, int *index)
 				c = '\0';
 		}else if (s[i] == '\"' && c == '\'')
 		{
-			res = ft_strjoin(res, get_double_quote(&s[++i], index));
+			res = ft_strjoin(res, get_double_quote(env, &s[++i], index));
 			break ;
 		}
 		else if (s[i] && (!c || (c == '\'' && ft_isalnum(s[i]))))

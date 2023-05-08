@@ -29,6 +29,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	*ft_memset(void *b, int c, size_t len);
 void	*ft_realloc(void *ptr, size_t size);
 void	ft_strncat(char *s1, const char *s2, size_t n);
+char	**ft_t_strdup(char **str);
+int		ft_t_strlen(char **str);
 // character checker
 int		ft_isdigit(int c);
 int		ft_isalpha(int c);

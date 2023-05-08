@@ -32,32 +32,17 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	(void)env;
+	t_env	*env_s;
+
+	env_s = ft_init_env(env);
 	while (1)
 	{
-		input = readline("username@hostname:[path/current/directory]$ ");
+		input = readline("\33[31mminishell:$>\33[35m ");
 		if (input &&  input[0])
 		{
-			
-			executer(input);
-			// display_ast_types(ast, "root");
-			// printf("\n");
-			// t_ast *node = search(ast);
-			// if (node != NULL)
-			// {
-			// 	t_cmd *cmd;
-			// 	printf("node type = %d\n", node->type);
-			// 	cmd =((t_cmd *)(((t_token *)(node->content))->value));
-			// 	printf("not here\n");
-			// 	printf("cmd->cmd : %s\n",cmd->cmd);
-			// 	if (cmd)
-			// 		printf("cdm  = %s\n", cmd->cmd);
-			// 	else
-			// 		printf("NULL value\n");
-			// 	cd(cmd,env);
-			// }
+			executer(input, env_s);
 			add_history(input);
 		}
-		
 		free(input);
 	}
 	return (0);

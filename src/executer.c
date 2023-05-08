@@ -65,6 +65,8 @@ void	display_tokens(t_list	*tokens)
 			printf("\n");
 			printf("		cmd_in : %d\n", ((t_cmd *)token->value)->cmd_in);
 			printf("		cmd_out : %d\n", ((t_cmd *)token->value)->cmd_out);
+			printf("		file_in : %s\n", ((t_cmd *)token->value)->file_in);
+			printf("		file_out : %s\n", ((t_cmd *)token->value)->file_out);
 		}
 		list = list->next;
 	}
@@ -132,7 +134,7 @@ int	lexical_erreur(char	*input)
 	return (-1);
 }
 
-void	executer(char *input)
+void	executer(char *input, t_env *env)
 {
 	t_list	*tokens;
 	int		err_lex;
@@ -143,13 +145,13 @@ void	executer(char *input)
 	if (err_lex != -1)
 		lexer_err(&input[err_lex]);
 	else
-		lexer(&tokens, input);
+		lexer(&tokens, input, env);
 	if (err_lex == -1)
 	{
 		// ta9ribane ra wajade plus hdi rasake m3a environement tal rada on gado
 		fix_expanding_issue(&tokens);
 		ini_arg_count(&tokens);
-		list = parser(&tokens, input);
+		list = parser(env, &tokens, input);
 		//display_tokens(tokens);
 		display_tokens(list);
 	}

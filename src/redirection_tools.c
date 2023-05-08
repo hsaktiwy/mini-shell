@@ -38,9 +38,10 @@ int	in_redirection(t_file *tmp)
 	return (fd);
 }
 
-int	heredoc(char *delimiter, int h_fd)
+int	heredoc(t_env *env, char *delimiter, int h_fd)
 {
 	char	*line;
+	char	*tmp;
 
 	while (1)
 	{
@@ -48,17 +49,18 @@ int	heredoc(char *delimiter, int h_fd)
 		line = get_next_line(0);
 		if (line)
 		{
-			if (!find_delimeter(line, delimiter))
+			tmp = expand(env, line);
+			if (!find_delimeter(tmp, delimiter))
 			{
-				// EXPAND IN THE HERE_DOC EFORE TROWING TO IT
-				if (write(h_fd, line, ft_strlen(line)) == -1)
-					return (free(line), 0);
+				if (write(h_fd, tmp, ft_strlen(tmp)) == -1)
+					return (free(tmp), free(line), 0);
 			}
 			else
 			{
-				return (free(line), close(h_fd), 1);
+				return (free(tmp), free(line), close(h_fd), 1);
 			}
 			free(line);
+			free(tmp);
 			line = NULL;
 		}
 		else
@@ -66,7 +68,7 @@ int	heredoc(char *delimiter, int h_fd)
 	}
 }
 
-int	here_doc_red(t_file *tmp)
+int	here_doc_red(t_env *env, t_file *tmp)
 {
 	int	fd;
 
@@ -77,7 +79,7 @@ int	here_doc_red(t_file *tmp)
 		fd = open(".here_doc", O_RDWR | O_CREAT | O_TRUNC, 0666);
 		if (fd == -1)
 			perror(NULL);
-		else if (!heredoc(tmp->a_file, fd))
+		else if (!heredoc(env, tmp->a_file, fd))
 		{
 			fd = -1;
 			printf("Error : here_doc fail\n");
@@ -93,9 +95,9 @@ int out_append_red(t_file *tmp, int out_app)
 	fd = -1;
 	if (tmp->a_file)
 	{
-		if (out_app == 0)
+		if (out_app == OUT_REDIRECT)
 			fd = open(tmp->a_file, O_RDWR | O_CREAT | O_TRUNC, 0644);
-		else if (out_app == 1)
+		else if (out_app == APPEND_REDIRECT)
 			fd = open(tmp->a_file, O_RDWR | O_CREAT | O_APPEND, 0644);
 		if (fd == -1)
 			perror("mini-shell");

@@ -1,0 +1,22 @@
+total 172
+drwxrwxrwx 1 lol lol    512 May  8 20:42 .
+drwxrwxrwx 1 lol lol    512 May  7 18:32 ..
+drwxrwxrwx 1 lol lol    512 May  8 02:23 .git
+-rwxrwxrwx 1 lol lol     15 May  8 20:37 .here_doc
+drwxrwxrwx 1 lol lol    512 May  7 18:32 .vscode
+-rwxrwxrwx 1 lol lol   2644 May  8 02:21 Makefile
+-rwxrwxrwx 1 lol lol   3021 May  8 02:21 NOTES
+-rwxrwxrwx 1 lol lol    360 May  7 18:32 README.md
+drwxrwxrwx 1 lol lol    512 May  7 18:32 TESTING
+-rwxrwxrwx 1 lol lol   8960 May  7 18:32 a.out
+-rwxrwxrwx 1 lol lol   1166 May  7 18:32 concept_paper
+-rwxrwxrwx 1 lol lol   1250 May  7 18:32 grammar
+-rwxrwxrwx 1 lol lol      0 May  8 20:42 green
+drwxrwxrwx 1 lol lol    512 May  8 02:21 include
+-rwxrwxrwx 1 lol lol      0 May  8 20:42 infile
+-rwxrwxrwx 1 lol lol 140280 May  8 20:41 mini_shell
+drwxrwxrwx 1 lol lol    512 May  8 20:41 obj
+-rwxrwxrwx 1 lol lol      0 May  8 20:42 out
+-rwxrwxrwx 1 lol lol      0 May  8 20:42 red
+drwxrwxrwx 1 lol lol    512 May  8 02:21 src
+-rwxrwxrwx 1 lol lol   1993 May  7 19:56 test.c

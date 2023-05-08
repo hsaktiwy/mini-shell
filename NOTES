@@ -2,12 +2,14 @@ urgent task:
 	[x]do redirection in all types(Parcinf fase)
 	[x]replace ast with a simple list only (t_cmd)
 	[x]fix the problem where u need to keep argument type (is it from "" or '' or $, not "$"-> is from "" ...)
-	[ ]Expand variables in here doc
-	[ ]Expand env using our one env (it must be a linked list [key = "", value = ""])
+	[x]Expand variables in here doc
+	[x]Expand env using our one env (it must be a linked list [key = "", value = ""])
 normal task: 
-	[ ]fix all erreur printf to print in stderror
+	[ ] fix norminette
+	[ ] fix leaks if there is 
+	[ ] fix all erreur printf to print in stderror
 	[ ] fix this cases : bash3-2$ ls 1>/dev/NULL
-	[ ]organize the working directory [include->libft + others if neccessary; in src-> seperate each step to it folder]
+	[ ] organize the working directory [include->libft + others if neccessary; in src-> seperate each step to it folder]
 notes : i made a expand_issue file to fix the problems like:(made bye hsaktiwy)
 	$a = "ls -la"
 	$b = "| wc -l"

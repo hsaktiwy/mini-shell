@@ -12,19 +12,17 @@
 
 #include "mini_shell.h"
 
-void	handleCommand(t_list **tokens, char *input, int *index, int *cmd)
+void	handleCommand(t_list **tokens, t_env *env,char *input, int *index)
 {
 	t_token *token = (t_token *)malloc(sizeof(t_token));
 	if (!token)
 		return;
-		
 	token->type = COMMAND;
-	token->value = get_cmd(&input[*index], index);
+	token->value = get_cmd(env, &input[*index], index);
 	ft_lstadd_back(tokens, ft_lstnew(token));
-	*cmd = 1;
 }
 
-void	handleArg(t_list **tokens, char *input, int *index)
+void	handleArg(t_list **tokens, t_env *env, char *input, int *index)
 {
 	t_token	*cmd;
 	t_token	*tmp;
@@ -42,11 +40,11 @@ void	handleArg(t_list **tokens, char *input, int *index)
 	}
 	if (input[*index] == '$')
 	{
-		node = ft_lstnew(creat_arg(get_simple_arg(&input[*index], index), VARIABLE));
+		node = ft_lstnew(creat_arg(get_simple_arg(env, &input[*index], index), VARIABLE));
 	}
 	else
 	{
-		node = ft_lstnew(creat_arg(get_simple_arg(&input[*index], index), WORD));
+		node = ft_lstnew(creat_arg(get_simple_arg(env, &input[*index], index), WORD));
 	}
 	ft_lstadd_back(&(((t_cmd *)cmd->value)->arg), node);
 }

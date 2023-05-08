@@ -56,31 +56,30 @@ typedef struct token
 }t_token;
 
 // execution
-void	executer(char *input);
-
-
+void	executer(char *input, t_env *env);
 // lexer
-int		lexer(t_list **tokens, char *input);
+int		lexer(t_list **tokens, char *input, t_env *env);
 void    free_tokens(t_list **list);
-void	handleCommand(t_list **tokens, char *input, int *index, int *cmd);
-void	handleArg(t_list **tokens, char *input, int *index);
+void	handleCommand(t_list **tokens, t_env *env, char *input, int *index);
+void	handleArg(t_list **tokens, t_env *env,char *input, int *index);
 void	fix_expanding_issue(t_list **tokens);
 void	ini_arg_count(t_list **tokens);
 // parser
-t_list	*parser(t_list **tokens, char *input);
+t_list	*parser(t_env *env, t_list **tokens, char *input);
 t_ast	*command(t_list **current);
-void	redirection_habdling(t_list **tokens);
+void	redirection_habdling(t_env *env, t_list **tokens);
 //		redirection parte
 int		out_append_red(t_file *tmp, int out_app);
-int		here_doc_red(t_file *tmp);
-int		heredoc(char *delimiter, int h_fd);
+int		here_doc_red(t_env *env, t_file *tmp);
+int		heredoc(t_env *env, char *delimiter, int h_fd);
 int		in_redirection(t_file *tmp);
 int		find_delimeter(char *line, char *needle);
 // ast tools
 t_ast	*ast_new_node();
 void	ast_add_l_r(t_ast *node, t_ast *n_left, t_ast *n_right);
 void	ast_set_data(t_ast *node, t_g_types type, void *content);
-
+// expand
+char	*expand(t_env *env, char *line);
 // tests
 void	display_tokens(t_list	*tokens);
 void 	display_ast_types(t_ast *node, char *str);
