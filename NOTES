@@ -1,5 +1,6 @@
 urgent task:
-	[ ] plz fix the command list (t_cmd->cmd) is not null terminated, it's tested in execute.c
+	[ ] creat function destroy env to free t_env 
+	[ ] fix the double erreur display in this case "minishell:$> >"
 	[x] added .gitignore file, add files u don't need to push to avoid unnecessary conflicts
 		and only commit the files that u have modified(this doesn't include files with modified headers!!)
 	[x]do redirection in all types(Parcinf fase)
