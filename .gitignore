@@ -1,4 +1,5 @@
 a.out
+.here_doc
 mini_shell
 *.o
 *.a
