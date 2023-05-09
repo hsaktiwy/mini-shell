@@ -1,0 +1,11 @@
+a.out
+mini_shell
+*.o
+*.a
+*.swp
+*.swo
+*.out
+**/.DS_Store
+.vscode/
+**/*.o/*.o
+obj
