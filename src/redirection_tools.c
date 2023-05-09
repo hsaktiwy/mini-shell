@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:17:19 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/06 15:18:18 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:51:23 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ int	in_redirection(t_file *tmp)
 	fd = -1;
 	if (ft_strlen(tmp->a_file))
 	{
-		fd = open(tmp->a_file, O_WRONLY, 0777);
+		if (ft_strlen(tmp->a_file) != 0)
+			fd = open(tmp->a_file, O_WRONLY, 0777);
 		if (fd == -1)
-			perror("mini-shell");
+			print_error(NULL, tmp->a_file, 1);
 	}
 	return (fd);
 }
@@ -78,7 +79,7 @@ int	here_doc_red(t_env *env, t_file *tmp)
 		// printf(">>>> ? : %s\n",tmp->a_file);
 		fd = open(".here_doc", O_RDWR | O_CREAT | O_TRUNC, 0666);
 		if (fd == -1)
-			perror(NULL);
+			print_error(NULL, ".here_doc", 1);
 		else if (!heredoc(env, tmp->a_file, fd))
 		{
 			fd = -1;
@@ -96,11 +97,17 @@ int out_append_red(t_file *tmp, int out_app)
 	if (tmp->a_file)
 	{
 		if (out_app == OUT_REDIRECT)
-			fd = open(tmp->a_file, O_RDWR | O_CREAT | O_TRUNC, 0644);
+		{
+			if (ft_strlen(tmp->a_file) != 0)
+				fd = open(tmp->a_file, O_RDWR | O_CREAT | O_TRUNC, 0644);
+		}
 		else if (out_app == APPEND_REDIRECT)
-			fd = open(tmp->a_file, O_RDWR | O_CREAT | O_APPEND, 0644);
+		{
+			if (ft_strlen(tmp->a_file) != 0)
+				fd = open(tmp->a_file, O_RDWR | O_CREAT | O_APPEND, 0644);
+		}
 		if (fd == -1)
-			perror("mini-shell");
+			print_error(NULL, tmp->a_file, 1);
 	}
 	return (fd);
 }

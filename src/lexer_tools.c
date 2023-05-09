@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:46:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/09 15:17:19 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:35:40 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ini_count(t_token **token)
 	while (current)
 	{
 		arg = current->content;
-		if (ft_strlen(arg->a_file))
+		if (arg->a_file)
 			cmd->arg_count++;
 		current = current->next;
 	}

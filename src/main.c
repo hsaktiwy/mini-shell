@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/09 16:44:23 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:04:34 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		getcwd(path, 4096);
-		printf("[%s]", path);
+		printf("\33[33m[%s]\33[00m", path);
 		input = readline("\33[31mminishell:$>\33[35m ");
 		if (input &&  input[0])
 		{

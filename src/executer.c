@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/09 14:57:50 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:46:51 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ void	executer(char *input, t_env *env)
 		// ta9ribane ra wajade plus hdi rasake m3a environement tal rada on gado
 		fix_expanding_issue(&tokens);
 		ini_arg_count(&tokens);
+		display_tokens(tokens);
 		list = parser(env, &tokens, input);
 		//execution
 		display_tokens(list);

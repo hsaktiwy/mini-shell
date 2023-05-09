@@ -1,4 +1,6 @@
 urgent task:
+	[ ] Fix our lexer problem between "" and noting 
+	[ ] detected the hide and seek game player ("minishell : Not such Dorectory or file")
 	[ ] creat function destroy env to free t_env 
 	[ ] fix the double erreur display in this case "minishell:$> >"
 	[x] added .gitignore file, add files u don't need to push to avoid unnecessary conflicts

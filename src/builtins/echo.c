@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:34:46 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/09 18:01:45 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:46:49 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_echo(t_cmd *command)
 
 	flag = 0;
 	arg_list = command->arg;
-	if (command->arg_count > 1)
+	if (command->arg_count >= 1)
 	{
 		if (ft_strcmp(((t_file *)(arg_list->content))->a_file, "-n") == 0)
 		{

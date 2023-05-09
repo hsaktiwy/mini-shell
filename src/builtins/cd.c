@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:50:22 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/09 17:44:47 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:40:28 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 int	print_error(char *command, char *str_error, int print_error)
 {
 	write(2, "minishill: ", 11);
-	write(2, command, ft_strlen(command));
-	write(2, ": ", 2);
+	if (command)
+	{
+		write(2, command, ft_strlen(command));
+		write(2, ": ", 2);
+	}
 	if (print_error)
 		perror(str_error);
 	else
@@ -39,7 +42,7 @@ char	*get_path(t_cmd *command, t_env *env)
 		if (ft_strcmp(((t_file *)(command->arg->content))->a_file, "-") == 0)
 		{
 			path = ft_getenv(env, "OLDPWD");
-			if (path == NULL)
+			if (path == NULL || !*path)
 				print_error(command->cmd, "OLDPWD not set\n", 0);
 		}
 		else if (ft_strcmp(((t_file *)(command->arg->content))->a_file, "--") == 0)
@@ -59,11 +62,11 @@ int	ft_cd(t_cmd *command, t_env *env)
 	char	*path;
 	char	cwd[4096];
 
-	if (command->arg_count > 1)
-		return (print_error(command->cmd, "too many arguments\n", 0));
+	// if (command->arg_count > 1)
+	// 	return (print_error(command->cmd, "too many arguments\n", 0));
 	getcwd(cwd, 4096);
 	path = get_path(command, env);
-	if (!path)
+	if (!path || !*path)
 		return (1);
 	if (chdir(path) != 0)
 	{

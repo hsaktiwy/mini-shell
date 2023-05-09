@@ -48,6 +48,7 @@ t_env	*ft_init_env(char **env)
 		return (no_mem(), NULL);
 	env_l->env = ft_t_strdup(env);
 	env_l->l_env = ft_lst_list_holder(env);
+	ft_setenv(&env_l, "OLDPWD", NULL);
 	return (env_l);
 }
 
