@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/09 18:01:37 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/09 20:34:44 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	exec_builtin(t_cmd *cmd, t_env *env)
 	if (!ft_strcmp(cmd->cmd, "cd"))
 		ft_cd(cmd, env);
 	if (!ft_strcmp(cmd->cmd, "pwd"))
-		ft_pwd(env);
+		ft_pwd(cmd);
 }
 
 void	execute(t_list *list, t_env *env)

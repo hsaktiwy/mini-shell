@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:50:22 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/09 17:44:47 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/09 20:10:33 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	print_error(char *command, char *str_error, int print_error)
 {
-	write(2, "minishill: ", 11);
+	write(2, "minishell: ", 11);
 	write(2, command, ft_strlen(command));
 	write(2, ": ", 2);
 	if (print_error)
