@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/09 13:57:14 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/09 16:44:23 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_ast	*search(t_ast *ast)
 	}
 	return (NULL);
 }
+
 int	main(int argc, char **argv, char **env)
 {
 	char	*input;
@@ -34,9 +35,13 @@ int	main(int argc, char **argv, char **env)
 	(void)env;
 	t_env	*env_s;
 
+	char path[4096];
+
 	env_s = ft_init_env(env);
 	while (1)
 	{
+		getcwd(path, 4096);
+		printf("[%s]", path);
 		input = readline("\33[31mminishell:$>\33[35m ");
 		if (input &&  input[0])
 		{

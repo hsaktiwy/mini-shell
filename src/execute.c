@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/09 14:55:43 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:01:37 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,6 @@
 
 int	is_builtin(char *cmd)
 {
-	// printf(">>>>>> %s\n", cmd);
-	// while (1)
-	// {
-	// 	if (*cmd != 0)
-	// 		write(1, &cmd, 1);
-	// 	else
-	// 	{
-	// 		write(1, "0", 1);
-	// 		break ;
-	// 	}
-	// 	cmd++;
-	// }
-	// return 0;
 	if (!ft_strcmp(cmd, "echo") ||
 		!ft_strcmp(cmd, "cd") ||
 		!ft_strcmp(cmd, "pwd") ||
@@ -40,14 +27,12 @@ int	is_builtin(char *cmd)
 
 void	exec_builtin(t_cmd *cmd, t_env *env)
 {
-	(void)env;
-	(void)cmd;
-	// if (!ft_strcmp(cmd->cmd, "echo"))
-	// 	echo(cmd);
-	// printf(">>>>>> %s\n", cmd->cmd);
-	// return ;
+	if (!ft_strcmp(cmd->cmd, "echo"))
+		ft_echo(cmd);
 	if (!ft_strcmp(cmd->cmd, "cd"))
-		cd(cmd, env);
+		ft_cd(cmd, env);
+	if (!ft_strcmp(cmd->cmd, "pwd"))
+		ft_pwd(env);
 }
 
 void	execute(t_list *list, t_env *env)
@@ -57,7 +42,7 @@ void	execute(t_list *list, t_env *env)
 	// t_cmd *cmd_list = list->content->value;
 	while (curr_cmd)
 	{
-		///////////////////// print the cmd and it's args////////////////////
+		/////////////////// print the cmd and it's args////////////////////
 		// printf("cmd = %s\n", ((t_cmd *)(((t_token *)(curr_cmd->content))->value))->cmd);
 		// curr_arg = ((t_cmd *)(((t_token *)(curr_cmd->content))->value))->arg;
 		// while (curr_arg)
@@ -66,7 +51,7 @@ void	execute(t_list *list, t_env *env)
 		// 	curr_arg = curr_arg->next;
 		// }
 		// printf("\n\n");
-		//////////////////// builtins execution/////////////
+		////////////////// builtins execution /////////////////////////////
 		if (is_builtin(((t_cmd *)(((t_token *)(curr_cmd->content))->value))->cmd) /*&& there is one cmd*/)
 			exec_builtin((t_cmd *)(((t_token *)(curr_cmd->content))->value), env);	//exec in parrent
 		// else

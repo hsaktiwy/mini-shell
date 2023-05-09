@@ -1,5 +1,6 @@
 urgent task:
-	[ ] create destroy env that free the allocated t_env
+	[ ] creat function destroy env to free t_env 
+	[ ] fix the double erreur display in this case "minishell:$> >"
 	[x] added .gitignore file, add files u don't need to push to avoid unnecessary conflicts
 		and only commit the files that u have modified(this doesn't include files with modified headers!!)
 	[x]do redirection in all types(Parcinf fase)
@@ -71,3 +72,7 @@ REPORTS: add a report if u find some bugs or something here pls
 
 List_CMD: linked->token->t_cmd 
 Linked_T_CMD :  linked->t_file->a_file
+
+
+### my notes don't mind them
+> OLDPWD is not set at first
