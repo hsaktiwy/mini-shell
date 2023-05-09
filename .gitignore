@@ -1,3 +1,4 @@
+obj
 a.out
 .here_doc
 mini_shell
@@ -9,4 +10,3 @@ mini_shell
 **/.DS_Store
 .vscode/
 **/*.o/*.o
-obj

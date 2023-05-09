@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:50:22 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/07 18:45:45 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:09:27 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,38 +24,38 @@ int	print_error(char *command, char *str_error, int print_error)
 	return (1);
 }
 
-char	*get_path(t_cmd *command, char **env)
+char	*get_path(t_cmd *command, t_env *env)
 {
 	char *path; (void)env;
 	
+
 	if (command->arg_count <= 0)
 	{
-		path = getenv("HOME");
+		path = ft_getenv(env, "HOME");
 		if (path == NULL)
 			print_error(command->cmd, "HOME not set\n", 0);
 	}
 	else
 	{
-		printf("arg == %s\n\n", command->arg->content);
-		if (ft_strcmp(command->arg->content, "-") == 0)
+		if (ft_strcmp(((t_file *)(command->arg->content))->a_file, "-") == 0)
 		{
-			path = getenv("OLDPWD");
+			path = ft_getenv(env, "OLDPWD");
 			if (path == NULL)
 				print_error(command->cmd, "OLDPWD not set\n", 0);
 		}
-		else if (ft_strcmp(command->arg->content, "--") == 0)
+		else if (ft_strcmp(((t_file *)(command->arg->content))->a_file, "--") == 0)
 		{
-			path = getenv("HOME");
+			path = ft_getenv(env, "HOME");
 			if (path == NULL)
 				print_error(command->cmd, "HOME not set\n", 0);
 		}
 		else
-			path = command->arg->content;
+			path = ((t_file *)(command->arg->content))->a_file;
 	}
 	return (path);
 }
 
-int	cd(t_cmd *command, char **env)
+int	cd(t_cmd *command, t_env *env)
 {
 	char	*path;
 	char	cwd[4096];
@@ -69,7 +69,9 @@ int	cd(t_cmd *command, char **env)
 	{
 		print_error(command->cmd, path, 1);
 	}
-	if (ft_strcmp(command->arg->content, "--") == 0)
+	
+	if ( command->arg_count != 0
+			&& ft_strcmp(((t_file *)(command->arg->content))->a_file, "-") == 0)
 	{
 		getcwd(cwd, 4096);
 		printf("%s\n", path);

@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:46:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/07 16:40:53 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:17:19 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	ini_count(t_token **token)
 {
 	t_cmd	*cmd;
 	t_list	*current;
+	t_file	*arg;
 
 	cmd = (*token)->value;
 	cmd->arg_count = 0;
@@ -60,7 +61,8 @@ void	ini_count(t_token **token)
 
 	while (current)
 	{
-		if (ft_strlen(current->content))
+		arg = current->content;
+		if (ft_strlen(arg->a_file))
 			cmd->arg_count++;
 		current = current->next;
 	}

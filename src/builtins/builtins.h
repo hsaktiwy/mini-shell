@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:35:46 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/07 15:34:03 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/09 14:45:20 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-int	cd(t_cmd *command, char **env);
+int	cd(t_cmd *command, t_env *env);
 
 #endif
