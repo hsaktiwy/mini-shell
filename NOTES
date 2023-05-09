@@ -71,3 +71,7 @@ REPORTS: add a report if u find some bugs or something here pls
 
 List_CMD: linked->token->t_cmd 
 Linked_T_CMD :  linked->t_file->a_file
+
+
+### my notes don't mind them
+> OLDPWD is not set at first
