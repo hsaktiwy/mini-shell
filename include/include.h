@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:58:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/08 15:51:29 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/09 13:56:28 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,8 @@ typedef struct s_command
 	size_t			arg_count;
 	int				cmd_in;
 	int				cmd_out;
-<<<<<<< HEAD
 	char			*file_in;
 	char			*file_out;
-=======
-	int				is_redireted;	
->>>>>>> abdelatif
 }t_cmd;
 
 //
