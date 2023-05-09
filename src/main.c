@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/08 14:15:40 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/09 11:07:09 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int argc, char **argv, char **env)
 		if (input &&  input[0])
 		{
 			
-			executer(input);
+			executer(input, env);
 			// display_ast_types(ast, "root");
 			// printf("\n");
 			// t_ast *node = search(ast);

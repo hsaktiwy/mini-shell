@@ -6,15 +6,18 @@
 #    By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 17:53:55 by hsaktiwy          #+#    #+#              #
-#    Updated: 2023/05/07 16:18:03 by aigounad         ###   ########.fr        #
+#    Updated: 2023/05/09 11:41:11 by aigounad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 FLAGS = -Wall -Wextra -Werror -g
 GET_NEXT_LINE = get_next_line_utils.c get_next_line.c 
-LIBFT = ft_iswhitespace.c ft_strjoin.c  ft_strncat.c ft_isalnum.c  ft_isalpha.c  ft_isdigit.c  ft_isprint.c ft_strdup.c ft_substr.c ft_lstclear.c ft_lstsize.c ft_lstdelete_index.c ft_lstadd_in_index.c ft_lstadd_front.c  ft_strcmp.c  ft_realloc.c ft_lstadd_back.c ft_lstnew.c ft_memset.c ft_split.c ft_strlen.c
-SRC = lexer.c parser_tools.c parser.c executer.c main.c free_token.c ast_tools.c lexer_tools.c redirection.c redirection_tools.c expanding_issue.c builtins/cd.c 
+LIBFT = ft_iswhitespace.c ft_strjoin.c  ft_strncat.c ft_isalnum.c  ft_isalpha.c  ft_isdigit.c  ft_isprint.c ft_strdup.c \
+		ft_substr.c ft_lstclear.c ft_lstsize.c ft_lstdelete_index.c ft_lstadd_in_index.c ft_lstadd_front.c  ft_strcmp.c \
+		ft_realloc.c ft_lstadd_back.c ft_lstnew.c ft_memset.c ft_split.c ft_strlen.c
+SRC = lexer.c parser_tools.c parser.c executer.c main.c free_token.c ast_tools.c lexer_tools.c redirection.c \
+		redirection_tools.c expanding_issue.c builtins/cd.c execute.c
 BUILTINS = echo.c cd.c
 INC = ft_get_cmd.c ft_next_arg.c ft_get_double_quote.c ft_get_simple_arg.c ft_get_single_quote.c ft_lstfree_t_file.c
 EXP = excep1.c
@@ -42,9 +45,9 @@ obj/include/exception/%.o : include/exception/%.c include/$(HEAD_EXP)
 obj/builtins/%.o : src/builtins/%.c  src/builtins/$(BUILTINS_HEADER)
 	$(CC) $(FLAGS) -o $@ -c $<
 clean : 
-	rm -rf $(OBJ);
+	rm -rf $(OBJ) obj/include/libft/*.o obj/include/*.o
 fclean : clean
-	rm -rf $(NAME);
+	rm -rf $(NAME)
 re :  fclean all
 
 .PHONY: re all clean fclean

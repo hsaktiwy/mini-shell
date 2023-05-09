@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:58:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/07 15:01:25 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/08 15:51:29 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,17 @@ typedef struct s_command
 	t_list			*arg;
 	size_t			arg_count;
 	int				cmd_in;
-	int				cmd_out;	
+	int				cmd_out;
+	int				is_redireted;	
 }t_cmd;
+
+//
+typedef struct s_env
+{
+	/* data */
+	t_list 	*l_env;
+	char 	*env;
+}	t_env;
 
 // helper to check input
 void	ft_lstfree_t_file(t_list **node);
