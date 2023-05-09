@@ -46,9 +46,7 @@ t_env	*ft_init_env(char **env)
 	env_l = (t_env *)malloc(sizeof(t_env));
 	if (!env_l)
 		return (no_mem(), NULL);
-	printf("not me1\n");
 	env_l->env = ft_t_strdup(env);
-	printf("not me2\n");
 	env_l->l_env = ft_lst_list_holder(env);
 	return (env_l);
 }
