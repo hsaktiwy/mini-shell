@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/07 18:59:36 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/09 12:08:43 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,12 @@ void display_ast_types(t_ast *node, char *str) {
 		printf("Command count arg = %zu\n", ((t_cmd *)(((t_token *)(node->content))->value))->arg_count);
 		printf("Command type cmd(token) = %d\n", ((t_cmd *)(((t_token *)(node->content))->value))->cmd_type);
 		t_cmd *cmd  = ((t_cmd *)(((t_token *)(node->content))->value));
-		while(cmd->arg)
+		t_list *arg;
+		arg = cmd->arg;
+		while(arg)
 		{
-			printf("arg = %s\n", (char *)(cmd->arg->content));
-			cmd->arg = cmd->arg->next;
+			printf("arg = %s\n", (char *)(arg->content));
+			arg = arg->next;
 		}
 	}
 	else if (node->type == REDIRECTION)
@@ -134,7 +136,7 @@ int	lexical_erreur(char	*input)
 	return (-1);
 }
 
-void	executer(char *input, t_env *env)
+void	executer(char *input, char **env)
 {
 	t_list	*tokens;
 	int		err_lex;
@@ -152,6 +154,8 @@ void	executer(char *input, t_env *env)
 		fix_expanding_issue(&tokens);
 		ini_arg_count(&tokens);
 		list = parser(env, &tokens, input);
+		//execution
+		execute(list, env);
 		//display_tokens(tokens);
 		display_tokens(list);
 	}

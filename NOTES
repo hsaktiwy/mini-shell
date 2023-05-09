@@ -1,4 +1,7 @@
 urgent task:
+	[ ] plz fix the command list (t_cmd->cmd) is not null terminated, it's tested in execute.c
+	[x] added .gitignore file, add files u don't need to push to avoid unnecessary conflicts
+		and only commit the files that u have modified(this doesn't include files with modified headers!!)
 	[x]do redirection in all types(Parcinf fase)
 	[x]replace ast with a simple list only (t_cmd)
 	[x]fix the problem where u need to keep argument type (is it from "" or '' or $, not "$"-> is from "" ...)
@@ -65,3 +68,6 @@ COMMAND THAT DOESN'T WORK:
 NOTE= "You can devide task needed to be don't to 2 type urgent one and the normale one"
 
 REPORTS: add a report if u find some bugs or something here pls 
+
+List_CMD: linked->token->t_cmd 
+Linked_T_CMD :  linked->t_file->a_file

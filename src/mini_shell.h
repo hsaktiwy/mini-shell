@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:53:21 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/07 18:58:37 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/09 12:09:52 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_ast{
 	struct	s_ast *right;
 }	t_ast;
 // tokens 
-typedef struct token
+typedef struct s_token
 {
 	t_token_type	type;
 	void			*value;	
@@ -83,4 +83,8 @@ char	*expand(t_env *env, char *line);
 // tests
 void	display_tokens(t_list	*tokens);
 void 	display_ast_types(t_ast *node, char *str);
+
+//execution
+void	execute(t_list *list, char **env);
+
 #endif
