@@ -86,5 +86,5 @@ Linked_T_CMD :  linked->t_file->a_file
 +everything that comes after $ is egnored including it
 +if a key already exists and it was exported without a value it keeps its prev val
 
-+any key added to env will be marked is_export so that it will only be printed when export is called
++any key added to env without a value will be marked is_export so that it will only be printed when export is called and not env
 
