@@ -1,21 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_init_env.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/10 13:26:20 by aigounad          #+#    #+#             */
+/*   Updated: 2023/05/10 17:30:23 by aigounad         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "environement.h"
 
-t_holder	*ft_lstnewholder(char *str)
+t_holder	*ft_lstnewholder(char *key_val, char *pt_equal)
 {
-    char		**res;
+    // char		**res;
     t_holder	*holder;
 
 	holder = (t_holder *)malloc(sizeof(t_holder));
 	if (!holder)
-		return (no_mem(),NULL);
-    res = ft_split(str, '=');
-	if (str[0])
+		return (no_mem(), NULL);
+	if (key_val)
 	{
-		holder->key = ft_strdup(res[0]);
-		if (str[1])
-			holder->value = ft_strdup(res[1]);
+		holder->key = ft_substr(key_val, 0,pt_equal - key_val);
+		if (!pt_equal)
+			holder->value = NULL;
 		else
-			holder->value = ft_strdup("");
+			holder->value = ft_substr(key_val, pt_equal - key_val + 1, ft_strlen(pt_equal + 1));
 		return (holder);
 	}
 	else
@@ -27,12 +38,14 @@ t_list	*ft_lst_list_holder(char **env)
 	t_list		*list;
 	int			i;
 	t_holder	*holder;
+	char 		*pt_equal;
 
 	i = -1;
 	list = NULL;
 	while (env[++i])
 	{
-		holder = ft_lstnewholder(env[i]);
+		pt_equal = ft_strchr(env[i],'=');
+		holder = ft_lstnewholder(env[i], pt_equal);
 		if (holder)
 			ft_lstadd_back(&list, ft_lstnew(holder));
 	}
@@ -42,21 +55,28 @@ t_list	*ft_lst_list_holder(char **env)
 t_env	*ft_init_env(char **env)
 {
 	t_env	*env_l;
+	size_t	size;
 
 	env_l = (t_env *)malloc(sizeof(t_env));
 	if (!env_l)
 		return (no_mem(), NULL);
-	printf("not me1\n");
-	env_l->env = ft_t_strdup(env);
-	printf("not me2\n");
+	size = ft_t_strlen(env);
+	env_l->env = ft_t_strdup(env, size);
+
 	env_l->l_env = ft_lst_list_holder(env);
 	return (env_l);
+	
 }
+
+// void leak_func()
+// {
+// 	system("leaks a.out");
+// }
 
 // int main(int argc, char **arg, char **env)
 // {
 // 	t_env *list;
-
+// 	atexit(leak_func);
 // 	list = ft_init_env(env);
 // 	if (list)
 // 	{
@@ -78,6 +98,8 @@ t_env	*ft_init_env(char **env)
 // 		printf("res of getenv a: %s\n", ft_getenv(list, "a"));
 // 		ft_setenv(&list, "a", "HAHAHA");
 // 		printf("res of setenv a: %s\n", ft_getenv(list, "a"));
+		
 // 	}
+// 	ft_free_env(&list);
 // 	return (0);
 // }

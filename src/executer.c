@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/09 23:35:29 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:40:40 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,9 +153,10 @@ void	executer(char *input, t_env *env)
 		// ta9ribane ra wajade plus hdi rasake m3a environement tal rada on gado
 		fix_expanding_issue(&tokens);
 		ini_arg_count(&tokens);
+		
 		list = parser(env, &tokens, input);
-		//display_tokens(tokens);
-		display_tokens(list);
+		display_tokens(tokens);
+		//display_tokens(list);
 		//execution
 		execute(list, env);
 	}

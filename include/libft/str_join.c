@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getenv.c                                        :+:      :+:    :+:   */
+/*   str_join.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/10 13:26:26 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/10 13:26:27 by aigounad         ###   ########.fr       */
+/*   Created: 2022/10/09 18:19:44 by aigounad          #+#    #+#             */
+/*   Updated: 2023/05/10 14:17:47 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "environement.h"
+#include "libft.h"
 
-char	*ft_getenv(t_env *env, char	*key)
+char	*str_join(char const *s1, char const *s2)
 {
-	t_list		*list;
-	t_holder	*holder;
+	char	*new_str;
+	char	*temp;
 
-	list = env->l_env;
-	while (list)
-	{
-		holder = list->content;
-		if (ft_strcmp(holder->key, key) == 0)
-			return (holder->value);
-		list = list->next;
-	}
-	return (NULL);
+	if (!s1 && !s2)
+		return (NULL);
+	if (!s1)
+		return (ft_strdup(s2));
+	if (!s2)
+		return (ft_strdup(s1));
+	new_str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!new_str)
+		return (NULL);
+	temp = new_str;
+	while (*s1)
+		*temp++ = *s1++;
+	while (*s2)
+		*temp++ = *s2++;
+	*temp = '\0';
+	return (new_str);
 }
