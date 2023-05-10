@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:26:14 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/10 18:05:08 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/10 21:58:04 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_setenv(t_env **env, char *key, char *value)
 		if (value)
 			(*env)->env = ft_realloc_env_table((*env)->env, key_val);
 		//add env in env_list
-		ft_lstadd_back(&((*env)->l_env), ft_lstnew(ft_lstnewholder(key, value)));
+		// ft_lstadd_back(&((*env)->l_env), ft_lstnew(ft_lstnewholder(key, value)));
 		// free(tmp);
 	}
 	else

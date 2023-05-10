@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 11:24:21 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/10 18:04:49 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/10 22:08:01 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,9 @@ char	*get_value(char *key, char *arg, t_env *env)
 		return (NULL);
 	if (*(equal_p - 1) == '+')
 	{
+		printf(">>>>IM INN\n");
 		env_value = ft_getenv(env, key);
+		printf(">>>>env_value = [%s]\n", env_value);
 		tmp = ft_substr(equal_p + 1, 0, ft_strlen(equal_p + 1));
 		value = str_join(env_value, tmp);
 		// free(tmp);
@@ -129,7 +131,7 @@ int	ft_export(t_cmd *command, t_env *env)
 		// 	free(key);
 		// 	return (1);
 		// }
-		// ft_setenv(&env, key, value);
+		ft_setenv(&env, key, value);
 		// ft_setenv should handle if value is NULL and just adds the key without a value
 		// free(key);
 		// free(value);

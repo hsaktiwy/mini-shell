@@ -82,8 +82,8 @@ Linked_T_CMD :  linked->t_file->a_file
 +export with no args prints all env
 +KEY is invalid if it starts with anything rather than a-z A-Z except '_'
 +KEY is invalid if it contains anything rather than a-z A-Z 0-9 '_'
-+export KEY+=VALUE is also valid and appends the value to the prevuios
-+everything that comes after $ is egnored including it
++export KEY+=VALUE  appends the value to the prevuios one found in value
+# +everything that comes after $ is egnored including it
 +if a key already exists and it was exported without a value it keeps its prev val
 
 +any key added to env without a value will be marked is_export so that it will only be printed when export is called and not env
