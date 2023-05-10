@@ -6,12 +6,12 @@
 #    By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 17:53:55 by hsaktiwy          #+#    #+#              #
-#    Updated: 2023/05/09 23:24:52 by aigounad         ###   ########.fr        #
+#    Updated: 2023/05/10 11:09:19 by aigounad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror -g -lreadline
+FLAGS = -Wall -Wextra -Werror -g #-lreadline
 ENV =  ft_getenv.c ft_setenv.c ft_init_env.c 
 LIBFT = ft_t_strdup.c ft_iswhitespace.c ft_strjoin.c  ft_strncat.c ft_isalnum.c  ft_isalpha.c  ft_isdigit.c  ft_isprint.c \
 		ft_strdup.c ft_substr.c ft_lstclear.c ft_lstsize.c ft_lstdelete_index.c ft_lstadd_in_index.c ft_lstadd_front.c  ft_strcmp.c  \
