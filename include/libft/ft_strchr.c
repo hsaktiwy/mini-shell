@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exception.h                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/16 10:13:17 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/09 14:27:25 by aigounad         ###   ########.fr       */
+/*   Created: 2022/10/08 23:27:52 by aigounad          #+#    #+#             */
+/*   Updated: 2023/01/10 15:07:28 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXCEPTION_H
-# define EXCEPTION_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include "../libft/libft.h"
-// # include "../include.h"
+char	*ft_strchr(const char *s, int c)
+{
+	int	len;
 
-void	error(void);
-void	no_mem(void);
-void	lexer_err(char *str);
-#endif
+	if (!s)
+		return (NULL);
+	len = ft_strlen(s);
+	while (len >= 0)
+	{
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
+		len--;
+	}
+	return (NULL);
+}

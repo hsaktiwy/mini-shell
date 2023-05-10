@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 18:35:46 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/09 20:34:39 by aigounad         ###   ########.fr       */
+/*   Created: 2023/05/09 17:26:20 by aigounad          #+#    #+#             */
+/*   Updated: 2023/05/09 20:34:34 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "builtins.h"
 
+int	ft_pwd(t_cmd *command)
+{
+	char	cwd[4096];
 
-# include "../../include/include.h"
-
-# include <errno.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-
-int	ft_echo(t_cmd *command);
-int	ft_cd(t_cmd *command, t_env *env);
-int	ft_pwd(t_cmd *command);
-
-#endif
+	getcwd(cwd, 4096);
+	write(command->cmd_out, &cwd, ft_strlen(cwd));
+	write(command->cmd_out, "\n", 1);
+	return (0);
+}

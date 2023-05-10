@@ -51,7 +51,7 @@ int	check_quotes_validity(char *input)
 		return (0);
 }
 
-t_file	*get_file(char *input, int *index)
+t_file	*get_file(t_env *env, char *input, int *index)
 {
 	t_file	*file;
 
@@ -65,19 +65,19 @@ t_file	*get_file(char *input, int *index)
 		&& check_quotes_validity(input))
 	{
 		(*index)++;
-		file = creat_arg(get_single_quote(&input[(*index)], index),SINGLE_QUOTE);
+		file = creat_arg(get_single_quote(env, &input[(*index)], index),SINGLE_QUOTE);
 	}else if (input[0] == '\"'
 		&& check_quotes_validity(input))
 	{
 		(*index)++;
-		file = creat_arg(get_double_quote(&input[(*index)], index), DOUBLE_QUOTE);
+		file = creat_arg(get_double_quote(env, &input[(*index)], index), DOUBLE_QUOTE);
 	}
 	else if (check_quotes_validity(input))
 	{
 		if(input[0] == '$')
-			file = creat_arg(get_simple_arg( input, index), VARIABLE);
+			file = creat_arg(get_simple_arg(env, input, index), VARIABLE);
 		else
-			file = creat_arg(get_simple_arg( input, index), WORD);
+			file = creat_arg(get_simple_arg(env, input, index), WORD);
 	}
 	return (file);
 }

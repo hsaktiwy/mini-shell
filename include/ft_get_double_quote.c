@@ -12,21 +12,21 @@
 
 #include "include.h"
 
-char	*expand_env_var(char *s, char *res,int k)
+char	*expand_env_var(t_env *env, char *s, char *res,int k)
 {
-	char	env[k + 1];
+	char	v_env[k + 1];
 	char	*re;
 	int		size;
 
-	env[0] = '\0';
-	ft_strncat(env, s, k);
-	size = ft_strlen(getenv(env));
+	v_env[0] = '\0';
+	ft_strncat(v_env, s, k);
+	size = ft_strlen(ft_getenv(env, v_env));
 	re = ft_realloc(res, ft_strlen(res) + size + 1);
-	ft_strncat(re, getenv(env), size);
+	ft_strncat(re, ft_getenv(env, v_env), size);
 	return (re);
 }
 
-char	*get_double_quote(char *s, int *index)
+char	*get_double_quote(t_env *env, char *s, int *index)
 {
 	char c;
 	char *res;
@@ -43,7 +43,7 @@ char	*get_double_quote(char *s, int *index)
 			k = 0;
 			while (s[k + i + 1] && (ft_isalnum(s[k + i + 1])|| s[k + i + 1] == '?' || s[k + i + 1] == '_'))
 				k++;
-			res = expand_env_var(&s[i + 1], res, k);
+			res = expand_env_var(env, &s[i + 1], res, k);
 			i += k + 1;
 		}
 		else if (s[i] == '\"')
@@ -55,7 +55,7 @@ char	*get_double_quote(char *s, int *index)
 			i++;
 		}else if (s[i] == '\'' && c == '\"')
 		{
-			res = ft_strjoin(res, get_single_quote(&s[++i], index));
+			res = ft_strjoin(res, get_single_quote(env, &s[++i], index));
 			break ;
 		}
 		else if (s[i] && (!c || (c == '\"' && ft_isalnum(s[i]))))

@@ -26,3 +26,11 @@ int	ft_strcmp(const char *s1, const char *s2)
 	}
 	return ((unsigned char)*s1 - (unsigned char)*s2);
 }
+// #include<stdio.h>
+// int	main()
+// {
+// 	if (!ft_strcmp("aaab", "aaa"))
+// 		printf("yes");
+// 	else
+// 		printf("no");
+// }

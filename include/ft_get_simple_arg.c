@@ -12,7 +12,7 @@
 
 #include "include.h"
 
-char	*get_simple_arg(char *str, int *index)
+char	*get_simple_arg(t_env *env, char *str, int *index)
 {
 	int		i;
 	int		k;
@@ -29,17 +29,17 @@ char	*get_simple_arg(char *str, int *index)
 			k = 0;
 			while (str[k + i + 1] && !iswhitespace(str[k + i + 1]) && str[k + i + 1] != '$')
 				k++;
-			arg = expand_env_var(&str[i + 1], arg, k);
+			arg = expand_env_var(env ,&str[i + 1], arg, k);
 			i += k + 1;			
 		}
 		else if (str[i] == '\'')
 		{
-			arg = ft_strjoin(arg, get_single_quote(&str[++i], index));
+			arg = ft_strjoin(arg, get_single_quote(env, &str[++i], index));
 			break ;
 		}
 		else if (str[i] == '\"')
 		{
-			arg = ft_strjoin(arg, get_double_quote(&str[++i], index));
+			arg = ft_strjoin(arg, get_double_quote(env, &str[++i], index));
 			break ;
 		}
 		else if(str[i])

@@ -23,11 +23,13 @@ t_cmd	*ini_cmd()
 	cmd->arg = NULL;
 	cmd->cmd_type = -1;
 	cmd->cmd_in = STDIN_FILENO;
-	cmd->cmd_out = STDOUT_FILENO;
+	cmd->cmd_out = STDOUT_FILENO;\
+	cmd->file_in = NULL;
+	cmd->file_out = NULL;
 	return (cmd);
 }
 
-t_cmd	*get_cmd(char *input, int *index)
+t_cmd	*get_cmd(t_env *env, char *input, int *index)
 {
 	int		i;
 	t_cmd	*cmd;
@@ -42,7 +44,7 @@ t_cmd	*get_cmd(char *input, int *index)
 		stack = *index;
 		if (input[i] && input[i] != '|')
 		{
-			cmd->cmd = get_simple_arg(input, index);
+			cmd->cmd = get_simple_arg(env, input, index);
 			if (input[i] == '$')
 				cmd->cmd_type = VARIABLE;
 			else

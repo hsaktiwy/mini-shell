@@ -1,13 +1,19 @@
 urgent task:
+	[ ] creat function destroy env to free t_env 
+	[ ] fix the double erreur display in this case "minishell:$> >"
+	[x] added .gitignore file, add files u don't need to push to avoid unnecessary conflicts
+		and only commit the files that u have modified(this doesn't include files with modified headers!!)
 	[x]do redirection in all types(Parcinf fase)
 	[x]replace ast with a simple list only (t_cmd)
 	[x]fix the problem where u need to keep argument type (is it from "" or '' or $, not "$"-> is from "" ...)
-	[ ]Expand variables in here doc
-	[ ]Expand env using our one env (it must be a linked list [key = "", value = ""])
+	[x]Expand variables in here doc
+	[x]Expand env using our one env (it must be a linked list [key = "", value = ""])
 normal task: 
-	[ ]fix all erreur printf to print in stderror
+	[ ] fix norminette
+	[ ] fix leaks if there is 
+	[ ] fix all erreur printf to print in stderror
 	[ ] fix this cases : bash3-2$ ls 1>/dev/NULL
-	[ ]organize the working directory [include->libft + others if neccessary; in src-> seperate each step to it folder]
+	[ ] organize the working directory [include->libft + others if neccessary; in src-> seperate each step to it folder]
 notes : i made a expand_issue file to fix the problems like:(made bye hsaktiwy)
 	$a = "ls -la"
 	$b = "| wc -l"
@@ -63,3 +69,22 @@ COMMAND THAT DOESN'T WORK:
 NOTE= "You can devide task needed to be don't to 2 type urgent one and the normale one"
 
 REPORTS: add a report if u find some bugs or something here pls 
+
+List_CMD: linked->token->t_cmd 
+Linked_T_CMD :  linked->t_file->a_file
+
+
+### my notes don't mind them
+> OLDPWD is not set at first
+> echo -n -n -nnnnnn "something"
+
+>export KEY=VALUE
++export with no args prints all env
++KEY is invalid if it starts with anything rather than a-z A-Z except '_'
++KEY is invalid if it contains anything rather than a-z A-Z 0-9 '_'
++export KEY+=VALUE is also valid and appends the value to the prevuios
++everything that comes after $ is egnored including it
++if a key already exists and it was exported without a value it keeps its prev val
+
++any key added to env will be marked is_export so that it will only be printed when export is called
+

@@ -117,7 +117,7 @@ t_list	*creat_cmd_list(t_list	**tokens)
 	return (list);
 }
 
-t_list	*parser(t_list **tokens, char *input)
+t_list	*parser(t_env *env, t_list **tokens, char *input)
 {
 	t_list   *list;
 	t_list  *current;
@@ -129,7 +129,7 @@ t_list	*parser(t_list **tokens, char *input)
 	// if (err != -1)
 	// {
 		//printf("Error : %d\n", err);
-		redirection_habdling(tokens);
+		redirection_habdling(env, tokens);
 		if (err == 1)
 			list = creat_cmd_list(&current);
 	//}
