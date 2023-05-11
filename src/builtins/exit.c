@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 19:06:50 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/11 19:08:13 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/11 19:19:09 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,6 @@ int	ft_exit(t_cmd *command, t_env *env)
 {
 	(void)command;
 	(void)env;
+	
 	return (0);
 }
