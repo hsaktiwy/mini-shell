@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 11:24:21 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/10 22:08:01 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:57:10 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,13 @@ void	print_export(t_cmd *command, t_env *env)
 				ft_strlen(((t_holder *)(list->content))->key));
 		}
 		if (((t_holder *)(list->content))->value)
+		{
+			write(command->cmd_out, "=", 1);
+			write(command->cmd_out, "\"", 1);
 			write(command->cmd_out, ((t_holder *)(list->content))->value,
 				ft_strlen(((t_holder *)(list->content))->value));
+			write(command->cmd_out, "\"", 1);
+		}
 		write(command->cmd_out, "\n", 1);
 		list = list->next;
 	}
@@ -52,25 +57,6 @@ char	*get_key(char *arg)
 	return (key);
 }
 
-int	check_key(char *key)
-{
-	size_t	i;
-
-	if (key && *key && !(key[0] >= 'a' && key[0] <= 'z') &&
-			!(key[0] >= 'a' && key[0] <= 'z') && key[0] != '_')
-		return (1);
-	i = 1;
-	while(key[i])
-	{
-		if ((key[0] >= 'a' && key[0] <= 'z') || (key[0] >= 'a' && key[0] <= 'z') ||
-				(key[0] >= '0' && key[0] <= '9') || key[0] == '_')
-			i++;
-		else
-			return (1);
-	}
-	return (0);
-}
-
 char	*get_value(char *key, char *arg, t_env *env)
 {
 	char	*value;
@@ -83,24 +69,15 @@ char	*get_value(char *key, char *arg, t_env *env)
 		return (NULL);
 	if (*(equal_p - 1) == '+')
 	{
-		printf(">>>>IM INN\n");
 		env_value = ft_getenv(env, key);
 		printf(">>>>env_value = [%s]\n", env_value);
 		tmp = ft_substr(equal_p + 1, 0, ft_strlen(equal_p + 1));
 		value = str_join(env_value, tmp);
-		// free(tmp);
+		free(tmp);
 	}
 	else
 		value = ft_substr(equal_p + 1, 0, ft_strlen(equal_p + 1));
 	return (value);
-}
-
-static int print_error(char *identifier)
-{
-	write(2, "bash: export: `", 16);
-	write(2, identifier, ft_strlen(identifier));
-	write(2, "': not a valid identifier\n", 26);
-	return (1);
 }
 
 int	ft_export(t_cmd *command, t_env *env)
@@ -117,25 +94,45 @@ int	ft_export(t_cmd *command, t_env *env)
 	{
 		arg = ((t_file *)(arg_list->content))->a_file;
 		key = get_key(arg);
-			printf(">>>> KEY = [%s]\n", key);
 		if (check_key(key))
 		{
-			// free(key);
-			return (print_error(arg));
+			free(key);
+			return (print_error2(arg));
 		}
 		value = get_value(key, arg, env);
-			printf(">>>> VALUE = [%s]\n", value);
-
-		// if (!value)
-		// {
-		// 	free(key);
-		// 	return (1);
-		// }
 		ft_setenv(&env, key, value);
-		// ft_setenv should handle if value is NULL and just adds the key without a value
-		// free(key);
-		// free(value);
+		free(key);
+		free(value);
 		arg_list = arg_list->next;
 	}
 	return (0);
 }
+
+// void	fun()
+// {
+// 	system("leaks a.out");
+// }
+// // check leaks
+// int main(int ac, char **av, char **env)
+// {
+// 	t_env *env_list;
+// 	t_cmd command;
+
+// 	t_file	*argg = malloc(sizeof(t_file));
+// 	t_list	*list = malloc(sizeof(t_list));
+
+// 	atexit(fun);
+// 	command.arg_count = 1;
+// 	command.arg = list;
+// 	command.arg->content = argg;
+// 	((t_file *)(command.arg->content))->a_file = "HOME+=value";
+// 	command.arg->next = NULL;
+// 	env_list = ft_init_env(env);
+
+// 	ft_export(&command, env_list);
+// 	print_export(&command, env_list);
+	
+// 	free(argg);
+// 	free(list);
+// 	ft_free_env(&env_list);
+// }

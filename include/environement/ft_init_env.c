@@ -6,13 +6,13 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:26:20 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/10 17:30:23 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/11 12:26:50 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environement.h"
 
-t_holder	*ft_lstnewholder(char *key_val, char *pt_equal)
+static t_holder	*ft_lstnewholder(char *key_val, char *pt_equal)
 {
     // char		**res;
     t_holder	*holder;

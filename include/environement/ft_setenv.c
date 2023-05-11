@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:26:14 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/10 21:58:04 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/11 18:57:16 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,38 @@ char	*join_key_value(char *key, char *value)
 	return (res);
 }
 
-void	ft_modifie_key(t_env **env, char *key, char *value)
+ssize_t	get_env_index(char **env_table, char *key)
+{
+	ssize_t	index;
+	size_t	j;
+	size_t	k;
+
+	index = 0;
+	while (env_table[index])
+	{
+		j = 0;
+		k = 0;
+		while(key[k] && env_table[index][j] && env_table[index][j] != '=')
+		{
+			if (key[k] != env_table[index][j])
+				break ;
+			j++;
+			k++;
+		}
+		if (env_table[index][j] == '=' && key[k] == 0)
+			return (index);
+		index++;
+	}
+	return (-1);
+}
+
+void	ft_modifie_key(t_env **env, char *key, char *value, char *key_val)
 {
 	t_list		*list;
 	t_holder	*holder;
+	ssize_t		index;
 
+	// Update env list
 	list = (*env)->l_env;
 	while (list)
 	{
@@ -36,46 +63,68 @@ void	ft_modifie_key(t_env **env, char *key, char *value)
 		{
 			free(holder->value);
 			holder->value = ft_strdup(value); 
-			return ;
+			break ;
 		}
 		list = list->next;
 	}
+	// Update env table ///////////////////
+	index = get_env_index((*env)->env, key);	// get index of env in table
+	if (index == -1) // in case env is not found
+		return ;
+	free((*env)->env[index]);			// free old env
+	(*env)->env[index] = key_val;		// add new env (already allocated by join_key_value())
 }
 
 char	**ft_realloc_env_table(char **env_table, char *key_val)
 {
 	char	**strs;
 	size_t	size;
+	size_t	i;
 
 	size = ft_t_strlen(env_table);
 	strs = ft_t_strdup(env_table, size + 1);
+	i = 0;
+	while(env_table[i])
+	{
+		free(env_table[i++]);
+	}
 	free(env_table);
 	strs[size] = key_val;
 	return (strs);
 }
 
+static t_holder	*ft_lstnewholder(char *key, char *value)
+{
+    // char		**res;
+    t_holder	*holder;
+
+	holder = (t_holder *)malloc(sizeof(t_holder));
+	if (!holder)
+		return (no_mem(), NULL);
+
+	holder->key = ft_strdup(key);
+	holder->value = ft_strdup(value);
+	return (holder);
+}
+
 void	ft_setenv(t_env **env, char *key, char *value)
 {
-	(void)env;
-	(void)key;
-	(void)value;
-	char	*v;
+	char	*old_env;
 	char	*key_val;	
 
-	v = ft_getenv(*env, key);
-	if (v == NULL)
+	old_env = ft_getenv(*env, key);
+	key_val = join_key_value(key, value);
+	if (old_env == NULL)
 	{
-		key_val = join_key_value(key, value);
 		// add env in env_table
 		if (value)
 			(*env)->env = ft_realloc_env_table((*env)->env, key_val);
 		//add env in env_list
-		// ft_lstadd_back(&((*env)->l_env), ft_lstnew(ft_lstnewholder(key, value)));
-		// free(tmp);
+		ft_lstadd_back(&((*env)->l_env), ft_lstnew(ft_lstnewholder(key, value)));
 	}
 	else
 	{	
 		//modify existing env
-		ft_modifie_key(env, key, value);
+		ft_modifie_key(env, key, value, key_val);
 	}
 }

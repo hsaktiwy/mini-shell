@@ -75,6 +75,7 @@ Linked_T_CMD :  linked->t_file->a_file
 
 
 ### my notes don't mind them
+>> env KEY=VALUE ls // with no options or args
 > OLDPWD is not set at first
 > echo -n -n -nnnnnn "something"
 
