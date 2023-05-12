@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/11 19:09:22 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/12 11:30:09 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	exec_builtin(t_cmd *cmd, t_env *env)
 		ft_env(cmd, env);
 	if (!ft_strcmp(cmd->cmd, "unset"))
 		ft_unset(cmd, env);
-	if (!ft_strcmp(cmd->cmd, "exit"))
-		ft_exit(cmd, env);
+	// if (!ft_strcmp(cmd->cmd, "exit"))
+	// 	ft_exit(cmd, env);
 }
 
 void	execute(t_list *list, t_env *env)
