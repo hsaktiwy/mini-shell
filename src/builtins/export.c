@@ -6,15 +6,52 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 11:24:21 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/11 15:57:10 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/13 16:06:43 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
+int	f(char *key1, char*key2)
+{
+	if (ft_strcmp(key1, key2) <= 0)
+		return (0);
+	else
+		return (1);
+}
+
+t_list	*sort_env_list(t_list *list)
+{
+	char	*p;
+	t_list *head;
+	t_list *tmp;
+
+	head = list;
+	while (head)
+	{
+		tmp = head->next;
+		while (tmp)
+		{
+			if (f(((t_holder *)(head->content))->key,
+					((t_holder *)(tmp->content))->key))
+			{
+				p = ((t_holder *)(head->content))->key;
+				((t_holder *)(head->content))->key = ((t_holder *)(tmp->content))->key;
+				((t_holder *)(tmp->content))->key = p;
+				p = ((t_holder *)(head->content))->value;
+				((t_holder *)(head->content))->value = ((t_holder *)(tmp->content))->value;
+				((t_holder *)(tmp->content))->value = p;
+			}
+			tmp = tmp->next;
+		}
+		head = head->next;
+	}
+	return (list);
+}
+
 void	print_export(t_cmd *command, t_env *env)
 {
-	t_list *list = env->l_env;
+	t_list *list = sort_env_list(env->l_env);
 	while (list)
 	{
 		if (((t_holder *)(list->content))->key)
@@ -70,7 +107,6 @@ char	*get_value(char *key, char *arg, t_env *env)
 	if (*(equal_p - 1) == '+')
 	{
 		env_value = ft_getenv(env, key);
-		printf(">>>>env_value = [%s]\n", env_value);
 		tmp = ft_substr(equal_p + 1, 0, ft_strlen(equal_p + 1));
 		value = str_join(env_value, tmp);
 		free(tmp);

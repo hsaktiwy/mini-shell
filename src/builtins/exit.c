@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 19:06:50 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/13 12:01:52 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/13 13:48:09 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ static int	check_arg(char *arg)
 	return (1);
 }
 
-void	get_status_put_error(int *arg, int *do_exit, int *status)
+void	get_status_put_error(char *arg, size_t arg_count, int *do_exit, int *status)
 {
-	if (command->arg_count == 1 && check_arg(arg))
+	if (arg_count == 1 && check_arg(arg))
 	{
 		*status = ft_atoi(arg);
 	}
-	else if (command->arg_count > 1 && check_arg(arg))
+	else if (arg_count > 1 && check_arg(arg))
 	{
 		write(2, "minishell: exit: too many arguments\n", 37);
 		*do_exit = 0;
@@ -57,7 +57,7 @@ int	ft_exit(t_cmd *command)
 	if (command->arg_count != 0)
 	{
 		arg = ((t_file *)(command->arg->content))->a_file;
-		get_status_put_error(arg, &do_exit, &status);
+		get_status_put_error(arg, command->arg_count, &do_exit, &status);
 	}
 	if (do_exit)
 		exit(status);

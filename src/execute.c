@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/13 12:21:16 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/13 16:46:22 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	exec_builtin(t_cmd *cmd, t_env *env)
 	// if (!ft_strcmp(cmd->cmd, "cat"))	//tmp
 	// 	ft_cat(cmd, env);				//tmp
 	if (!ft_strcmp(cmd->cmd, "exit"))
-		g_minishell.exit_status = ft_exit(cmd, env);
+		g_minishell.exit_status = ft_exit(cmd);
 }
 
 void	exec_builtin_fork(t_cmd *cmd, t_env *env)
@@ -81,11 +81,7 @@ void	exec_builtin_fork(t_cmd *cmd, t_env *env)
 
 	pid = fork();
 	if (pid < 0)
-	{
-		print
-		perror("fork");
-		exit(1);
-	}
+		ft_perror("fork");
 	if (pid == 0)
 	{
 		if (!ft_strcmp(cmd->cmd, "echo"))
@@ -111,20 +107,9 @@ void	exec_builtin_fork(t_cmd *cmd, t_env *env)
 void	execute(t_list *list, t_env *env)
 {
 	t_list *curr_cmd = list;
-	// t_list *curr_arg;
-	// t_cmd *cmd_list = list->content->value;
+
 	while (curr_cmd)
 	{
-		/////////////////// print the cmd and it's args////////////////////
-		// printf("cmd = %s\n", ((t_cmd *)(((t_token *)(curr_cmd->content))->value))->cmd);
-		// curr_arg = ((t_cmd *)(((t_token *)(curr_cmd->content))->value))->arg;
-		// while (curr_arg)
-		// {
-		// 	printf("|%s|", ((t_file *)(curr_arg->content))->a_file);
-		// 	curr_arg = curr_arg->next;
-		// }
-		// printf("\n\n");
-		////////////////// builtins execution /////////////////////////////
 		if (is_builtin(((t_cmd *)(((t_token *)(curr_cmd->content))->value))->cmd))
 		{
 			if (g_minishell.n_commands == 1)

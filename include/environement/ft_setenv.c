@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:26:14 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/11 18:57:16 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/13 16:08:30 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ char	**ft_realloc_env_table(char **env_table, char *key_val)
 
 static t_holder	*ft_lstnewholder(char *key, char *value)
 {
-    // char		**res;
     t_holder	*holder;
 
 	holder = (t_holder *)malloc(sizeof(t_holder));
@@ -107,10 +106,34 @@ static t_holder	*ft_lstnewholder(char *key, char *value)
 	return (holder);
 }
 
+int	key_is_in_list(t_list *list, char *key)
+{
+	while (list)
+	{
+		if (ft_strcmp(((t_holder *)(list->content))->key, key) == 0)
+			return (1);
+		list = list->next;
+	}
+	return (0);
+}
+
+void	add_value(t_list *list, char *key, char *value)
+{
+	while (list)
+	{
+		if (ft_strcmp(((t_holder *)(list->content))->key, key) == 0)
+		{
+			((t_holder *)(list->content))->value = ft_strdup(value);
+			break ;
+		}
+		list = list->next;
+	}
+}
+
 void	ft_setenv(t_env **env, char *key, char *value)
 {
 	char	*old_env;
-	char	*key_val;	
+	char	*key_val;
 
 	old_env = ft_getenv(*env, key);
 	key_val = join_key_value(key, value);
@@ -120,11 +143,15 @@ void	ft_setenv(t_env **env, char *key, char *value)
 		if (value)
 			(*env)->env = ft_realloc_env_table((*env)->env, key_val);
 		//add env in env_list
-		ft_lstadd_back(&((*env)->l_env), ft_lstnew(ft_lstnewholder(key, value)));
+		if (key_is_in_list((*env)->l_env, key))	// if the key already exist in the list with a null value
+			add_value((*env)->l_env, key, value);
+		else
+			ft_lstadd_back(&((*env)->l_env), ft_lstnew(ft_lstnewholder(key, value)));
 	}
 	else
 	{	
 		//modify existing env
-		ft_modifie_key(env, key, value, key_val);
+		if (value)
+			ft_modifie_key(env, key, value, key_val);
 	}
 }
