@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:35:46 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/11 19:08:27 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/13 11:57:19 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 
 # include "../../include/include.h"
+# include "../mini_shell.h"
 
 # include <errno.h>
 # include <unistd.h>
@@ -27,7 +28,7 @@ int		ft_pwd(t_cmd *command);
 int		ft_export(t_cmd *command, t_env *env);
 int		ft_env(t_cmd *command, t_env *env);
 int		ft_unset(t_cmd *command, t_env *env);
-int		ft_exit(t_cmd *command, t_env *env);
+int		ft_exit(t_cmd *command);
 
 //common functions
 int		check_key(char *key);

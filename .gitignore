@@ -10,3 +10,4 @@ mini_shell
 **/.DS_Store
 .vscode/
 **/*.o/*.o
+.vscode/*

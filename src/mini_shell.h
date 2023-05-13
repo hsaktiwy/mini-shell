@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:53:21 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/09 22:57:08 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/13 10:45:48 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # include <fcntl.h>
 # include <errno.h>
 # include "builtins/builtins.h"
+# include "../include/environement/environement.h"
+
+# include <signal.h>
 
 typedef enum types{
 	COMMAND,
@@ -55,6 +58,16 @@ typedef struct s_token
 	void			*value;	
 }t_token;
 
+// global struct
+typedef struct s_minishell
+{
+	int	exit_status;
+	int	process_executing;
+	int	n_commands;
+}	t_minishell;
+
+t_minishell g_minishell;
+
 // execution
 void	executer(char *input, t_env *env);
 // lexer
@@ -63,7 +76,8 @@ void    free_tokens(t_list **list);
 void	handleCommand(t_list **tokens, t_env *env, char *input, int *index);
 void	handleArg(t_list **tokens, t_env *env,char *input, int *index);
 void	fix_expanding_issue(t_list **tokens);
-void	ini_arg_count(t_list **tokens);
+// void	ini_arg_count(t_list **tokens);
+void	ft_init(t_list **tokens);
 // parser
 t_list	*parser(t_env *env, t_list **tokens, char *input);
 t_ast	*command(t_list **current);

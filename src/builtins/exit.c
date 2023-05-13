@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 19:06:50 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/12 11:37:31 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/13 12:01:52 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,38 +23,43 @@ static int	check_arg(char *arg)
 	return (1);
 }
 
-int	ft_exit(t_cmd *command, t_env *env)
+void	get_status_put_error(int *arg, int *do_exit, int *status)
 {
-	(void)env;
-	unsigned char	status;
-	int				exit;
+	if (command->arg_count == 1 && check_arg(arg))
+	{
+		*status = ft_atoi(arg);
+	}
+	else if (command->arg_count > 1 && check_arg(arg))
+	{
+		write(2, "minishell: exit: too many arguments\n", 37);
+		*do_exit = 0;
+		*status = 1;
+	}
+	else
+	{
+		write(2, "minishell: exit: ", 18);
+		write(2, arg, ft_strlen(arg));
+		write(2, ": numeric argument required\n", 29);
+		*status = 255;
+	}
+}
+
+int	ft_exit(t_cmd *command)
+{
+	int				status;
+	int				do_exit;
 	char			*arg;
 
-	exit = 1;
+	do_exit = 1;
 	status = 0;
-	//if (number of commands is one)
-	// write(2, "exit\n", 6);
+	if (g_minishell.n_commands == 1)
+		write(2, "exit\n", 6);
 	if (command->arg_count != 0)
 	{
 		arg = ((t_file *)(command->arg->content))->a_file;
-		if (command->arg_count == 1 && check_arg(arg))
-		{
-			status = ft_atoi(arg);
-		}
-		else if (command->arg_count > 1 && check_arg(arg))
-		{
-			write(2, "minishell: exit: too many arguments\n", 37);
-			exit = 0;
-		}
-		else
-		{
-			write(2, "minishell: exit: ", 18);
-			write(2, arg, ft_strlen(arg));
-			write(2, ": numeric argument required\n", 29);
-			status = 255;
-		}
+		get_status_put_error(arg, &do_exit, &status);
 	}
-	// return (status);
-	if (exit)
-		exit();
+	if (do_exit)
+		exit(status);
+	return (status);
 }

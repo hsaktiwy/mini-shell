@@ -6,7 +6,7 @@
 #    By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 17:53:55 by hsaktiwy          #+#    #+#              #
-#    Updated: 2023/05/12 11:31:38 by aigounad         ###   ########.fr        #
+#    Updated: 2023/05/13 10:26:21 by aigounad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ HEAD_ENV = environement.h
 all : $(NAME)
 
 $(NAME) : $(OBJ) 
-	$(CC) $(OBJ) -o $@ -lreadline
+	$(CC) $(OBJ) -o $@ -lreadline  #-L /goinfre/aigounad/.brew/opt/readline/lib
 
 obj/%.o : src/%.c $(HEADER) | obj_dir
 	$(CC) $(FLAGS) -o $@ -c $<
