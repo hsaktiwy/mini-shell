@@ -6,12 +6,13 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/12 15:39:02 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:16:11 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_shell.h"
 
+t_minishell g_minishell;
 // t_ast	*search(t_ast *ast)
 // {
 // 	t_ast *tmp;
@@ -58,6 +59,7 @@ int	main(__attribute__((unused)) int ac,
 		////////////////////////////
 		if (input &&  input[0])
 		{
+			// printf("$$$$ INPUT = ");
 			executer(input, env_s);
 			add_history(input);
 		}

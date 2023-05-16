@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:53:21 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/13 10:45:48 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/16 11:13:10 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <stdio.h>
+# include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../include/include.h"
@@ -61,12 +62,11 @@ typedef struct s_token
 // global struct
 typedef struct s_minishell
 {
-	int	exit_status;
-	int	process_executing;
+	int	status;
 	int	n_commands;
 }	t_minishell;
 
-t_minishell g_minishell;
+extern t_minishell g_minishell;
 
 // execution
 void	executer(char *input, t_env *env);
