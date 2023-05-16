@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/16 09:54:07 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/16 18:44:18 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	display_tokens(t_list	*tokens)
 		if (token->type == COMMAND)
 		{
 			printf("	type : COMMOND\n");
-			printf("		CMD : %s\n", ((t_cmd *)token->value)->cmd);
+			printf("		CMD : |%s|\n", ((t_cmd *)token->value)->cmd);
 			t_list 	*arg = ((t_cmd *)token->value)->arg;
 			printf("	CMD type cmd(token) = %d\n", ((t_cmd *)(token->value))->cmd_type);
 			printf("	CMD count arg = %zu\n", ((t_cmd *)(token->value))->arg_count);
@@ -151,13 +151,12 @@ void	executer(char *input, t_env *env)
 		lexer(&tokens, input, env);
 	if (err_lex == -1)
 	{
-		// ta9ribane ra wajade plus hdi rasake m3a environement tal rada on gado
 		fix_expanding_issue(&tokens);
 		ft_init(&tokens);
 		
 		list = parser(env, &tokens, input);
-		display_tokens(tokens);
-		//display_tokens(list);
+		// display_tokens(tokens);
+		display_tokens(list);
 		//execution
 		execute(list, env);
 	}

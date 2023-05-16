@@ -4,7 +4,9 @@
 		"stdlib.h": "c",
 		"include.h": "c",
 		"mini_shell.h": "c",
-		"environement.h": "c"
+		"environement.h": "c",
+		"iterator": "c",
+		"locale": "c"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }

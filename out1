@@ -10,7 +10,6 @@ grammar
 include
 mini_shell
 obj
-out
 out1
 pipes
 src

@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/16 12:16:11 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:48:42 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,11 @@ int	main(__attribute__((unused)) int ac,
 {
 	char	*input;
 	t_env	*env_s;
-	char 	path[4096];
 
 	set_signal_handlers();
 	env_s = ft_init_env(env);
 	while (1)
 	{
-		getcwd(path, 4096);
-		printf("[%s]", path);
 		input = readline("\33[31mminishell:$>\33[35m ");
 		// if the user pressed Ctr+D
 		if (!input)
@@ -57,10 +54,9 @@ int	main(__attribute__((unused)) int ac,
 			exit(0);
 		}
 		////////////////////////////
-		if (input &&  input[0])
+		if (input && input[0])
 		{
-			// printf("$$$$ INPUT = ");
-			executer(input, env_s);
+			executer(ft_strtrim(input, " "), env_s);
 			add_history(input);
 		}
 		free(input);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 20:44:05 by aigounad          #+#    #+#             */
-/*   Updated: 2023/01/10 15:10:10 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:58:42 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static char	*ft_read_file(int fd, char *strs, int *eof)
 		return (strs);
 	}
 	buf[bytes] = '\0';
-	tmp = ft_strjoin(strs, buf);
+	tmp = str_join(strs, buf);
 	free(strs);
 	return (tmp);
 }
@@ -93,3 +93,20 @@ char	*get_next_line(int fd)
 	strs = ft_reject(strs);
 	return (line);
 }
+
+// #include <fcntl.h>
+// #include <stdio.h>
+// int main()
+// {
+// 	char *line;
+// 	int fd = open("/Users/aigounad/Desktop/myshell42/Makefile", O_RDONLY, 0666);
+// 	printf("fd = %d| buf = %d\n", fd, BUFFER_SIZE);
+// 	line = get_next_line(fd);
+// 		printf("%s", line);
+// 		return (0);
+// 	while ((line = get_next_line(fd)))
+// 	{
+// 		printf("%s", line);
+// 		free(line);
+// 	}
+// }
