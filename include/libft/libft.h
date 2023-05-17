@@ -29,7 +29,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	*ft_memset(void *b, int c, size_t len);
 void	*ft_realloc(void *ptr, size_t size);
 void	ft_strncat(char *s1, const char *s2, size_t n);
-char	**ft_t_strdup(char **str);
+char	**ft_t_strdup(char **str, size_t size);
 int		ft_t_strlen(char **str);
 // character checker
 int		ft_isdigit(int c);
@@ -38,16 +38,19 @@ int		ft_isalnum(int c);
 int		ft_isprint(int c);
 int		iswhitespace(char c);
 int		str_iswhitespaced(char *str);
+
 //
-int	ft_strcmp(const char *s1, const char *s2);
+int		ft_strcmp(const char *s1, const char *s2);
+char	*ft_strchr(const char *s, int c);
+char	*str_join(char const *s1, char const *s2);
+int		ft_atoi(const char *str);
+char	*ft_strtrim(char const *s1, char const *set);
+
 // get next line 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 5
 # endif
+
 char	*get_next_line(int fd);
-size_t	ft_strlen_nln(char *str);
-void	*ft_calloc(size_t count);
-void	clean(char *s);
-void	*free_rest(char **rest);
 
 #endif

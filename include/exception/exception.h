@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:13:17 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/09 14:27:25 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/13 16:46:45 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,5 @@
 void	error(void);
 void	no_mem(void);
 void	lexer_err(char *str);
+void	ft_perror(char *msg);
 #endif

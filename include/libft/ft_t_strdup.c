@@ -10,16 +10,14 @@ int		ft_t_strlen(char **str)
 	return (i);
 }
 
-char	**ft_t_strdup(char **str)
+char	**ft_t_strdup(char **str, size_t size)
 {
-	int		size;
 	char	**res;
 	int		i;
 
 	if (!str)
 		return (NULL);
-	size = ft_t_strlen(str);
-	res = (char **)malloc(sizeof(char *) * size + 1);
+	res = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!res)
 		return (NULL);
 	res[size] = NULL;

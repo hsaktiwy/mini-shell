@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/09 19:46:51 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:45:12 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	display_tokens(t_list	*tokens)
 		if (token->type == COMMAND)
 		{
 			printf("	type : COMMOND\n");
-			printf("		CMD : %s\n", ((t_cmd *)token->value)->cmd);
+			printf("		CMD : |%s|\n", ((t_cmd *)token->value)->cmd);
 			t_list 	*arg = ((t_cmd *)token->value)->arg;
 			printf("	CMD type cmd(token) = %d\n", ((t_cmd *)(token->value))->cmd_type);
 			printf("	CMD count arg = %zu\n", ((t_cmd *)(token->value))->arg_count);
@@ -70,6 +70,7 @@ void	display_tokens(t_list	*tokens)
 		}
 		list = list->next;
 	}
+	printf(">>> Commands = [%d]\n", g_minishell.n_commands);
 }
 
 void display_ast_types(t_ast *node, char *str) {
@@ -150,15 +151,14 @@ void	executer(char *input, t_env *env)
 		lexer(&tokens, input, env);
 	if (err_lex == -1)
 	{
-		// ta9ribane ra wajade plus hdi rasake m3a environement tal rada on gado
 		fix_expanding_issue(&tokens);
-		ini_arg_count(&tokens);
-		display_tokens(tokens);
+		ft_init(&tokens);
+		
 		list = parser(env, &tokens, input);
-		//execution
+		// display_tokens(tokens);
 		display_tokens(list);
+		//execution
 		execute(list, env);
-		//display_tokens(tokens);
 	}
 	free_tokens(&tokens);
 }

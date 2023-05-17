@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:50:22 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/09 19:40:28 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:45:23 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 int	print_error(char *command, char *str_error, int print_error)
 {
-	write(2, "minishill: ", 11);
-	if (command)
-	{
-		write(2, command, ft_strlen(command));
-		write(2, ": ", 2);
-	}
+	write(2, "minishell: ", 11);
+	write(2, command, ft_strlen(command));
+	write(2, ": ", 2);
 	if (print_error)
 		perror(str_error);
 	else

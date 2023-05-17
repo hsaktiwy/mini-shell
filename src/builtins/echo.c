@@ -6,27 +6,11 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:34:46 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/09 18:46:49 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:45:32 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-
-// int	ft_strcmp(char *str1, char *str2)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	if (!str1 || !str2)
-// 		return (-256);
-// 	while (str1[i] && str2[i])
-// 	{
-// 		if (str1[i] != str2[i])
-// 			return (str1[i] - str2[i]);
-// 		i++;
-// 	}
-// 	return (0);
-// }
 
 void	ft_printf(t_list *arg_list)
 {
@@ -43,6 +27,27 @@ void	ft_printf(t_list *arg_list)
 	}
 }
 
+int	is_valid_arg(char *arg)
+{
+	size_t	i;
+	int		n;
+
+	if (!arg)
+		return (0);
+	if (arg[0] != '-')
+		return (0);
+	i = 1;
+	n = 0;
+	while (arg[i] && arg[i] == 'n')
+	{
+		i++;
+		n++;
+	}
+	if (arg[i] != 0 || n == 0)
+		return (0);
+	return (1);
+}
+
 int	ft_echo(t_cmd *command)
 {
 	int	flag;
@@ -50,9 +55,9 @@ int	ft_echo(t_cmd *command)
 
 	flag = 0;
 	arg_list = command->arg;
-	if (command->arg_count >= 1)
+	if (command->arg_count > 0)
 	{
-		if (ft_strcmp(((t_file *)(arg_list->content))->a_file, "-n") == 0)
+		while (arg_list && is_valid_arg(((t_file *)(arg_list->content))->a_file))
 		{
 			flag = 1;
 			arg_list = arg_list->next;

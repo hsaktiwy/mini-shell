@@ -1,7 +1,8 @@
 urgent task:
-	[ ] Fix our lexer problem between "" and noting 
-	[ ] detected the hide and seek game player ("minishell : Not such Dorectory or file")
-	[ ] creat function destroy env to free t_env 
+	[ ] error management {perror("malloc");
+  							exit(EXIT_FAILURE);}
+	[x] should add a global struct which will contain the exit status of commands
+	[x] creat function destroy env to free t_env
 	[ ] fix the double erreur display in this case "minishell:$> >"
 	[x] added .gitignore file, add files u don't need to push to avoid unnecessary conflicts
 		and only commit the files that u have modified(this doesn't include files with modified headers!!)
@@ -29,21 +30,6 @@ notes : i made a expand_issue file to fix the problems like:(made bye hsaktiwy)
 		-rw-r--r--   1 hsaktiwy  candidate     14 May  6 15:21 .here_doc
 		-rw-r--r--   1 hsaktiwy  candidate      0 May  6 19:26 >
 		-rw-r--r--   1 hsaktiwy  candidate   2279 May  6 19:06 Makefile
-		-rw-r--r--   1 hsaktiwy  candidate    360 May  3 10:06 README.md
-		drwxr-xr-x   4 hsaktiwy  candidate    136 May  3 10:06 TESTING
-		-rwxr-xr-x   1 hsaktiwy  candidate   8960 May  6 19:04 a.out
-		-rw-r--r--   1 hsaktiwy  candidate      0 May  6 19:35 a1
-		-rw-r--r--   1 hsaktiwy  candidate      0 May  6 19:35 a2
-		-rw-r--r--   1 hsaktiwy  candidate      0 May  6 19:35 a3
-		-rw-r--r--   1 hsaktiwy  candidate      0 May  6 19:35 append.txt
-		-rw-r--r--   1 hsaktiwy  candidate   1166 May  3 10:06 concept_paper
-		-rwxr-xr-x   1 hsaktiwy  candidate   8600 May  6 19:17 echo
-		-rw-r--r--   1 hsaktiwy  candidate   1250 May  3 10:06 grammar
-		drwxr-xr-x  32 hsaktiwy  candidate   1088 May  6 19:05 include
-		-rwxr-xr-x   1 hsaktiwy  candidate  33796 May  6 19:17 mini_shell
-		drwxr-xr-x  15 hsaktiwy  candidate    510 May  6 19:17 obj
-		drwxr-xr-x  15 hsaktiwy  candidate    510 May  6 15:53 src
-		-rw-r--r--   1 hsaktiwy  candidate   1993 May  6 19:04 test.c
 	bash-3.2$ $a $b
 	output :
 		ls: -l: No such file or directory
@@ -68,7 +54,7 @@ notes : i made a expand_issue file to fix the problems like:(made bye hsaktiwy)
 COMMAND THAT DOESN'T WORK:
 [ ]ls -la "|"
 
-NOTE= "You can devide task needed to be don't to 2 type urgent one and the normale one"
+NOTE= "You can devide task needed to be done to 2 type urgent one and the normale one"
 
 REPORTS: add a report if u find some bugs or something here pls 
 
@@ -77,4 +63,30 @@ Linked_T_CMD :  linked->t_file->a_file
 
 
 ### my notes don't mind them
+"
++ ignore command if it starts with #
++ handle when full path is specified as the name of the command
+bash-3.2$ /tmp
+bash: /tmp: is a directory ## exit 126
+bash-3.2$ /bin/lsds
+bash: /bin/lsds: No such file or directory ## exit 127
+bash-3.2$ sdsf
+bash: sdsf: command not found ## exit 127
+"
++shell level
+sleep 5 << kk | cat
+
+>> env KEY=VALUE ls // with no options or args
 > OLDPWD is not set at first
+> echo -n -n -nnnnnn "something"
+
+>export KEY=VALUE
++export with no args prints all env
++KEY is invalid if it starts with anything rather than a-z A-Z except '_'
++KEY is invalid if it contains anything rather than a-z A-Z 0-9 '_'
++export KEY+=VALUE  appends the value to the prevuios one found in value
+# +everything that comes after $ is egnored including it
++if a key already exists and it was exported without a value it keeps its prev val
+
++any key added to env without a value will be marked is_export so that it will only be printed when export is called and not env
+

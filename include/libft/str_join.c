@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   str_join.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 19:28:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/11 12:28:32 by aigounad         ###   ########.fr       */
+/*   Created: 2022/10/09 18:19:44 by aigounad          #+#    #+#             */
+/*   Updated: 2023/05/10 14:17:47 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+char	*str_join(char const *s1, char const *s2)
 {
-	int		i;
-	int		size;
-	char	*res;
+	char	*new_str;
+	char	*temp;
 
-	i = 0;
+	if (!s1 && !s2)
+		return (NULL);
 	if (!s1)
+		return (ft_strdup(s2));
+	if (!s2)
+		return (ft_strdup(s1));
+	new_str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!new_str)
 		return (NULL);
-	size = ft_strlen(s1);
-	res = (char *) malloc(size + 1);
-	if (!res)
-		return (NULL);
-	while (i < size)
-	{
-		res[i] = s1[i];
-		i++;
-	}
-	res[i] = '\0';
-	return (res);
+	temp = new_str;
+	while (*s1)
+		*temp++ = *s1++;
+	while (*s2)
+		*temp++ = *s2++;
+	*temp = '\0';
+	return (new_str);
 }

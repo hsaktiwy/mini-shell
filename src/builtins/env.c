@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 19:28:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/11 12:28:32 by aigounad         ###   ########.fr       */
+/*   Created: 2023/05/10 17:21:32 by aigounad          #+#    #+#             */
+/*   Updated: 2023/05/10 17:28:47 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "builtins.h"
 
-char	*ft_strdup(const char *s1)
+void	print_env(t_cmd *command, t_env *env)
 {
-	int		i;
-	int		size;
-	char	*res;
+	char **pp;
 
-	i = 0;
-	if (!s1)
-		return (NULL);
-	size = ft_strlen(s1);
-	res = (char *) malloc(size + 1);
-	if (!res)
-		return (NULL);
-	while (i < size)
+	pp = env->env;
+
+	while (*pp)
 	{
-		res[i] = s1[i];
-		i++;
+		write(command->cmd_out, *pp, ft_strlen(*pp));
+		write(command->cmd_out, "\n", 1);
+		pp++;
 	}
-	res[i] = '\0';
-	return (res);
+}
+
+int	ft_env(t_cmd *command, t_env *env)
+{
+	print_env(command, env);
+	return (0);
 }

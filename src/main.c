@@ -6,46 +6,57 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/09 19:04:34 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:44:35 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_shell.h"
 
-t_ast	*search(t_ast *ast)
-{
-	t_ast *tmp;
+t_minishell g_minishell;
+// t_ast	*search(t_ast *ast)
+// {
+// 	t_ast *tmp;
 
-	tmp = ast;
-	if (tmp)
-	{
-		return (tmp->left->left);
-	}else
-	{
-		printf("NULL");
-	}
-	return (NULL);
+// 	tmp = ast;
+// 	if (tmp)
+// 	{
+// 		return (tmp->left->left);
+// 	}else
+// 	{
+// 		printf("NULL");
+// 	}
+// 	return (NULL);
+// }
+
+void	set_signal_handlers()
+{
+	// rl_catch_signals();	//hide printing ^'\'
+	// signal(SIGINT, sig_int_handler);	// handel Ctr+c
+	signal(SIGQUIT, SIG_IGN);	// ignore Ctr+'\'
 }
 
-int	main(int argc, char **argv, char **env)
+int	main(__attribute__((unused)) int ac,
+		__attribute__((unused)) char **av, char **env)
 {
 	char	*input;
-	(void)argc;
-	(void)argv;
-	(void)env;
 	t_env	*env_s;
 
-	char path[4096];
-
+	set_signal_handlers();
 	env_s = ft_init_env(env);
 	while (1)
 	{
-		getcwd(path, 4096);
-		printf("\33[33m[%s]\33[00m", path);
 		input = readline("\33[31mminishell:$>\33[35m ");
-		if (input &&  input[0])
+		// if the user pressed Ctr+D
+		if (!input)
 		{
-			executer(input, env_s);
+			// ft_free_env(&env_s);
+			write(1, "\n", 1);
+			exit(0);
+		}
+		////////////////////////////
+		if (input && input[0])
+		{
+			executer(ft_strtrim(input, " "), env_s);
 			add_history(input);
 		}
 		free(input);

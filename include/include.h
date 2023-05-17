@@ -6,22 +6,25 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:58:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/09 14:12:38 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/09 22:51:39 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INCLUDE_H
 # define INCLUDE_H
-# include "get_next_line/get_next_line.h"
+
+//includes
 # include "libft/libft.h"
 # include "exception/exception.h"
 # include "environement/environement.h"
+
+//structs
 typedef enum s_arg_type{
 	WORD,
 	SINGLE_QUOTE,
 	DOUBLE_QUOTE,
 	VARIABLE
-}t_argument_type;
+}	t_argument_type;
 
 typedef struct s_argument
 {
@@ -57,4 +60,5 @@ int		check_quotes_validity(char *input);
 t_file	*get_file(t_env *env, char *input, int *index);
 t_cmd	*get_cmd(t_env *env, char *input, int *index);
 t_file	*creat_arg(char *file_name, t_argument_type type);
+
 #endif
