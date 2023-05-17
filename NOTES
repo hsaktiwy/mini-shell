@@ -92,3 +92,17 @@ sleep 5 << kk | cat
 
 +any key added to env without a value will be marked is_export so that it will only be printed when export is called and not env
 
+
+
+
+
+
+
+heredoc with no command not working
+env -i ./minishell seg
+expand ~ && -- to home
+ls | ls | << l
+
+
+close fds
+exit | ls

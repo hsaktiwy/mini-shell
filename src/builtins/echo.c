@@ -6,21 +6,24 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:34:46 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/10 11:22:54 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:38:05 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void	ft_printf(t_list *arg_list)
+void	ft_printf(t_cmd *command, t_list *arg_list)
 {
+	char	*p;
+
 	while (arg_list)
 	{
-		if (printf("%s", ((t_file *)(arg_list->content))->a_file) < 0)
+		p = ((t_file *)(arg_list->content))->a_file;
+		if (write(command->cmd_out, p, ft_strlen(p)) < 0)
 			exit(1);
 		if (arg_list->next)
 		{
-			if (printf(" ") < 0)
+			if (write(command->cmd_out, " ", 1) < 0)
 				exit(1);
 		}
 		arg_list = arg_list->next;
@@ -62,11 +65,11 @@ int	ft_echo(t_cmd *command)
 			flag = 1;
 			arg_list = arg_list->next;
 		}
-		ft_printf(arg_list);
+		ft_printf(command, arg_list);
 	}
 	if (!flag)
 	{
-		if (printf("\n") < 0)
+		if (write(command->cmd_out, "\n", 1) < 0)
 			exit(1);
 	}
 	return (0);

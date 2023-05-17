@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/17 13:34:35 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/17 18:51:32 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,51 +56,42 @@ static void	free_tab(char **pp)
 	free(pp);
 }
 
-int	is_path(char *s)
+void	append_filename(char *filename, char *path, char *des)
 {
-	if (ft_strchr(s, '/'))
-		return (1);
-	else
-		return (0);
-}
-
-char *get_full_path(char *cmd, t_env *env)
-{
-	char	**paths;
-	char	path[4096];
-	int		i = 0;
 	int		j;
 	int		k;
 
-	if (ft_strchr(cmd, '/'))
-		return (ft_strdup(cmd));
-	if (ft_strcmp(cmd, "minishell" == 0))
-		return ()
+	j = -1;
+	while (path[++j])
+		des[j] = path[j];
+	if (des[j - 1] != '/')
+		des[j++] = '/';
+	k = 0;
+	while (filename[k])
+		des[j++] = filename[k++];
+	des[j] = 0;
+}
+
+char *get_full_path(char *filename, t_env *env)
+{
+	char	**paths;
+	char	path[4096];
+	int		i;
+
+	if (is_builtin(filename) || ft_strchr(filename, '/'))
+		return (ft_strdup(filename));
 	paths = ft_split(ft_getenv(env, "PATH"), ':');
-	while (paths[i])
+	i = -1;
+	while (paths[++i])
 	{
-		j = 0;
-		if (!paths[i][j])
+		if (!*(paths[i]))
 			continue ;
-		while (paths[i][j])
-		{
-			path[j] = paths[i][j];
-			j++;
-		}
-		if (path[j - 1] != '/')
-			path[j++] = '/';
-		k = 0;
-		while (cmd[k])
-		{
-			path[j++] = cmd[k++];
-		}
-		path[j] = 0;
+		append_filename(filename, paths[i], path);
 		if (access(path, 0) == 0)
 		{
 			free_tab(paths);
 			return (ft_strdup(path));
 		}
-		i++;
 	}
 	free_tab(paths);
 	return (NULL);
@@ -162,22 +153,29 @@ void	dup_redirections(t_list *cmd)
 	}
 }
 
-void	execute_command_in_child(char *path, char **args, char **env)
+void	execute_command_in_child(char *filename, char **args, char **env)
 {
-	// printf("path  = %s|\n", path);
-	// int i = -1;
-	// while (args[++i])
-	// 	printf("arg[%d]  = [%s]\n", i,args[i]);
-	execve(path, args, env);
+	execve(filename, args, env);
 	write(2, "minishell: ", 11);
-	perror(path);
-	exit(127);
+	if (errno == EACCES)	//The filename argument is a Dir and permission denied
+	{
+		write(2, filename, ft_strlen(filename));
+		// write(2, ": is a directory\n", 18);
+		exit(126);
+	}
+	else if (errno == ENOENT)	//No such file od directory
+	{
+		perror(filename);
+		exit(127);
+	}
 }
 
 void	execute_builtin_in_child(t_list *cmd, t_env *env)
 {
 	if (is_builtin(((t_cmd *)(((t_token *)(cmd->content))->value))->cmd))
+	{
 		exit(exec_builtin((t_cmd *)(((t_token *)(cmd->content))->value), env));
+	}
 }
 
 int	execute_builtin_in_parrent(t_list *cmd, t_env *env, int *get_exit)
@@ -205,13 +203,16 @@ void	wait_4_last_command(t_list *cmd, pid_t pid)
 		waitpid(pid, &g_minishell.status, 0);
 }
 
-void	command_not_found(t_list *cmd)
+void	command_not_found(t_list *cmd, int *get_exit)
 {
 	char	*p;
 
 	p = ((t_cmd*)((t_token*)(cmd->content))->value)->cmd;
+	write(2, "minishell: ", 11);
 	write(2, p, ft_strlen(p));
 	write(2, ": command not found\n", 21);
+	*get_exit = 0;
+	g_minishell.status = 127;
 }
 
 void	execute_2(t_list *cmd, t_env *env, int *get_exit, int *fd, int old_fd)
@@ -222,7 +223,7 @@ void	execute_2(t_list *cmd, t_env *env, int *get_exit, int *fd, int old_fd)
 
 	path = get_full_path(((t_cmd*)((t_token*)(cmd->content))->value)->cmd, env);
 	if (!path)
-		return (command_not_found(cmd));
+		return (command_not_found(cmd, get_exit));
 	args = get_args(cmd);
 	if (cmd->next)
 		pipe(fd);
@@ -275,6 +276,7 @@ void	execute(t_list *list, t_env *env)
 	}
 	while (wait(NULL) > -1)
 				;
+	// colse_fds(); 
 	if (get_exit)
 		get_exit_status();
 	
@@ -283,8 +285,13 @@ void	execute(t_list *list, t_env *env)
 }
 
 // t_minishell g_minishell;
+// static void	f()
+// {
+// 	system("leaks a.out");
+// }
 // int main(int ac, char **av, char **env)
 // {
+// 	atexit(f);
 // 	t_list *list = malloc(sizeof(t_list));
 // 	list->next = NULL;
 // 	list->content = (t_token *)malloc(sizeof(t_token));

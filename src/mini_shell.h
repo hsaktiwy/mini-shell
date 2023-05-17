@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:53:21 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/16 16:01:52 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:22:14 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <stdio.h>
+# include <string.h>
 # include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
