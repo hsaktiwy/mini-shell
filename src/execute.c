@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/17 23:26:38 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/17 23:41:02 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,12 +147,12 @@ void	dup_redirections(t_list *cmd)
 	if (((t_cmd *)(((t_token *)(cmd->content))->value))->file_out)
 	{
 		dup2(((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_out, STDOUT_FILENO);
-		close(((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_out);
+		// close(((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_out);
 	}
 	if (((t_cmd *)(((t_token *)(cmd->content))->value))->file_in)
 	{
 		dup2(((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_in, STDOUT_FILENO);
-		close(((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_in);
+		// close(((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_in);
 	}
 }
 
@@ -160,15 +160,13 @@ void	execute_command(char *filename, char **args, char **env)
 {
 	execve(filename, args, env);
 	write(2, "minishell: ", 11);
+	perror(filename);
 	if (errno == EACCES)	//The filename argument is a Dir and permission denied
 	{
-		write(2, filename, ft_strlen(filename));
-		// write(2, ": is a directory\n", 18);
 		exit(126);
 	}
 	else if (errno == ENOENT)	//No such file od directory
 	{
-		perror(filename);
 		exit(127);
 	}
 }
@@ -192,7 +190,7 @@ int	execb1(t_list *cmd, int *get_exit)
 	return (0);
 }
 
-void	close_fds_and_free(char *path, char **args, int *fd, int old_fd)
+void	close_pipe_and_free(char *path, char **args, int *fd, int old_fd)
 {
 	free(path);
 	free(args);
@@ -220,6 +218,18 @@ void	command_not_found(t_list *cmd, int *get_exit)
 	g_minishell.status = 127;
 }
 
+void	close_open_fds(t_list *list)
+{
+	while (list)
+	{
+		if (((t_cmd *)(((t_token *)(list->content))->value))->cmd_in != 0)
+			close(((t_cmd *)(((t_token *)(list->content))->value))->cmd_in);
+		if (((t_cmd *)(((t_token *)(list->content))->value))->cmd_out != 1)
+			close(((t_cmd *)(((t_token *)(list->content))->value))->cmd_out);
+		list = list->next;
+	}
+}
+
 void	execute_2(t_list *cmd, t_list *list, int *get_exit, int *fd, int old_fd)
 {
 	(void)list;
@@ -243,10 +253,10 @@ void	execute_2(t_list *cmd, t_list *list, int *get_exit, int *fd, int old_fd)
 		dup_stdin_and_stdout(cmd, fd, old_fd);
 		dup_redirections(cmd);
 		execb2(cmd);
-		// close_open_fds(list);
+		close_open_fds(list);
 		execute_command(path, args, ((t_cmd*)((t_token*)(cmd->content))->value)->env->env);
 	}
-	close_fds_and_free(path, args, fd, old_fd);
+	close_pipe_and_free(path, args, fd, old_fd);
 	wait_4_last_command(cmd, pid);
 }
 
@@ -272,7 +282,6 @@ void	execute(t_list *list)
 	get_exit = 1;
 	fd[0] = -1;
 	fd[1] = -1;
-	// ft_piping();
 	while (curr_cmd)
 	{
 		old_fd = fd[0];
@@ -281,7 +290,7 @@ void	execute(t_list *list)
 	}
 	while (wait(NULL) > -1)
 				;
-	// colse_fds(); 
+	close_open_fds(list); 
 	if (get_exit)
 		get_exit_status();
 	
