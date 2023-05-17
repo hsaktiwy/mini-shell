@@ -28,13 +28,13 @@ char    *expand(t_env *env, char *line)
 	return (arg);
 }
 
-int main(int i, char **argv, char **env)
-{
-	char *a;
-	t_env	*env_l;
+// int main(int i, char **argv, char **env)
+// {
+// 	char *a;
+// 	t_env	*env_l;
 
-	env_l = ft_init_env(env);
-	a = expand(env_l, "ls -la '$PATH' \"$PATH\" ");
-	printf("%s\n",a);
-	return 0;
-}
+// 	env_l = ft_init_env(env);
+// 	a = expand(env_l, "ls -la '$PATH' \"$PATH\" ");
+// 	printf("%s\n",a);
+// 	return 0;
+// }
