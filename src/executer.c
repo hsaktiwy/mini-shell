@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/17 19:06:50 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/17 23:11:08 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ void	executer(char *input, t_env *env)
 		display_tokens(tokens);
 		// display_tokens(list);
 		//execution
-		execute(list, env);
+		execute(list);
 	}
 	free_tokens(&tokens);
 }

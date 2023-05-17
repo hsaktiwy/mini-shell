@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:53:21 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/17 19:05:34 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/17 23:11:14 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,6 @@ void	display_tokens(t_list	*tokens);
 void 	display_ast_types(t_ast *node, char *str);
 
 //execution
-void	execute(t_list *list, t_env *env);
+void	execute(t_list *list);
 
 #endif

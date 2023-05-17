@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:21:36 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/11 19:29:38 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/17 23:03:54 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_unset_env_table(char **env_table, size_t index)
 	free(tmp);
 }
 
-int	ft_unset(t_cmd *command, t_env *env)
+int	ft_unset(t_cmd *command)
 {
 	ssize_t	index;
 	t_list	*arg_list;
@@ -68,14 +68,14 @@ int	ft_unset(t_cmd *command, t_env *env)
 			arg_list = arg_list->next;
 			continue ;
 		}
-		index = get_env_index(env->env, arg);
+		index = get_env_index(command->env->env, arg);
 		if (index == -1)
 		{
 			arg_list = arg_list->next;
 			continue ;
 		}
-		ft_unset_env_list(&env->l_env, arg);
-		ft_unset_env_table(env->env, index);
+		ft_unset_env_list(&(command->env->l_env), arg);
+		ft_unset_env_table(command->env->env, index);
 		arg_list = arg_list->next;
 	}
 	return (0);

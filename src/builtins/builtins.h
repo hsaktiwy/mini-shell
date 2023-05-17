@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:35:46 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/17 15:45:19 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/17 23:12:09 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@
 # include <stdlib.h>
 
 int		ft_echo(t_cmd *command);
-int		ft_cd(t_cmd *command, t_env *env);
+int		ft_cd(t_cmd *command);
 int		ft_pwd(t_cmd *command);
-int		ft_export(t_cmd *command, t_env *env);
-int		ft_env(t_cmd *command, t_env *env);
-int		ft_unset(t_cmd *command, t_env *env);
+int		ft_export(t_cmd *command);
+int		ft_env(t_cmd *command);
+int		ft_unset(t_cmd *command);
 int		ft_exit(t_cmd *command);
 
 //common functions
