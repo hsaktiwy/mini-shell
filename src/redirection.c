@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:42:55 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/07 18:08:57 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:11:49 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ int	out_red_cmd(t_token **red, t_token **command)
 	int		fd;
 
 	fd = -1;
+	fd = out_append_red((*red)->value, (*red)->type);
+	if (fd == -1)
+		return (0);
 	if (*command)
 	{
 		cmd = (*command)->value;
-		fd = out_append_red((*red)->value, (*red)->type);
-		if (fd == -1)
-			return (0);
 		cmd->cmd_out = fd;
 		cmd->file_out = ((t_file *)((*red)->value))->a_file;
 	}	
@@ -36,15 +36,16 @@ int	in_red_cmd(t_env *env, t_token **red, t_token **command)
 	int		fd;
 
 	fd = -1;
+	
+	if ((*red)->type == IN_REDIRECT)
+		fd = in_redirection((*red)->value);
+	else if ((*red)->type == HERE_DOC)
+		fd = here_doc_red(env, (*red)->value);
+	if (fd == -1)
+		return (0);
 	if(*command)
 	{
-			cmd = (*command)->value;
-		if ((*red)->type == IN_REDIRECT)
-			fd = in_redirection((*red)->value);
-		else if ((*red)->type == HERE_DOC)
-			fd = here_doc_red(env, (*red)->value);
-		if (fd == -1)
-			return (0); 
+		cmd = (*command)->value;
 		cmd->cmd_in = fd;
 		if ((*red)->type == HERE_DOC)
 			cmd->file_in = ".here_doc";
@@ -83,7 +84,7 @@ int	redirect(t_env *env, t_list **list, t_token **cmd)
 	return (1);
 }
 
-void    redirection_habdling(t_env *env, t_list **tokens)
+int    redirection_habdling(t_env *env, t_list **tokens)
 {
 	t_list	*list;
 	t_token	*token;
@@ -103,7 +104,7 @@ void    redirection_habdling(t_env *env, t_list **tokens)
 			current = current->next;
 		}
 		if (!redirect(env, &list, &cmd))
-				return ;
+				return (0);
 		while(list)
 		{
 			token = list->content;
@@ -112,4 +113,5 @@ void    redirection_habdling(t_env *env, t_list **tokens)
 				break;
 		}
 	}
+	return (1);
 }

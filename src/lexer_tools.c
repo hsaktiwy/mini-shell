@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:46:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/17 15:44:47 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:27:36 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	handleArg(t_list **tokens, t_env *env, char *input, int *index)
 			cmd = tmp;
 		list = list->next;
 	}
+	// i think we can ride of this when we will expand beffore entring
 	if (input[*index] == '$')
 	{
 		node = ft_lstnew(creat_arg(get_simple_arg(env, &input[*index], index), VARIABLE));

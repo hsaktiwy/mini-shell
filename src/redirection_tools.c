@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:17:19 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/17 15:45:45 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:47:56 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,9 @@ int	in_redirection(t_file *tmp)
 	int fd;
 
 	fd = -1;
-	if (ft_strlen(tmp->a_file))
+	if (tmp->a_file)
 	{
-		if (ft_strlen(tmp->a_file) != 0)
-			fd = open(tmp->a_file, O_WRONLY, 0777);
+		fd = open(tmp->a_file, O_WRONLY, 0777);
 		if (fd == -1)
 			print_error(NULL, tmp->a_file, 1);
 	}
@@ -74,7 +73,7 @@ int	here_doc_red(t_env *env, t_file *tmp)
 	int	fd;
 
 	fd = -1;
-	if(ft_strlen(tmp->a_file))
+	if(tmp->a_file)
 	{
 		// printf(">>>> ? : %s\n",tmp->a_file);
 		fd = open(".here_doc", O_RDWR | O_CREAT | O_TRUNC, 0666);

@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:31:06 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/03/18 18:35:11 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:08:03 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,30 +54,33 @@ int	check_quotes_validity(char *input)
 t_file	*get_file(t_env *env, char *input, int *index)
 {
 	t_file	*file;
+	int		i;
 
 	file = NULL;
-	if(!input)
+	i = 0;
+	i += surpace_whitesspaces(input, index);
+	if(!input || !input[i])
 	{
-		file = creat_arg(ft_strdup("\0"), WORD);
+		file = creat_arg(NULL, WORD);
 		return (file);
 	}
-	else if (input[0] == '\''
-		&& check_quotes_validity(input))
+	else if (input[i] == '\''
+		&& check_quotes_validity(&input[i]))
 	{
 		(*index)++;
-		file = creat_arg(get_single_quote(env, &input[(*index)], index),SINGLE_QUOTE);
-	}else if (input[0] == '\"'
-		&& check_quotes_validity(input))
+		file = creat_arg(get_single_quote(env, &input[++i], index),SINGLE_QUOTE);
+	}else if (input[i] == '\"'
+		&& check_quotes_validity(&input[i]))
 	{
 		(*index)++;
-		file = creat_arg(get_double_quote(env, &input[(*index)], index), DOUBLE_QUOTE);
+		file = creat_arg(get_double_quote(env, &input[++i], index), DOUBLE_QUOTE);
 	}
-	else if (check_quotes_validity(input))
+	else if (check_quotes_validity(&input[i]))
 	{
-		if(input[0] == '$')
-			file = creat_arg(get_simple_arg(env, input, index), VARIABLE);
+		if(input[i] == '$')
+			file = creat_arg(get_simple_arg(env, &input[i], index), VARIABLE);
 		else
-			file = creat_arg(get_simple_arg(env, input, index), WORD);
+			file = creat_arg(get_simple_arg(env, &input[i], index), WORD);
 	}
 	return (file);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:53:21 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/16 16:01:52 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:12:57 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	ft_init(t_list **tokens);
 // parser
 t_list	*parser(t_env *env, t_list **tokens, char *input);
 t_ast	*command(t_list **current);
-void	redirection_habdling(t_env *env, t_list **tokens);
+int		redirection_habdling(t_env *env, t_list **tokens);
 //		redirection parte
 int		out_append_red(t_file *tmp, int out_app);
 int		here_doc_red(t_env *env, t_file *tmp);

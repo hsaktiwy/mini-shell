@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:48:28 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/13 10:46:50 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:12:45 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int redirection_error(t_list *tokens, int display)
 		if (token->type != COMMAND && token->type != PIPE)
 		{
 			file = token->value;
-			if (!ft_strlen(file->a_file))
+			if (!file->a_file)
 			{
 				if (display != 1)
 					return (1);
@@ -132,7 +132,8 @@ t_list	*parser(t_env *env, t_list **tokens, char *input)
 	// if (err != -1)
 	// {
 		//printf("Error : %d\n", err);
-		redirection_habdling(env, tokens);
+		if (!redirection_habdling(env, tokens))
+			return (NULL);
 		if (err == 1)
 			list = creat_cmd_list(&current);
 	//}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:26:20 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/11 12:26:50 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:49:56 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,9 @@ t_env	*ft_init_env(char **env)
 	env_l = (t_env *)malloc(sizeof(t_env));
 	if (!env_l)
 		return (no_mem(), NULL);
-<<<<<<< HEAD
-	env_l->env = ft_t_strdup(env);
-=======
 	size = ft_t_strlen(env);
 	env_l->env = ft_t_strdup(env, size);
 
->>>>>>> main
 	env_l->l_env = ft_lst_list_holder(env);
 	ft_setenv(&env_l, "OLDPWD", NULL);
 	return (env_l);
