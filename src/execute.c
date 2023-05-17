@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/16 18:58:51 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/17 13:34:35 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	exec_builtin(t_cmd *cmd, t_env *env)
 	return (0);
 }
 
-static void	ft_free_tab(char **pp)
+static void	free_tab(char **pp)
 {
 	int	i;
 
@@ -56,7 +56,15 @@ static void	ft_free_tab(char **pp)
 	free(pp);
 }
 
-char *ft_get_full_path(char *cmd, t_env *env)
+int	is_path(char *s)
+{
+	if (ft_strchr(s, '/'))
+		return (1);
+	else
+		return (0);
+}
+
+char *get_full_path(char *cmd, t_env *env)
 {
 	char	**paths;
 	char	path[4096];
@@ -64,8 +72,10 @@ char *ft_get_full_path(char *cmd, t_env *env)
 	int		j;
 	int		k;
 
-	// if (access(cmd, 0) == 0)
-	// 	return (ft_strdup(cmd));
+	if (ft_strchr(cmd, '/'))
+		return (ft_strdup(cmd));
+	if (ft_strcmp(cmd, "minishell" == 0))
+		return ()
 	paths = ft_split(ft_getenv(env, "PATH"), ':');
 	while (paths[i])
 	{
@@ -87,16 +97,16 @@ char *ft_get_full_path(char *cmd, t_env *env)
 		path[j] = 0;
 		if (access(path, 0) == 0)
 		{
-			ft_free_tab(paths);
+			free_tab(paths);
 			return (ft_strdup(path));
 		}
 		i++;
 	}
-	ft_free_tab(paths);
-	return (ft_strdup(cmd));
+	free_tab(paths);
+	return (NULL);
 }
 
-char	**ft_get_args(t_list *list)
+char	**get_args(t_list *list)
 {
 	char	**args;
 	size_t	size;
@@ -121,7 +131,7 @@ char	**ft_get_args(t_list *list)
 	}
 	return (args);
 }
-void	dup_stdin_stdout(t_list *cmd, int *fd, int old_fd)
+void	dup_stdin_and_stdout(t_list *cmd, int *fd, int old_fd)
 {
 	// dup stdin
 	if (old_fd != -1)
@@ -130,11 +140,11 @@ void	dup_stdin_stdout(t_list *cmd, int *fd, int old_fd)
 		close(old_fd);
 	}
 	// dup stdout
-	if (cmd->next /*&& ((t_cmd *)(list->content))->cmd_out == 1*/)
+	if (cmd->next)
 	{
+		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);
-		close(fd[0]);
 	}
 }
 
@@ -152,14 +162,15 @@ void	dup_redirections(t_list *cmd)
 	}
 }
 
-void	executecommand(char *path, char **args, char **env)
+void	execute_command_in_child(char *path, char **args, char **env)
 {
-	printf("path  = %s|\n", path);
-	int i = -1;
-	while (args[++i])
-		printf("arg[%d]  = [%s]\n", i,args[i]);
+	// printf("path  = %s|\n", path);
+	// int i = -1;
+	// while (args[++i])
+	// 	printf("arg[%d]  = [%s]\n", i,args[i]);
 	execve(path, args, env);
-	perror("execve");
+	write(2, "minishell: ", 11);
+	perror(path);
 	exit(127);
 }
 
@@ -180,14 +191,39 @@ int	execute_builtin_in_parrent(t_list *cmd, t_env *env, int *get_exit)
 	return (0);
 }
 
-void	execute_cmd(t_list *cmd, t_env *env, int *get_exit, int *fd, int old_fd)
+void	close_fds_and_free(char *path, char **args, int *fd)
+{
+	free(path);
+	free(args);
+	if (fd[1] > 0)
+		close(fd[1]);
+}
+
+void	wait_4_last_command(t_list *cmd, pid_t pid)
+{
+	if (!(cmd->next))
+		waitpid(pid, &g_minishell.status, 0);
+}
+
+void	command_not_found(t_list *cmd)
+{
+	char	*p;
+
+	p = ((t_cmd*)((t_token*)(cmd->content))->value)->cmd;
+	write(2, p, ft_strlen(p));
+	write(2, ": command not found\n", 21);
+}
+
+void	execute_2(t_list *cmd, t_env *env, int *get_exit, int *fd, int old_fd)
 {
 	pid_t	pid;
 	char	*path;
 	char	**args;
 
-	path = ft_get_full_path(((t_cmd*)((t_token*)(cmd->content))->value)->cmd, env);
-	args = ft_get_args(cmd);
+	path = get_full_path(((t_cmd*)((t_token*)(cmd->content))->value)->cmd, env);
+	if (!path)
+		return (command_not_found(cmd));
+	args = get_args(cmd);
 	if (cmd->next)
 		pipe(fd);
 	if (execute_builtin_in_parrent(cmd, env, get_exit))
@@ -197,16 +233,13 @@ void	execute_cmd(t_list *cmd, t_env *env, int *get_exit, int *fd, int old_fd)
 		perror("fork"); //
 	if (pid == 0)
 	{
-		dup_stdin_stdout(cmd, fd, old_fd);
+		dup_stdin_and_stdout(cmd, fd, old_fd);
 		dup_redirections(cmd);
 		execute_builtin_in_child(cmd, env);
-		executecommand(path, args, env->env);
+		execute_command_in_child(path, args, env->env);
 	}
-	free(path);
-	free(args);
-	close(fd[1]);
-	if (!(cmd->next))
-		waitpid(pid, &g_minishell.status, 0);
+	close_fds_and_free(path, args, fd);
+	wait_4_last_command(cmd, pid);
 }
 
 void	get_exit_status()
@@ -235,11 +268,12 @@ void	execute(t_list *list, t_env *env)
 	while (curr_cmd)
 	{
 		old_fd = fd[0];
-		execute_cmd(curr_cmd, env, &get_exit, fd, old_fd);
-		close(old_fd);
+		execute_2(curr_cmd, env, &get_exit, fd, old_fd);
+		if (old_fd > 0)
+			close(old_fd);
 		curr_cmd = curr_cmd->next;
 	}
-	while (wait(NULL) != -1)
+	while (wait(NULL) > -1)
 				;
 	if (get_exit)
 		get_exit_status();
@@ -251,8 +285,61 @@ void	execute(t_list *list, t_env *env)
 // t_minishell g_minishell;
 // int main(int ac, char **av, char **env)
 // {
+// 	t_list *list = malloc(sizeof(t_list));
+// 	list->next = NULL;
+// 	list->content = (t_token *)malloc(sizeof(t_token));
+// 	((t_token *)(list->content))->value = (t_cmd *)malloc(sizeof(t_cmd));
+
+// 	((t_cmd *)((t_token *)(list->content))->value)->arg = malloc(sizeof(t_list));
+// 	((t_cmd *)((t_token *)(list->content))->value)->arg->content = malloc(sizeof(t_file));
+// 	((t_file *)(((t_cmd *)((t_token *)(list->content))->value)->arg->content))->a_file = av[2];
+// 	((t_cmd *)((t_token *)(list->content))->value)->arg->next = NULL;
+// 	((t_cmd *)((t_token *)(list->content))->value)->arg_count = 1;
+// 	((t_cmd *)((t_token *)(list->content))->value)->cmd = av[1];
+// 	((t_cmd *)((t_token *)(list->content))->value)->cmd_in = 0;
+// 	((t_cmd *)((t_token *)(list->content))->value)->cmd_out = 1;
+// 	((t_cmd *)((t_token *)(list->content))->value)->file_in = NULL;
+// 	((t_cmd *)((t_token *)(list->content))->value)->file_out = NULL;
+
+
+// 	t_list *node;
+// 	if (av[3] && av[4])
+// 	{
+// 		node = malloc(sizeof(t_list));
+// 		list->next = node;
+// 		node->next = NULL;
+// 		node->content = (t_token *)malloc(sizeof(t_token));
+// 		((t_token *)(node->content))->value = (t_cmd *)malloc(sizeof(t_cmd));
+
+// 		((t_cmd *)((t_token *)(node->content))->value)->arg = malloc(sizeof(t_list));
+// 		((t_cmd *)((t_token *)(node->content))->value)->arg->content = malloc(sizeof(t_file));
+// 		((t_file *)(((t_cmd *)((t_token *)(node->content))->value)->arg->content))->a_file = av[4];
+// 		((t_cmd *)((t_token *)(node->content))->value)->arg->next = NULL;
+// 		((t_cmd *)((t_token *)(node->content))->value)->arg_count = 1;
+// 		((t_cmd *)((t_token *)(node->content))->value)->cmd = av[3];
+// 		((t_cmd *)((t_token *)(node->content))->value)->cmd_in = 0;
+// 		((t_cmd *)((t_token *)(node->content))->value)->cmd_out = 1;
+// 		((t_cmd *)((t_token *)(node->content))->value)->file_in = NULL;
+// 		((t_cmd *)((t_token *)(node->content))->value)->file_out = NULL;
+// 	}
+
 // 	t_env *s_env = ft_init_env(env);
-// 	char *path = ft_get_full_path("lhjhs", s_env);
-// 	free(path);
+
+// 	execute(list, s_env);
+
 // 	ft_free_env(&s_env);
+// 	if (av[3] && av[4])
+// 	{
+// 		free(((t_cmd *)((t_token *)(node->content))->value)->arg->content);
+// 		free(((t_cmd *)((t_token *)(node->content))->value)->arg);
+// 		free(((t_token *)(node->content))->value);
+// 		free(node->content);
+// 		free(node);
+// 	}
+
+// 	free(((t_cmd *)((t_token *)(list->content))->value)->arg->content);
+// 	free(((t_cmd *)((t_token *)(list->content))->value)->arg);
+// 	free(((t_token *)(list->content))->value);
+// 	free(list->content);
+// 	free(list);
 // }

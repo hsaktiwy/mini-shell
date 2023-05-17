@@ -72,6 +72,8 @@ bash-3.2$ /bin/lsds
 bash: /bin/lsds: No such file or directory ## exit 127
 bash-3.2$ sdsf
 bash: sdsf: command not found ## exit 127
+
+++caling close with invalid file descriptor
 "
 +shell level
 sleep 5 << kk | cat

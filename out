@@ -1,17 +1,1 @@
-Makefile
-NOTES
-README.md
-TESTING
-a.out
-a.out.dSYM
-cat.sh
-concept_paper
-grammar
-include
-mini_shell
-obj
-out
-out1
-pipes
-src
-test.c
+bash: /xc: No such file or directory
