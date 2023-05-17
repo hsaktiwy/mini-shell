@@ -65,23 +65,32 @@ Linked_T_CMD :  linked->t_file->a_file
 
 
 ### my notes don't mind them
-"
+
+export > 888
++++env -i ./minishell seg
+> OLDPWD is not set at first
+
++ expand ~ && -- to home
 + ignore command if it starts with #
 + handle when full path is specified as the name of the command
-bash-3.2$ /tmp
-bash: /tmp: is a directory ## exit 126
-bash-3.2$ /bin/lsds
-bash: /bin/lsds: No such file or directory ## exit 127
-bash-3.2$ sdsf
-bash: sdsf: command not found ## exit 127
-
 ++caling close with invalid file descriptor
-"
 +shell level
-sleep 5 << kk | cat
+> ls | > out different behaviar
+
++test all builtins 
+
+
+-close fds
+-bash-3.2$ /tmp
+-bash: /tmp: is a directory ## exit 126
+-bash-3.2$ /bin/lsds
+-bash: /bin/lsds: No such file or directory ## exit 127
+-bash-3.2$ sdsf
+-bash: sdsf: command not found ## exit 127
+
+-sleep 5 << kk | cat
 
 >> env KEY=VALUE ls // with no options or args
-> OLDPWD is not set at first
 > echo -n -n -nnnnnn "something"
 
 >export KEY=VALUE
@@ -100,11 +109,8 @@ sleep 5 << kk | cat
 
 
 
-heredoc with no command not working
-env -i ./minishell seg
-expand ~ && -- to home
-ls | ls | << l
+-heredoc with no command not working
+-ls | ls | << l
 
 
-close fds
-exit | ls
+-exit | ls
