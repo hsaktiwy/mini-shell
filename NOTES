@@ -1,9 +1,11 @@
 urgent task:
+	[x] fix redirection case with file_name have NULL and file name have Empty space 
+	[x] fix the problem that made the redirection don't work where there is no  command: (exemple : bash-3.2$ << kk or < out or < hello)
 	[ ] error management {perror("malloc");
   							exit(EXIT_FAILURE);}
 	[x] should add a global struct which will contain the exit status of commands
 	[x] creat function destroy env to free t_env
-	[ ] fix the double erreur display in this case "minishell:$> >"
+	[x] fix the double erreur display in this case "minishell:$> >"
 	[x] added .gitignore file, add files u don't need to push to avoid unnecessary conflicts
 		and only commit the files that u have modified(this doesn't include files with modified headers!!)
 	[x]do redirection in all types(Parcinf fase)

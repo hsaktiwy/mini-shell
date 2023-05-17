@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:50:22 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/09 20:10:33 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:45:23 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*get_path(t_cmd *command, t_env *env)
 		if (ft_strcmp(((t_file *)(command->arg->content))->a_file, "-") == 0)
 		{
 			path = ft_getenv(env, "OLDPWD");
-			if (path == NULL)
+			if (path == NULL || !*path)
 				print_error(command->cmd, "OLDPWD not set\n", 0);
 		}
 		else if (ft_strcmp(((t_file *)(command->arg->content))->a_file, "--") == 0)
@@ -59,11 +59,11 @@ int	ft_cd(t_cmd *command, t_env *env)
 	char	*path;
 	char	cwd[4096];
 
-	if (command->arg_count > 1)
-		return (print_error(command->cmd, "too many arguments\n", 0));
+	// if (command->arg_count > 1)
+	// 	return (print_error(command->cmd, "too many arguments\n", 0));
 	getcwd(cwd, 4096);
 	path = get_path(command, env);
-	if (!path)
+	if (!path || !*path)
 		return (1);
 	if (chdir(path) != 0)
 	{

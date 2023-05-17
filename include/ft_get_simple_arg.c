@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:20:03 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/03/18 19:29:06 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:03:43 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ char	*get_simple_arg(t_env *env, char *str, int *index)
 
 	i = 0;
 	arg = ft_strdup("");
-	while (str[i] && iswhitespace(str[i]))
-		i++;
+	// while (iswhitespace(str[i]))
+	// 	i++;
 	while (str[i] && !iswhitespace(str[i]) && str[i] != '|'  && str[i] != '<'  && str[i] != '>')
 	{
 		if (str[i] == '$' && str[i + 1] && !iswhitespace(str[i + 1]))

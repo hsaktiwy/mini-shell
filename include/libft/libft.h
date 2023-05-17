@@ -38,7 +38,7 @@ int		ft_isalnum(int c);
 int		ft_isprint(int c);
 int		iswhitespace(char c);
 int		str_iswhitespaced(char *str);
-
+int		surpace_whitesspaces(char *str, int *index);
 //
 int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strchr(const char *s, int c);

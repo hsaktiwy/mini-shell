@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/05/17 18:40:51 by aigounad         ###   ########.fr       */
+=======
+/*   Updated: 2023/05/17 16:49:45 by hsaktiwy         ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +159,7 @@ void	executer(char *input, t_env *env)
 		ft_init(&tokens);
 		
 		list = parser(env, &tokens, input);
-		// display_tokens(tokens);
+		display_tokens(tokens);
 		// display_tokens(list);
 		//execution
 		execute(list, env);

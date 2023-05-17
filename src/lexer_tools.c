@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:46:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/17 16:48:10 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/17 19:04:51 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	handleArg(t_list **tokens, t_env *env, char *input, int *index)
 			cmd = tmp;
 		list = list->next;
 	}
+	// i think we can ride of this when we will expand beffore entring
 	if (input[*index] == '$')
 	{
 		node = ft_lstnew(creat_arg(get_simple_arg(env, &input[*index], index), VARIABLE));
@@ -62,7 +63,7 @@ void	ini_count(t_token **token)
 	while (current)
 	{
 		arg = current->content;
-		if (ft_strlen(arg->a_file))
+		if (arg->a_file)
 			cmd->arg_count++;
 		current = current->next;
 	}

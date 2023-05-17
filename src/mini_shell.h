@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:53:21 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/17 16:22:14 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/17 19:05:34 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_init(t_list **tokens);
 // parser
 t_list	*parser(t_env *env, t_list **tokens, char *input);
 t_ast	*command(t_list **current);
-void	redirection_habdling(t_env *env, t_list **tokens);
+int		redirection_habdling(t_env *env, t_list **tokens);
 //		redirection parte
 int		out_append_red(t_file *tmp, int out_app);
 int		here_doc_red(t_env *env, t_file *tmp);
