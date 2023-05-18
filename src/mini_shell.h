@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:53:21 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/18 14:10:54 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/18 15:16:32 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,6 @@ void	display_tokens(t_list	*tokens);
 void 	display_ast_types(t_ast *node, char *str);
 
 //execution
-void	execute(t_list *list, t_env *env);
+void	execute(t_list *list);
 
 #endif

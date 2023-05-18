@@ -6,13 +6,13 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:07:28 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/17 16:45:41 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/17 22:50:39 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
 
-t_cmd	*ini_cmd()
+t_cmd	*ini_cmd(t_env *env)
 {
 	t_cmd	*cmd;
 	
@@ -26,6 +26,7 @@ t_cmd	*ini_cmd()
 	cmd->cmd_out = STDOUT_FILENO;\
 	cmd->file_in = NULL;
 	cmd->file_out = NULL;
+	cmd->env = env;
 	return (cmd);
 }
 
@@ -38,7 +39,7 @@ t_cmd	*get_cmd(t_env *env, char *input, int *index)
 	i = 0;
 	if (!input)
 		return (NULL);
-	cmd = ini_cmd();
+	cmd = ini_cmd(env);
 	if(check_quotes_validity(input))
 	{
 		stack = *index;

@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 11:24:21 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/13 16:06:43 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/17 22:58:46 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ t_list	*sort_env_list(t_list *list)
 	return (list);
 }
 
-void	print_export(t_cmd *command, t_env *env)
+void	print_export(t_cmd *command)
 {
-	t_list *list = sort_env_list(env->l_env);
+	t_list *list = sort_env_list(command->env->l_env);
 	while (list)
 	{
 		if (((t_holder *)(list->content))->key)
@@ -116,7 +116,7 @@ char	*get_value(char *key, char *arg, t_env *env)
 	return (value);
 }
 
-int	ft_export(t_cmd *command, t_env *env)
+int	ft_export(t_cmd *command)
 {
 	t_list	*arg_list;
 	char	*value;
@@ -125,7 +125,7 @@ int	ft_export(t_cmd *command, t_env *env)
 
 	arg_list = command->arg;
 	if (command->arg_count == 0)
-		print_export(command, env);
+		print_export(command);
 	while (arg_list)
 	{
 		arg = ((t_file *)(arg_list->content))->a_file;
@@ -135,8 +135,8 @@ int	ft_export(t_cmd *command, t_env *env)
 			free(key);
 			return (print_error2(arg));
 		}
-		value = get_value(key, arg, env);
-		ft_setenv(&env, key, value);
+		value = get_value(key, arg, command->env);
+		ft_setenv(&(command->env), key, value);
 		free(key);
 		free(value);
 		arg_list = arg_list->next;

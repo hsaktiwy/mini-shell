@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:50:22 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/17 15:45:23 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/18 11:07:41 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,16 @@ char	*get_path(t_cmd *command, t_env *env)
 	return (path);
 }
 
-int	ft_cd(t_cmd *command, t_env *env)
+int	ft_cd(t_cmd *command)
 {
 	char	*path;
 	char	cwd[4096];
+	char	*oldpwd;
 
 	// if (command->arg_count > 1)
 	// 	return (print_error(command->cmd, "too many arguments\n", 0));
 	getcwd(cwd, 4096);
-	path = get_path(command, env);
+	path = get_path(command, command->env);
 	if (!path || !*path)
 		return (1);
 	if (chdir(path) != 0)
@@ -73,9 +74,13 @@ int	ft_cd(t_cmd *command, t_env *env)
 	//print path in case of "-"
 	if ( command->arg_count != 0
 			&& ft_strcmp(((t_file *)(command->arg->content))->a_file, "-") == 0)
-		printf("%s\n", ft_getenv(env, "OLDPWD"));
+	{
+		oldpwd = ft_getenv(command->env, "OLDPWD");
+		write(command->cmd_out, oldpwd, ft_strlen(oldpwd));
+		write(command->cmd_out, "\n", 1);
+	}
 	// update env
-	ft_setenv(&env, "OLDPWD", cwd);
-	ft_setenv(&env, "PWD", getcwd(cwd, 4096));
+	ft_setenv(&(command->env), "OLDPWD", cwd);
+	ft_setenv(&(command->env), "PWD", getcwd(cwd, 4096));
 	return (0);
 }

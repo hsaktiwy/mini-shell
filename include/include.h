@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:58:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/17 16:50:49 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/17 22:49:30 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_command
 	int				cmd_out;
 	char			*file_in;
 	char			*file_out;
+	t_env			*env;
 }t_cmd;
 
 // helper to check input

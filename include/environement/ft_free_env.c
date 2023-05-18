@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:25:19 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/10 16:42:56 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/18 10:37:12 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	free_list(t_list **list)
 void	ft_free_env(t_env **env_t)
 {
 	int			i;
-	t_holder	*holder;
 
 	i = -1;
 	if ((*env_t))

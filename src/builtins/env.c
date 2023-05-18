@@ -6,17 +6,17 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:21:32 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/10 17:28:47 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/17 23:02:08 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void	print_env(t_cmd *command, t_env *env)
+void	print_env(t_cmd *command)
 {
 	char **pp;
 
-	pp = env->env;
+	pp = command->env->env;
 
 	while (*pp)
 	{
@@ -26,8 +26,8 @@ void	print_env(t_cmd *command, t_env *env)
 	}
 }
 
-int	ft_env(t_cmd *command, t_env *env)
+int	ft_env(t_cmd *command)
 {
-	print_env(command, env);
+	print_env(command);
 	return (0);
 }

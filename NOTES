@@ -68,23 +68,33 @@ Linked_T_CMD :  linked->t_file->a_file
 
 
 ### my notes don't mind them
-"
-+ ignore command if it starts with #
-+ handle when full path is specified as the name of the command
-bash-3.2$ /tmp
-bash: /tmp: is a directory ## exit 126
-bash-3.2$ /bin/lsds
-bash: /bin/lsds: No such file or directory ## exit 127
-bash-3.2$ sdsf
-bash: sdsf: command not found ## exit 127
-
-++caling close with invalid file descriptor
-"
+>>> space and #
+export > 888
 +shell level
-sleep 5 << kk | cat
+./minishell recieves a signal 11
++ ignore command or arg if it starts with #
 
->> env KEY=VALUE ls // with no options or args
-> OLDPWD is not set at first
+--env -i ./minishell seg--
+--OLDPWD is not set at first--
+
++ expand ~ && -- to home
+--handle when full path is specified as the name of the command--
+--caling close with invalid file descriptor--
+> ls | > out different behaviar
+
++test all builtins 
+
+
+-close fds
+-bash-3.2$ /tmp
+-bash: /tmp: is a directory ## exit 126
+-bash-3.2$ /bin/lsds
+-bash: /bin/lsds: No such file or directory ## exit 127
+-bash-3.2$ sdsf
+-bash: sdsf: command not found ## exit 127
+
+-sleep 5 << kk | cat
+
 > echo -n -n -nnnnnn "something"
 
 >export KEY=VALUE
@@ -104,17 +114,16 @@ sleep 5 << kk | cat
 
 hsaktiwy signed this problem as finished and cleared (in date of 18/5/2023: 2:13){
 
-heredoc with no command not working
-env -i ./minishell seg
-expand ~ && -- to home
-ls | ls | << l
+-heredoc with no command not working
+-ls | ls | << l
 
 }
 
+-exit | ls
 close fds
 exit | ls
-//// about the normal task number 1 : 
-
+//// about the normal task number 1 : >>>>>>> FIXED <<<<<<<
+{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{
 k size of  = 4 _ PATH $PATHS ~"$PATH" 
 before adding to : /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin:/Users/hsaktiwy/.fig/bin
 k size of  = 5 _ PATHS ~"$PATH" 
@@ -146,3 +155,4 @@ Process 8274: 2 leaks for 144 total leaked bytes.
     2 (144 bytes) << TOTAL >>
       1 (128 bytes) ROOT LEAK: 0x7f8dd1406ca0 [128]  length: 127  "ls -la /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Appl..."
       1 (16 bytes) ROOT LEAK: 0x7f8dd1406c80 [16]  length: 7  "OLDPWD=" <<< ?
+}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
