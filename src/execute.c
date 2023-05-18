@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/18 17:25:31 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/18 23:18:41 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char *get_full_path(char *filename, t_list *list)
 	env = ((t_cmd *)(((t_token *)(list->content))->value))->env;
 	paths = ft_split(ft_getenv(env, "PATH"), ':');
 	if (!paths)
-		return (write(2, "minishell: PATH not set\n", 25), NULL);
+		return (write(2, "minishell: PATH not set\n", 24), NULL);
 	i = -1;
 	while (paths[++i])
 	{
@@ -215,7 +215,7 @@ void	command_not_found(t_list *cmd, int *get_exit)
 	p = ((t_cmd*)((t_token*)(cmd->content))->value)->cmd;
 	write(2, "minishell: ", 11);
 	write(2, p, ft_strlen(p));
-	write(2, ": command not found\n", 21);
+	write(2, ": command not found\n", 20);
 	*get_exit = 0;
 	g_minishell.status = 127;
 }

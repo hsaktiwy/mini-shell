@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:26:20 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/18 16:39:01 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/18 23:35:47 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,47 @@ void	ft_declare_envs(t_env *env)
 	ft_setenv(&env, "OLDPWD", NULL);
 	getcwd(path, 4096);
 	ft_setenv(&env, "PWD", path);
-	ft_setenv(&env, "SHLVL", "1");
+	// ft_setenv(&env, "SHLVL", "1");
 }
 
-void	ft_change_envs(t_env **env)
+void	ft_unset_oldpwd(t_env **env)
 {
 	ssize_t	index;
 
 	ft_unset_env_list(&((*env)->l_env), "OLDPWD");
 	index = get_env_index((*env)->env, "OLDPWD");
-	ft_unset_env_table((*env)->env, index);
+	if (index >= 0)
+		ft_unset_env_table((*env)->env, index);
 	ft_setenv(env, "OLDPWD", NULL);
-	// should add 1 to shell level 
-	// ft_setenv(env, "SHLVL", "1");
+}
+
+void	ft_change_shlvl(t_env **env)
+{
+	char	*shlvl;
+	int		level;
+	char	*tmp;
+
+	level = 0;
+	shlvl = ft_getenv(*env, "SHLVL");
+	if (!shlvl)
+		ft_setenv(env, "SHLVL", "1");
+	else
+	{
+		level = ft_atoi(shlvl);
+		level++;
+		if (level > 999)
+		{
+			write(2, "minishell: warning: shell level (", 33);
+			ft_putnbr_fd(level, 2);
+			write(2, ") too high, resetting to 1\n", 27);
+			level = 1;
+		}
+		else if (level < 1)
+			level = 0;
+		tmp = ft_itoa(level);
+		ft_setenv(env, "SHLVL", tmp);
+		free(tmp);
+	}
 }
 
 t_env	*ft_init_env(char **env)
@@ -94,7 +122,8 @@ t_env	*ft_init_env(char **env)
 	env_l->env = ft_t_strdup(env, size);
 
 	env_l->l_env = ft_lst_list_holder(env);
-	ft_change_envs(&env_l);
+	ft_unset_oldpwd(&env_l);
+	ft_change_shlvl(&env_l);
 	return (env_l);
 }
 

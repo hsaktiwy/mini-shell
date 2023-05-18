@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 11:24:21 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/17 22:58:46 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/18 23:20:39 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	print_export(t_cmd *command)
 	{
 		if (((t_holder *)(list->content))->key)
 		{
-			write(command->cmd_out, "declare -x ", 12);
+			write(command->cmd_out, "declare -x ", 11);
 			write(command->cmd_out, ((t_holder *)(list->content))->key,
 				ft_strlen(((t_holder *)(list->content))->key));
 		}

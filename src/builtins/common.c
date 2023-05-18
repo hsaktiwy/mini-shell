@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:45:11 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/11 19:28:59 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/18 23:19:26 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	check_key(char *key)
 
 int print_error2(char *identifier)
 {
-	write(2, "minishell: export: `", 21);
+	write(2, "minishell: export: `", 20);
 	write(2, identifier, ft_strlen(identifier));
 	write(2, "': not a valid identifier\n", 26);
 	return (1);
