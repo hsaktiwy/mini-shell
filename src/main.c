@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/17 19:05:29 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/18 14:10:50 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	main(__attribute__((unused)) int ac,
 	{
 		input = readline("\33[31mminishell:$>\33[35m ");
 		// if the user pressed Ctr+D
+		input = expand_input(env_s, input);
 		if (!input)
 		{
 			// ft_free_env(&env_s);

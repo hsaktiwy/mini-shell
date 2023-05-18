@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:17:59 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/09 20:32:55 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/18 13:26:39 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ char	*expand_env_var(t_env *env, char *s, char *res,int k)
 
 	v_env[0] = '\0';
 	ft_strncat(v_env, s, k);
+	printf("before adding to : %s\n",ft_getenv(env, v_env));
 	size = ft_strlen(ft_getenv(env, v_env));
 	re = ft_realloc(res, ft_strlen(res) + size + 1);
 	ft_strncat(re, ft_getenv(env, v_env), size);
