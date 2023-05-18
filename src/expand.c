@@ -64,7 +64,14 @@ char    *expand_input(t_env *env, char *line)
 			|| line[i + 1] == '\0' || line[i + 1] == '/') && c == '\0'))
 		{
 			printf ("wait what ?\n");
-			arg = reallocated_str(arg, ft_getenv(env, "HOME"));
+			if (ft_getenv(env, "HOME"))
+				arg = reallocated_str(arg, ft_getenv(env, "HOME"));
+			else
+			{
+				arg = ft_realloc(arg, ft_strlen(arg) + 2);
+				ft_strncat(arg, &line[i], 1);
+				i++;
+			}
 			i++;
 		}
 		else if(line[i])

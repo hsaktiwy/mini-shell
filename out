@@ -1,1 +1,28 @@
-bash: /xc: No such file or directory
+total 320
+-rw-r--r--   1 hsaktiwy  candidate       0 May 18 14:16 "h"
+drwxr-xr-x  27 hsaktiwy  candidate     918 May 18 18:34 .
+drwxr-xr-x   3 hsaktiwy  candidate     102 May  6 20:27 ..
+drwxr-xr-x  15 hsaktiwy  candidate     510 May 18 18:14 .git
+-rw-r--r--   1 hsaktiwy  candidate      99 May 17 15:44 .gitignore
+drwxr-xr-x   3 hsaktiwy  candidate     102 May 18 14:16 .vscode
+-rw-r--r--   1 hsaktiwy  candidate    3282 May 17 15:44 Makefile
+-rw-r--r--   1 hsaktiwy  candidate    5722 May 18 14:16 NOTES
+-rw-r--r--   1 hsaktiwy  candidate     360 May  3 10:06 README.md
+drwxr-xr-x   4 hsaktiwy  candidate     136 May  3 10:06 TESTING
+drwxr-xr-x   3 hsaktiwy  candidate     102 May 17 15:44 a.out.dSYM
+-rwxr-xr-x   1 hsaktiwy  candidate      25 May 17 15:44 cat.sh
+-rw-r--r--   1 hsaktiwy  candidate    1166 May  3 10:06 concept_paper
+-rw-r--r--   1 hsaktiwy  candidate    1250 May  3 10:06 grammar
+-rw-r--r--   1 hsaktiwy  candidate      79 May 18 14:16 h
+-rw-r--r--   1 hsaktiwy  candidate     168 May 17 17:33 hahah
+-rw-r--r--   1 hsaktiwy  candidate       0 May 17 17:33 hello
+drwxr-xr-x  12 hsaktiwy  candidate     408 May 18 14:16 include
+-rwxr-xr-x   1 hsaktiwy  candidate  112688 May 18 18:34 mini_shell
+drwxr-xr-x  17 hsaktiwy  candidate     578 May 18 18:34 obj
+-rw-r--r--   1 hsaktiwy  candidate       0 May 18 18:26 old
+-rw-r--r--   1 hsaktiwy  candidate       0 May 18 18:40 out
+-rw-r--r--   1 hsaktiwy  candidate       0 May 18 18:27 outtt
+drwxr-xr-x   3 hsaktiwy  candidate     102 May 17 15:44 pipes
+drwxr-xr-x  18 hsaktiwy  candidate     612 May 18 14:16 src
+-rw-r--r--   1 hsaktiwy  candidate       5 May 18 14:16 test
+-rw-r--r--   1 hsaktiwy  candidate     281 May 18 14:16 test.c

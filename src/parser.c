@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:48:28 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/17 17:12:45 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/18 18:37:14 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,11 @@ t_list	*creat_cmd_list(t_list	**tokens)
 			g_minishell.n_commands += 1;
 			ft_lstadd_back(&list, ft_lstnew(token));
 		}
+		// ls | >out problem to solve
+		// else if (token->type == PIPE)
+		// {
+		// 	ft_lstadd_back(&list, ft_lstnew(token));
+		// }
 		current = current->next;
 	}
 	return (list);
