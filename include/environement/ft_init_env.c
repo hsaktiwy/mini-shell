@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:26:20 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/18 23:35:47 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/18 23:46:16 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,13 +116,15 @@ t_env	*ft_init_env(char **env)
 		env_l->env = malloc(sizeof(char *));
 		*(env_l->env) = NULL;
 		ft_declare_envs(env_l);
-		return (env_l);
 	}
-	size = ft_t_strlen(env);
-	env_l->env = ft_t_strdup(env, size);
+	else
+	{
+		size = ft_t_strlen(env);
+		env_l->env = ft_t_strdup(env, size);
 
-	env_l->l_env = ft_lst_list_holder(env);
-	ft_unset_oldpwd(&env_l);
+		env_l->l_env = ft_lst_list_holder(env);
+		ft_unset_oldpwd(&env_l);
+	}
 	ft_change_shlvl(&env_l);
 	return (env_l);
 }
