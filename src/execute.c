@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/17 23:41:02 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/18 10:50:01 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ char *get_full_path(char *filename, t_list *list)
 		return (ft_strdup(filename));
 	env = ((t_cmd *)(((t_token *)(list->content))->value))->env;
 	paths = ft_split(ft_getenv(env, "PATH"), ':');
+	if (!paths)
+		return (write(2, "minishell: PATH not set\n", 25), NULL);
 	i = -1;
 	while (paths[++i])
 	{

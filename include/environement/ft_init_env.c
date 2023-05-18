@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:26:20 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/17 15:49:56 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/18 11:02:33 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,27 @@ t_list	*ft_lst_list_holder(char **env)
 	return (list);
 }
 
+void	ft_declare_envs(t_env *env)
+{
+	char	path[4096];
+
+	ft_setenv(&env, "OLDPWD", NULL);
+	getcwd(path, 4096);
+	ft_setenv(&env, "PWD", path);
+	ft_setenv(&env, "SHLVL", "1");
+}
+
+void	ft_change_envs(t_env **env)
+{
+	ssize_t	index;
+
+	ft_unset_env_list(&((*env)->l_env), "OLDPWD");
+	index = get_env_index((*env)->env, "OLDPWD");
+	ft_unset_env_table((*env)->env, index);
+	ft_setenv(env, "OLDPWD", NULL);
+	ft_setenv(env, "SHLVL", "1");
+}
+
 t_env	*ft_init_env(char **env)
 {
 	t_env	*env_l;
@@ -60,13 +81,20 @@ t_env	*ft_init_env(char **env)
 	env_l = (t_env *)malloc(sizeof(t_env));
 	if (!env_l)
 		return (no_mem(), NULL);
+	env_l->l_env = NULL;
+	env_l->env = malloc(sizeof(char *));
+	*(env_l->env) = NULL;
+	if (!env || !*env)
+	{
+		ft_declare_envs(env_l);
+		return (env_l);
+	}
 	size = ft_t_strlen(env);
 	env_l->env = ft_t_strdup(env, size);
 
 	env_l->l_env = ft_lst_list_holder(env);
-	ft_setenv(&env_l, "OLDPWD", NULL);
+	ft_change_envs(&env_l);
 	return (env_l);
-	
 }
 
 // void leak_func()
