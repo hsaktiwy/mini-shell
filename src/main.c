@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/17 15:44:35 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/18 14:04:03 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	main(__attribute__((unused)) int ac,
 	{
 		input = readline("\33[31mminishell:$>\33[35m ");
 		// if the user pressed Ctr+D
+		input = expand_input(env_s, input);
 		if (!input)
 		{
 			// ft_free_env(&env_s);
