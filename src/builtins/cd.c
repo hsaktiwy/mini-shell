@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:50:22 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/18 11:03:44 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/18 11:07:41 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	ft_cd(t_cmd *command)
 {
 	char	*path;
 	char	cwd[4096];
+	char	*oldpwd;
 
 	// if (command->arg_count > 1)
 	// 	return (print_error(command->cmd, "too many arguments\n", 0));
@@ -73,7 +74,11 @@ int	ft_cd(t_cmd *command)
 	//print path in case of "-"
 	if ( command->arg_count != 0
 			&& ft_strcmp(((t_file *)(command->arg->content))->a_file, "-") == 0)
-		printf("%s\n", ft_getenv(command->env, "OLDPWD"));
+	{
+		oldpwd = ft_getenv(command->env, "OLDPWD");
+		write(command->cmd_out, oldpwd, ft_strlen(oldpwd));
+		write(command->cmd_out, "\n", 1);
+	}
 	// update env
 	ft_setenv(&(command->env), "OLDPWD", cwd);
 	ft_setenv(&(command->env), "PWD", getcwd(cwd, 4096));

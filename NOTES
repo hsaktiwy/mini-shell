@@ -67,14 +67,17 @@ Linked_T_CMD :  linked->t_file->a_file
 ### my notes don't mind them
 
 export > 888
-+++env -i ./minishell seg
-> OLDPWD is not set at first
++shell level
+./minishell recieves a signal 11
++ ignore command or arg if it starts with #
+++ if an agr starts with # ignore the rest of the args
+
+--env -i ./minishell seg--
+--OLDPWD is not set at first--
 
 + expand ~ && -- to home
-+ ignore command if it starts with #
-+ handle when full path is specified as the name of the command
-++caling close with invalid file descriptor
-+shell level
+--handle when full path is specified as the name of the command--
+--caling close with invalid file descriptor--
 > ls | > out different behaviar
 
 +test all builtins 
@@ -90,7 +93,6 @@ export > 888
 
 -sleep 5 << kk | cat
 
->> env KEY=VALUE ls // with no options or args
 > echo -n -n -nnnnnn "something"
 
 >export KEY=VALUE

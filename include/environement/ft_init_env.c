@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:26:20 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/18 11:02:33 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/18 11:39:55 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ void	ft_change_envs(t_env **env)
 	index = get_env_index((*env)->env, "OLDPWD");
 	ft_unset_env_table((*env)->env, index);
 	ft_setenv(env, "OLDPWD", NULL);
-	ft_setenv(env, "SHLVL", "1");
+	// should add 1 to shell level 
+	// ft_setenv(env, "SHLVL", "1");
 }
 
 t_env	*ft_init_env(char **env)
