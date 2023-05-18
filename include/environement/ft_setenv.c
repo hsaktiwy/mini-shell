@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:26:14 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/13 16:08:30 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/18 16:32:31 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,8 @@ void	ft_setenv(t_env **env, char *key, char *value)
 	char	*key_val;
 
 	old_env = ft_getenv(*env, key);
-	key_val = join_key_value(key, value);
+	if (value)
+		key_val = join_key_value(key, value);
 	if (old_env == NULL)
 	{
 		// add env in env_table

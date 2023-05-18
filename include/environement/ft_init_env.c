@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:26:20 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/18 11:39:55 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/18 16:39:01 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,10 @@ t_env	*ft_init_env(char **env)
 	if (!env_l)
 		return (no_mem(), NULL);
 	env_l->l_env = NULL;
-	env_l->env = malloc(sizeof(char *));
-	*(env_l->env) = NULL;
 	if (!env || !*env)
 	{
+		env_l->env = malloc(sizeof(char *));
+		*(env_l->env) = NULL;
 		ft_declare_envs(env_l);
 		return (env_l);
 	}
@@ -108,28 +108,28 @@ t_env	*ft_init_env(char **env)
 // 	t_env *list;
 // 	atexit(leak_func);
 // 	list = ft_init_env(env);
-// 	if (list)
-// 	{
-// 		int i;
+// 	// if (list)
+// 	// {
+// 	// 	int i;
 
-// 		i = -1;
-// 		while(list->env[++i])
-// 			printf("%s\n", list->env[i]);
-// 		t_list *linked = list->l_env;
-// 		t_holder *holder;
-// 		while (linked)
-// 		{
-// 			holder = linked->content;
-// 			printf("Key = %s : Value = %s\n", holder->key, holder->value);
-// 			linked = linked->next;
-// 		}
-// 		printf("\n\n\n");
-// 		printf("res of getenv PATH: %s\n", ft_getenv(list, "PATH"));
-// 		printf("res of getenv a: %s\n", ft_getenv(list, "a"));
-// 		ft_setenv(&list, "a", "HAHAHA");
-// 		printf("res of setenv a: %s\n", ft_getenv(list, "a"));
+// 	// 	i = -1;
+// 	// 	while(list->env[++i])
+// 	// 		printf("%s\n", list->env[i]);
+// 	// 	t_list *linked = list->l_env;
+// 	// 	t_holder *holder;
+// 	// 	while (linked)
+// 	// 	{
+// 	// 		holder = linked->content;
+// 	// 		printf("Key = %s : Value = %s\n", holder->key, holder->value);
+// 	// 		linked = linked->next;
+// 	// 	}
+// 	// 	printf("\n\n\n");
+// 	// 	printf("res of getenv PATH: %s\n", ft_getenv(list, "PATH"));
+// 	// 	printf("res of getenv a: %s\n", ft_getenv(list, "a"));
+// 	// 	ft_setenv(&list, "a", "HAHAHA");
+// 	// 	printf("res of setenv a: %s\n", ft_getenv(list, "a"));
 		
-// 	}
+// 	// }
 // 	ft_free_env(&list);
 // 	return (0);
 // }

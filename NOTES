@@ -122,8 +122,8 @@ hsaktiwy signed this problem as finished and cleared (in date of 18/5/2023: 2:13
 -exit | ls
 close fds
 exit | ls
-//// about the normal task number 1 : 
-
+//// about the normal task number 1 : >>>>>>> FIXED <<<<<<<
+{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{
 k size of  = 4 _ PATH $PATHS ~"$PATH" 
 before adding to : /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin:/Users/hsaktiwy/.fig/bin
 k size of  = 5 _ PATHS ~"$PATH" 
@@ -155,3 +155,4 @@ Process 8274: 2 leaks for 144 total leaked bytes.
     2 (144 bytes) << TOTAL >>
       1 (128 bytes) ROOT LEAK: 0x7f8dd1406ca0 [128]  length: 127  "ls -la /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Appl..."
       1 (16 bytes) ROOT LEAK: 0x7f8dd1406c80 [16]  length: 7  "OLDPWD=" <<< ?
+}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}

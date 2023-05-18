@@ -50,9 +50,6 @@ char    *expand_input(t_env *env, char *line)
 	i = 0;
 	c = '\0';
 	arg = ft_strdup("");
-	tmp = line;
-	line = ft_strtrim(tmp, " ");
-	free(tmp);
 	while (line[i])
 	{
 		if (line[i] == '$' && line[i + 1] && !iswhitespace(line[i + 1]) && c == '\0')
@@ -85,9 +82,12 @@ char    *expand_input(t_env *env, char *line)
 			ft_strncat(arg, &line[i], 1);
 			i++;
 		}
-		printf("??? = %c _ %s\n", line[i], arg);
+		// printf("??? = %c _ %s\n", line[i], arg);
 	}
 	free(line);
+	tmp = arg;
+	arg = ft_strtrim(tmp, " ");
+	free(tmp);
 	return (arg);
 }
 // void	func_leak()
