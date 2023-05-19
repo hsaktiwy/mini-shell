@@ -2,6 +2,7 @@ urgent task:
 	[ ]"ls | > out" "ls | <<l" different behaviar
 	[ ]	signals in parent, fork and heredoc
 	[ ]	$? should expand to exit status
+	[x]	removed global struct
 	[x] fix the expand problem exepmple : "minishell > $FalS_variable ls -la ___output will be the ls -la result command"
 	[x] I made this ~ exanding to $HOME
 	[x] fix redirection case with file_name have NULL and file name have Empty space 
@@ -65,6 +66,7 @@ COMMAND THAT DOESN'T WORK:
 NOTE= "You can devide task needed to be done to 2 type urgent one and the normale one"
 
 REPORTS: add a report if u find some bugs or something here pls 
+"ls                  <<kk"
 
 List_CMD: linked->token->t_cmd 
 Linked_T_CMD :  linked->t_file->a_file
