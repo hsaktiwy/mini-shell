@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:03:39 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/18 20:24:59 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/19 16:51:15 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,7 @@ int lexer(t_list **tokens, char *input, t_env *env)
 		else if (input[i] == '|')
 			handlePipe(tokens, &i, &cmd);
 		else if (cmd == 0)
-		{
-			handleCommand(tokens, env, input, &i);
-			cmd = 1;
-		}
+			cmd = handleCommand(tokens, env, input, &i);
 		else
 			handleArg(tokens, env, input, &i);
 		if (iswhitespace(input[i]))

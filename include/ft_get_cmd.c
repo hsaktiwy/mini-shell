@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:07:28 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/17 22:50:39 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/19 16:52:47 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,28 @@ t_cmd	*ini_cmd(t_env *env)
 
 t_cmd	*get_cmd(t_env *env, char *input, int *index)
 {
-	int		i;
+	//int		i;
 	t_cmd	*cmd;
-	int		stack;
+	//int		stack;
 
-	i = 0;
+	//i = 0;
 	if (!input)
 		return (NULL);
 	cmd = ini_cmd(env);
 	if(check_quotes_validity(input))
 	{
-		stack = *index;
-		if (input[i] && input[i] != '|')
+		//stack = *index;
+		if (input[0] && input[0] != '|')
 		{
 			cmd->cmd = get_simple_arg(env, input, index);
-			if (input[i] == '$')
+			if (input[0] == '$')
 				cmd->cmd_type = VARIABLE;
 			else
 				cmd->cmd_type = WORD;
 		}
-		i = (*index) - stack;
+		//i = (*index) - stack;
 	}
+	if (cmd->cmd == NULL)
+		return (free(cmd), NULL);
 	return (cmd);	
 }

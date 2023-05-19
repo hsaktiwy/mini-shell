@@ -42,7 +42,7 @@ char	*reallocated_str(char *str, char *add)
 char    *expand_input(t_env *env, char *line)
 {
 	int		i;
-	int		k;
+	//int		k;
 	char 	c;
 	int		s;
 	char	*arg;
@@ -54,16 +54,17 @@ char    *expand_input(t_env *env, char *line)
 	s = 0;
 	while (line[i])
 	{
-		if (line[i] == '$' && line[i + 1] && !iswhitespace(line[i + 1]) && c == '\0')
-		{
-			k = 0;
-			while (line[k + i + 1] && (ft_isalnum(line[k + i + 1])|| line[k + i + 1] == '?' || line[k + i + 1] == '_'))
-				k++;
-			// printf("k size of  = %d _ %s\n", k,&line[i + 1]);
-			arg = expand_env_var(env ,&line[i + 1], arg, k);
-			i += k + 1;			
-		}
-		else if ((line[i] == '~' && (iswhitespace(line[i + 1])
+		// if (line[i] == '$' && line[i + 1] && !iswhitespace(line[i + 1]) && c == '\0')
+		// {
+		// 	k = 0;
+		// 	while (line[k + i + 1] && (ft_isalnum(line[k + i + 1])|| line[k + i + 1] == '?' || line[k + i + 1] == '_'))
+		// 		k++;
+		// 	// printf("k size of  = %d _ %s\n", k,&line[i + 1]);
+		// 	arg = expand_env_var(env ,&line[i + 1], arg, k);
+		// 	i += k + 1;			
+		// }
+		// else 
+		if ((line[i] == '~' && (iswhitespace(line[i + 1])
 			|| line[i + 1] == '\0' || line[i + 1] == '/') && c == '\0'))
 		{
 			printf ("wait what ?\n");

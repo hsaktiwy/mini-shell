@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:53:21 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/19 10:08:03 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/19 16:51:53 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	executer(char *input, t_env *env);
 // lexer
 int		lexer(t_list **tokens, char *input, t_env *env);
 void    free_tokens(t_list **list);
-void	handleCommand(t_list **tokens, t_env *env, char *input, int *index);
+int		handleCommand(t_list **tokens, t_env *env,char *input, int *index);
 void	handleArg(t_list **tokens, t_env *env,char *input, int *index);
 void	fix_expanding_issue(t_list **tokens);
 // void	ini_arg_count(t_list **tokens);

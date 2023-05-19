@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/19 14:57:17 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/19 17:14:57 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ void	executer(char *input, t_env *env)
 		lexer(&tokens, input, env);
 	if (err_lex == -1)
 	{
-		//fix_expanding_issue(&tokens);
+		fix_expanding_issue(&tokens);
 		ft_init(&tokens);
 		
 		list = parser(env, &tokens, input);
