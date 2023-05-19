@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 11:24:21 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/19 01:12:05 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/19 15:53:15 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,24 +51,28 @@ t_list	*sort_env_list(t_list *list)
 
 void	print_export(t_cmd *command)
 {
-	t_list *list = sort_env_list(command->env->l_env);
+	t_list	*list;
+
+	list = sort_env_list(command->env->l_env);
 	while (list)
 	{
-		if (((t_holder *)(list->content))->key)
+		if (ft_strcmp(((t_holder *)(list->content))->key, "_") != 0)
 		{
-			write(command->cmd_out, "declare -x ", 11);
-			write(command->cmd_out, ((t_holder *)(list->content))->key,
-				ft_strlen(((t_holder *)(list->content))->key));
+			if (((t_holder *)(list->content))->key)
+			{
+				write(command->cmd_out, "declare -x ", 11);
+				write(command->cmd_out, ((t_holder *)(list->content))->key,
+					ft_strlen(((t_holder *)(list->content))->key));
+			}
+			if (((t_holder *)(list->content))->value)
+			{
+				write(command->cmd_out, "=\"", 2);
+				write(command->cmd_out, ((t_holder *)(list->content))->value,
+					ft_strlen(((t_holder *)(list->content))->value));
+				write(command->cmd_out, "\"", 1);
+			}
+			write(command->cmd_out, "\n", 1);
 		}
-		if (((t_holder *)(list->content))->value)
-		{
-			write(command->cmd_out, "=", 1);
-			write(command->cmd_out, "\"", 1);
-			write(command->cmd_out, ((t_holder *)(list->content))->value,
-				ft_strlen(((t_holder *)(list->content))->value));
-			write(command->cmd_out, "\"", 1);
-		}
-		write(command->cmd_out, "\n", 1);
 		list = list->next;
 	}
 }

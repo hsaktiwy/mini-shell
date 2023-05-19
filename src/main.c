@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/19 10:26:11 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/19 14:44:59 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ int	main(__attribute__((unused)) int ac,
 		////////////////////////////
 		if (input && input[0])
 		{
+			add_history(input);
 			input = expand_input(env_s, input);
 			executer(input, env_s);
-			add_history(input);
 		}
 		free(input);
 	}

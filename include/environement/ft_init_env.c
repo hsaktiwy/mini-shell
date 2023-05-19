@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:26:20 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/19 00:36:06 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/19 15:28:24 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_declare_envs(t_env *env)
 	ft_setenv(&env, "OLDPWD", NULL);
 	getcwd(path, 4096);
 	ft_setenv(&env, "PWD", path);
-	// ft_setenv(&env, "SHLVL", "1");
+	ft_setenv(&env, "_", "minishell");
 }
 
 void	ft_unset_oldpwd(t_env **env)

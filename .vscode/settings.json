@@ -7,7 +7,8 @@
 		"environement.h": "c",
 		"iterator": "c",
 		"locale": "c",
-		"__mutex_base": "c"
+		"__mutex_base": "c",
+		"wait.h": "c"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }

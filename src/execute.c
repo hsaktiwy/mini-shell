@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/19 12:47:00 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/19 15:42:16 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,9 +161,24 @@ void	dup_redirections(t_list *cmd)
 	}
 }
 
-void	execute_command(char *filename, char **args, char **env)
+void	save_last_arg_in_env(char *filename, char **args, t_env *env)
 {
-	execve(filename, args, env);
+	if (!args || !*args)
+		ft_setenv(&env, "_", filename);
+	else
+	{
+		while (*args)
+		{
+			if (!*(args + 1))
+				ft_setenv(&env, "_", *args);
+			args++;
+		}
+	}
+}
+
+void	execute_command(char *filename, char **args, t_env *env)
+{
+	execve(filename, args, env->env);
 	write(2, "minishell: ", 11);
 	perror(filename);
 	if (errno == EACCES)	//The filename argument is a Dir and permission denied
@@ -246,9 +261,10 @@ void	execute_2(t_list *cmd, t_list *list, int *get_exit, int *fd, int old_fd)
 	char	**args;
 
 	path = get_full_path(((t_cmd*)((t_token*)(cmd->content))->value)->cmd, cmd);
+	args = get_args(cmd);
+	save_last_arg_in_env(path, args, ((t_cmd*)((t_token*)(cmd->content))->value)->env);
 	if (!path)
 		return (command_not_found(cmd, get_exit));
-	args = get_args(cmd);
 	if (cmd->next)
 		pipe(fd);
 	if (execb1(cmd, list, get_exit))
@@ -262,7 +278,7 @@ void	execute_2(t_list *cmd, t_list *list, int *get_exit, int *fd, int old_fd)
 		dup_redirections(cmd);
 		execb2(cmd, list);
 		close_open_fds(list);
-		execute_command(path, args, ((t_cmd*)((t_token*)(cmd->content))->value)->env->env);
+		execute_command(path, args, ((t_cmd*)((t_token*)(cmd->content))->value)->env);
 	}
 	close_pipe_and_free(path, args, fd, old_fd);
 	wait_4_last_command(cmd, pid);
