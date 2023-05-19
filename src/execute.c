@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/19 10:05:19 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/19 12:47:00 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,9 @@ void	dup_stdin_and_stdout(t_list *cmd, int *fd, int old_fd)
 		close(fd[1]);
 	}
 }
+int isFileDescriptorValid(int fd) {
+    return fcntl(fd, F_GETFD) != -1;
+}
 
 void	dup_redirections(t_list *cmd)
 {
@@ -153,7 +156,7 @@ void	dup_redirections(t_list *cmd)
 	}
 	if (((t_cmd *)(((t_token *)(cmd->content))->value))->file_in)
 	{
-		dup2(((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_in, STDOUT_FILENO);
+		dup2(((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_in, STDIN_FILENO);
 		// close(((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_in);
 	}
 }
