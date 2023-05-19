@@ -105,3 +105,7 @@ export > 888	//FIXED
 +if a key already exists and it was exported without a value it keeps its prev val
 
 +any key added to env without a value will be marked is_export so that it will only be printed when export is called and not env
+
+ ls | | | wc or ls |||| wc
+ export "VA=ls|wc" should consider one cmd
+ echo '$USER'$USER"$USER" 
