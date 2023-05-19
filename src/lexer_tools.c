@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:46:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/17 19:04:51 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/19 10:06:38 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,8 @@ void	ini_arg_count(t_list **tokens)
 	}
 }
 
-void	init_global_s_minishell()
-{
-	g_minishell.status = 0;
-	g_minishell.n_commands = 0;
-}
-
 void	ft_init(t_list **tokens)
 {
 	ini_arg_count(tokens);
-	init_global_s_minishell();
+	g_exit_status = 0;
 }

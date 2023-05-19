@@ -1,4 +1,7 @@
 urgent task:
+	[ ]"ls | > out" "ls | <<l" different behaviar
+	[ ]	signals in parent, fork and heredoc
+	[ ]	$? should expand to exit status
 	[x] fix the expand problem exepmple : "minishell > $FalS_variable ls -la ___output will be the ls -la result command"
 	[x] I made this ~ exanding to $HOME
 	[x] fix redirection case with file_name have NULL and file name have Empty space 
@@ -16,7 +19,7 @@ urgent task:
 	[x]Expand variables in here doc
 	[x]Expand env using our one env (it must be a linked list [key = "", value = ""])
 normal task:
-	1 [ ] i find a leaks in the env_list that we are using specialy in the OLDPWD= key ? fix it ? (see line 96 in this NOTES)
+	1 [x] i find a leaks in the env_list that we are using specialy in the OLDPWD= key ? fix it ? (see line 96 in this NOTES)
 	2 [ ] fix norminette
 	3 [ ] fix leaks if there is 
 	4 [ ] fix all erreur printf to print in stderror
@@ -69,22 +72,21 @@ Linked_T_CMD :  linked->t_file->a_file
 
 ### my notes don't mind them
 >>> space and #
-export > 888
--shell level
-+ ignore command or arg if it starts with #
+export > 888	//FIXED
+-shell level	//FIXED
 
---env -i ./minishell seg--
---OLDPWD is not set at first--
+--env -i ./minishell seg--	//FIXED or not
+--OLDPWD is not set at first-- //FIXED
 
-+ expand ~ && -- to home
++ expand ~ && -- to home //FIXED or not
 --handle when full path is specified as the name of the command--
 --caling close with invalid file descriptor--
-> ls | > out different behaviar
+> "ls | > out" "ls | <<l" different behaviar
 
 +test all builtins 
 
 
--close fds
+-close fds	//FIXED
 -bash-3.2$ /tmp
 -bash: /tmp: is a directory ## exit 126
 -bash-3.2$ /bin/lsds

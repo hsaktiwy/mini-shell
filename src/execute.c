@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/18 23:18:41 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/19 10:05:19 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	is_builtin(char *cmd)
 	return (0);
 }
 
-int	exec_builtin(t_cmd *cmd)
+int	exec_builtin(t_cmd *cmd, t_list *list)
 {
 	if (!ft_strcmp(cmd->cmd, "echo"))
 		return (ft_echo(cmd));
@@ -40,7 +40,7 @@ int	exec_builtin(t_cmd *cmd)
 	if (!ft_strcmp(cmd->cmd, "unset"))
 		return (ft_unset(cmd));
 	if (!ft_strcmp(cmd->cmd, "exit"))
-		return (ft_exit(cmd));
+		return (ft_exit(cmd, list));
 	return (0);
 }
 
@@ -173,19 +173,22 @@ void	execute_command(char *filename, char **args, char **env)
 	}
 }
 
-void	execb2(t_list *cmd)
+void	execb2(t_list *cmd, t_list *list)
 {
 	if (is_builtin(((t_cmd *)(((t_token *)(cmd->content))->value))->cmd))
 	{
-		exit(exec_builtin((t_cmd *)(((t_token *)(cmd->content))->value)));
+		exit(exec_builtin((t_cmd *)(((t_token *)(cmd->content))->value), list));
 	}
 }
 
-int	execb1(t_list *cmd, int *get_exit)
+int	execb1(t_list *cmd, t_list *list, int *get_exit)
 {
-	if (is_builtin(((t_cmd *)(((t_token *)(cmd->content))->value))->cmd) && g_minishell.n_commands == 1)
+	size_t	n_commands;
+
+	n_commands = ft_lstsize(list);
+	if (is_builtin(((t_cmd *)(((t_token *)(cmd->content))->value))->cmd) && n_commands == 1)
 	{
-		g_minishell.status = exec_builtin((t_cmd *)(((t_token *)(cmd->content))->value));	//exec in parrent
+		g_exit_status = exec_builtin((t_cmd *)(((t_token *)(cmd->content))->value), list);	//exec in parrent
 		*get_exit = 0;
 		return (1);
 	}
@@ -205,7 +208,7 @@ void	close_pipe_and_free(char *path, char **args, int *fd, int old_fd)
 void	wait_4_last_command(t_list *cmd, pid_t pid)
 {
 	if (!(cmd->next))
-		waitpid(pid, &g_minishell.status, 0);
+		waitpid(pid, &g_exit_status, 0);
 }
 
 void	command_not_found(t_list *cmd, int *get_exit)
@@ -217,7 +220,7 @@ void	command_not_found(t_list *cmd, int *get_exit)
 	write(2, p, ft_strlen(p));
 	write(2, ": command not found\n", 20);
 	*get_exit = 0;
-	g_minishell.status = 127;
+	g_exit_status = 127;
 }
 
 void	close_open_fds(t_list *list)
@@ -245,7 +248,7 @@ void	execute_2(t_list *cmd, t_list *list, int *get_exit, int *fd, int old_fd)
 	args = get_args(cmd);
 	if (cmd->next)
 		pipe(fd);
-	if (execb1(cmd, get_exit))
+	if (execb1(cmd, list, get_exit))
 		return ;
 	pid = fork();
 	if (pid < 0)
@@ -254,7 +257,7 @@ void	execute_2(t_list *cmd, t_list *list, int *get_exit, int *fd, int old_fd)
 	{
 		dup_stdin_and_stdout(cmd, fd, old_fd);
 		dup_redirections(cmd);
-		execb2(cmd);
+		execb2(cmd, list);
 		close_open_fds(list);
 		execute_command(path, args, ((t_cmd*)((t_token*)(cmd->content))->value)->env->env);
 	}
@@ -264,12 +267,12 @@ void	execute_2(t_list *cmd, t_list *list, int *get_exit, int *fd, int old_fd)
 
 void	get_exit_status()
 {
-	if (WIFEXITED(g_minishell.status))
-		g_minishell.status = WEXITSTATUS(g_minishell.status);
-	else if (WIFSIGNALED(g_minishell.status))
+	if (WIFEXITED(g_exit_status))
+		g_exit_status = WEXITSTATUS(g_exit_status);
+	else if (WIFSIGNALED(g_exit_status))
 	{
 		printf("get name of signal\n");
-		g_minishell.status = WTERMSIG(g_minishell.status) + 128;
+		g_exit_status = WTERMSIG(g_exit_status) + 128;
 	}
 }
 
@@ -296,7 +299,6 @@ void	execute(t_list *list)
 	if (get_exit)
 		get_exit_status();
 	
-	printf(">>> EXIT_STATUS = [%d]\n", g_minishell.status);
 	unlink(".here_doc");
 }
 

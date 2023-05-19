@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 19:06:50 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/18 23:20:26 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/19 09:52:58 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,17 @@ void	get_status_put_error(char *arg, size_t arg_count, int *do_exit, int *status
 	}
 }
 
-int	ft_exit(t_cmd *command)
+int	ft_exit(t_cmd *command, t_list *list)
 {
 	int				status;
 	int				do_exit;
 	char			*arg;
+	size_t			n_commands;
 
 	do_exit = 1;
 	status = 0;
-	if (g_minishell.n_commands == 1)
+	n_commands = ft_lstsize(list);
+	if (n_commands == 1)
 		write(2, "exit\n", 5);
 	if (command->arg_count != 0)
 	{
