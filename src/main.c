@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/19 14:57:29 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/19 16:20:37 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ int	main(__attribute__((unused)) int ac,
 		////////////////////////////
 		if (input && input[0])
 		{
+			add_history(input);
 			input = expand_input(env_s, input);
 			executer(input, env_s);
-			add_history(input);
 		}
 		free(input);
 	}

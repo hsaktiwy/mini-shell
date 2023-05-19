@@ -109,7 +109,7 @@ export > 888	//FIXED
 
 
 
- ls | | | wc or ls |||| wc
+ [x] ls | | | wc or ls |||| wc (i think it soved)
  export "VA=ls|wc" should consider one cmd
- echo '$USER'$USER"$USER" 
+ [x] echo '$USER'$USER"$USER" 
  ls           | cat         <           out1 // space problem

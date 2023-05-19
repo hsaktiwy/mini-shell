@@ -44,18 +44,20 @@ char    *expand_input(t_env *env, char *line)
 	int		i;
 	int		k;
 	char 	c;
+	int		s;
 	char	*arg;
 	char	*tmp;
 
 	i = 0;
 	c = '\0';
 	arg = ft_strdup("");
+	s = 0;
 	while (line[i])
 	{
 		if (line[i] == '$' && line[i + 1] && !iswhitespace(line[i + 1]) && c == '\0')
 		{
 			k = 0;
-			while (line[k + i + 1] && !iswhitespace(line[k + i + 1]) && line[k + i + 1] != '$')
+			while (line[k + i + 1] && (ft_isalnum(line[k + i + 1])|| line[k + i + 1] == '?' || line[k + i + 1] == '_'))
 				k++;
 			// printf("k size of  = %d _ %s\n", k,&line[i + 1]);
 			arg = expand_env_var(env ,&line[i + 1], arg, k);
@@ -85,8 +87,17 @@ char    *expand_input(t_env *env, char *line)
 				c = '\0';
 			else if (line[i] == '\"' && c == '\"')
 				c = '\0';
-			arg = ft_realloc(arg, ft_strlen(arg) + 2);
-			ft_strncat(arg, &line[i], 1);
+			if (s == 0 && iswhitespace(line[i]))
+			{
+				arg = ft_realloc(arg, ft_strlen(arg) + 2);
+				ft_strncat(arg, &line[i], 1);
+				s = 1;
+			}else if (!iswhitespace(line[i]))
+			{
+				arg = ft_realloc(arg, ft_strlen(arg) + 2);
+				ft_strncat(arg, &line[i], 1);
+				s = 0;
+			}
 			i++;
 		}
 		// printf("??? = %c _ %s\n", line[i], arg);

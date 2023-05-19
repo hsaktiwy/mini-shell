@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:48:28 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/19 10:02:54 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/19 16:09:04 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int check_piping(char *input)
 		else if (input[c] != '|' && !iswhitespace(input[c]) && open == 1)
 		{
 			open = 0;
-		}
+		}else if (input[c] == '|' && open == 1)
+			break ;
 		c++;
 	}
 	if (open == 1)
