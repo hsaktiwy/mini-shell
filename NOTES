@@ -1,4 +1,5 @@
 urgent task:
+	[x] ignore from # to end  
 	[x] fix the expand problem exepmple : "minishell > $FalS_variable ls -la ___output will be the ls -la result command"
 	[x] I made this ~ exanding to $HOME
 	[x] fix redirection case with file_name have NULL and file name have Empty space 
@@ -68,11 +69,9 @@ Linked_T_CMD :  linked->t_file->a_file
 
 
 ### my notes don't mind them
->>> space and #
 export > 888
 +shell level
 ./minishell recieves a signal 11
-+ ignore command or arg if it starts with #
 
 --env -i ./minishell seg--
 --OLDPWD is not set at first--

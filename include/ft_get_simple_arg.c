@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:20:03 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/17 17:03:43 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/18 19:10:02 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*get_simple_arg(t_env *env, char *str, int *index)
 {
 	int		i;
-	int		k;
+	//int		k;
 	char	*arg;
 
 	i = 0;
@@ -24,15 +24,16 @@ char	*get_simple_arg(t_env *env, char *str, int *index)
 	// 	i++;
 	while (str[i] && !iswhitespace(str[i]) && str[i] != '|'  && str[i] != '<'  && str[i] != '>')
 	{
-		if (str[i] == '$' && str[i + 1] && !iswhitespace(str[i + 1]))
-		{
-			k = 0;
-			while (str[k + i + 1] && !iswhitespace(str[k + i + 1]) && str[k + i + 1] != '$')
-				k++;
-			arg = expand_env_var(env ,&str[i + 1], arg, k);
-			i += k + 1;			
-		}
-		else if (str[i] == '\'')
+		// if (str[i] == '$' && str[i + 1] && !iswhitespace(str[i + 1]))
+		// {
+		// 	k = 0;
+		// 	while (str[k + i + 1] && !iswhitespace(str[k + i + 1]) && str[k + i + 1] != '$')
+		// 		k++;
+		// 	arg = expand_env_var(env ,&str[i + 1], arg, k);
+		// 	i += k + 1;			
+		// }
+		// else 
+		if (str[i] == '\'')
 		{
 			arg = ft_strjoin(arg, get_single_quote(env, &str[++i], index));
 			break ;

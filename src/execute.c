@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/18 17:25:31 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/18 19:40:07 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,7 +291,7 @@ void	execute(t_list *list)
 		curr_cmd = curr_cmd->next;
 	}
 	while (wait(NULL) > -1)
-				;
+		;
 	close_open_fds(list); 
 	if (get_exit)
 		get_exit_status();

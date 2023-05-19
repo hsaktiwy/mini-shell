@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:03:39 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/18 15:49:03 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/18 20:24:59 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int lexer(t_list **tokens, char *input, t_env *env)
 
 	i = 0;
 	cmd = 0;
-	while (input[i])
+	while (input[i] && input[i] != '#')
 	{
 		if (input[i] == '<' && input[i + 1] && input[i + 1] == '<')
 			handleHereDoc(tokens, env, input, &i);

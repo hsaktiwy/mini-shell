@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/18 18:56:58 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/18 20:25:29 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,14 +151,14 @@ void	executer(char *input, t_env *env)
 		lexer(&tokens, input, env);
 	if (err_lex == -1)
 	{
-		fix_expanding_issue(&tokens);
+		//fix_expanding_issue(&tokens);
 		ft_init(&tokens);
 		
 		list = parser(env, &tokens, input);
-		// display_tokens(tokens);
-		// display_tokens(list);
+		display_tokens(tokens);
+		display_tokens(list);
 		//execution
 		execute(list);
 	}
-	free_tokens(&tokens);
+	// free_tokens(&tokens);
 }
