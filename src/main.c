@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/19 14:44:59 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/19 22:21:32 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,17 @@ int	g_exit_status;
 // 	return (NULL);
 // }
 
+// void	sig_int_handler(int sig)
+// {
+// 	write(1, "\n", 1);
+// }
+
 void	set_signal_handlers()
 {
 	// rl_catch_signals();	//hide printing ^'\'
 	// signal(SIGINT, sig_int_handler);	// handel Ctr+c
 	signal(SIGQUIT, SIG_IGN);	// ignore Ctr+'\'
+	signal(SIGTSTP, SIG_IGN);	// ignore Ctr+'z'
 }
 
 int	main(__attribute__((unused)) int ac,
@@ -54,6 +60,13 @@ int	main(__attribute__((unused)) int ac,
 			write(1, "\n", 1);
 			exit(0);
 		}
+		// if (strcmp(input, "^C") == 0 || strcmp(input, "SIGINT") == 0) {
+		// 	// Perform the action for canceling or interrupting the current operation.
+		// 	// For example, clear the input line and display a new prompt.
+		// 	rl_on_new_line();
+		// 	// rl_replace_line("", 0);
+		// 	rl_redisplay();
+		// }
 		////////////////////////////
 		if (input && input[0])
 		{
@@ -64,4 +77,4 @@ int	main(__attribute__((unused)) int ac,
 		free(input);
 	}
 	return (0);
-} 
+}

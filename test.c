@@ -5,15 +5,20 @@
 
 int	main(int ac, char **av, char **env)
 {
-	int fd = open("out", O_RDWR); //3
-	dup2(fd, STDOUT_FILENO);
-	close(fd);
-	int fd2 = open("cat.sh", O_RDWR);
-	printf("fd = %d fd2 = %d\n", fd, fd2);
-	if (isatty(1))
-		write(1, "Is a tty\n", 9);
-	else
-		write(1, "NOt a tty\n", 10);
+	char *p;
+	p = NULL;
+
+	while (*p)
+		;
+	// int fd = open("out", O_RDWR); //3
+	// dup2(fd, STDOUT_FILENO);
+	// close(fd);
+	// int fd2 = open("cat.sh", O_RDWR);
+	// printf("fd = %d fd2 = %d\n", fd, fd2);
+	// if (isatty(1))
+	// 	write(1, "Is a tty\n", 9);
+	// else
+	// 	write(1, "NOt a tty\n", 10);
 
 	// char **argv = {"echo", "-n", "hello"};
 	// int i = 0;

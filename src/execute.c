@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/19 15:42:16 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/19 21:52:23 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	is_builtin(char *cmd)
 {
-	if (!ft_strcmp(cmd, "echo") ||
-		!ft_strcmp(cmd, "cd") ||
-		!ft_strcmp(cmd, "pwd") ||
-		!ft_strcmp(cmd, "export") ||
-		!ft_strcmp(cmd, "unset") ||
-		!ft_strcmp(cmd, "env") ||
-		!ft_strcmp(cmd, "exit"))
+	if (!ft_strcmp(cmd, "echo")
+		|| !ft_strcmp(cmd, "cd")
+		|| !ft_strcmp(cmd, "pwd")
+		|| !ft_strcmp(cmd, "export")
+		|| !ft_strcmp(cmd, "unset")
+		|| !ft_strcmp(cmd, "env")
+		|| !ft_strcmp(cmd, "exit"))
 		return (1);
 	return (0);
 }
@@ -72,7 +72,7 @@ void	append_filename(char *filename, char *path, char *des)
 	des[j] = 0;
 }
 
-char *get_full_path(char *filename, t_list *list)
+char	*get_path2(char *filename, t_list *list)
 {
 	char	**paths;
 	char	path[4096];
@@ -106,7 +106,7 @@ char	**get_args(t_list *list)
 	char	**args;
 	size_t	size;
 	t_list	*arg_list;
-	char 	*curr_arg;
+	char	*curr_arg;
 	size_t	index;
 
 	size = 1 + ((t_cmd *)((t_token *)(list->content))->value)->arg_count;
@@ -116,7 +116,7 @@ char	**get_args(t_list *list)
 	args[size] = 0;
 	arg_list = ((t_cmd *)((t_token *)(list->content))->value)->arg;
 	index = 0;
-	args[index++] = ((t_cmd*)((t_token*)(list->content))->value)->cmd;
+	args[index++] = ((t_cmd *)((t_token *)(list->content))->value)->cmd;
 	while (arg_list)
 	{
 		curr_arg = ((t_file *)(arg_list->content))->a_file;
@@ -127,41 +127,56 @@ char	**get_args(t_list *list)
 	return (args);
 }
 
-void	dup_stdin_and_stdout(t_list *cmd, int *fd, int old_fd)
+void	dup_stdin_and_stdout(t_list *cmd, t_fd *fd)
 {
 	// dup stdin
-	if (old_fd != -1)
+	if (fd->old_fd != -1)
 	{
-		dup2(old_fd, STDIN_FILENO);
-		close(old_fd);
+		if (dup2(fd->old_fd, STDIN_FILENO) == -1)
+			perror("dup2");
+		if (close(fd->old_fd) == -1)
+			perror("close");
 	}
 	// dup stdout
 	if (cmd->next)
 	{
-		close(fd[0]);
-		dup2(fd[1], STDOUT_FILENO);
-		close(fd[1]);
+		if (close(fd->fd[0]) == -1)
+			perror("close");
+		dup2(fd->fd[1], STDOUT_FILENO);
+		if (close(fd->fd[1]) == -1)
+			perror("close");
 	}
 }
-int isFileDescriptorValid(int fd) {
-    return fcntl(fd, F_GETFD) != -1;
-}
+// int isFileDescriptorValid(int fd) {
+//     return fcntl(fd, F_GETFD) != -1;
+// }
 
 void	dup_redirections(t_list *cmd)
 {
-	if (((t_cmd *)(((t_token *)(cmd->content))->value))->file_out)
+	char	*file;
+	int		fd;
+
+	file = ((t_cmd *)(((t_token *)(cmd->content))->value))->file_out;
+	if (file)
 	{
-		dup2(((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_out, STDOUT_FILENO);
-		// close(((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_out);
+		fd = ((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_out;
+		if (dup2(fd, STDOUT_FILENO) == -1)
+			perror("dup2");
 	}
-	if (((t_cmd *)(((t_token *)(cmd->content))->value))->file_in)
+	file = ((t_cmd *)(((t_token *)(cmd->content))->value))->file_in;
+	if (file)
 	{
-		dup2(((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_in, STDIN_FILENO);
-		// close(((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_in);
+		if (ft_strcmp(file, ".here_doc") == 0)
+		{
+			fd = open(".here_doc", O_RDONLY, 0666);
+			((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_in = fd;
+		}
+		if (dup2(fd, STDIN_FILENO) == -1)
+			perror("dup2");
 	}
 }
 
-void	save_last_arg_in_env(char *filename, char **args, t_env *env)
+void	save_cmd(char *filename, char **args, t_env *env)
 {
 	if (!args || !*args)
 		ft_setenv(&env, "_", filename);
@@ -176,16 +191,16 @@ void	save_last_arg_in_env(char *filename, char **args, t_env *env)
 	}
 }
 
-void	execute_command(char *filename, char **args, t_env *env)
+void	exec_c(char *filename, char **args, t_env *env)
 {
 	execve(filename, args, env->env);
 	write(2, "minishell: ", 11);
 	perror(filename);
-	if (errno == EACCES)	//The filename argument is a Dir and permission denied
+	if (errno == EACCES) //The filename argument is a Dir and permission denied
 	{
 		exit(126);
 	}
-	else if (errno == ENOENT)	//No such file od directory
+	else if (errno == ENOENT) //No such file od directory
 	{
 		exit(127);
 	}
@@ -202,31 +217,39 @@ void	execb2(t_list *cmd, t_list *list)
 int	execb1(t_list *cmd, t_list *list, int *get_exit)
 {
 	size_t	n_commands;
+	char	*cmd_name;
+	t_cmd	*command;
 
 	n_commands = ft_lstsize(list);
-	if (is_builtin(((t_cmd *)(((t_token *)(cmd->content))->value))->cmd) && n_commands == 1)
+	cmd_name = ((t_cmd *)(((t_token *)(cmd->content))->value))->cmd;
+	if (is_builtin(cmd_name) && n_commands == 1)
 	{
-		g_exit_status = exec_builtin((t_cmd *)(((t_token *)(cmd->content))->value), list);	//exec in parrent
+		command = (t_cmd *)(((t_token *)(cmd->content))->value);
+		g_exit_status = exec_builtin(command, list); //exec in parrent
 		*get_exit = 0;
 		return (1);
 	}
 	return (0);
 }
 
-void	close_pipe_and_free(char *path, char **args, int *fd, int old_fd)
+void	close_pipe_and_free(t_list *cmd, char *path,
+							char **args, t_fd *fd)
 {
 	free(path);
 	free(args);
-	if (fd[1] > 0)
-		close(fd[1]);
-	if (old_fd > 0)
-		close(old_fd);
+	if (cmd->next)
+		if (close(fd->fd[1]) == -1)
+			perror("close");
+	if (fd->old_fd > 0)
+		if (close(fd->old_fd) == -1)
+			perror("close");
 }
 
 void	wait_4_last_command(t_list *cmd, pid_t pid)
 {
 	if (!(cmd->next))
-		waitpid(pid, &g_exit_status, 0);
+		if (waitpid(pid, &g_exit_status, 0) == -1)
+			perror("waitpid");
 }
 
 void	command_not_found(t_list *cmd, int *get_exit)
@@ -234,39 +257,56 @@ void	command_not_found(t_list *cmd, int *get_exit)
 	char	*p;
 
 	p = ((t_cmd*)((t_token*)(cmd->content))->value)->cmd;
-	write(2, "minishell: ", 11);
-	write(2, p, ft_strlen(p));
-	write(2, ": command not found\n", 20);
+	if (write(2, "minishell: ", 11) == -1
+		|| write(2, p, ft_strlen(p)) == -1
+		|| write(2, ": command not found\n", 20) == -1)
+		perror("write");
 	*get_exit = 0;
 	g_exit_status = 127;
 }
 
 void	close_open_fds(t_list *list)
 {
+	int	fd;
+
 	while (list)
 	{
 		if (((t_cmd *)(((t_token *)(list->content))->value))->cmd_in != 0)
-			close(((t_cmd *)(((t_token *)(list->content))->value))->cmd_in);
+		{
+			fd = ((t_cmd *)(((t_token *)(list->content))->value))->cmd_in;
+			if (close(fd) == -1)
+				perror("close");
+		}
 		if (((t_cmd *)(((t_token *)(list->content))->value))->cmd_out != 1)
-			close(((t_cmd *)(((t_token *)(list->content))->value))->cmd_out);
+		{
+			fd = ((t_cmd *)(((t_token *)(list->content))->value))->cmd_out;
+			if (close(fd) == -1)
+				perror("close");
+		}
 		list = list->next;
 	}
 }
 
-void	execute_2(t_list *cmd, t_list *list, int *get_exit, int *fd, int old_fd)
+void	ft_piping(t_list *cmd, t_fd *fd)
 {
-	(void)list;
+	if (cmd->next)
+		if (pipe(fd->fd) == -1)
+			perror("pipe");
+}
+
+void	execute_2(t_list *cmd, t_list *list,
+					int *get_exit, t_fd *fd)
+{
 	pid_t	pid;
 	char	*path;
 	char	**args;
 
-	path = get_full_path(((t_cmd*)((t_token*)(cmd->content))->value)->cmd, cmd);
+	path = get_path2(((t_cmd *)((t_token *)(cmd->content))->value)->cmd, cmd);
 	args = get_args(cmd);
-	save_last_arg_in_env(path, args, ((t_cmd*)((t_token*)(cmd->content))->value)->env);
+	save_cmd(path, args, ((t_cmd *)((t_token *)(cmd->content))->value)->env);
 	if (!path)
 		return (command_not_found(cmd, get_exit));
-	if (cmd->next)
-		pipe(fd);
+	ft_piping(cmd, fd);
 	if (execb1(cmd, list, get_exit))
 		return ;
 	pid = fork();
@@ -274,24 +314,55 @@ void	execute_2(t_list *cmd, t_list *list, int *get_exit, int *fd, int old_fd)
 		perror("fork"); //
 	if (pid == 0)
 	{
-		dup_stdin_and_stdout(cmd, fd, old_fd);
+		dup_stdin_and_stdout(cmd, fd);
 		dup_redirections(cmd);
 		execb2(cmd, list);
 		close_open_fds(list);
-		execute_command(path, args, ((t_cmd*)((t_token*)(cmd->content))->value)->env);
+		exec_c(path, args, ((t_cmd *)((t_token *)(cmd->content))->value)->env);
 	}
-	close_pipe_and_free(path, args, fd, old_fd);
+	close_pipe_and_free(cmd, path, args, fd);
 	wait_4_last_command(cmd, pid);
+}
+
+void	get_name_of_signal(int sig)
+{
+	if (sig == 2)
+		printf("^C\n");
+	if (sig == 3)
+		printf("^\\Quit: %d\n", sig);
+	if (sig == 6)
+		printf("Aborted\n");
+	if (sig == 7)
+		printf("Bus error\n");
+	if (sig == 8)
+		printf("Floating point exception\n");
+	if (sig == 9)
+		printf("Killed\n");
+	if (sig == 10)
+		printf("User-defined signal 1\n");
+	if (sig == 11)
+		printf("Segmentation fault: %d\n", sig);
+	if (sig == 12)
+		printf("User-defined signal 2\n");
+	if (sig == 13)
+		printf("Broken pipe\n");
+	if (sig == 14)
+		printf("Alarm clock\n");
+	if (sig == 15)
+		printf("Terminated\n");
 }
 
 void	get_exit_status()
 {
+	int	sig;
+
 	if (WIFEXITED(g_exit_status))
 		g_exit_status = WEXITSTATUS(g_exit_status);
 	else if (WIFSIGNALED(g_exit_status))
 	{
-		printf("get name of signal\n");
-		g_exit_status = WTERMSIG(g_exit_status) + 128;
+		sig = WTERMSIG(g_exit_status);
+		g_exit_status = sig + 128;
+		get_name_of_signal(sig);
 	}
 }
 
@@ -299,17 +370,16 @@ void	execute(t_list *list)
 {
 	t_list *curr_cmd;
 	int		get_exit;
-	int		fd[2];
-	int		old_fd;
+	t_fd	fd;
 
 	curr_cmd = list;
 	get_exit = 1;
-	fd[0] = -1;
-	fd[1] = -1;
+	fd.fd[0] = -1;
+	fd.fd[1] = -1;
 	while (curr_cmd)
 	{
-		old_fd = fd[0];
-		execute_2(curr_cmd, list, &get_exit, fd, old_fd);
+		fd.old_fd = fd.fd[0];
+		execute_2(curr_cmd, list, &get_exit, &fd);
 		curr_cmd = curr_cmd->next;
 	}
 	while (wait(NULL) > -1)
@@ -317,7 +387,6 @@ void	execute(t_list *list)
 	close_open_fds(list); 
 	if (get_exit)
 		get_exit_status();
-	
 	unlink(".here_doc");
 }
 

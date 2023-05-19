@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:42:55 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/17 17:11:49 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/19 20:18:38 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	in_red_cmd(t_env *env, t_token **red, t_token **command)
 	if(*command)
 	{
 		cmd = (*command)->value;
-		cmd->cmd_in = fd;
+		cmd->cmd_in = 0;
 		if ((*red)->type == HERE_DOC)
 			cmd->file_in = ".here_doc";
 		else

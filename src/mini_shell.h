@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:53:21 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/19 10:08:03 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/19 20:51:35 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,11 @@ typedef struct s_token
 	void			*value;	
 }t_token;
 
-// global struct
-// typedef struct s_minishell
-// {
-// 	int	status;
-// 	int	n_commands;
-// }	t_minishell;
+typedef struct s_fd
+{
+	int	fd[2];
+	int	old_fd;
+}	t_fd;
 
 extern int	g_exit_status;
 
@@ -103,5 +102,8 @@ void 	display_ast_types(t_ast *node, char *str);
 //execution
 void	execute(t_list *list);
 void	init_global_s_minishell();
+
+//tmp
+int isFileDescriptorValid(int fd);
 
 #endif
