@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:21:36 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/18 10:27:09 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/19 01:12:15 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_unset(t_cmd *command)
 		arg = ((t_file *)(arg_list->content))->a_file;
 		if (check_key(arg))
 		{
-			print_error2(arg);
+			print_error2(arg, 2);
 			arg_list = arg_list->next;
 			continue ;
 		}

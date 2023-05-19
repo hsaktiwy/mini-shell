@@ -57,7 +57,7 @@ char    *expand_input(t_env *env, char *line)
 			k = 0;
 			while (line[k + i + 1] && !iswhitespace(line[k + i + 1]) && line[k + i + 1] != '$')
 				k++;
-			printf("k size of  = %d _ %s\n", k,&line[i + 1]);
+			// printf("k size of  = %d _ %s\n", k,&line[i + 1]);
 			arg = expand_env_var(env ,&line[i + 1], arg, k);
 			i += k + 1;			
 		}

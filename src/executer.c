@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/18 20:25:29 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/19 14:57:17 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	display_tokens(t_list	*tokens)
 		}
 		list = list->next;
 	}
-	printf(">>> Commands = [%d]\n", g_minishell.n_commands);
 }
 
 void display_ast_types(t_ast *node, char *str) {
@@ -155,9 +154,10 @@ void	executer(char *input, t_env *env)
 		ft_init(&tokens);
 		
 		list = parser(env, &tokens, input);
-		display_tokens(tokens);
+		// display_tokens(tokens);
 		display_tokens(list);
 		//execution
+		// printf(">>> Commands = [%d]\n", ft_lstsize(list));
 		execute(list);
 	}
 	// free_tokens(&tokens);

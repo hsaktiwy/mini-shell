@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:48:28 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/18 18:37:14 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/19 10:02:54 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ t_list	*creat_cmd_list(t_list	**tokens)
 		token = current->content;
 		if (token->type == COMMAND)
 		{
-			g_minishell.n_commands += 1;
 			ft_lstadd_back(&list, ft_lstnew(token));
 		}
 		// ls | >out problem to solve

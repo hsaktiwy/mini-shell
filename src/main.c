@@ -6,13 +6,13 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/18 20:17:05 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/19 14:57:29 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_shell.h"
 
-t_minishell g_minishell;
+int	g_exit_status;
 // t_ast	*search(t_ast *ast)
 // {
 // 	t_ast *tmp;
@@ -45,7 +45,8 @@ int	main(__attribute__((unused)) int ac,
 	env_s = ft_init_env(env);
 	while (1)
 	{
-		input = readline("\33[31mminishell:$>\33[35m ");
+		printf("\33[3mSHLVL:(%s) exit:(%d):~%s\33[3m", ft_getenv(env_s, "SHLVL"), g_exit_status, getcwd(NULL, 0));
+		input = readline("\33[31m<minishell:$>\33[35m ");
 		// if the user pressed Ctr+D
 		if (!input)
 		{

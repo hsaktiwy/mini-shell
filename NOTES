@@ -1,5 +1,10 @@
 urgent task:
 	[x] ignore from # to end  
+	[ ] LOOK AT THE BOTTOM
+	[ ]"ls | > out" "ls | <<l" different behaviar
+	[ ]	signals in parent, fork and heredoc
+	[ ]	$? should expand to exit status
+	[x]	removed global struct
 	[x] fix the expand problem exepmple : "minishell > $FalS_variable ls -la ___output will be the ls -la result command"
 	[x] I made this ~ exanding to $HOME
 	[x] fix redirection case with file_name have NULL and file name have Empty space 
@@ -17,7 +22,7 @@ urgent task:
 	[x]Expand variables in here doc
 	[x]Expand env using our one env (it must be a linked list [key = "", value = ""])
 normal task:
-	1 [ ] i find a leaks in the env_list that we are using specialy in the OLDPWD= key ? fix it ? (see line 96 in this NOTES)
+	1 [x] i find a leaks in the env_list that we are using specialy in the OLDPWD= key ? fix it ? (see line 96 in this NOTES)
 	2 [ ] fix norminette
 	3 [ ] fix leaks if there is 
 	4 [ ] fix all erreur printf to print in stderror
@@ -63,38 +68,35 @@ COMMAND THAT DOESN'T WORK:
 NOTE= "You can devide task needed to be done to 2 type urgent one and the normale one"
 
 REPORTS: add a report if u find some bugs or something here pls 
+"ls                  <<kk"
 
 List_CMD: linked->token->t_cmd 
 Linked_T_CMD :  linked->t_file->a_file
 
 
 ### my notes don't mind them
-export > 888
-+shell level
-./minishell recieves a signal 11
+>>> space and #
+export > 888	//FIXED
+-shell level	//FIXED
 
---env -i ./minishell seg--
---OLDPWD is not set at first--
+--env -i ./minishell seg--	//FIXED or not
+--OLDPWD is not set at first-- //FIXED
 
-+ expand ~ && -- to home
++ expand ~ && -- to home //FIXED or not
 --handle when full path is specified as the name of the command--
 --caling close with invalid file descriptor--
-> ls | > out different behaviar
+> "ls | > out" "ls | <<l" different behaviar
 
 +test all builtins 
 
 
--close fds
+-close fds	//FIXED
 -bash-3.2$ /tmp
 -bash: /tmp: is a directory ## exit 126
 -bash-3.2$ /bin/lsds
 -bash: /bin/lsds: No such file or directory ## exit 127
 -bash-3.2$ sdsf
 -bash: sdsf: command not found ## exit 127
-
--sleep 5 << kk | cat
-
-> echo -n -n -nnnnnn "something"
 
 >export KEY=VALUE
 +export with no args prints all env
@@ -103,55 +105,11 @@ export > 888
 +export KEY+=VALUE  appends the value to the prevuios one found in value
 # +everything that comes after $ is egnored including it
 +if a key already exists and it was exported without a value it keeps its prev val
-
 +any key added to env without a value will be marked is_export so that it will only be printed when export is called and not env
 
 
 
-
-
-
-hsaktiwy signed this problem as finished and cleared (in date of 18/5/2023: 2:13){
-
--heredoc with no command not working
--ls | ls | << l
-
-}
-
--exit | ls
-close fds
-exit | ls
-//// about the normal task number 1 : >>>>>>> FIXED <<<<<<<
-{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{
-k size of  = 4 _ PATH $PATHS ~"$PATH" 
-before adding to : /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin:/Users/hsaktiwy/.fig/bin
-k size of  = 5 _ PATHS ~"$PATH" 
-before adding to : (null)
-ls -la /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin:/Users/hsaktiwy/.fig/bin  ~"$PATH" 
-Process:         a.out [8274]
-Path:            /Volumes/VOLUME/*/a.out
-Load Address:    0x101dbc000
-Identifier:      a.out
-Version:         ???
-Code Type:       X86-64
-Parent Process:  zsh [2312]
-
-Date/Time:       2023-05-18 13:34:19.852 +0100
-Launch Time:     2023-05-18 13:34:19.392 +0100
-OS Version:      Mac OS X 10.15.7 (19H2026)
-Report Version:  7
-Analysis Tool:   /Applications/Xcode.app/Contents/Developer/usr/bin/leaks
-Analysis Tool Version:  Xcode 12.4 (12D4e)
-
-Physical footprint:         304K
-Physical footprint (peak):  304K
-----
-
-leaks Report Version: 4.0
-Process 8274: 158 nodes malloced for 12 KB
-Process 8274: 2 leaks for 144 total leaked bytes.
-
-    2 (144 bytes) << TOTAL >>
-      1 (128 bytes) ROOT LEAK: 0x7f8dd1406ca0 [128]  length: 127  "ls -la /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Appl..."
-      1 (16 bytes) ROOT LEAK: 0x7f8dd1406c80 [16]  length: 7  "OLDPWD=" <<< ?
-}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+ ls | | | wc or ls |||| wc
+ export "VA=ls|wc" should consider one cmd
+ echo '$USER'$USER"$USER" 
+ ls           | cat         <           out1 // space problem

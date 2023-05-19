@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:21:32 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/17 23:02:08 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/19 00:56:40 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	print_env(t_cmd *command)
 	char **pp;
 
 	pp = command->env->env;
-
+	if (!pp)
+		return;
 	while (*pp)
 	{
 		write(command->cmd_out, *pp, ft_strlen(*pp));

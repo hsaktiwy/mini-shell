@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_tools.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:17:19 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/17 16:47:56 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/19 12:45:15 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	in_redirection(t_file *tmp)
 	fd = -1;
 	if (tmp->a_file)
 	{
-		fd = open(tmp->a_file, O_WRONLY, 0777);
+		// fd = open(tmp->a_file, O_WRONLY, 0777);
+		fd = open(tmp->a_file, O_RDONLY, 0777);
 		if (fd == -1)
 			print_error(NULL, tmp->a_file, 1);
 	}
