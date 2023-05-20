@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/20 14:19:00 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/20 14:25:41 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,9 @@ int	main(__attribute__((unused)) int ac,
 	env_s = ft_init_env(env);
 	while (1)
 	{
-		printf("\33[31mSHLVL:(%s) exit:(%d):~%s\33[00m", ft_getenv(env_s, "SHLVL"), g_exit_status, getcwd(NULL, 0));
+		// printf("\33[31mSHLVL:(%s) exit:(%d):~%s\33[00m", ft_getenv(env_s, "SHLVL"), g_exit_status, getcwd(NULL, 0));
 		input = readline("\33[31m<minishell:$>\33[35m ");
+		// input = "ls | wc";
 		// if the user pressed Ctr+D
 		if (!input)
 		{
@@ -71,7 +72,6 @@ int	main(__attribute__((unused)) int ac,
 		}
 		system("leaks mini_shell");
 		free(input);
-		break ;
 	}
 	return (0);
 }

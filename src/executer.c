@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/20 14:18:56 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/20 14:21:05 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ void	executer(char *input, t_env *env)
 		//execution
 		// printf(">>> Commands = [%d]\n", ft_lstsize(list));
 		execute(list);
-		ft_lstclear(&list, NULL);
+		// ft_lstclear(&list, NULL);
 	}
 	free_tokens(&tokens);
 }
