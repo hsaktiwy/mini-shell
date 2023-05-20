@@ -112,3 +112,98 @@ export > 888	//FIXED
  export "VA=ls|wc" should consider one cmd
  echo '$USER'$USER"$USER" 
  ls           | cat         <           out1 // space problem
+
+ echo $f "$HOME" segmentation fault
+ echo $f"$HOME"
+ echo $f"$HOME""                         "
+
+ whats this anyway
+ root@abdelatif# echo $$$
+ 1682$
+
+################################## LEAK REPORT #########################################
+=TRY TO INVESTIGATE THE ROOT OF THESE LEAKS
+<<TEST 1 WITH ONE input AND A WHILE BREAK>>
+==4047== Memcheck, a memory error detector
+==4047== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==4047== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==4047== Command: ./mini_shell
+==4047== 
+Displaying a tokens (list) : 
+        type : COMMOND
+                CMD : |ls|
+        CMD type cmd(token) = 0
+        CMD count arg = 1
+                Data :|-la|->[0]
+                cmd_in : 0
+                cmd_out : 1
+                file_in : (null)
+                file_out : (null)
+        type : COMMOND
+                CMD : |wc|
+        CMD type cmd(token) = 0
+        CMD count arg = 0
+                Data :
+                cmd_in : 0
+                cmd_out : 1
+                file_in : (null)
+                file_out : (null)
+     24     209    1184
+==4047== 
+==4047== HEAP SUMMARY:
+==4047==     in use at exit: 4 bytes in 1 blocks
+==4047==   total heap usage: 306 allocs, 306 frees, 11,170 bytes allocated
+==4047== 
+==4047== 4 bytes in 1 blocks are definitely lost in loss record 1 of 1
+==4047==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4047==    by 0x11055E: ft_realloc (ft_realloc.c:28)
+==4047==    by 0x10F7CB: get_simple_arg (ft_get_simple_arg.c:47)
+==4047==    by 0x10B1E2: handleArg (lexer_tools.c:48)
+==4047==    by 0x109EA1: lexer (lexer.c:100)
+==4047==    by 0x10ACA8: executer (executer.c:150)
+==4047==    by 0x10AE75: main (main.c:82)
+==4047== 
+==4047== LEAK SUMMARY:
+==4047==    definitely lost: 4 bytes in 1 blocks
+==4047==    indirectly lost: 0 bytes in 0 blocks
+==4047==      possibly lost: 0 bytes in 0 blocks
+==4047==    still reachable: 0 bytes in 0 blocks
+==4047==         suppressed: 0 bytes in 0 blocks
+==4047== 
+==4047== For lists of detected and suppressed errors, rerun with: -s
+==4047== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+<<TEST 2 wwith miltiple inputs>>
+=======================================================================================
+==839== 13 bytes in 1 blocks are still reachable in loss record 6 of 68
+==839==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==839==    by 0x11050A: ft_realloc (ft_realloc.c:28)
+==839==    by 0x10F777: get_simple_arg (ft_get_simple_arg.c:47)
+==839==    by 0x10ED38: get_cmd (ft_get_cmd.c:48)
+==839==    by 0x10B0F0: handleCommand (lexer_tools.c:21)
+==839==    by 0x109EC0: lexer (lexer.c:96)
+==839==    by 0x10ACE8: executer (executer.c:150)
+==839==    by 0x10AEA2: main (main.c:82)
+========================================================================================
+==839== 16 bytes in 1 blocks are still reachable in loss record 10 of 68
+==839==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==839==    by 0x10B0B7: handleCommand (lexer_tools.c:17)
+==839==    by 0x109EC0: lexer (lexer.c:96)
+==839==    by 0x10ACE8: executer (executer.c:150)
+==839==    by 0x10AEA2: main (main.c:82)
+=========================================================================================
+==839== 16 bytes in 1 blocks are still reachable in loss record 11 of 68
+==839==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==839==    by 0x1105F8: ft_lstnew (ft_lstnew.c:19)
+==839==    by 0x10B104: handleCommand (lexer_tools.c:22)
+==839==    by 0x109EC0: lexer (lexer.c:96)
+==839==    by 0x10ACE8: executer (executer.c:150)
+==839==    by 0x10AEA2: main (main.c:82)
+==========================================================================================
+==839== 64 bytes in 1 blocks are still reachable in loss record 21 of 68
+==839==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==839==    by 0x10EC28: ini_cmd (ft_get_cmd.c:19)
+==839==    by 0x10ECD8: get_cmd (ft_get_cmd.c:42)
+==839==    by 0x10B0F0: handleCommand (lexer_tools.c:21)
+==839==    by 0x109EC0: lexer (lexer.c:96)
+==839==    by 0x10ACE8: executer (executer.c:150)
+==839==    by 0x10AEA2: main (main.c:82)

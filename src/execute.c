@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/19 21:52:23 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/20 11:33:30 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ char	**get_args(t_list *list)
 	args = malloc(sizeof(char *) * (size + 1));
 	if (!args)
 		ft_perror("minishell: malloc");
-	args[size] = 0;
 	arg_list = ((t_cmd *)((t_token *)(list->content))->value)->arg;
 	index = 0;
 	args[index++] = ((t_cmd *)((t_token *)(list->content))->value)->cmd;
@@ -124,6 +123,7 @@ char	**get_args(t_list *list)
 			args[index++] = curr_arg;
 		arg_list = arg_list->next;
 	}
+	args[index] = 0;
 	return (args);
 }
 
@@ -206,10 +206,12 @@ void	exec_c(char *filename, char **args, t_env *env)
 	}
 }
 
-void	execb2(t_list *cmd, t_list *list)
+void	execb2(t_list *cmd, t_list *list, char *path, char **args)
 {
 	if (is_builtin(((t_cmd *)(((t_token *)(cmd->content))->value))->cmd))
 	{
+		free(path);
+		free(args);
 		exit(exec_builtin((t_cmd *)(((t_token *)(cmd->content))->value), list));
 	}
 }
@@ -308,7 +310,7 @@ void	execute_2(t_list *cmd, t_list *list,
 		return (command_not_found(cmd, get_exit));
 	ft_piping(cmd, fd);
 	if (execb1(cmd, list, get_exit))
-		return ;
+		return (free(path), free(args));
 	pid = fork();
 	if (pid < 0)
 		perror("fork"); //
@@ -316,12 +318,13 @@ void	execute_2(t_list *cmd, t_list *list,
 	{
 		dup_stdin_and_stdout(cmd, fd);
 		dup_redirections(cmd);
-		execb2(cmd, list);
+		execb2(cmd, list, path, args);
 		close_open_fds(list);
 		exec_c(path, args, ((t_cmd *)((t_token *)(cmd->content))->value)->env);
 	}
-	close_pipe_and_free(cmd, path, args, fd);
 	wait_4_last_command(cmd, pid);
+
+	close_pipe_and_free(cmd, path, args, fd);
 }
 
 void	get_name_of_signal(int sig)
@@ -366,6 +369,40 @@ void	get_exit_status()
 	}
 }
 
+// void	free_args_list(t_list *list)
+// {
+// 	t_file *file;
+// 	if (list == NULL)
+// 		return ;
+// 	while (list)
+// 	{
+// 		free_args_list(list->next);
+// 		file = list->content;
+// 		free(file->a_file);
+// 		free(file);
+// 		free(list);
+// 	}
+// }
+
+void	free_cmd_list(t_list **list)
+{
+	// t_list *args;
+
+	if (*list == NULL)
+		return;
+	while (*list)
+	{
+		free_cmd_list(&(*list)->next);
+		// args = ((t_cmd *)(((t_token*)(list->content))->value))->arg;
+		// free_args_list(args);
+		// free(((t_cmd *)(((t_token*)(list->content))->value))->cmd);
+		// free(((t_token *)(list->content))->value);
+		// free(list->content);
+		free(*list);
+		*list = NULL;
+	}
+}
+
 void	execute(t_list *list)
 {
 	t_list *curr_cmd;
@@ -388,6 +425,7 @@ void	execute(t_list *list)
 	if (get_exit)
 		get_exit_status();
 	unlink(".here_doc");
+	free_cmd_list(&list);
 }
 
 // t_minishell g_minishell;

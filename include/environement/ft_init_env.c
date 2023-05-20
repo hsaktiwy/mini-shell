@@ -6,11 +6,21 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:26:20 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/19 15:28:24 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/20 01:02:48 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environement.h"
+
+t_env *global_env(t_env *env)
+{
+	static t_env *g_env;
+	if (env == NULL)
+		return (g_env);
+	else
+		g_env = env;
+	return (NULL);
+}
 
 static t_holder	*ft_lstnewholder(char *key_val, char *pt_equal)
 {
@@ -126,6 +136,7 @@ t_env	*ft_init_env(char **env)
 		ft_unset_oldpwd(&env_l);
 	}
 	ft_change_shlvl(&env_l);
+	global_env(env_l);
 	return (env_l);
 }
 

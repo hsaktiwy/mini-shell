@@ -34,4 +34,6 @@ void		ft_unset_env_table(char **env_table, size_t index);
 // function used in unset.c
 ssize_t	get_env_index(char **env_table, char *key);
 
+t_env *global_env(t_env *env);
+
 #endif

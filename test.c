@@ -3,13 +3,40 @@
 #include <stdio.h>
 #include <sys/wait.h>
 
+char *global(char *env)
+{
+	static char *g;
+
+	if (env == NULL)
+		return g;
+	else
+		g = env;
+	return g;
+}
+
+void	ft_change_p()
+{
+	char *p = global(NULL);
+	p[0] = 'H';
+	p[1] = 'E';
+	p[2] = 'L';
+	p[3] = 'L';
+	p[4] = 'O';
+	p[5] = 0;
+}
 int	main(int ac, char **av, char **env)
 {
-	char *p;
-	p = NULL;
+	// char p[100];
+	// global(p);
 
-	while (*p)
-		;
+	// ft_change_p();
+
+	// printf("p = [%s]", p);
+	while (1)
+	{
+		printf("333333333333333\n");
+		sleep(1);
+	}
 	// int fd = open("out", O_RDWR); //3
 	// dup2(fd, STDOUT_FILENO);
 	// close(fd);

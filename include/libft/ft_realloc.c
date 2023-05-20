@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 12:50:27 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/03/18 16:07:33 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/20 11:55:58 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@ void    *ft_realloc(void *ptr, size_t size)
     int		i;
 	int		j;
 
+	if (size <= 0)
+		return (ptr);
     if ((!ptr))
     {
 		res = malloc(size);
 		return (res);	
-	}else if (size > 0)
+	}else
 	{
 		res = malloc(size);
 		i = -1;

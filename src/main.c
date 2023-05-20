@@ -6,37 +6,29 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/19 22:21:32 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/20 11:45:58 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_shell.h"
 
 int	g_exit_status;
-// t_ast	*search(t_ast *ast)
-// {
-// 	t_ast *tmp;
 
-// 	tmp = ast;
-// 	if (tmp)
-// 	{
-// 		return (tmp->left->left);
-// 	}else
-// 	{
-// 		printf("NULL");
-// 	}
-// 	return (NULL);
-// }
-
-// void	sig_int_handler(int sig)
-// {
-// 	write(1, "\n", 1);
-// }
+void	sig_int_handler(int sig)
+{
+	if (sig == SIGINT)
+	{
+		t_env *env = global_env(NULL);
+		ft_free_env(&env);
+		exit(0);
+		write(1, "\n", 1);
+	}
+}
 
 void	set_signal_handlers()
 {
 	// rl_catch_signals();	//hide printing ^'\'
-	// signal(SIGINT, sig_int_handler);	// handel Ctr+c
+	signal(SIGINT, sig_int_handler);	// handel Ctr+c
 	signal(SIGQUIT, SIG_IGN);	// ignore Ctr+'\'
 	signal(SIGTSTP, SIG_IGN);	// ignore Ctr+'z'
 }
@@ -51,12 +43,13 @@ int	main(__attribute__((unused)) int ac,
 	env_s = ft_init_env(env);
 	while (1)
 	{
-		printf("\33[3mSHLVL:(%s) exit:(%d):~%s\33[3m", ft_getenv(env_s, "SHLVL"), g_exit_status, getcwd(NULL, 0));
-		input = readline("\33[31m<minishell:$>\33[35m ");
+		// printf("\33[3mSHLVL:(%s) exit:(%d):~%s\33[3m", ft_getenv(env_s, "SHLVL"), g_exit_status, getcwd(NULL, 0));
+		// input = readline("\33[31m<minishell:$>\33[35m ");
+		input = "unset HOME | ls";
 		// if the user pressed Ctr+D
 		if (!input)
 		{
-			// ft_free_env(&env_s);
+			ft_free_env(&env_s);
 			write(1, "\n", 1);
 			exit(0);
 		}
@@ -70,11 +63,12 @@ int	main(__attribute__((unused)) int ac,
 		////////////////////////////
 		if (input && input[0])
 		{
-			add_history(input);
+			// add_history(input);
 			input = expand_input(env_s, input);
 			executer(input, env_s);
 		}
 		free(input);
+		break ;
 	}
 	return (0);
 }
