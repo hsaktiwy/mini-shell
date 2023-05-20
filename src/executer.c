@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/19 17:14:57 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/20 14:08:42 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ void	executer(char *input, t_env *env)
 		//execution
 		// printf(">>> Commands = [%d]\n", ft_lstsize(list));
 		execute(list);
+		ft_lstclear(&list, NULL);
 	}
-	// free_tokens(&tokens);
+	free_tokens(&tokens);
 }

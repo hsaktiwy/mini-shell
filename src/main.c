@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/19 16:20:37 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/20 13:11:41 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ int	g_exit_status;
 // 	return (NULL);
 // }
 
+// char *getcwd(char *buf, size_t size); allocate memory to be free
+		/* If buf is NULL, space is allocated as necessary to store the pathname and
+     size is ignored.  This space may later be free(3)'d. (there is a leaks here )*/
 void	set_signal_handlers()
 {
 	// rl_catch_signals();	//hide printing ^'\'
@@ -45,7 +48,7 @@ int	main(__attribute__((unused)) int ac,
 	env_s = ft_init_env(env);
 	while (1)
 	{
-		printf("\33[3mSHLVL:(%s) exit:(%d):~%s\33[3m", ft_getenv(env_s, "SHLVL"), g_exit_status, getcwd(NULL, 0));
+		printf("\33[31mSHLVL:(%s) exit:(%d):~%s\33[00m", ft_getenv(env_s, "SHLVL"), g_exit_status, getcwd(NULL, 0));
 		input = readline("\33[31m<minishell:$>\33[35m ");
 		// if the user pressed Ctr+D
 		if (!input)
@@ -61,6 +64,7 @@ int	main(__attribute__((unused)) int ac,
 			input = expand_input(env_s, input);
 			executer(input, env_s);
 		}
+		system("leaks mini_shell");
 		free(input);
 	}
 	return (0);
