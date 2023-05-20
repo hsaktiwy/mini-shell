@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/20 14:21:05 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/20 18:45:16 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,25 @@ void	display_tokens(t_list	*tokens)
 		{
 			printf("	type : <\n");
 			printf("		Data : %s\n", ((t_file *)token->value)->a_file);
+			printf("		Old_data : %s\n", ((t_file *)token->value)->token_file);
 		}
 		if (token->type == OUT_REDIRECT)
 		{
 			printf("	type : >\n");
 			printf("		Data : %s\n", ((t_file *)token->value)->a_file);
+			printf("		Old_data : %s\n", ((t_file *)token->value)->token_file);
 		}
 		if (token->type == HERE_DOC)
 		{
 			printf("	type : <<\n");
 			printf("		Data : %s\n", ((t_file *)token->value)->a_file);
+			printf("		Old_data : %s\n", ((t_file *)token->value)->token_file);
 		}
 		if (token->type == APPEND_REDIRECT)
 		{
 			printf("	type : >>\n");
 			printf("		Data : %s\n", ((t_file *)token->value)->a_file);
+			printf("		Old_data : %s\n", ((t_file *)token->value)->token_file);
 		}
 		if (token->type == PIPE)
 		{
@@ -150,11 +154,12 @@ void	executer(char *input, t_env *env)
 		lexer(&tokens, input, env);
 	if (err_lex == -1)
 	{
+		display_tokens(tokens);
 		fix_expanding_issue(&tokens);
 		ft_init(&tokens);
 		
 		list = parser(env, &tokens, input);
-		// display_tokens(tokens);
+		display_tokens(tokens);
 		display_tokens(list);
 		//execution
 		// printf(">>> Commands = [%d]\n", ft_lstsize(list));

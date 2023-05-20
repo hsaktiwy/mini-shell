@@ -24,6 +24,7 @@ void	ft_change_p()
 	p[4] = 'O';
 	p[5] = 0;
 }
+
 int	main(int ac, char **av, char **env)
 {
 	// char p[100];

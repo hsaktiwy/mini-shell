@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+         #
+#    By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 17:53:55 by hsaktiwy          #+#    #+#              #
-#    Updated: 2023/05/20 14:19:32 by aigounad         ###   ########.fr        #
+#    Updated: 2023/05/20 16:35:13 by hsaktiwy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror -g -I/goinfre/aigounad/.brew/opt/readline #-fsanitize=address
+FLAGS = -Wall -Wextra -Werror -g -fsanitize=address #-I/goinfre/aigounad/.brew/opt/readline 
 
 ENV =  ft_getenv.c ft_setenv.c ft_init_env.c ft_unset_envs.c ft_free_env.c
 LIBFT = ft_t_strdup.c ft_iswhitespace.c ft_strjoin.c  ft_strncat.c ft_isalnum.c  ft_isalpha.c  ft_isdigit.c  ft_isprint.c \
@@ -34,7 +34,7 @@ HEAD_ENV = environement.h
 all : $(NAME)
 
 $(NAME) : $(OBJ) 
-	$(CC) $(FLAGS) $(OBJ) -o $@ -lreadline  -L /goinfre/aigounad/.brew/opt/readline/lib
+	$(CC) $(FLAGS) $(OBJ) -o $@ -lreadline  #-L /goinfre/aigounad/.brew/opt/readline/lib
 
 obj/%.o : src/%.c $(HEADER) | obj_dir
 	$(CC) $(FLAGS) -o $@ -c $<

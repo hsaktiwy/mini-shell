@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_tools.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:17:19 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/19 20:57:59 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/20 17:13:28 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	find_delimeter(char *line, char *needle)
 	int	i;
 
 	i = 0;
+	if (!(*needle) && *line == '\n')
+		return (1);
 	while (line[i] && needle[i] && needle[i] == line[i])
 		i++;
 	if (line[i] == '\n' && !needle[i])
@@ -78,6 +80,8 @@ int	here_doc_red(t_env *env, t_file *tmp)
 	{
 		// printf(">>>> ? : %s\n",tmp->a_file);
 		fd = open(".here_doc", O_RDWR | O_CREAT | O_TRUNC, 0666);
+		// if (!tmp->a_file)
+		// 	tmp->a_file = ft_strdup("");
 		if (fd == -1)
 			print_error(NULL, ".here_doc", 1);
 		else if (!heredoc(env, tmp->a_file, fd))

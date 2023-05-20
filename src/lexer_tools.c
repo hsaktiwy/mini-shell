@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:46:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/19 16:52:33 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/20 16:47:31 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ void	handleArg(t_list **tokens, t_env *env, char *input, int *index)
 	t_token	*tmp;
 	t_list	*list;
 	t_list	*node;
+	char	*file;
 
 	cmd = NULL;
+	node = NULL;
 	list = *tokens;
 	while (list)
 	{
@@ -45,16 +47,20 @@ void	handleArg(t_list **tokens, t_env *env, char *input, int *index)
 			cmd = tmp;
 		list = list->next;
 	}
-	// i think we can ride of this when we will expand beffore entring
-	if (input[*index] == '$')
+	if (input[*index] == '$' && is_splitable_env(&input[*index]))
 	{
-		node = ft_lstnew(creat_arg(get_simple_arg(env, &input[*index], index), VARIABLE));
+		file = get_simple_arg(env, &input[*index], index);
+		if (file)
+			node = ft_lstnew(creat_arg(file, VARIABLE));
 	}
 	else
 	{
-		node = ft_lstnew(creat_arg(get_simple_arg(env, &input[*index], index), WORD));
+		file = get_simple_arg(env, &input[*index], index);
+		if (file)
+			node = ft_lstnew(creat_arg(file, WORD));
 	}
-	ft_lstadd_back(&(((t_cmd *)cmd->value)->arg), node);
+	if (node)
+		ft_lstadd_back(&(((t_cmd *)cmd->value)->arg), node);
 }
 
 void	ini_count(t_token **token)

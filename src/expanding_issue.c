@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:53:52 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/06 19:58:21 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/20 16:42:57 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	fix_if_whitspace(t_cmd **command)
 	while (current)
 	{
 		str = current->content;
-		if (str_iswhitespaced(str->a_file)
+		if (str->a_file && str_iswhitespaced(str->a_file)
 			&& str->arg_type == VARIABLE)
 		{
 			fix_in_arg(&(cmd->arg), str, i);

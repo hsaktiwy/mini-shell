@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:58:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/17 22:49:30 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/20 18:39:26 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_file
 {
 	t_argument_type arg_type;
     char			*a_file;
+	char			*token_file;
 }t_file;
 
 typedef struct s_command
@@ -53,11 +54,13 @@ typedef struct s_command
 
 // helper to check input
 void	ft_lstfree_t_file(t_list **node);
+char	*get_token(char *str);
 char	*get_single_quote(t_env *env, char *s, int *index);
 char	*get_double_quote(t_env *env, char *s, int *index);
 char	*get_simple_arg(t_env *env, char *str, int *index);
 char	*expand_env_var(t_env *env, char *s, char *res,int k);
 int		check_quotes_validity(char *input);
+int		is_splitable_env(char *str);
 t_file	*get_file(t_env *env, char *input, int *index);
 t_cmd	*get_cmd(t_env *env, char *input, int *index);
 t_file	*creat_arg(char *file_name, t_argument_type type);

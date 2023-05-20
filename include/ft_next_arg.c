@@ -6,11 +6,64 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:31:06 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/17 17:08:03 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/20 18:48:11 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include.h"
+
+char	double_single_check(char input, char old_c, int *i)
+{
+	if (input == '\'' && old_c == '\0')
+	{
+		old_c = '\'';
+		(*i)++;
+	}
+	else if (input == '\"' && old_c == '\0')
+	{
+		old_c = '\"';
+		(*i)++;
+	}
+	else if (input == '\'' && old_c == '\'')
+	{
+		old_c = '\0';
+		(*i)++;
+	}
+	else if (input == '\"' && old_c == '\"')
+	{
+		old_c = '\0';
+		(*i)++;
+	}
+	return (old_c);
+}
+
+char	*get_token(char *str)
+{
+	int		i;
+	char	c;
+	char 	*res;
+
+	i = 0;
+	c = '\0';
+	res = ft_strdup("");
+	while (iswhitespace(str[i]))
+		i++;
+	while (str[i] && str[i] != '|'
+		&& str[i] != '<' && str[i] != '>'
+		&& !iswhitespace(str[i]))
+	{
+		c = double_single_check(str[i], c, &i);
+		if (str[i] && str[i] != '|'
+			&& str[i] != '<' && str[i] != '>'
+			&& !iswhitespace(str[i]) && str[i] != c)
+		{
+			res = ft_realloc(res, ft_strlen(res) + 2);
+			ft_strncat(res, &str[i], 1);
+			i++;
+		}
+	}
+	return (res);
+}
 
 t_file	*creat_arg(char *file_name, t_argument_type type)
 {

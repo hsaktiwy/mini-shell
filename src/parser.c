@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:48:28 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/20 14:19:15 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/20 18:53:20 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int redirection_error(t_list *tokens, int display)
 					return (1);
 				return (printf_error_redi(token, list->next),1);
 			}
+			// if (!)
+			// return ()
 		}
 		list = list->next;
 	}

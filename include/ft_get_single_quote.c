@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:21:52 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/09 20:33:34 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/20 15:03:21 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ char	*get_single_quote(t_env *env, char *s, int *index)
 				c = '\'';
 			else
 				c = '\0';
-		}else if (s[i] == '\"' && c == '\'')
+		}else if (c == '\'')
 		{
-			res = ft_strjoin(res, get_double_quote(env, &s[++i], index));
+			res = ft_strjoin(res, get_simple_arg(env, &s[i], index));
 			break ;
 		}
-		else if (s[i] && (!c || (c == '\'' && ft_isalnum(s[i]))))
+		else if (s[i] && !c)
 		{
 			res = ft_realloc(res, ft_strlen(res) + 2);
 			ft_strncat(res, &s[i], 1);

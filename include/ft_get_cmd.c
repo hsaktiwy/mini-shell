@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:07:28 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/19 16:52:47 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/20 16:06:49 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,25 @@ t_cmd	*ini_cmd(t_env *env)
 	cmd->file_out = NULL;
 	cmd->env = env;
 	return (cmd);
+}
+
+int	is_splitable_env(char *str)
+{
+	int	i;
+
+	i = 0;
+	if(str[i] == '$')
+		i++;
+	else
+		return (0);
+	while (str[i] && (ft_isalnum(str[i])
+		|| str[i] == '?' || str[i] == '_'))
+		i++;
+	if (str[i] == '\"' || str[i] == '\''
+		|| str[i] == '$')
+		return (0);
+	else
+		return (1);
 }
 
 t_cmd	*get_cmd(t_env *env, char *input, int *index)

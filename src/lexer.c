@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:03:39 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/19 16:51:15 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/20 18:42:35 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ void handleHereDoc(t_list **tokens, t_env *env, char *input, int *index)
 		return;
 		
 	*index += 2;
+	char 	*r = get_token(&input[*index]);
 	token->type = HERE_DOC;
 	token->value = get_file(env, &input[*index], index);
+	((t_file *)token->value)->token_file = r;
 	ft_lstadd_back(tokens, ft_lstnew(token));
 }
 
@@ -31,8 +33,10 @@ void handleInRedirect(t_list **tokens, t_env *env, char *input, int *index)
 		return;
 		
 	++(*index);
+	char 	*r = get_token(&input[*index]);
 	token->type = IN_REDIRECT;
 	token->value = get_file(env, &input[*index], index);
+	((t_file *)token->value)->token_file = r;
 	ft_lstadd_back(tokens, ft_lstnew(token));
 }
 
@@ -43,20 +47,28 @@ void handleAppendRedirect(t_list **tokens, t_env *env, char *input, int *index)
 		return;
 		
 	*index += 2;
+	char 	*r = get_token(&input[*index]);
 	token->type = APPEND_REDIRECT;
 	token->value = get_file(env, &input[*index], index);
+	((t_file *)token->value)->token_file = r;
 	ft_lstadd_back(tokens, ft_lstnew(token));
+	
 }
 
 void handleOutRedirect(t_list **tokens, t_env *env, char *input, int *index)
 {
-	t_token *token = (t_token *)malloc(sizeof(t_token));
+	t_token *token;
+	;
+
+	token = (t_token *)malloc(sizeof(t_token));
 	if (!token)
 		return;
-		
+	
 	++(*index);
+	char 	*r = get_token(&input[*index]);
 	token->type = OUT_REDIRECT;
 	token->value = get_file(env, &input[*index], index);
+	((t_file *)token->value)->token_file = r;
 	ft_lstadd_back(tokens, ft_lstnew(token));
 }
 

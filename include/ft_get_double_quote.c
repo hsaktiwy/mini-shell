@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_double_quote.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:17:59 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/18 23:27:12 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/20 15:25:53 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,21 @@ char	*get_double_quote(t_env *env, char *s, int *index)
 			else
 				c = '\0';
 			i++;
-		}else if (s[i] == '\'' && c == '\"')
+		}else if (c == '\"')
 		{
-			res = ft_strjoin(res, get_single_quote(env, &s[++i], index));
+			//(*index) += i;
+			printf("from double to -> get_simple_arg(%s)(%d)\n",&s[i], *index);
+			res = ft_strjoin(res, get_simple_arg(env, &s[i], index));
 			break ;
 		}
-		else if (s[i] && (!c || (c == '\"' && ft_isalnum(s[i]))))
+		else if (s[i] && !c)
 		{
 			res = ft_realloc(res, ft_strlen(res) + 2);
 			ft_strncat(res, &s[i], 1);
 			i++;
 		}
+		printf("??? = %c _ %s(c == [%c])\n", s[i], res, c);
 	}
+	printf("final result : |%s|\n", res);
 	return ((*index) += i, res);
 }

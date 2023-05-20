@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/20 14:25:41 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/20 14:37:09 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(__attribute__((unused)) int ac,
 	while (1)
 	{
 		// printf("\33[31mSHLVL:(%s) exit:(%d):~%s\33[00m", ft_getenv(env_s, "SHLVL"), g_exit_status, getcwd(NULL, 0));
-		input = readline("\33[31m<minishell:$>\33[35m ");
+		input = readline("\33[31mminishell:$>\33[35m ");
 		// input = "ls | wc";
 		// if the user pressed Ctr+D
 		if (!input)
@@ -70,7 +70,7 @@ int	main(__attribute__((unused)) int ac,
 			input = expand_input(env_s, input);
 			executer(input, env_s);
 		}
-		system("leaks mini_shell");
+		//system("leaks mini_shell");
 		free(input);
 	}
 	return (0);

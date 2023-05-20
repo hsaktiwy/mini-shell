@@ -88,25 +88,32 @@ char    *expand_input(t_env *env, char *line)
 				c = '\0';
 			else if (line[i] == '\"' && c == '\"')
 				c = '\0';
-			if (s == 0 && iswhitespace(line[i]))
+			if (s == 0 && iswhitespace(line[i]) && c == '\0')
 			{
 				arg = ft_realloc(arg, ft_strlen(arg) + 2);
 				ft_strncat(arg, &line[i], 1);
 				s = 1;
-			}else if (!iswhitespace(line[i]))
+			}
+			else if (s == 1 && !iswhitespace(line[i]))
 			{
 				arg = ft_realloc(arg, ft_strlen(arg) + 2);
 				ft_strncat(arg, &line[i], 1);
 				s = 0;
 			}
+			else
+			{
+				arg = ft_realloc(arg, ft_strlen(arg) + 2);
+				ft_strncat(arg, &line[i], 1);
+			}
 			i++;
 		}
-		// printf("??? = %c _ %s\n", line[i], arg);
+		//printf("??? = %c _ %s\n", line[i], arg);
 	}
 	free(line);
 	tmp = arg;
 	arg = ft_strtrim(tmp, " ");
 	free(tmp);
+	printf("arg == %s\n", arg);
 	return (arg);
 }
 // void	func_leak()
