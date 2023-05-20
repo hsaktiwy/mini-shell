@@ -1,5 +1,11 @@
 #include "mini_shell.h"
 
+void    t_file_free(void *value)
+{
+    free(((t_file *)value)->a_file);
+    free(value);
+}
+
 void    s_free(void *value)
 {
     free(value);
@@ -17,7 +23,7 @@ void    free_token(void *value)
         free(token->value);
     }else if (token->type == COMMAND)
     {
-        ft_lstclear(&((t_cmd *)token->value)->arg, s_free);
+        ft_lstclear(&((t_cmd *)token->value)->arg, t_file_free);
         free(((t_cmd *)token->value)->cmd);
         free(token->value);
     }

@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/20 11:33:30 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/20 14:18:46 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -420,7 +420,7 @@ void	execute(t_list *list)
 		curr_cmd = curr_cmd->next;
 	}
 	while (wait(NULL) > -1)
-				;
+		;
 	close_open_fds(list); 
 	if (get_exit)
 		get_exit_status();

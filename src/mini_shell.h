@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:53:21 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/19 20:51:35 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/20 14:19:04 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	executer(char *input, t_env *env);
 // lexer
 int		lexer(t_list **tokens, char *input, t_env *env);
 void    free_tokens(t_list **list);
-void	handleCommand(t_list **tokens, t_env *env, char *input, int *index);
+int		handleCommand(t_list **tokens, t_env *env,char *input, int *index);
 void	handleArg(t_list **tokens, t_env *env,char *input, int *index);
 void	fix_expanding_issue(t_list **tokens);
 // void	ini_arg_count(t_list **tokens);

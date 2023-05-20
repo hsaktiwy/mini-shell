@@ -1,4 +1,5 @@
 urgent task:
+	[x] ignore from # to end  
 	[ ] LOOK AT THE BOTTOM
 	[ ]"ls | > out" "ls | <<l" different behaviar
 	[ ]	signals in parent, fork and heredoc
@@ -108,7 +109,7 @@ export > 888	//FIXED
 
 
 
- ls | | | wc or ls |||| wc
+ [x] ls | | | wc or ls |||| wc (i think it soved)
  export "VA=ls|wc" should consider one cmd
  echo '$USER'$USER"$USER" 
  ls           | cat         <           out1 // space problem
@@ -207,3 +208,5 @@ Displaying a tokens (list) :
 ==839==    by 0x109EC0: lexer (lexer.c:96)
 ==839==    by 0x10ACE8: executer (executer.c:150)
 ==839==    by 0x10AEA2: main (main.c:82)
+ [x] echo '$USER'$USER"$USER" 
+ ls           | cat         <           out1 // space problem

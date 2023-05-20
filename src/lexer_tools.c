@@ -3,23 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:46:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/19 10:06:38 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/19 16:52:33 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_shell.h"
 
-void	handleCommand(t_list **tokens, t_env *env,char *input, int *index)
+int	handleCommand(t_list **tokens, t_env *env,char *input, int *index)
 {
 	t_token *token = (t_token *)malloc(sizeof(t_token));
 	if (!token)
-		return;
+		return 0;
 	token->type = COMMAND;
 	token->value = get_cmd(env, &input[*index], index);
-	ft_lstadd_back(tokens, ft_lstnew(token));
+	if (token->value)
+	{
+		ft_lstadd_back(tokens, ft_lstnew(token));
+		return (1);
+	}
+	else
+		free(token);
+	return (0);
 }
 
 void	handleArg(t_list **tokens, t_env *env, char *input, int *index)
