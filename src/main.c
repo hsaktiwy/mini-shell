@@ -3,24 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/21 13:23:23 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/21 17:40:53 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_shell.h"
 
 int	g_exit_status;
-int	g_stdin_fd(int i)
-{
-	static int	j;
-	if (i == -1)
-		return (j);
-	j = i;
-	return (j);
-}
 
 void	signal_handler(int sig)
 {
@@ -45,9 +37,6 @@ void	signal_handler(int sig)
 	}
 }
 
-// char *getcwd(char *buf, size_t size); allocate memory to be free
-		/* If buf is NULL, space is allocated as necessary to store the pathname and
-     size is ignored.  This space may later be free(3)'d. (there is a leaks here )*/
 void	set_signal_handlers()
 {
 	rl_catch_signals = 0;
@@ -68,6 +57,35 @@ void	restore_stdin()
 	g_stdin_fd(-2);
 }
 
+void	main2(char *input, t_env *env)
+{
+	t_list	*tokens;
+	int		err_lex;
+	t_list	*list;
+	
+	tokens = NULL;
+	err_lex = lexical_erreur(input);
+	if (err_lex != -1)
+		lexer_err(&input[err_lex]);
+	else
+		lexer(&tokens, input, env);
+	if (err_lex == -1)
+	{
+		display_tokens(tokens);
+		fix_expanding_issue(&tokens);
+		ini_arg_count(&tokens);
+		
+		list = parser(env, &tokens, input);
+		g_token_l(tokens);
+		// display_tokens(tokens);
+		display_tokens(list);
+		//execution
+		// printf(">>> Commands = [%d]\n", ft_lstsize(list));
+		execute(list);
+	}
+	free_tokens(&tokens);
+}
+
 int	main(__attribute__((unused)) int ac,
 		__attribute__((unused)) char **av, char **env)
 {
@@ -80,8 +98,8 @@ int	main(__attribute__((unused)) int ac,
 	{
 		restore_stdin();
 		// printf("\33[31mSHLVL:(%s) exit:(%d):~%s\33[00m", ft_getenv(env_s, "SHLVL"), g_exit_status, getcwd(NULL, 0));
-		input = readline("\33[31m<minishell:$>\33[35m ");
-		// input = "exit | ls";
+		input = readline("\33[31mminishell:$>\33[35m ");
+		// input = "exit";
 		// if the user pressed Ctr+D
 		if (!input)
 		{
@@ -92,9 +110,9 @@ int	main(__attribute__((unused)) int ac,
 		////////////////////////////
 		if (input && input[0])
 		{
-			// add_history(input);
+			add_history(input);
 			input = expand_input(env_s, input);
-			executer(input, env_s);
+			main2(input, env_s);
 		}
 		// system("leaks mini_shell");
 		free(input);

@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/21 12:04:09 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/21 17:41:44 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_shell.h"
-
-t_list *g_token_l(t_list *tokens)
-{
-	static t_list *g_tokens;
-	if (tokens == NULL)
-		return (g_tokens);
-	else
-		g_tokens = tokens;
-	return (g_tokens);
-}
 
 void	display_tokens(t_list	*tokens)
 {
@@ -119,62 +109,3 @@ void display_ast_types(t_ast *node, char *str) {
     display_ast_types(node->right, "right");
 }
 
-int	lexical_erreur(char	*input)
-{
-	int		i;
-	char	c;
-	int		c_i;
-
-	i = -1;
-	c = '\0';
-	c_i = -1;
-	while (input[++i])
-	{
-		if (input[i] == '\"' && c == '\0')
-		{
-			c = '\"';
-			c_i = i;
-		}
-		else if (input[i] == '\'' && c == '\0')
-		{
-			c = '\'';
-			c_i = i;
-		}
-		else if ((input[i] == '\'' && c == '\'') || (input[i] == '\"' && c == '\"'))
-			c = '\0';
-		if (input[i] != '\0' && !ft_isprint(input[i]))
-			return (i);
-	}
-	if (c == '\'' || c == '\"')
-		return (c_i);
-	return (-1);
-}
-
-void	executer(char *input, t_env *env)
-{
-	t_list	*tokens;
-	int		err_lex;
-	t_list	*list;
-	
-	tokens = NULL;
-	err_lex = lexical_erreur(input);
-	if (err_lex != -1)
-		lexer_err(&input[err_lex]);
-	else
-		lexer(&tokens, input, env);
-	if (err_lex == -1)
-	{
-		display_tokens(tokens);
-		fix_expanding_issue(&tokens);
-		ft_init(&tokens);
-		
-		list = parser(env, &tokens, input);
-		g_token_l(tokens);
-		// display_tokens(tokens);
-		display_tokens(list);
-		//execution
-		// printf(">>> Commands = [%d]\n", ft_lstsize(list));
-		execute(list);
-	}
-	free_tokens(&tokens);
-}

@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:53:21 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/21 13:09:32 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/21 17:47:22 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct s_execve_params
 extern int	g_exit_status;
 
 // execution
-void	executer(char *input, t_env *env);
+void	main2(char *input, t_env *env);
 // lexer
 int		lexer(t_list **tokens, char *input, t_env *env);
 void    free_tokens(t_list **list);
@@ -83,8 +83,9 @@ void    free_token(void *value);
 int		handleCommand(t_list **tokens, t_env *env,char *input, int *index);
 void	handleArg(t_list **tokens, t_env *env,char *input, int *index);
 void	fix_expanding_issue(t_list **tokens);
-// void	ini_arg_count(t_list **tokens);
-void	ft_init(t_list **tokens);
+void	ini_arg_count(t_list **tokens);
+int		lexical_erreur(char	*input);
+
 // parser
 t_list	*parser(t_env *env, t_list **tokens, char *input);
 t_ast	*command(t_list **current);
@@ -108,7 +109,6 @@ void 	display_ast_types(t_ast *node, char *str);
 
 //execution
 void	execute(t_list *list);
-void	init_global_s_minishell();
 
 //global functions
 int		g_cmd_executing(pid_t newpid);
