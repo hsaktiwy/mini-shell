@@ -80,8 +80,6 @@ int redirection_error(t_list *tokens, int display)
 					return (1);
 				return (printf_error_redi(token, list->next),1);
 			}
-			// if (!)
-			// return ()
 		}
 		list = list->next;
 	}

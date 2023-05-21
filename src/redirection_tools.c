@@ -34,9 +34,15 @@ int	in_redirection(t_file *tmp)
 	if (tmp->a_file)
 	{
 		// fd = open(tmp->a_file, O_WRONLY, 0777);
-		fd = open(tmp->a_file, O_RDONLY, 0777);
+		fd = open(tmp->token_file, O_RDONLY, 0777);
 		if (fd == -1)
 			print_error(NULL, tmp->a_file, 1);
+	}
+	else if(tmp->token_file)
+	{
+		write(STDERR_FILENO, "minishe : ", 11);
+		write(STDERR_FILENO, tmp->token_file, ft_strlen(tmp->token_file));
+		write(STDERR_FILENO, ": ambiguous redirect\n", 22);
 	}
 	return (fd);
 }
