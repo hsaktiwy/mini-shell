@@ -47,9 +47,9 @@ int	in_redirection(t_file *tmp)
 		if (fd == -1)
 			print_error(NULL, tmp->a_file, 1);
 	}
-	else if(tmp->token_file)
+	else if(ft_strlen(tmp->token_file))
 	{
-		write(STDERR_FILENO, "minishe : ", 11);
+		write(STDERR_FILENO, "minishell : ", 11);
 		write(STDERR_FILENO, tmp->token_file, ft_strlen(tmp->token_file));
 		write(STDERR_FILENO, ": ambiguous redirect\n", 22);
 	}

@@ -92,7 +92,7 @@ int	main(__attribute__((unused)) int ac,
 		////////////////////////////
 		if (input && input[0])
 		{
-			// add_history(input);
+			add_history(input);
 			input = expand_input(env_s, input);
 			executer(input, env_s);
 		}

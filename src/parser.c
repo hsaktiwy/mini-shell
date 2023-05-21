@@ -74,7 +74,7 @@ int redirection_error(t_list *tokens, int display)
 		if (token->type != COMMAND && token->type != PIPE)
 		{
 			file = token->value;
-			if (!file->a_file)
+			if (!file->a_file && !ft_strlen(file->token_file))
 			{
 				if (display != 1)
 					return (1);
