@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:42:55 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/19 20:18:38 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/21 10:37:38 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	in_red_cmd(t_env *env, t_token **red, t_token **command)
 	
 	if ((*red)->type == IN_REDIRECT)
 		fd = in_redirection((*red)->value);
-	else if ((*red)->type == HERE_DOC)
+	else if ((*red)->type == HERE_DOC && g_stdin_fd(-1) == -2)
 		fd = here_doc_red(env, (*red)->value);
 	if (fd == -1)
 		return (0);

@@ -6,13 +6,13 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:26:20 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/20 14:18:32 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/21 11:57:39 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environement.h"
 
-t_env *global_env(t_env *env)
+t_env *g_env_s(t_env *env)
 {
 	static t_env *g_env;
 	if (env == NULL)
@@ -136,7 +136,7 @@ t_env	*ft_init_env(char **env)
 		ft_unset_oldpwd(&env_l);
 	}
 	ft_change_shlvl(&env_l);
-	global_env(env_l);
+	g_env_s(env_l);
 	return (env_l);
 	
 }

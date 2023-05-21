@@ -39,6 +39,27 @@ char	*reallocated_str(char *str, char *add)
 	return (res);
 }
 
+char	*g_input_line(char *input)
+{
+	static char	*g_input;
+
+	if (input == NULL)
+		return (g_input);
+	g_input = input;
+	return (g_input);
+}
+
+char	*remove_white_spaces(char *p)
+{
+	char	*tmp;
+
+	tmp = p;
+	p = ft_strtrim(tmp, " ");
+	free(tmp);
+	g_input_line(p);
+	return (p);
+}
+
 char    *expand_input(t_env *env, char *line)
 {
 	int		i;
@@ -46,7 +67,6 @@ char    *expand_input(t_env *env, char *line)
 	char 	c;
 	int		s;
 	char	*arg;
-	char	*tmp;
 
 	i = 0;
 	c = '\0';
@@ -104,10 +124,7 @@ char    *expand_input(t_env *env, char *line)
 		// printf("??? = %c _ %s\n", line[i], arg);
 	}
 	free(line);
-	tmp = arg;
-	arg = ft_strtrim(tmp, " ");
-	free(tmp);
-	return (arg);
+	return (remove_white_spaces(arg));
 }
 // void	func_leak()
 // {

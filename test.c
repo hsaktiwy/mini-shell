@@ -1,63 +1,53 @@
-#include <unistd.h>
-#include <fcntl.h>
+// 
 #include <stdio.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <unistd.h>
 #include <sys/wait.h>
 
-char *global(char *env)
-{
-	static char *g;
+// volatile sig_atomic_t interrupted = 0;
 
-	if (env == NULL)
-		return g;
-	else
-		g = env;
-	return g;
-}
+// void sigintHandler(int signum) {
+//     interrupted = 1;
+// }
 
-void	ft_change_p()
-{
-	char *p = global(NULL);
-	p[0] = 'H';
-	p[1] = 'E';
-	p[2] = 'L';
-	p[3] = 'L';
-	p[4] = 'O';
-	p[5] = 0;
-}
-int	main(int ac, char **av, char **env)
-{
-	// char p[100];
-	// global(p);
+int main() {
+    // signal(SIGINT, sigintHandler);
 
-	// ft_change_p();
+    // char buffer[256];
+    // printf("Enter heredoc contents (press Ctrl+D to finish):\n");
 
-	// printf("p = [%s]", p);
-	while (1)
-	{
-		printf("333333333333333\n");
-		sleep(1);
-	}
-	// int fd = open("out", O_RDWR); //3
-	// dup2(fd, STDOUT_FILENO);
-	// close(fd);
-	// int fd2 = open("cat.sh", O_RDWR);
-	// printf("fd = %d fd2 = %d\n", fd, fd2);
-	// if (isatty(1))
-	// 	write(1, "Is a tty\n", 9);
-	// else
-	// 	write(1, "NOt a tty\n", 10);
+    // while (1) {
+    //     if (fgets(buffer, sizeof(buffer), stdin) == NULL || interrupted) {
+    //         // Check if EOF or SIGINT received
+    //         printf("Heredoc interrupted.\n");
+    //         break;
+    //     }
+    //     // Process the heredoc contents
+    //     printf("Received: %s", buffer);
+    // }
+	// close(STDIN_FILENO);
+	// write(0, "sd\n", 3);
+	// while(1);
 
-	// char **argv = {"echo", "-n", "hello"};
-	// int i = 0;
-	// while (i++ < 40)
-	// {
-	// 	if (*env == NULL)
-	// 	printf("env is null\n");
-	// 	env++;
-	// }
-	// printf("Program name: %s\n", av[0]);
-	// char **argv = av + 1;
-	// execve("cat.sh", argv, env);
-	// perror("execve");
-	return (0);
+    char *p = malloc(100);
+
+    pid_t id = fork();
+    if (id == 0)
+    {
+        // free(p);
+        printf("Hello from child\n");
+        exit(0);
+    }
+    // pid_t id2 = fork();
+    // if (id2 == 0)
+    // {
+    //     printf("Hello from child2\n");
+    //     exit(0);
+    // }
+    wait(NULL);
+    wait(NULL);
+    printf("Hello from parent\n");
+    // free(p);
+    return 0;
 }

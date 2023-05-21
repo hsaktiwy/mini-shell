@@ -1,8 +1,8 @@
 urgent task:
+	[x] freed everything when exit is called
 	[x] ignore from # to end  
-	[ ] LOOK AT THE BOTTOM
 	[ ]"ls | > out" "ls | <<l" different behaviar
-	[ ]	signals in parent, fork and heredoc
+	[x]	signals in parent, fork and heredoc
 	[ ]	$? should expand to exit status
 	[x]	removed global struct
 	[x] fix the expand problem exepmple : "minishell > $FalS_variable ls -la ___output will be the ls -la result command"
@@ -208,5 +208,7 @@ Displaying a tokens (list) :
 ==839==    by 0x109EC0: lexer (lexer.c:96)
 ==839==    by 0x10ACE8: executer (executer.c:150)
 ==839==    by 0x10AEA2: main (main.c:82)
+
+
  [x] echo '$USER'$USER"$USER" 
  ls           | cat         <           out1 // space problem
