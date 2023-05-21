@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/21 13:16:07 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/21 13:23:23 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	main(__attribute__((unused)) int ac,
 		if (!input)
 		{
 			ft_free_env(&env_s);
-			write(1, "\n", 1);
+			write(1, "exit\n", 5);
 			exit(0);
 		}
 		////////////////////////////
