@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:46:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/20 16:47:31 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/21 17:42:46 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,35 @@ void	ini_arg_count(t_list **tokens)
 		current = current->next;
 	}
 }
-
-void	ft_init(t_list **tokens)
+int	lexical_erreur(char	*input)
 {
-	ini_arg_count(tokens);
-	g_exit_status = 0;
+	int		i;
+	char	c;
+	int		c_i;
+
+	i = -1;
+	c = '\0';
+	c_i = -1;
+	while (input[++i])
+	{
+		if (input[i] == '\"' && c == '\0')
+		{
+			c = '\"';
+			c_i = i;
+		}
+		else if (input[i] == '\'' && c == '\0')
+		{
+			c = '\'';
+			c_i = i;
+		}
+		else if ((input[i] == '\'' && c == '\'') || (input[i] == '\"' && c == '\"'))
+			c = '\0';
+		if (input[i] != '\0' && !ft_isprint(input[i]))
+			return (i);
+	}
+	if (c == '\'' || c == '\"')
+		return (c_i);
+	return (-1);
 }
+
+

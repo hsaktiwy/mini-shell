@@ -6,20 +6,11 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/21 13:03:23 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/21 17:52:26 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_shell.h"
-
-int	g_cmd_executing(pid_t newpid)
-{
-	static pid_t oldpid;
-
-	if (newpid != -1)
-		oldpid = newpid;
-	return (oldpid);
-}
 
 int	is_builtin(char *cmd)
 {
@@ -202,18 +193,6 @@ void	save_cmd(t_execve_params *ep, t_env *env)
 	}
 }
 
-void	free_cmd_list(t_list **list)
-{
-	if (*list == NULL)
-		return;
-	while (*list)
-	{
-		free_cmd_list(&(*list)->next);
-		free(*list);
-		*list = NULL;
-	}
-}
-
 void	exec_c(t_execve_params *execve_params, t_env *env)
 {
 	execve(execve_params->path, execve_params->args, env->env);
@@ -235,11 +214,7 @@ void	execb2(t_list *cmd, t_list *list) //leak
 
 	if (is_builtin(((t_cmd *)(((t_token *)(cmd->content))->value))->cmd))
 	{
-		// free(path);
-		// (void)path;
-		// free(args);
 		status = exec_builtin((t_cmd *)(((t_token *)(cmd->content))->value), list);
-		// ft_lstclear(&list, free_token);
 		exit(status);
 	}
 }
@@ -325,13 +300,7 @@ void	ft_piping(t_list *cmd, t_fd *fd)
 			perror("pipe");
 }
 
-void	sig_child(int sig)
-{
-	if (sig == SIGINT)
-		printf("catched sigint 3 in child\n");
-}
-void	execute_2(t_list *cmd, t_list *list,
-					int *get_exit, t_fd *fd)
+void	execute_2(t_list *cmd, t_list *list, int *get_exit, t_fd *fd)
 {
 	pid_t	pid;
 	t_execve_params	ep;
@@ -411,6 +380,7 @@ void	execute(t_list *list)
 	get_exit = 1;
 	fd.fd[0] = -1;
 	fd.fd[1] = -1;
+	g_exit_status = 0;
 	while (curr_cmd)
 	{
 		g_cmd_executing(1);
@@ -427,70 +397,3 @@ void	execute(t_list *list)
 	unlink(".here_doc");
 	ft_lstclear(&list, NULL);
 }
-
-// t_minishell g_minishell;
-// static void	f()
-// {
-// 	system("leaks a.out");
-// }
-// int main(int ac, char **av, char **env)
-// {
-// 	atexit(f);
-// 	t_list *list = malloc(sizeof(t_list));
-// 	list->next = NULL;
-// 	list->content = (t_token *)malloc(sizeof(t_token));
-// 	((t_token *)(list->content))->value = (t_cmd *)malloc(sizeof(t_cmd));
-
-// 	((t_cmd *)((t_token *)(list->content))->value)->arg = malloc(sizeof(t_list));
-// 	((t_cmd *)((t_token *)(list->content))->value)->arg->content = malloc(sizeof(t_file));
-// 	((t_file *)(((t_cmd *)((t_token *)(list->content))->value)->arg->content))->a_file = av[2];
-// 	((t_cmd *)((t_token *)(list->content))->value)->arg->next = NULL;
-// 	((t_cmd *)((t_token *)(list->content))->value)->arg_count = 1;
-// 	((t_cmd *)((t_token *)(list->content))->value)->cmd = av[1];
-// 	((t_cmd *)((t_token *)(list->content))->value)->cmd_in = 0;
-// 	((t_cmd *)((t_token *)(list->content))->value)->cmd_out = 1;
-// 	((t_cmd *)((t_token *)(list->content))->value)->file_in = NULL;
-// 	((t_cmd *)((t_token *)(list->content))->value)->file_out = NULL;
-
-
-// 	t_list *node;
-// 	if (av[3] && av[4])
-// 	{
-// 		node = malloc(sizeof(t_list));
-// 		list->next = node;
-// 		node->next = NULL;
-// 		node->content = (t_token *)malloc(sizeof(t_token));
-// 		((t_token *)(node->content))->value = (t_cmd *)malloc(sizeof(t_cmd));
-
-// 		((t_cmd *)((t_token *)(node->content))->value)->arg = malloc(sizeof(t_list));
-// 		((t_cmd *)((t_token *)(node->content))->value)->arg->content = malloc(sizeof(t_file));
-// 		((t_file *)(((t_cmd *)((t_token *)(node->content))->value)->arg->content))->a_file = av[4];
-// 		((t_cmd *)((t_token *)(node->content))->value)->arg->next = NULL;
-// 		((t_cmd *)((t_token *)(node->content))->value)->arg_count = 1;
-// 		((t_cmd *)((t_token *)(node->content))->value)->cmd = av[3];
-// 		((t_cmd *)((t_token *)(node->content))->value)->cmd_in = 0;
-// 		((t_cmd *)((t_token *)(node->content))->value)->cmd_out = 1;
-// 		((t_cmd *)((t_token *)(node->content))->value)->file_in = NULL;
-// 		((t_cmd *)((t_token *)(node->content))->value)->file_out = NULL;
-// 	}
-
-// 	t_env *s_env = ft_init_env(env);
-
-// 	execute(list, s_env);
-
-// 	ft_free_env(&s_env);
-// 	if (av[3] && av[4])
-// 	{
-// 		free(((t_cmd *)((t_token *)(node->content))->value)->arg->content);
-// 		free(((t_cmd *)((t_token *)(node->content))->value)->arg);
-// 		free(((t_token *)(node->content))->value);
-// 		free(node->content);
-// 		free(node);
-// 	}
-
-// 	free(((t_cmd *)((t_token *)(list->content))->value)->arg->content);
-// 	free(((t_cmd *)((t_token *)(list->content))->value)->arg);
-// 	free(((t_token *)(list->content))->value);
-// 	free(list->content);
-// 	free(list);
-// }

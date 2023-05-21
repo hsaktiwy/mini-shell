@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 19:06:50 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/21 13:10:32 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/21 17:06:50 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	ft_exit(t_cmd *command, t_list *list)
 			free(g_input_line(NULL));
 			g_env = g_env_s(NULL);
 			ft_free_env(&g_env);
+			rl_clear_history();
 		}
 		exit(status);
 	}
