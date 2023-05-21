@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/21 18:19:08 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/21 23:12:22 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ char	*get_path2(char *filename, t_list *list)
 	int		i;
 	t_env	*env;
 
-	if (is_builtin(filename) || ft_strchr(filename, '/'))
+	if (is_builtin(filename) || ft_strchr(filename, '/')
+		|| !ft_getenv(g_env_s(NULL), "PATH"))
 		return (ft_strdup(filename));
 	env = ((t_cmd *)(((t_token *)(list->content))->value))->env;
 	paths = ft_split(ft_getenv(env, "PATH"), ':');
@@ -92,10 +93,7 @@ char	*get_path2(char *filename, t_list *list)
 			continue ;
 		append_filename(filename, paths[i], path);
 		if (access(path, 0) == 0)
-		{
-			free_tab(paths);
-			return (ft_strdup(path));
-		}
+			return (free_tab(paths), ft_strdup(path));
 	}
 	free_tab(paths);
 	return (NULL);
@@ -302,14 +300,14 @@ void	ft_piping(t_list *cmd, t_fd *fd)
 
 void	execute_2(t_list *cmd, t_list *list, int *get_exit, t_fd *fd)
 {
-	pid_t	pid;
+	pid_t			pid;
 	t_execve_params	ep;
 
 	ep.path = get_path2(((t_cmd *)((t_token *)(cmd->content))->value)->cmd, cmd);
 	ep.args = get_args(cmd);
 	save_cmd(&ep, ((t_cmd *)((t_token *)(cmd->content))->value)->env);
 	if (!ep.path)
-		return (command_not_found(cmd, get_exit));
+		return (free(ep.args), command_not_found(cmd, get_exit));
 	ft_piping(cmd, fd);
 	if (execb1(cmd, list, get_exit, &ep))
 		return ;

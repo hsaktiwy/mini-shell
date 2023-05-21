@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_simple_arg.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:20:03 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/20 16:19:31 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/21 23:10:14 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ char	*get_simple_arg(t_env *env, char *str, int *index)
 			ft_strncat(arg, &str[i], 1);
 			i++;
 		}
-		printf("??? = %c _ %s\n", str[i], arg);
+		// printf("??? = %c _ %s\n", str[i], arg);
 	}
 	if (!ft_strlen(arg) && k != 0)
 		return ((*index) += i, free(arg), NULL);
-	printf("--> final result to return : [%s]\n", arg);
+	// printf("--> final result to return : [%s]\n", arg);
 	return ((*index) += i,arg);
 }

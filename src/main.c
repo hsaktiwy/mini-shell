@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/21 22:29:42 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/21 23:09:23 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,14 @@ void	main2(char *input, t_env *env)
 		lexer(&tokens, input, env);
 	if (err_lex == -1)
 	{
-		display_tokens(tokens);
+		// display_tokens(tokens);
 		fix_expanding_issue(&tokens);
 		ini_arg_count(&tokens);
 		
 		list = parser(env, &tokens, input);
 		g_token_l(tokens);
 		// display_tokens(tokens);
-		display_tokens(list);
+		// display_tokens(list);
 		//execution
 		// printf(">>> Commands = [%d]\n", ft_lstsize(list));
 		execute(list);
@@ -97,7 +97,9 @@ int	main(__attribute__((unused)) int ac,
 	while (1)
 	{
 		restore_stdin();
-		// printf("\33[31mSHLVL:(%s) exit:(%d):~%s\33[00m", ft_getenv(env_s, "SHLVL"), g_exit_status, getcwd(NULL, 0));
+		char buf[4000];
+		getcwd(buf, 4000);
+		printf("\33[31mSHLVL:(%s) exit:(%d):~%s\33[00m", ft_getenv(env_s, "SHLVL"), g_exit_status, buf);
 		input = readline("\33[31mminishell:$>\33[35m ");
 		// input = "exit";
 		// if the user pressed Ctr+D

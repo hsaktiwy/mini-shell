@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_double_quote.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:17:59 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/20 15:25:53 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/21 23:10:10 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ char	*get_double_quote(t_env *env, char *s, int *index)
 			ft_strncat(res, &s[i], 1);
 			i++;
 		}
-		printf("??? = %c _ %s(c == [%c])\n", s[i], res, c);
+		// printf("??? = %c _ %s(c == [%c])\n", s[i], res, c);
 	}
-	printf("final result : |%s|\n", res);
+	// printf("final result : |%s|\n", res);
 	return ((*index) += i, res);
 }
