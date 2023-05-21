@@ -6,11 +6,20 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/20 14:18:46 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/21 13:03:23 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_shell.h"
+
+int	g_cmd_executing(pid_t newpid)
+{
+	static pid_t oldpid;
+
+	if (newpid != -1)
+		oldpid = newpid;
+	return (oldpid);
+}
 
 int	is_builtin(char *cmd)
 {
@@ -176,12 +185,14 @@ void	dup_redirections(t_list *cmd)
 	}
 }
 
-void	save_cmd(char *filename, char **args, t_env *env)
+void	save_cmd(t_execve_params *ep, t_env *env)
 {
-	if (!args || !*args)
-		ft_setenv(&env, "_", filename);
+	char	**args;
+	if (!ep->args || !*(ep->args))
+		ft_setenv(&env, "_", ep->path);
 	else
 	{
+		args = ep->args;
 		while (*args)
 		{
 			if (!*(args + 1))
@@ -191,11 +202,23 @@ void	save_cmd(char *filename, char **args, t_env *env)
 	}
 }
 
-void	exec_c(char *filename, char **args, t_env *env)
+void	free_cmd_list(t_list **list)
 {
-	execve(filename, args, env->env);
+	if (*list == NULL)
+		return;
+	while (*list)
+	{
+		free_cmd_list(&(*list)->next);
+		free(*list);
+		*list = NULL;
+	}
+}
+
+void	exec_c(t_execve_params *execve_params, t_env *env)
+{
+	execve(execve_params->path, execve_params->args, env->env);
 	write(2, "minishell: ", 11);
-	perror(filename);
+	perror(execve_params->path);
 	if (errno == EACCES) //The filename argument is a Dir and permission denied
 	{
 		exit(126);
@@ -206,17 +229,22 @@ void	exec_c(char *filename, char **args, t_env *env)
 	}
 }
 
-void	execb2(t_list *cmd, t_list *list, char *path, char **args)
+void	execb2(t_list *cmd, t_list *list) //leak
 {
+	int	status;
+
 	if (is_builtin(((t_cmd *)(((t_token *)(cmd->content))->value))->cmd))
 	{
-		free(path);
-		free(args);
-		exit(exec_builtin((t_cmd *)(((t_token *)(cmd->content))->value), list));
+		// free(path);
+		// (void)path;
+		// free(args);
+		status = exec_builtin((t_cmd *)(((t_token *)(cmd->content))->value), list);
+		// ft_lstclear(&list, free_token);
+		exit(status);
 	}
 }
 
-int	execb1(t_list *cmd, t_list *list, int *get_exit)
+int	execb1(t_list *cmd, t_list *list, int *get_exit, t_execve_params *ep)
 {
 	size_t	n_commands;
 	char	*cmd_name;
@@ -226,6 +254,8 @@ int	execb1(t_list *cmd, t_list *list, int *get_exit)
 	cmd_name = ((t_cmd *)(((t_token *)(cmd->content))->value))->cmd;
 	if (is_builtin(cmd_name) && n_commands == 1)
 	{
+		free(ep->args);
+		free(ep->path);
 		command = (t_cmd *)(((t_token *)(cmd->content))->value);
 		g_exit_status = exec_builtin(command, list); //exec in parrent
 		*get_exit = 0;
@@ -234,11 +264,10 @@ int	execb1(t_list *cmd, t_list *list, int *get_exit)
 	return (0);
 }
 
-void	close_pipe_and_free(t_list *cmd, char *path,
-							char **args, t_fd *fd)
+void	close_pipe_and_free(t_list *cmd, t_execve_params *ep, t_fd *fd)
 {
-	free(path);
-	free(args);
+	free(ep->path);
+	free(ep->args);
 	if (cmd->next)
 		if (close(fd->fd[1]) == -1)
 			perror("close");
@@ -296,43 +325,46 @@ void	ft_piping(t_list *cmd, t_fd *fd)
 			perror("pipe");
 }
 
+void	sig_child(int sig)
+{
+	if (sig == SIGINT)
+		printf("catched sigint 3 in child\n");
+}
 void	execute_2(t_list *cmd, t_list *list,
 					int *get_exit, t_fd *fd)
 {
 	pid_t	pid;
-	char	*path;
-	char	**args;
+	t_execve_params	ep;
 
-	path = get_path2(((t_cmd *)((t_token *)(cmd->content))->value)->cmd, cmd);
-	args = get_args(cmd);
-	save_cmd(path, args, ((t_cmd *)((t_token *)(cmd->content))->value)->env);
-	if (!path)
+	ep.path = get_path2(((t_cmd *)((t_token *)(cmd->content))->value)->cmd, cmd);
+	ep.args = get_args(cmd);
+	save_cmd(&ep, ((t_cmd *)((t_token *)(cmd->content))->value)->env);
+	if (!ep.path)
 		return (command_not_found(cmd, get_exit));
 	ft_piping(cmd, fd);
-	if (execb1(cmd, list, get_exit))
-		return (free(path), free(args));
+	if (execb1(cmd, list, get_exit, &ep))
+		return ;
 	pid = fork();
 	if (pid < 0)
-		perror("fork"); //
+		perror("fork");
 	if (pid == 0)
 	{
 		dup_stdin_and_stdout(cmd, fd);
 		dup_redirections(cmd);
-		execb2(cmd, list, path, args);
+		execb2(cmd, list);
 		close_open_fds(list);
-		exec_c(path, args, ((t_cmd *)((t_token *)(cmd->content))->value)->env);
+		exec_c(&ep, ((t_cmd *)((t_token *)(cmd->content))->value)->env);
 	}
 	wait_4_last_command(cmd, pid);
-
-	close_pipe_and_free(cmd, path, args, fd);
+	close_pipe_and_free(cmd, &ep, fd);
 }
 
 void	get_name_of_signal(int sig)
 {
 	if (sig == 2)
-		printf("^C\n");
+		printf("\n");
 	if (sig == 3)
-		printf("^\\Quit: %d\n", sig);
+		printf("Quit: %d\n", sig);
 	if (sig == 6)
 		printf("Aborted\n");
 	if (sig == 7)
@@ -340,7 +372,7 @@ void	get_name_of_signal(int sig)
 	if (sig == 8)
 		printf("Floating point exception\n");
 	if (sig == 9)
-		printf("Killed\n");
+		printf("\n");
 	if (sig == 10)
 		printf("User-defined signal 1\n");
 	if (sig == 11)
@@ -369,40 +401,6 @@ void	get_exit_status()
 	}
 }
 
-// void	free_args_list(t_list *list)
-// {
-// 	t_file *file;
-// 	if (list == NULL)
-// 		return ;
-// 	while (list)
-// 	{
-// 		free_args_list(list->next);
-// 		file = list->content;
-// 		free(file->a_file);
-// 		free(file);
-// 		free(list);
-// 	}
-// }
-
-void	free_cmd_list(t_list **list)
-{
-	// t_list *args;
-
-	if (*list == NULL)
-		return;
-	while (*list)
-	{
-		free_cmd_list(&(*list)->next);
-		// args = ((t_cmd *)(((t_token*)(list->content))->value))->arg;
-		// free_args_list(args);
-		// free(((t_cmd *)(((t_token*)(list->content))->value))->cmd);
-		// free(((t_token *)(list->content))->value);
-		// free(list->content);
-		free(*list);
-		*list = NULL;
-	}
-}
-
 void	execute(t_list *list)
 {
 	t_list *curr_cmd;
@@ -415,17 +413,19 @@ void	execute(t_list *list)
 	fd.fd[1] = -1;
 	while (curr_cmd)
 	{
+		g_cmd_executing(1);
 		fd.old_fd = fd.fd[0];
 		execute_2(curr_cmd, list, &get_exit, &fd);
 		curr_cmd = curr_cmd->next;
 	}
 	while (wait(NULL) > -1)
 		;
+	g_cmd_executing(0);
 	close_open_fds(list); 
 	if (get_exit)
 		get_exit_status();
 	unlink(".here_doc");
-	free_cmd_list(&list);
+	ft_lstclear(&list, NULL);
 }
 
 // t_minishell g_minishell;

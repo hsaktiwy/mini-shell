@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:53:21 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/20 14:19:04 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/21 13:09:32 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,12 @@ typedef struct s_fd
 	int	old_fd;
 }	t_fd;
 
+typedef struct s_execve_params
+{
+	char	*path;
+	char	**args;
+}	t_execve_params;
+
 extern int	g_exit_status;
 
 // execution
@@ -73,6 +79,7 @@ void	executer(char *input, t_env *env);
 // lexer
 int		lexer(t_list **tokens, char *input, t_env *env);
 void    free_tokens(t_list **list);
+void    free_token(void *value);
 int		handleCommand(t_list **tokens, t_env *env,char *input, int *index);
 void	handleArg(t_list **tokens, t_env *env,char *input, int *index);
 void	fix_expanding_issue(t_list **tokens);
@@ -102,6 +109,13 @@ void 	display_ast_types(t_ast *node, char *str);
 //execution
 void	execute(t_list *list);
 void	init_global_s_minishell();
+
+//global functions
+int		g_cmd_executing(pid_t newpid);
+int		g_heredoc_executing(int i);
+int		g_stdin_fd(int i);
+t_list *g_token_l(t_list *tokens);
+char	*g_input_line(char *input);
 
 //tmp
 int isFileDescriptorValid(int fd);

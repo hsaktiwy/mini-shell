@@ -6,11 +6,21 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/20 18:45:16 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/21 12:04:09 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_shell.h"
+
+t_list *g_token_l(t_list *tokens)
+{
+	static t_list *g_tokens;
+	if (tokens == NULL)
+		return (g_tokens);
+	else
+		g_tokens = tokens;
+	return (g_tokens);
+}
 
 void	display_tokens(t_list	*tokens)
 {
@@ -159,12 +169,12 @@ void	executer(char *input, t_env *env)
 		ft_init(&tokens);
 		
 		list = parser(env, &tokens, input);
-		display_tokens(tokens);
+		g_token_l(tokens);
+		// display_tokens(tokens);
 		display_tokens(list);
 		//execution
 		// printf(">>> Commands = [%d]\n", ft_lstsize(list));
 		execute(list);
-		// ft_lstclear(&list, NULL);
 	}
 	free_tokens(&tokens);
 }

@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 19:06:50 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/19 09:52:58 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/21 13:10:32 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ int	ft_exit(t_cmd *command, t_list *list)
 	int				status;
 	int				do_exit;
 	char			*arg;
-	size_t			n_commands;
+	t_list			*g_tokens;
+	t_env 			*g_env;
 
 	do_exit = 1;
 	status = 0;
-	n_commands = ft_lstsize(list);
-	if (n_commands == 1)
+	if (ft_lstsize(list) == 1)
 		write(2, "exit\n", 5);
 	if (command->arg_count != 0)
 	{
@@ -62,6 +62,17 @@ int	ft_exit(t_cmd *command, t_list *list)
 		get_status_put_error(arg, command->arg_count, &do_exit, &status);
 	}
 	if (do_exit)
+	{
+		if (ft_lstsize(list) == 1)
+		{
+			g_tokens = g_token_l(NULL);
+			free_tokens(&g_tokens);
+			ft_lstclear(&list, NULL);
+			free(g_input_line(NULL));
+			g_env = g_env_s(NULL);
+			ft_free_env(&g_env);
+		}
 		exit(status);
+	}
 	return (status);
 }

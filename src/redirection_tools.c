@@ -6,11 +6,20 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:17:19 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/20 17:13:28 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/21 10:18:31 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_shell.h"
+
+int	g_heredoc_executing(int i)
+{
+	static int	j;
+	if (i == -1)
+		return (j);
+	j = i;
+	return (j);
+}
 
 int	find_delimeter(char *line, char *needle)
 {
@@ -21,7 +30,7 @@ int	find_delimeter(char *line, char *needle)
 		return (1);
 	while (line[i] && needle[i] && needle[i] == line[i])
 		i++;
-	if (line[i] == '\n' && !needle[i])
+	if (line[i] == '\0' && !needle[i])
 		return (1);
 	return (0);
 }
@@ -54,26 +63,26 @@ int	heredoc(t_env *env, char *delimiter, int h_fd)
 
 	while (1)
 	{
-		write(1, ">", 1);
-		line = get_next_line(0);
-		if (line)
+		g_heredoc_executing(1);
+		line = readline("> ");
+		if (g_heredoc_executing(-1) && line)
 		{
 			tmp = expand(env, line);
-			if (!find_delimeter(tmp, delimiter))
+			if (!find_delimeter(tmp, delimiter) && g_heredoc_executing(-1))
 			{
 				if (write(h_fd, tmp, ft_strlen(tmp)) == -1)
-					return (free(tmp), free(line), 0);
+					return (g_heredoc_executing(0), free(tmp), free(line), 0);
 			}
 			else
 			{
-				return (free(tmp), free(line), close(h_fd), 1);
+				return (g_heredoc_executing(0), free(tmp), free(line), close(h_fd), 1);
 			}
 			free(line);
 			free(tmp);
 			line = NULL;
 		}
 		else
-			return (1);
+			return (g_heredoc_executing(0), free(line), 1);
 	}
 }
 
