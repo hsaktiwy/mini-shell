@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_tools.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:17:19 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/22 15:26:49 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/22 21:40:02 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	g_heredoc_executing(int i)
-{
-	static int	j;
-	if (i == -1)
-		return (j);
-	j = i;
-	return (j);
-}
 
 int	find_delimeter(char *line, char *needle)
 {

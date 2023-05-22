@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_double_quote.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:17:59 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/22 15:53:05 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/22 21:47:24 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,20 @@ char	*expand_env_var(t_env *env, char *s, char *res,int k)
 {
 	char	v_env[k + 1];
 	char	*re;
+	char	*tmp;
 	int		size;
 
 	v_env[0] = '\0';
 	ft_strncat(v_env, s, k);
 	// printf("before adding to : %s\n",ft_getenv(env, v_env));
+	if (ft_strcmp(v_env, "?") == 0)
+	{
+		tmp = ft_itoa(g_exit_status);
+		size = ft_strlen(tmp);
+		re = ft_realloc(res, ft_strlen(res) + size + 1);
+		ft_strncat(re, tmp, size);
+		return (free(tmp), re);
+	}
 	size = ft_strlen(ft_getenv(env, v_env));
 	re = ft_realloc(res, ft_strlen(res) + size + 1);
 	ft_strncat(re, ft_getenv(env, v_env), size);

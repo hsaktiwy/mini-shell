@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:48:28 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/22 15:26:49 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/22 21:54:21 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,9 @@ int	syntax_error(char *input, t_list *tokens)
 		r *= -1;
 	if(redirection_error(tokens, r))
 		r += -1;
+	if (r != 1)
+		g_exit_status = 2;
+	printf("exit status = %d\n", g_exit_status);
 	return (r);
 }
 

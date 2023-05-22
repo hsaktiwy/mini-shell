@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/22 15:26:49 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/22 22:00:50 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -335,7 +335,7 @@ void	get_name_of_signal(int sig)
 	if (sig == 2)
 		printf("\n");
 	if (sig == 3)
-		printf("Quit: %d\n", sig);
+		printf("Quit: 3\n");
 	if (sig == 6)
 		printf("Aborted\n");
 	if (sig == 7)
@@ -347,7 +347,7 @@ void	get_name_of_signal(int sig)
 	if (sig == 10)
 		printf("User-defined signal 1\n");
 	if (sig == 11)
-		printf("Segmentation fault: %d\n", sig);
+		printf("Segmentation fault: 11\n");
 	if (sig == 12)
 		printf("User-defined signal 2\n");
 	if (sig == 13)
@@ -396,6 +396,5 @@ void	execute(t_list *list)
 	close_open_fds(list); 
 	if (get_exit)
 		get_exit_status();
-	unlink(".here_doc");
 	ft_lstclear(&list, NULL);
 }

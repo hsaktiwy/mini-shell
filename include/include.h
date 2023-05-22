@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:58:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/20 18:39:26 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/22 21:48:16 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ typedef struct s_command
 	char			*file_out;
 	t_env			*env;
 }t_cmd;
+
+// global variable
+extern int	g_exit_status;
 
 // helper to check input
 void	ft_lstfree_t_file(t_list **node);

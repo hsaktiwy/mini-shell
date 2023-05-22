@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/22 16:39:53 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/22 22:01:58 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,12 @@ void	main2(char *input, t_env *env)
 		list = parser(env, &tokens, input);
 		g_token_l(tokens);
 		// display_tokens(tokens);
-		display_tokens(list);
+		// display_tokens(list);
 		//execution
 		// printf(">>> Commands = [%d]\n", ft_lstsize(list));
-		execute(list);
+		if(list)
+			execute(list);
+		unlink(".here_doc");
 	}
 	free_tokens(&tokens);
 }

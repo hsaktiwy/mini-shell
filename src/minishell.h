@@ -74,9 +74,6 @@ typedef struct s_execve_params
 	char	**args;
 }	t_execve_params;
 
-// global variable
-extern int	g_exit_status;
-
 //
 void	main2(char *input, t_env *env);
 // lexer
