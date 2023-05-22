@@ -6,11 +6,11 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:40:00 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/21 17:59:28 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:26:49 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_shell.h"
+#include "minishell.h"
 
 int	check_token(t_list	**current, t_g_types g_type)
 {

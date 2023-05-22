@@ -6,14 +6,48 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 19:06:50 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/21 17:06:50 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/22 17:31:34 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
+int	ft_atoi2(const char *str)
+{
+	unsigned long int	r;
+	int					sign;
+
+	r = 0;
+	sign = 1;
+	while ((*str >= 9 && *str <= 13) || (*str == ' '))
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sign = -1;
+		str++;
+	}
+	while (*str && (*str >= '0' && *str <= '9'))
+	{
+		r = r * 10 + (*str - '0');
+		str++;
+	}
+	if ((sign == 1 && r > LONG_MAX) || (sign == -1 && (r - 1) > LONG_MAX))
+			return (-1);
+	return (0);
+}
+
 static int	check_arg(char *arg)
 {
+	int	n;
+
+	if (!arg)
+		return (0);
+	n = ft_atoi2(arg);
+	if (n == -1)
+		return (0);
+	if (arg[0] == '+' || arg[0] == '-')
+		arg++;
 	while (*arg)
 	{
 		if (!ft_isdigit(*arg))
@@ -40,7 +74,7 @@ void	get_status_put_error(char *arg, size_t arg_count, int *do_exit, int *status
 		write(2, "minishell: exit: ", 17);
 		write(2, arg, ft_strlen(arg));
 		write(2, ": numeric argument required\n", 28);
-		*status = 255;
+		*status = 2;
 	}
 }
 

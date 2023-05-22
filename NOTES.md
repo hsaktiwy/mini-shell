@@ -79,13 +79,12 @@ Linked_T_CMD :  linked->t_file->a_file
 export > 888	//FIXED
 -shell level	//FIXED
 
---env -i ./minishell seg--	//FIXED or not
+--env -i ./minishell seg--	//FIXED 
 --OLDPWD is not set at first-- //FIXED
 
 + expand ~ && -- to home //FIXED or not
 --handle when full path is specified as the name of the command--
 --caling close with invalid file descriptor--
-> "ls | > out" "ls | <<l" different behaviar
 
 +test all builtins 
 
@@ -110,19 +109,47 @@ export > 888	//FIXED
 
 
  [x] ls | | | wc or ls |||| wc (i think it soved)
- export "VA=ls|wc" should consider one cmd
- echo '$USER'$USER"$USER" 
- ls           | cat         <           out1 // space problem
-
- echo $f "$HOME" segmentation fault
- echo $f"$HOME"
- echo $f"$HOME""                         "
-
- whats this anyway
- root@abdelatif# echo $$$
- 1682$
+ [x]export "VA=ls|wc" should consider one cmd
+ [x]echo '$USER'$USER"$USER" 
+ [x]echo $f "$HOME" segmentation fault
+ [x]echo $f"$HOME"
 
 ################################## LEAK REPORT #########################################
 
+########################################################################################
  [x] echo '$USER'$USER"$USER" 
- ls           | cat         <           out1 // space problem
+
+ TO DO LIST
+ [x] in redirection not working
+ [ ] ls           | cat         <           out1 // space problem
+ [ ]> "ls | > out" "ls | <<l" different behaviar
+
+############# builtins testing
+[x] exit -21131313
+[x] exit -9223372036854775809
+[x] exit 9223372036854775808
+[x] exit +"100"
+
+[x] export = // SIGSEGV
+
+[ ] echo $?HELLO
+
+
+############# syntax testing
+[ ] echo hi | < |
+
+[ ] syntax error  set g_exit_status = 2 
+
+[ ] echo hi | > >>
+
+[ ] mini-shell:     syntax error near unexpected token `newline' <<what are the extra spaces>>
+
+[ ] cat    <| ls    <<should be erorr>>
+
+[ ]  echo hi <<>
+
+[ ] } or { or {} or }{
+
+[ ] < ls/ > 		<<nothing should be passed to execution>>
+
+[ ] <ls>

@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:45:11 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/19 01:10:56 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:43:05 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	check_key(char *key)
 {
 	size_t	i;
 
+	if (!key)
+		return (1);
 	if (key && !((key[0] >= 'a' && key[0] <= 'z') ||
 			(key[0] >= 'A' && key[0] <= 'Z')) && key[0] != '_')
 		return (1);

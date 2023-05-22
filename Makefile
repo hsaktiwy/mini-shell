@@ -6,7 +6,7 @@
 #    By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 17:53:55 by hsaktiwy          #+#    #+#              #
-#    Updated: 2023/05/21 18:20:32 by aigounad         ###   ########.fr        #
+#    Updated: 2023/05/22 16:39:58 by aigounad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ BUILTINS = cd.c pwd.c echo.c export.c env.c unset.c exit.c common.c
 INC = ft_get_cmd.c ft_next_arg.c ft_get_double_quote.c ft_get_simple_arg.c ft_get_single_quote.c ft_lstfree_t_file.c
 EXP = excep1.c
 OBJ = $(SRC:%.c=obj/%.o) $(BUILTINS:%.c=obj/builtins/%.o) $(ENV:%.c=obj/include/environement/%.o) $(INC:%.c=obj/include/%.o) $(EXP:%.c=obj/include/exception/%.o) $(LIBFT:%.c=obj/include/libft/%.o)
-HEADER = src/mini_shell.h
-NAME = mini_shell
+HEADER = src/minishell.h
+NAME = minishell
 HEAD_INC = include.h
 HEAD_EXP = exception.h
 HEAD_GET_N = get_next_line.h

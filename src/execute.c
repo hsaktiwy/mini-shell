@@ -6,11 +6,11 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/21 23:12:22 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:26:49 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_shell.h"
+#include "minishell.h"
 
 int	is_builtin(char *cmd)
 {
@@ -145,9 +145,9 @@ void	dup_stdin_and_stdout(t_list *cmd, t_fd *fd)
 			perror("close");
 	}
 }
-// int isFileDescriptorValid(int fd) {
-//     return fcntl(fd, F_GETFD) != -1;
-// }
+int isFileDescriptorValid(int fd) {
+    return fcntl(fd, F_GETFD) != -1;
+}
 
 void	dup_redirections(t_list *cmd)
 {
@@ -167,10 +167,14 @@ void	dup_redirections(t_list *cmd)
 		if (ft_strcmp(file, ".here_doc") == 0)
 		{
 			fd = open(".here_doc", O_RDONLY, 0666);
+			if (fd == -1)
+				perror("open");
 			((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_in = fd;
 		}
+		else
+			fd = ((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_in;
 		if (dup2(fd, STDIN_FILENO) == -1)
-			perror("dup2");
+			perror("dup222");
 	}
 }
 

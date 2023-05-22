@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_shell.h                                       :+:      :+:    :+:   */
+/*   minishell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <stdio.h>
+# include <limits.h>
 # include <string.h>
 # include <sys/wait.h>
 # include <readline/readline.h>
@@ -60,6 +61,7 @@ typedef struct s_token
 	void			*value;	
 }t_token;
 
+// structs used in execute.c for norminette
 typedef struct s_fd
 {
 	int	fd[2];
@@ -72,9 +74,10 @@ typedef struct s_execve_params
 	char	**args;
 }	t_execve_params;
 
+// global variable
 extern int	g_exit_status;
 
-// execution
+//
 void	main2(char *input, t_env *env);
 // lexer
 int		lexer(t_list **tokens, char *input, t_env *env);

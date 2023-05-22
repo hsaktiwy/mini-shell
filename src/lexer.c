@@ -6,11 +6,11 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:03:39 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/20 19:24:21 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:26:49 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_shell.h"
+#include "minishell.h"
 
 void handleHereDoc(t_list **tokens, t_env *env, char *input, int *index)
 {

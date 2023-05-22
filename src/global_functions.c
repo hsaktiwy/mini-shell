@@ -6,11 +6,21 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 17:34:45 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/21 17:48:55 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:26:49 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_shell.h"
+#include "minishell.h"
+
+char	*g_input_line(char *input)
+{
+	static char	*g_input;
+
+	if (input == NULL)
+		return (g_input);
+	g_input = input;
+	return (g_input);
+}
 
 int	g_stdin_fd(int i)
 {

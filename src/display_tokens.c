@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executer.c                                         :+:      :+:    :+:   */
+/*   display_tokens.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/21 17:41:44 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:54:06 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_shell.h"
+#include "minishell.h"
 
 void	display_tokens(t_list	*tokens)
 {
@@ -91,7 +91,7 @@ void display_ast_types(t_ast *node, char *str) {
 		arg = cmd->arg;
 		while(arg)
 		{
-			printf("arg = %s\n", (char *)(arg->content));
+			// printf("arg = %s\n", (char *)(arg->content));
 			arg = arg->next;
 		}
 	}

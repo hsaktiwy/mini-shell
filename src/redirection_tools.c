@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_tools.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:17:19 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/21 10:18:31 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:26:49 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_shell.h"
+#include "minishell.h"
 
 int	g_heredoc_executing(int i)
 {
@@ -70,7 +70,8 @@ int	heredoc(t_env *env, char *delimiter, int h_fd)
 			tmp = expand(env, line);
 			if (!find_delimeter(tmp, delimiter) && g_heredoc_executing(-1))
 			{
-				if (write(h_fd, tmp, ft_strlen(tmp)) == -1)
+				if (write(h_fd, tmp, ft_strlen(tmp)) == -1
+					|| write(h_fd, "\n", 1) == -1)
 					return (g_heredoc_executing(0), free(tmp), free(line), 0);
 			}
 			else
@@ -105,7 +106,7 @@ int	here_doc_red(t_env *env, t_file *tmp)
 			write(2, "Error : here_doc fail\n", 22);
 		}
 	}
-	return (fd);		
+	return (0);		
 }
 
 int out_append_red(t_file *tmp, int out_app)

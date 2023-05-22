@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:20:03 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/21 23:10:14 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:57:53 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*get_simple_arg(t_env *env, char *str, int *index)
 				k++;
 			arg = expand_env_var(env ,&str[i + 1], arg, k);
 			i += k + 1;
-			printf("arg = (%s) and (%d)->%s", arg, k, &str[i]);		
+			// printf("arg = (%s) and (%d)->%s", arg, k, &str[i]);		
 		}
 		else if (str[i] == '\'')
 		{

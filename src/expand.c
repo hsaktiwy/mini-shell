@@ -1,4 +1,4 @@
-#include "mini_shell.h"
+#include "minishell.h"
 
 char    *expand(t_env *env, char *line)
 {
@@ -13,7 +13,7 @@ char    *expand(t_env *env, char *line)
 		if (line[i] == '$' && line[i + 1] && !iswhitespace(line[i + 1]))
 		{
 			k = 0;
-			while (line[k + i + 1] && !iswhitespace(line[k + i + 1]) && line[k + i + 1] != '$')
+			while (line[k + i + 1] && (ft_isalnum(line[k + i + 1]) || line[k + i + 1] == '?' || line[k + i + 1] == '_'))
 				k++;
 			arg = expand_env_var(env ,&line[i + 1], arg, k);
 			i += k + 1;			
@@ -37,16 +37,6 @@ char	*reallocated_str(char *str, char *add)
 	res = ft_realloc(str, ft_strlen(str) + size + 1);
 	ft_strncat(res, add, size);
 	return (res);
-}
-
-char	*g_input_line(char *input)
-{
-	static char	*g_input;
-
-	if (input == NULL)
-		return (g_input);
-	g_input = input;
-	return (g_input);
 }
 
 char	*remove_white_spaces(char *p)

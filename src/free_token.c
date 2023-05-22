@@ -1,4 +1,4 @@
-#include "mini_shell.h"
+#include "minishell.h"
 
 void    t_file_free(void *value)
 {

@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:17:59 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/21 23:10:10 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:53:05 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*get_double_quote(t_env *env, char *s, int *index)
 		}else if (c == '\"')
 		{
 			//(*index) += i;
-			printf("from double to -> get_simple_arg(%s)(%d)\n",&s[i], *index);
+			// printf("from double to -> get_simple_arg(%s)(%d)\n",&s[i], *index);
 			res = ft_strjoin(res, get_simple_arg(env, &s[i], index));
 			break ;
 		}

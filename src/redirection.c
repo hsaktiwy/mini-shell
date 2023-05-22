@@ -6,11 +6,11 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:42:55 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/21 10:37:38 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:26:49 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_shell.h"
+#include "minishell.h"
 
 int	out_red_cmd(t_token **red, t_token **command)
 {
@@ -46,7 +46,7 @@ int	in_red_cmd(t_env *env, t_token **red, t_token **command)
 	if(*command)
 	{
 		cmd = (*command)->value;
-		cmd->cmd_in = 0;
+		cmd->cmd_in = fd;
 		if ((*red)->type == HERE_DOC)
 			cmd->file_in = ".here_doc";
 		else

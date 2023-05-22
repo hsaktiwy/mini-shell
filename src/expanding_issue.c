@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expanding_issue.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:53:52 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/20 16:42:57 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:26:49 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_shell.h"
+#include "minishell.h"
 
 void	fix_in_cmd(t_cmd **command)
 {
