@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/22 22:01:58 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:57:59 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	main2(char *input, t_env *env)
 	
 	tokens = NULL;
 	err_lex = lexical_erreur(input);
+	g_pipe_count(0);
 	if (err_lex != -1)
 		lexer_err(&input[err_lex]);
 	else
@@ -74,13 +75,10 @@ void	main2(char *input, t_env *env)
 		// display_tokens(tokens);
 		fix_expanding_issue(&tokens);
 		ini_arg_count(&tokens);
-		
 		list = parser(env, &tokens, input);
 		g_token_l(tokens);
 		// display_tokens(tokens);
 		// display_tokens(list);
-		//execution
-		// printf(">>> Commands = [%d]\n", ft_lstsize(list));
 		if(list)
 			execute(list);
 		unlink(".here_doc");

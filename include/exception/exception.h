@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exception.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:13:17 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/13 16:46:45 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/23 14:20:19 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ void	error(void);
 void	no_mem(void);
 void	lexer_err(char *str);
 void	ft_perror(char *msg);
+void	put_string(char *str);
 #endif

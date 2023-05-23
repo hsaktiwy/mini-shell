@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:03:39 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/22 15:26:49 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:53:01 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void handlePipe(t_list **tokens, int *index, int *cmd)
 		return;
 	token->type = PIPE;
 	token->value = NULL;
+	g_pipe_count(g_pipe_count(-1) + 1);
 	ft_lstadd_back(tokens, ft_lstnew(token));
 	(*index)++;
 	*cmd = 0;

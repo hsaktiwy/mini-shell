@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_simple_arg.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:20:03 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/22 15:57:53 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/23 14:05:17 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ char	*get_simple_arg(t_env *env, char *str, int *index)
 		k = 0;
 		if (str[i] == '$' && str[i + 1] && (!iswhitespace(str[i + 1]) ))
 		{
-			while (str[k + i + 1] && (ft_isalnum(str[k + i + 1]) || str[k + i + 1] == '?' ||  str[k + i + 1] == '_'))
+			while (str[k + i + 1] && (ft_isalnum(str[k + i + 1]) || str[k + i + 1] != '?' ||  str[k + i + 1] == '_'))
+				k++;
+			if (str[k + i + 1] == '?')
 				k++;
 			arg = expand_env_var(env ,&str[i + 1], arg, k);
 			i += k + 1;

@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:17:59 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/22 21:47:24 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/23 14:07:33 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ char	*get_double_quote(t_env *env, char *s, int *index)
 		if (s[i] == '$' && (ft_isalnum(s[i + 1]) || s[i + 1] == '?' ||  s[i + 1] == '_'))
 		{
 			k = 0;
-			while (s[k + i + 1] && (ft_isalnum(s[k + i + 1])|| s[k + i + 1] == '?' || s[k + i + 1] == '_'))
+			while (s[k + i + 1] && (ft_isalnum(s[k + i + 1])|| s[k + i + 1] != '?' || s[k + i + 1] == '_'))
+				k++;
+			if(s[k + i + 1] == '?')
 				k++;
 			res = expand_env_var(env, &s[i + 1], res, k);
 			i += k + 1;
