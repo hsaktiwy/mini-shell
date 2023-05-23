@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/23 15:57:59 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:42:27 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	main(__attribute__((unused)) int ac,
 		restore_stdin();
 		char buf[4000];
 		getcwd(buf, 4000);
-		printf("\33[31mSHLVL:(%s) exit:(%d):~%s#\33[00m", ft_getenv(env_s, "SHLVL"), g_exit_status, buf);
+		// printf("\33[31mSHLVL:(%s) exit:(%d):~%s#\33[00m", ft_getenv(env_s, "SHLVL"), g_exit_status, buf);
 		input = readline("\33[31mminishell:$>\33[35m ");
 		// input = "exit";
 		// if the user pressed Ctr+D
