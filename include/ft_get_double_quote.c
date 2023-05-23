@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:17:59 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/23 14:07:33 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/23 16:35:12 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ char	*get_double_quote(t_env *env, char *s, int *index)
 	i = 0;
 	c = '\0';
 	res = ft_strdup("");
-	while (s[i] && (!c || (c == '\"' && (ft_isprint(s[i]) && !iswhitespace(s[i]) && s[i] != '|'  && s[i] != '<'  && s[i] != '>'))))
+	while (s[i] && (!c || (c == '\"' && !iswhitespace(s[i]) && s[i] != '|'  && s[i] != '<'  && s[i] != '>')))
 	{
-		if (s[i] == '$' && (ft_isalnum(s[i + 1]) || s[i + 1] == '?' ||  s[i + 1] == '_'))
+		if (s[i] == '$' && (ft_isalpha(s[i + 1]) || s[i + 1] == '?' ||  s[i + 1] == '_'))
 		{
 			k = 0;
-			while (s[k + i + 1] && (ft_isalnum(s[k + i + 1])|| s[k + i + 1] != '?' || s[k + i + 1] == '_'))
+			while (s[k + i + 1] && s[k + i + 1] != '?' && (ft_isalnum(s[k + i + 1]) || s[k + i + 1] == '_'))
 				k++;
 			if(s[k + i + 1] == '?')
 				k++;

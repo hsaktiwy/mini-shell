@@ -234,3 +234,10 @@ bash-3.2$ ls -la <
 bash: syntax error near unexpected token `newline'
 bash-3.2$ echo $?
 258
+
+[ ] fix this problem plus exit status is 255 not 2
+{
+bash-3.2$ exit 11111111111111111111111111111111111111111111
+exit
+bash: exit: 11111111111111111111111111111111111111111111: numeric argument required
+}
