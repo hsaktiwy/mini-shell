@@ -1,7 +1,8 @@
-obj
+obj/
+obj/*
 a.out
 .here_doc
-mini_shell
+minishell
 *.o
 *.a
 *.swp
@@ -11,3 +12,8 @@ mini_shell
 .vscode/
 **/*.o/*.o
 .vscode/*
+a.out.dSYM
+a.out.dSYM/*
+test.c
+cat.sh
+TESTING
