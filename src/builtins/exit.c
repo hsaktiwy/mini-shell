@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 19:06:50 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/23 17:06:37 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/23 22:11:52 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,24 @@ static int	check_arg(char *arg)
 	return (1);
 }
 
+void	before_exiting(t_list *list)
+{
+	t_list			*tokens;
+	t_env 			*env;
+	
+	if (ft_lstsize(list) == 1)
+	{
+		tokens = g_token_l(NULL);
+		close_open_fds(list);
+		free_tokens(&tokens);
+		ft_lstclear(&list, NULL);
+		free(g_input_line(NULL));
+		env = g_env_s(NULL);
+		ft_free_env(&env);
+		rl_clear_history();
+	}
+}
+
 void	get_status_put_error(char *arg, size_t arg_count, int *do_exit, int *status)
 {
 	if (arg_count == 1 && check_arg(arg))
@@ -74,7 +92,7 @@ void	get_status_put_error(char *arg, size_t arg_count, int *do_exit, int *status
 		write(2, "minishell: exit: ", 17);
 		write(2, arg, ft_strlen(arg));
 		write(2, ": numeric argument required\n", 28);
-		*status = 2;
+		*status = 255;
 	}
 }
 
@@ -83,8 +101,6 @@ int	ft_exit(t_cmd *command, t_list *list)
 	int				status;
 	int				do_exit;
 	char			*arg;
-	t_list			*g_tokens;
-	t_env 			*g_env;
 
 	do_exit = 1;
 	status = 0;
@@ -97,16 +113,7 @@ int	ft_exit(t_cmd *command, t_list *list)
 	}
 	if (do_exit)
 	{
-		if (ft_lstsize(list) == 1)
-		{
-			g_tokens = g_token_l(NULL);
-			free_tokens(&g_tokens);
-			ft_lstclear(&list, NULL);
-			free(g_input_line(NULL));
-			g_env = g_env_s(NULL);
-			ft_free_env(&g_env);
-			rl_clear_history();
-		}
+		before_exiting(list);
 		exit(status);
 	}
 	return (status);

@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:48:28 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/23 15:42:13 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/23 20:22:19 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ int	syntax_error(char *input, t_list *tokens)
 		r += -1;
 	if (r != 1)
 		g_exit_status = 258;
-	printf("exit status = %d\n", g_exit_status);
 	return (r);
 }
 
@@ -163,11 +162,12 @@ t_list	*parser(t_env *env, t_list **tokens, char *input)
 		//printf("Error : %d\n", err);
 		if (err == 1)
 		{
-			if (!redirection_habdling(env, tokens))
-				return (NULL);
+			// if (!redirection_habdling(env, tokens))
+			// 	return (NULL);
+			redirection_habdling(env, tokens);
 			list = creat_cmd_list(&current);
 		}
 	//}
-	printf("number of pipes = %d\n", g_pipe_count(-1));
+	// printf("number of pipes = %d\n", g_pipe_count(-1));
 	return (list);
 }

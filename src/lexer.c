@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:03:39 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/23 15:53:01 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/23 20:36:48 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,15 @@ void handlePipe(t_list **tokens, int *index, int *cmd)
 	t_token *token = (t_token *)malloc(sizeof(t_token));
 	if (!token)
 		return;
+	if ((*cmd) == 0)
+	{
+		t_token *fake_cmd = (t_token *)malloc(sizeof(t_token));
+		if (!fake_cmd)
+			return;
+		fake_cmd->type = COMMAND;
+		fake_cmd->value = ini_cmd(g_env_s(NULL));
+		ft_lstadd_back(tokens, ft_lstnew(fake_cmd));
+	}
 	token->type = PIPE;
 	token->value = NULL;
 	g_pipe_count(g_pipe_count(-1) + 1);
@@ -110,6 +119,15 @@ int lexer(t_list **tokens, char *input, t_env *env)
 			handleArg(tokens, env, input, &i);
 		if (iswhitespace(input[i]))
 			i++;
+	}
+	if(cmd == 0)
+	{
+		t_token *fake_cmd = (t_token *)malloc(sizeof(t_token));
+		if (!fake_cmd)
+			return 0;
+		fake_cmd->type = COMMAND;
+		fake_cmd->value = ini_cmd(g_env_s(NULL));
+		ft_lstadd_back(tokens, ft_lstnew(fake_cmd));
 	}
 	return 0;
 }

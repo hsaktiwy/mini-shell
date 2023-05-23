@@ -109,6 +109,7 @@ void 	display_ast_types(t_ast *node, char *str);
 
 //execution
 void	execute(t_list *list);
+void	close_open_fds(t_list *list);
 
 //global functions
 int		g_cmd_executing(pid_t newpid);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:58:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/22 21:48:16 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/23 19:27:47 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,5 @@ int		is_splitable_env(char *str);
 t_file	*get_file(t_env *env, char *input, int *index);
 t_cmd	*get_cmd(t_env *env, char *input, int *index);
 t_file	*creat_arg(char *file_name, t_argument_type type);
-
+t_cmd	*ini_cmd(t_env *env);
 #endif

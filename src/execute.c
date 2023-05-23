@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/22 19:57:11 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/23 19:34:01 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,16 @@ void	append_filename(char *filename, char *path, char *des)
 	des[j] = 0;
 }
 
-char	*get_path2(char *filename, t_list *list)
+char	*findcmd(char *filename)
 {
 	char	**paths;
 	char	path[4096];
 	int		i;
-	t_env	*env;
 
 	if (is_builtin(filename) || ft_strchr(filename, '/')
 		|| !ft_getenv(g_env_s(NULL), "PATH"))
 		return (ft_strdup(filename));
-	env = ((t_cmd *)(((t_token *)(list->content))->value))->env;
-	paths = ft_split(ft_getenv(env, "PATH"), ':');
+	paths = ft_split(ft_getenv(g_env_s(NULL), "PATH"), ':');
 	if (!paths)
 		return (NULL);
 	i = -1;
@@ -241,10 +239,8 @@ int	execb1(t_list *cmd, t_list *list, int *get_exit, t_execve_params *ep)
 	return (0);
 }
 
-void	close_pipe_and_free(t_list *cmd, t_execve_params *ep, t_fd *fd)
+void	close_pipe(t_list *cmd, t_fd *fd)
 {
-	free(ep->path);
-	free(ep->args);
 	if (cmd->next)
 		if (close(fd->fd[1]) == -1)
 			perror("close");
@@ -302,19 +298,10 @@ void	ft_piping(t_list *cmd, t_fd *fd)
 			perror("pipe");
 }
 
-void	execute_2(t_list *cmd, t_list *list, int *get_exit, t_fd *fd)
+void	ft_forking(t_list *cmd, t_list *list, t_fd *fd, t_execve_params *ep)
 {
-	pid_t			pid;
-	t_execve_params	ep;
+	pid_t	pid;
 
-	ep.path = get_path2(((t_cmd *)((t_token *)(cmd->content))->value)->cmd, cmd);
-	ep.args = get_args(cmd);
-	save_cmd(&ep, ((t_cmd *)((t_token *)(cmd->content))->value)->env);
-	if (!ep.path)
-		return (free(ep.args), command_not_found(cmd, get_exit));
-	ft_piping(cmd, fd);
-	if (execb1(cmd, list, get_exit, &ep))
-		return ;
 	pid = fork();
 	if (pid < 0)
 		perror("fork");
@@ -324,10 +311,30 @@ void	execute_2(t_list *cmd, t_list *list, int *get_exit, t_fd *fd)
 		dup_redirections(cmd);
 		execb2(cmd, list);
 		close_open_fds(list);
-		exec_c(&ep, ((t_cmd *)((t_token *)(cmd->content))->value)->env);
+		exec_c(ep, g_env_s(NULL));
 	}
 	wait_4_last_command(cmd, pid);
-	close_pipe_and_free(cmd, &ep, fd);
+}
+
+void	execute_2(t_list *cmd, t_list *list, int *get_exit, t_fd *fd)
+{
+	t_execve_params	ep;
+
+	ft_piping(cmd, fd);
+	if (((t_cmd *)(((t_token *)(cmd->content))->value))->cmd)
+	{
+		ep.path = findcmd(((t_cmd *)((t_token *)(cmd->content))->value)->cmd);
+		ep.args = get_args(cmd);
+		save_cmd(&ep, g_env_s(NULL));
+		if (!ep.path)
+			return (free(ep.args), command_not_found(cmd, get_exit));
+		if (execb1(cmd, list, get_exit, &ep))
+			return ;
+		ft_forking(cmd, list, fd, &ep);
+		free(ep.path);
+		free(ep.args);
+	}
+	close_pipe(cmd, fd);
 }
 
 void	get_name_of_signal(int sig)

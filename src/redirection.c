@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:42:55 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/22 15:26:49 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/23 20:23:59 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,7 @@ int    redirection_habdling(t_env *env, t_list **tokens)
 				cmd = token;
 			current = current->next;
 		}
-		if (!redirect(env, &list, &cmd))
-				return (0);
+		redirect(env, &list, &cmd);
 		while(list)
 		{
 			token = list->content;

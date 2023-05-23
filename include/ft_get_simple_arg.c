@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_simple_arg.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:20:03 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/23 16:33:20 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/23 20:42:14 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*get_simple_arg(t_env *env, char *str, int *index)
 
 	i = 0;
 	arg = ft_strdup("");
-	printf("before annything in simple arg: %s\n", str);
+	// printf("before annything in simple arg: %s\n", str);
 	// while (iswhitespace(str[i]))
 	// 	i++;
 	while (str[i] && !iswhitespace(str[i]) && str[i] != '|'  && str[i] != '<'  && str[i] != '>')
@@ -33,8 +33,7 @@ char	*get_simple_arg(t_env *env, char *str, int *index)
 			if (str[k + i + 1] == '?')
 				k++;
 			arg = expand_env_var(env ,&str[i + 1], arg, k);
-			i += k + 1;
-			printf("arg = (%s) and (%d)->%s\n", arg, k, &str[i]);		
+			i += k + 1;	
 		}
 		else if (str[i] == '\'')
 		{
@@ -52,7 +51,7 @@ char	*get_simple_arg(t_env *env, char *str, int *index)
 			ft_strncat(arg, &str[i], 1);
 			i++;
 		}
-		printf("??? = %c _ %s\n", str[i], arg);
+		// printf("??? = %c _ %s\n", str[i], arg);
 	}
 	if (!ft_strlen(arg) && k != 0)
 		return ((*index) += i, free(arg), NULL);
