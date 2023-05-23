@@ -13,7 +13,9 @@ char    *expand(t_env *env, char *line)
 		if (line[i] == '$' && line[i + 1] && !iswhitespace(line[i + 1]))
 		{
 			k = 0;
-			while (line[k + i + 1] && (ft_isalnum(line[k + i + 1]) || line[k + i + 1] == '?' || line[k + i + 1] == '_'))
+			while (line[k + i + 1] && (ft_isalnum(line[k + i + 1]) || line[k + i + 1] != '?' || line[k + i + 1] == '_'))
+				k++;
+			if (line[k + i + 1] == '?')
 				k++;
 			arg = expand_env_var(env ,&line[i + 1], arg, k);
 			i += k + 1;			

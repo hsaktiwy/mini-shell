@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:48:28 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/22 21:54:21 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:53:44 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,37 @@ int printf_error(int boolean)
 	return (0);
 }
 
-void	printf_error_redi(t_token *token, t_list *list)
+void	printf_error_redi(t_list *list)
 {
-	if ((token->type == IN_REDIRECT || token->type == HERE_DOC) && list)
-		printf("mini-shell:	syntax error near unexpected token `<'\n");
-	else if (token->type == OUT_REDIRECT && list)
-		printf("mini-shell:	syntax error near unexpected token `>'\n");
-	else if (token->type == APPEND_REDIRECT && list)
-		printf("mini-shell:	syntax error near unexpected token `>>'\n");
+	t_token *tmp;
+	char c [3];
+
+	c[0] = '\0';
+	c[1] = '\0';
+	c[2] = '\0';
+	tmp = NULL;
+	if (list)
+	{
+		tmp = list->content;
+		if (tmp->type == 1)
+			c[0] = '|';
+		else if (tmp->type == 2)
+			c[0] = '<';
+		else if (tmp->type == 3)
+			c[0] = '<';
+		else if (tmp->type == 4)
+			(c[0] = '<', c[1] = '<');
+		else if (tmp->type == 5)
+			(c[0] = '>', c[1] = '>');
+	}
+	if (list && tmp->type != COMMAND && c[0])
+	{
+		put_string("mini-shell: syntax error near unexpected token `");
+		put_string(c);
+		put_string("'\n");
+	}
 	else
-		printf("mini-shell:	syntax error near unexpected token `newline'\n");
+		put_string("mini-shell: syntax error near unexpected token `newline'\n");
 }
 
 int redirection_error(t_list *tokens, int display)
@@ -78,7 +99,7 @@ int redirection_error(t_list *tokens, int display)
 			{
 				if (display != 1)
 					return (1);
-				return (printf_error_redi(token, list->next),1);
+				return (printf_error_redi(list->next),1);
 			}
 		}
 		list = list->next;
@@ -98,7 +119,7 @@ int	syntax_error(char *input, t_list *tokens)
 	if(redirection_error(tokens, r))
 		r += -1;
 	if (r != 1)
-		g_exit_status = 2;
+		g_exit_status = 258;
 	printf("exit status = %d\n", g_exit_status);
 	return (r);
 }
@@ -140,10 +161,13 @@ t_list	*parser(t_env *env, t_list **tokens, char *input)
 	// if (err != -1)
 	// {
 		//printf("Error : %d\n", err);
-		if (!redirection_habdling(env, tokens))
-			return (NULL);
 		if (err == 1)
+		{
+			if (!redirection_habdling(env, tokens))
+				return (NULL);
 			list = creat_cmd_list(&current);
+		}
 	//}
+	printf("number of pipes = %d\n", g_pipe_count(-1));
 	return (list);
 }

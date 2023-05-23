@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 17:34:45 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/22 21:40:12 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:51:16 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	*g_input_line(char *input)
 int	g_stdin_fd(int i)
 {
 	static int	j;
+
 	if (i == -1)
 		return (j);
 	j = i;
@@ -34,6 +35,7 @@ int	g_stdin_fd(int i)
 t_list *g_token_l(t_list *tokens)
 {
 	static t_list *g_tokens;
+
 	if (tokens == NULL)
 		return (g_tokens);
 	else
@@ -52,6 +54,17 @@ int	g_cmd_executing(pid_t newpid)
 int	g_heredoc_executing(int i)
 {
 	static int	j;
+	
+	if (i == -1)
+		return (j);
+	j = i;
+	return (j);
+}
+
+int	g_pipe_count(int i)
+{
+	static	int j;
+
 	if (i == -1)
 		return (j);
 	j = i;

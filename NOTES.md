@@ -132,24 +132,105 @@ export > 888	//FIXED
 
 [x] export = // SIGSEGV
 
-[ ] echo $?HELLO
-
+[x] echo $?HELLO (ft_get_simple_arg i added if(str[k + i + 1] == '?') k++; plus the same for the files expand.c ft_get_doube_quote as the all do the same)
+{
+output bash-3.2$
+	bash-3.2$ echo $?HELLo
+	0HELLo
+	bash-3.2$ echo $?HELLO
+	0HELLO
+	bash-3.2$ echo $??
+	0?
+	bash-3.2$ echo "$?HELLo"
+	0HELLo
+	bash-3.2$ cat << kk
+	> $?HHH
+	> KK
+	> kk
+	0HHH
+	KK
+	bash-3.2$
+our : minishell
+	SHLVL:(2) exit:(0):~/Users/hsaktiwy/Desktop/mini-shell/mini-shell#minishell:$> echo "$?HELLO"
+	exit status = 0
+	0HELLO
+	SHLVL:(2) exit:(0):~/Users/hsaktiwy/Desktop/mini-shell/mini-shell#minishell:$> echo $??
+	exit status = 0
+	0?
+	SHLVL:(2) exit:(0):~/Users/hsaktiwy/Desktop/mini-shell/mini-shell#minishell:$> echo $?HELLO
+	exit status = 0
+	0HELLO
+	SHLVL:(2) exit:(0):~/Users/hsaktiwy/Desktop/mini-shell/mini-shell#minishell:$> cat << kk
+	exit status = 0
+	> $?HHH
+	> KK
+	> kk
+	0HHH
+	KK
+	SHLVL:(2) exit:(0):~/Users/hsaktiwy/Desktop/mini-shell/mini-shell#minishell:$> 
+}
 
 ############# syntax testing
-[ ] echo hi | < |
-
-[ ] syntax error  set g_exit_status = 2 
+[x] echo hi | < |
+{
+our: minishell
+	SHLVL:(2) exit:(0):~/Users/hsaktiwy/Desktop/mini-shell/mini-shell#minishell:$> echo hi | < |
+	mini-shell:     syntax error near unexpected token `|'
+	exit status = 2
+bash :
+	bash-3.2$ echo hi | < |
+	bash: syntax error near unexpected token `|'
+	bash-3.2$ echo $?
+	258
+notes : 
+	wach machi khasna ndisplayiwe exit status 258 ?
+}
+[x] syntax error  set g_exit_status = 2 
 
 [ ] echo hi | > >>
+{
+our: minishell
+	SHLVL:(2) exit:(2):~/Users/hsaktiwy/Desktop/mini-shell/mini-shell#minishell:$> echo hi | > >>
+	mini-shell:     syntax error near unexpected token `>>'
+	exit status = 2
+bash :
+	bash-3.2$ echo hi | > >>
+	bash: syntax error near unexpected token `>>'
+	bash-3.2$ echo $?
+	258
+}
+[x] mini-shell:     syntax error near unexpected token `newline' <<what are the extra spaces>>
+{
+	hahah ok hadi dartha custum ahaha i did fixed it 
+}
 
-[ ] mini-shell:     syntax error near unexpected token `newline' <<what are the extra spaces>>
+[x] cat    <| ls    <<should be erorr>>
+{
+our: minishell
+	SHLVL:(2) exit:(0):~/Users/hsaktiwy/Desktop/mini-shell/mini-shell#minishell:$> cat    <| ls    <
+	mini-shell: syntax error near unexpected token `|'
+	exit status = 2
+bash : 
+	bash-3.2$ cat    <| ls    <
+	bash: syntax error near unexpected token `|'
+	bash-3.2$ echo $?
+	258
+}
 
-[ ] cat    <| ls    <<should be erorr>>
+[x]  echo hi <<>
 
-[ ]  echo hi <<>
+[x] } or { or {} or }{
 
-[ ] } or { or {} or }{
+[x] < ls/ > 		<<nothing should be passed to execution>>
 
-[ ] < ls/ > 		<<nothing should be passed to execution>>
+[x] <ls>
 
-[ ] <ls>
+// ********************  ?
+bash-3.2$ ls -la | | 
+bash: syntax error near unexpected token `|'
+bash-3.2$ echo $?
+258
+bash-3.2$ ls -la <
+bash: syntax error near unexpected token `newline'
+bash-3.2$ echo $?
+258
