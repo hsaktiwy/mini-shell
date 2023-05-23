@@ -1,0 +1,13 @@
+obj
+a.out
+.here_doc
+mini_shell
+*.o
+*.a
+*.swp
+*.swo
+*.out
+**/.DS_Store
+.vscode/
+**/*.o/*.o
+.vscode/*
