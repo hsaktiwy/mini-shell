@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/23 15:42:27 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/23 16:30:56 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	main2(char *input, t_env *env)
 		list = parser(env, &tokens, input);
 		g_token_l(tokens);
 		// display_tokens(tokens);
-		// display_tokens(list);
+		display_tokens(list);
 		if(list)
 			execute(list);
 		unlink(".here_doc");

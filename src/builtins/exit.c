@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 19:06:50 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/22 17:31:34 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:06:37 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_atoi2(const char *str)
 {
-	unsigned long int	r;
+	long double	r;
 	int					sign;
 
 	r = 0;
@@ -32,7 +32,7 @@ int	ft_atoi2(const char *str)
 		r = r * 10 + (*str - '0');
 		str++;
 	}
-	if ((sign == 1 && r > LONG_MAX) || (sign == -1 && (r - 1) > LONG_MAX))
+	if ((r * sign > LONG_MAX) || (r * sign < LONG_MIN))
 			return (-1);
 	return (0);
 }
