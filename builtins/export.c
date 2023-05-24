@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 11:24:21 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/24 14:50:03 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/24 18:08:10 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,12 +111,20 @@ char	*get_value(char *key, char *arg, t_env *env)
 	if (*(equal_p - 1) == '+')
 	{
 		env_value = ft_getenv(env, key);
-		tmp = ft_substr(equal_p + 1, 0, ft_strlen(equal_p + 1));
+		if (*(equal_p + 1))
+			tmp = ft_substr(equal_p + 1, 0, ft_strlen(equal_p + 1));
+		else
+			tmp = ft_strdup("");
 		value = str_join(env_value, tmp);
 		free(tmp);
 	}
 	else
-		value = ft_substr(equal_p + 1, 0, ft_strlen(equal_p + 1));
+	{
+		if (*(equal_p + 1))
+			value = ft_substr(equal_p + 1, 0, ft_strlen(equal_p + 1));
+		else
+			value = ft_strdup("");
+	}
 	return (value);
 }
 
