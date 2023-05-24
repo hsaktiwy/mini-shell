@@ -109,15 +109,30 @@ export > 888	//FIXED
 
 
  [x] ls | | | wc or ls |||| wc (i think it soved)
+<<<<<<< Updated upstream
  [x]export "VA=ls|wc" should consider one cmd
  [x]echo '$USER'$USER"$USER" 
  [x]echo $f "$HOME" segmentation fault
  [x]echo $f"$HOME"
+=======
+ export "VA=ls|wc" should consider one cmd
+ echo '$USER'$USER"$USER" 
+ ls           | cat         <           out1 // space problem
+
+ echo $f "$HOME"
+ echo $f"$HOME"
+ echo $f"$HOME""                         "
+
+ whats this anyway
+ root@abdelatif# echo $$$
+ 1682$
+>>>>>>> Stashed changes
 
 ################################## LEAK REPORT #########################################
 
 ########################################################################################
  [x] echo '$USER'$USER"$USER" 
+<<<<<<< Updated upstream
 
  TO DO LIST
  [x] in redirection not working
@@ -272,3 +287,8 @@ include/
 
 Makefile: one makefile for everyting or each with a makefile
 ##########################################################################$$$########
+=======
+ ls           | cat         <           out1 // space problem
+
+ [ ] echo $f"$HOME""                         "    leak "                 "
+>>>>>>> Stashed changes
