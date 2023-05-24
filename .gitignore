@@ -1,0 +1,17 @@
+obj
+obj/
+obj/*
+a.out
+.here_doc
+minishell
+*.o
+*.a
+*.swp
+.vscode/
+**/*.o/*.o
+.vscode/*
+a.out.dSYM
+a.out.dSYM/*
+test.c
+cat.sh
+TESTING/
