@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:25:19 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/24 13:58:52 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/24 20:36:02 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	free_list(t_list **list)
 		return;
 	free_list(&((*list)->next));
 	holder = (*list)->content;
-
 	// free holder node content
 	free(holder->key);
 	free(holder->value);

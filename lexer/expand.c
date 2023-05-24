@@ -10,14 +10,14 @@ char    *expand(t_env *env, char *line)
 	arg = ft_strdup("");
 	while (line[i])
 	{
-		if (line[i] == '$' && line[i + 1] && (ft_isalpha(line[i + 1]) || line[i + 1] == '?' ||  line[i + 1] == '_') && !iswhitespace(line[i + 1]))
+		if (line[i] == '$' && line[i + 1] && (ft_isalpha(line[i + 1]) || line[i + 1] == '{' || line[i + 1] == '?' ||  line[i + 1] == '_') && !iswhitespace(line[i + 1]))
 		{
 			k = 0;
-			while (line[k + i + 1] && line[k + i + 1] != '?' && (ft_isalnum(line[k + i + 1]) || line[k + i + 1] == '_'))
+			while (line[k + i + 1] && line[k + i + 1] != '?' && line[k + i + 1] != '{' && (ft_isalnum(line[k + i + 1]) || line[k + i + 1] == '_'))
 				k++;
 			if (line[k + i + 1] == '?')
 				k++;
-			arg = expand_env_var(env ,&line[i + 1], arg, k);
+			arg = expand_env_var(env ,&line[i + 1], arg, &k);
 			i += k + 1;			
 		}
 		else if(line[i])

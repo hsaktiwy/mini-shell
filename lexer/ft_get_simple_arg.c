@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:20:03 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/24 14:12:46 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:18:31 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ char	*get_simple_arg(t_env *env, char *str, int *index)
 	while (str[i] && !iswhitespace(str[i]) && str[i] != '|'  && str[i] != '<'  && str[i] != '>')
 	{
 		k = 0;
-		if (str[i] == '$' && str[i + 1] && (ft_isalpha(str[i + 1]) || str[i + 1] == '?' ||  str[i + 1] == '_') && !iswhitespace(str[i + 1]))
+		if (str[i] == '$' && str[i + 1] && (ft_isalpha(str[i + 1]) || str[i + 1] == '{' || str[i + 1] == '?' || str[i + 1] == '\"' || str[i + 1] == '\'' ||  str[i + 1] == '_') && !iswhitespace(str[i + 1]))
 		{
-			while (str[k + i + 1] && str[k + i + 1] != '?' && (ft_isalnum(str[k + i + 1]) || str[k + i + 1] == '_'))
+			while (str[k + i + 1] && str[k + i + 1] != '?' && str[k + i + 1] != '{' && (ft_isalnum(str[k + i + 1]) || str[k + i + 1] == '_'))
 				k++;
 			if (str[k + i + 1] == '?')
 				k++;
-			arg = expand_env_var(env ,&str[i + 1], arg, k);
+			arg = expand_env_var(env ,&str[i + 1], arg, &k);
 			i += k + 1;	
 		}
 		else if (str[i] == '\'')
