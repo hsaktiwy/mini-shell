@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+         #
+#    By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 13:01:11 by hsaktiwy          #+#    #+#              #
-#    Updated: 2023/05/24 16:16:10 by aigounad         ###   ########.fr        #
+#    Updated: 2023/05/24 20:55:13 by hsaktiwy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-# FLAGS = -Wall -Wextra -Werror -g -fsanitize=address -I/Users/hsaktiwy/.brew/opt/readline/include -I$(INCLUDE_DIR)
-FLAGS = -Wall -Wextra -Werror -g -fsanitize=address -I/Users/aigounad/.brew/opt/readline/include -I$(INCLUDE_DIR)
+FLAGS = -Wall -Wextra -Werror -g -fsanitize=address -I/Users/hsaktiwy/.brew/opt/readline/include -I$(INCLUDE_DIR)
+#FLAGS = -Wall -Wextra -Werror -g -fsanitize=address -I/Users/aigounad/.brew/opt/readline/include -I$(INCLUDE_DIR)
 
 ENV =  ft_getenv.c ft_setenv.c ft_init_env.c ft_unset_envs.c ft_free_env.c
 
@@ -46,8 +46,8 @@ HEAD_EXE = include/execution.h include/minishell.h
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-#	$(CC) $(FLAGS) $(OBJ) -o $@ -lreadline  -L /Users/hsaktiwy/.brew/opt/readline/lib
-	$(CC) $(FLAGS) $(OBJ) -o $@ -lreadline  -L /Users/aigounad/.brew/opt/readline/lib
+	$(CC) $(FLAGS) $(OBJ) -o $@ -lreadline  -L /Users/hsaktiwy/.brew/opt/readline/lib
+#	$(CC) $(FLAGS) $(OBJ) -o $@ -lreadline  -L /Users/aigounad/.brew/opt/readline/lib
 
 obj/parser/%.o : parser/%.c $(HEAD_PAR) | obj_dir
 	$(CC) $(FLAGS) -o $@ -c $<

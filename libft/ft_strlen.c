@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 08:27:26 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/24 18:13:06 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/24 20:56:55 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-int	main()
-{
-	char *p;
-	p = "";
+// int	main()
+// {
+// 	char *p;
+// 	p = "";
 
-	printf("%zu\n", ft_strlen(p));
-}
+// 	printf("%zu\n", ft_strlen(p));
+// }

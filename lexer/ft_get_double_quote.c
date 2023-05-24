@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:17:59 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/24 19:02:39 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/24 20:58:07 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,8 @@ char	*expand_env_var(t_env *env, char *s, char *res,int *k)
 	{
 		(*k) = is_closed(s);
 		char 	tmp_env[(*k) - 1];
-		printf("size = %d\n", (*k));
 		tmp_env[0] = '\0';
 		ft_strncat(tmp_env, ++s, (*k) - 2);
-		printf("tmp = %s\n", tmp_env);
 		if (ft_strcmp(tmp_env, "?") == 0)
 		{
 			tmp = ft_itoa(g_exit_status);
@@ -85,12 +83,9 @@ char	*expand_env_var(t_env *env, char *s, char *res,int *k)
 			return (free(tmp),re);
 		}
 		size = ft_strlen(ft_getenv(env, tmp_env));
-		printf("sizeof %s est %d\n", tmp_env, size);
 		re = ft_realloc(res, ft_strlen(res) + size + 1);
-		printf("result of realoc is  : %s\n", re);
 		ft_strncat(re, ft_getenv(env, tmp_env), size);
-		printf("result after strncat is : %s\n", re);
-		return (free(tmp), printf("??\n"),re);
+		return (free(tmp),re);
 	}
 	else
 	{
