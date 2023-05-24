@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 19:06:50 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/23 22:11:52 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/23 22:21:02 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_atoi2(const char *str)
 {
-	long double	r;
+	long double			r;
 	int					sign;
 
 	r = 0;

@@ -235,11 +235,40 @@ bash: syntax error near unexpected token `newline'
 bash-3.2$ echo $?
 258
 
-[ ] fix this problem plus exit status is 255 not 2
+[x] fix this problem plus exit status is 255 not 2
 {
 bash-3.2$ exit 11111111111111111111111111111111111111111111
 exit
 bash: exit: 11111111111111111111111111111111111111111111: numeric argument required
 }
 
-++ close open file fds in exit
+[x] ++ close open file fds in exit
+
+##################################################################################
+#######[FINAL_PROJET_STRUCTURE_IDEA]
+#######[FEEL_FREE_TO_EDIT_AS_YOU_THINK_FITS]
+builins/
+	src: cd.c common.c echo.c env.c exit.c export.c pwd.c unset.c
+	header: builtin.h
+execution/
+	src: execute.c execution_utils.c ...
+	header: execution.h
+environment/
+	src: ft_free_env.c ft_getenv.c ft_init_env.c ft_setenv.c ft_unset_envs.c
+	header: environment.h
+parser/
+	src:
+	header:
+lexer/
+	src:
+	header:
+libft/
+	src: everything else hh(u didn't think i was going to write all the files hhhh)
+	header: libfh.h
+include/
+	#All header files
+	#+ minishell.h will include all headers
+	#+ all files will include minishell.h
+
+Makefile: one makefile for everyting or each with a makefile
+##########################################################################$$$########

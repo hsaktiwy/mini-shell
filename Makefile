@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+         #
+#    By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 17:53:55 by hsaktiwy          #+#    #+#              #
-#    Updated: 2023/05/22 21:49:43 by hsaktiwy         ###   ########.fr        #
+#    Updated: 2023/05/23 22:32:12 by aigounad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRC = expand.c lexer.c parser_tools.c parser.c main.c free_token.c lexer_tools.c
 BUILTINS = cd.c pwd.c echo.c export.c env.c unset.c exit.c common.c
 INC = ft_get_cmd.c ft_next_arg.c ft_get_double_quote.c ft_get_simple_arg.c ft_get_single_quote.c ft_lstfree_t_file.c 
 EXP = excep1.c
-OBJ = $(SRC:%.c=obj/%.o) $(BUILTINS:%.c=obj/builtins/%.o) $(ENV:%.c=obj/include/environement/%.o) $(INC:%.c=obj/include/%.o) $(EXP:%.c=obj/include/exception/%.o) $(LIBFT:%.c=obj/include/libft/%.o)
+OBJ = $(SRC:%.c=obj/%.o) $(BUILTINS:%.c=obj/builtins/%.o) $(ENV:%.c=obj/include/environement/%.o) $(INC:%.c=obj/include/%.o) \
+		$(EXP:%.c=obj/include/exception/%.o) $(LIBFT:%.c=obj/include/libft/%.o)
 HEADER = src/minishell.h
 NAME = minishell
 HEAD_INC = include.h
