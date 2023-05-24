@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 obj
+=======
+>>>>>>> main
 obj/
 obj/*
 a.out
@@ -7,6 +10,12 @@ minishell
 *.o
 *.a
 *.swp
+<<<<<<< HEAD
+=======
+*.swo
+*.out
+**/.DS_Store
+>>>>>>> main
 .vscode/
 **/*.o/*.o
 .vscode/*
@@ -14,4 +23,8 @@ a.out.dSYM
 a.out.dSYM/*
 test.c
 cat.sh
+<<<<<<< HEAD
 TESTING/
+=======
+TESTING
+>>>>>>> main

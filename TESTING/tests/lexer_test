@@ -1,9 +1,0 @@
-(1+2 % 49889 x * (1 + 1))
-cmd | cmd arg | << file
-E -> T E'
-E' -> + T E' | - T E' | ε
-T -> F T'
-T' -> x F T' | / F T' | % F T' | ε
-F -> ( E ) | num
-
-E -> S_CMD RED 
