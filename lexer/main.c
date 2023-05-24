@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/24 15:01:13 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:49:35 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	restore_stdin()
 {
 	if (!isatty(STDIN_FILENO))
 	{
+		printf("INN\n");
 		if (dup2(g_stdin_fd(-1), STDIN_FILENO) == -1)
 			perror("dup2");
 		if (close(g_stdin_fd(-1)) == -1)
@@ -97,8 +98,8 @@ int	main(__attribute__((unused)) int ac,
 	while (1)
 	{
 		restore_stdin();
-		char buf[4000];
-		getcwd(buf, 4000);
+		// char buf[4000];
+		// getcwd(buf, 4000);
 		// printf("\33[31mSHLVL:(%s) exit:(%d):~%s#\33[00m", ft_getenv(env_s, "SHLVL"), g_exit_status, buf);
 		input = readline("\33[31mminishell:$>\33[35m ");
 		// input = "exit";

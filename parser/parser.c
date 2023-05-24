@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:48:28 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/24 14:45:00 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:18:39 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,26 +52,40 @@ int printf_error(int boolean)
 void	printf_error_redi(t_list *list)
 {
 	t_token *tmp;
+	t_cmd	*cmd;
+
 	char c [3];
 
 	c[0] = '\0';
 	c[1] = '\0';
 	c[2] = '\0';
 	tmp = NULL;
+	
 	if (list)
 	{
 		tmp = list->content;
+		if (tmp->type == COMMAND)
+		{
+			cmd = tmp->value;
+			if (!(cmd->cmd))
+			{
+				list = list->next;
+				if (list)
+					tmp = list->content;
+			}
+		}
 		if (tmp->type == 1)
 			c[0] = '|';
 		else if (tmp->type == 2)
 			c[0] = '<';
 		else if (tmp->type == 3)
-			c[0] = '<';
+			c[0] = '>';
 		else if (tmp->type == 4)
 			(c[0] = '<', c[1] = '<');
 		else if (tmp->type == 5)
 			(c[0] = '>', c[1] = '>');
 	}
+	
 	if (list && tmp->type != COMMAND && c[0])
 	{
 		ft_putstr_fd("mini-shell: syntax error near unexpected token `", 2);
