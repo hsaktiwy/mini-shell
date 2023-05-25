@@ -7,11 +7,6 @@ echo $'$'
 
 export USER= // overflow
 
-<< "end" cat
-
-
-
-
 
 {
 	< f < Makefile cat
@@ -28,14 +23,18 @@ export USER= // overflow
 	export f = Make
 
 	< $f'file' cat
-}
+}	//FIXED
  
 {
 	<< end cat > 1 | << end cat > 2 | << end cat > 3
 	
 	should add a function to generate heredoc file names so that each heredoc writes to a different file
-}
+}	//FIXED
 
 {
 	echo $USER'R'$USER""''""''""'$USER'$USE // cuz u have the last null var after single quotes
-}
+}	//FIXED
+
+{
+	<< "end" cat
+}	//FIXED

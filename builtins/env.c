@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:21:32 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/24 14:50:03 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:19:42 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	print_env(t_cmd *command)
 {
-	char **pp;
+	char	**pp;
 
 	pp = command->env->env;
 	if (!pp)
-		return;
+		return ;
 	while (*pp)
 	{
 		write(command->cmd_out, *pp, ft_strlen(*pp));

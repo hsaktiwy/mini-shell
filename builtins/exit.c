@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 19:06:50 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/24 14:51:28 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:14:06 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_atoi2(const char *str)
 		str++;
 	}
 	if ((r * sign > LONG_MAX) || (r * sign < LONG_MIN))
-			return (-1);
+		return (-1);
 	return (0);
 }
 
@@ -59,13 +59,13 @@ static int	check_arg(char *arg)
 
 void	before_exiting(t_list *list)
 {
-	t_list			*tokens;
-	t_env 			*env;
-	
+	t_list	*tokens;
+	t_env	*env;
+
 	if (ft_lstsize(list) == 1)
 	{
 		tokens = g_token_l(NULL);
-		//close_open_fds(list);
+		close_open_fds(list);
 		free_tokens(&tokens);
 		ft_lstclear(&list, NULL);
 		free(g_input_line(NULL));
@@ -75,7 +75,8 @@ void	before_exiting(t_list *list)
 	}
 }
 
-void	get_status_put_error(char *arg, size_t arg_count, int *do_exit, int *status)
+void	get_status_put_error(char *arg, size_t arg_count,
+									int *do_exit, int *status)
 {
 	if (arg_count == 1 && check_arg(arg))
 	{
@@ -83,15 +84,15 @@ void	get_status_put_error(char *arg, size_t arg_count, int *do_exit, int *status
 	}
 	else if (arg_count > 1 && check_arg(arg))
 	{
-		write(2, "minishell: exit: too many arguments\n", 36);
+		write(STDERR_FILENO, "minishell: exit: too many arguments\n", 36);
 		*do_exit = 0;
 		*status = 1;
 	}
 	else
 	{
-		write(2, "minishell: exit: ", 17);
-		write(2, arg, ft_strlen(arg));
-		write(2, ": numeric argument required\n", 28);
+		write(STDERR_FILENO, "minishell: exit: ", 17);
+		write(STDERR_FILENO, arg, ft_strlen(arg));
+		write(STDERR_FILENO, ": numeric argument required\n", 28);
 		*status = 255;
 	}
 }
