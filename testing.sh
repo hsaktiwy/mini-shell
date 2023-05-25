@@ -39,3 +39,10 @@ export USER= // overflow
 {
 	echo $USER'R'$USER""''""''""'$USER'$USE // cuz u have the last null var after single quotes
 }
+
+{
+	bash-3.2$ << "$HOME"$test cat
+	> $HOME
+	> $HOME$test
+	$HOME
+}

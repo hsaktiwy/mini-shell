@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:03:39 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/25 14:56:35 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/25 15:16:12 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,17 @@ char	*here_doc_name(char *common, int nbr)
 
 void handleHereDoc(t_list **tokens, t_env *env, char *input, int *index)
 {
-	t_token *token = (t_token *)malloc(sizeof(t_token));
+	t_token	*token;
+	// char 	*r;
+	token = (t_token *)malloc(sizeof(t_token));
 	if (!token)
 		return;
-		
 	*index += 2;
-	char 	*r = get_token(&input[*index]);
+	g_heredoc_count(1);
+	//r = ;
 	token->type = HERE_DOC;
 	token->value = get_file(env, &input[*index], index);
-	((t_file *)token->value)->token_file = r;
+	((t_file *)token->value)->token_file = here_doc_name(".here_doc", g_heredoc_count(-1));
 	ft_lstadd_back(tokens, ft_lstnew(token));
 }
 

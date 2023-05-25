@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/24 17:49:35 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/25 15:10:43 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	main2(char *input, t_env *env)
 	tokens = NULL;
 	err_lex = lexical_erreur(input);
 	g_pipe_count(0);
+	g_heredoc_count(0);
 	if (err_lex != -1)
 		lexer_err(&input[err_lex]);
 	else

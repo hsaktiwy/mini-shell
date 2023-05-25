@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:17:19 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/25 14:07:42 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/25 15:17:35 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,10 @@ int	here_doc_red(t_env *env, t_file *tmp)
 	fd = -1;
 	if(tmp->a_file)
 	{
-		fd = open(".here_doc", O_RDWR | O_CREAT | O_TRUNC, 0666);
+		if (tmp->token_file)
+		fd = open(tmp->token_file, O_RDWR | O_CREAT | O_TRUNC, 0666);
 		if (fd == -1)
-			print_error(NULL, ".here_doc", 1);
+			print_error(NULL, tmp->token_file, 1);
 		else if (!heredoc(env, tmp->a_file, fd))
 		{
 			fd = -1;
