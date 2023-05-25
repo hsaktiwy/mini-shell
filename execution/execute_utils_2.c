@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:31:17 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/24 16:07:03 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/25 15:32:01 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ void	dup_redirections(t_list *cmd)
 	file = ((t_cmd *)(((t_token *)(cmd->content))->value))->file_in;
 	if (file)
 	{
-		if (ft_strcmp(file, ".here_doc") == 0)
+		if (ft_strncmp(file, ".here_doc", 9) == 0)
 		{
-			fd = open(".here_doc", O_RDONLY, 0666);
+			fd = open(file, O_RDONLY, 0666);
 			if (fd == -1)
 				perror("open");
 			((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_in = fd;

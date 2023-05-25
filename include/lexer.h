@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 11:59:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/24 16:44:04 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:45:59 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_file	*get_file(t_env *env, char *input, int *index);
 t_cmd	*get_cmd(t_env *env, char *input, int *index);
 t_file	*creat_arg(char *file_name, t_argument_type type);
 t_cmd	*ini_cmd(t_env *env);
+
 // lexer
 int		lexer(t_list **tokens, char *input, t_env *env);
 void    free_tokens(t_list **list);

@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:17:19 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/24 14:46:12 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/25 17:27:03 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	in_redirection(t_file *tmp)
 	if (tmp->a_file)
 	{
 		// fd = open(tmp->a_file, O_WRONLY, 0777);
-		fd = open(tmp->token_file, O_RDONLY, 0777);
+		fd = open(tmp->a_file, O_RDONLY, 0777);
 		if (fd == -1)
 			print_error(NULL, tmp->a_file, 1);
 	}
@@ -47,7 +47,7 @@ int	in_redirection(t_file *tmp)
 	return (fd);
 }
 
-int	heredoc(t_env *env, char *delimiter, int h_fd)
+int	heredoc(t_env *env, char *delimiter, int h_fd, int exp)
 {
 	char	*line;
 	char	*tmp;
@@ -58,18 +58,21 @@ int	heredoc(t_env *env, char *delimiter, int h_fd)
 		line = readline("> ");
 		if (g_heredoc_executing(-1) && line)
 		{
-			tmp = expand(env, line);
-			if (!find_delimeter(tmp, delimiter) && g_heredoc_executing(-1))
+			
+			if (!find_delimeter(line, delimiter) && g_heredoc_executing(-1))
 			{
+				if (exp)
+					tmp = expand(env, line);
+				else
+					tmp = line;
 				if (write(h_fd, tmp, ft_strlen(tmp)) == -1
 					|| write(h_fd, "\n", 1) == -1)
 					return (g_heredoc_executing(0), free(tmp), free(line), 0);
 			}
 			else
-			{
-				return (g_heredoc_executing(0), free(tmp), free(line), close(h_fd), 1);
-			}
+				return (g_heredoc_executing(0), free(line), close(h_fd), 1);
 			free(line);
+			if (exp)
 			free(tmp);
 			line = NULL;
 		}
@@ -85,13 +88,11 @@ int	here_doc_red(t_env *env, t_file *tmp)
 	fd = -1;
 	if(tmp->a_file)
 	{
-		// printf(">>>> ? : %s\n",tmp->a_file);
-		fd = open(".here_doc", O_RDWR | O_CREAT | O_TRUNC, 0666);
-		// if (!tmp->a_file)
-		// 	tmp->a_file = ft_strdup("");
+		if (tmp->token_file)
+		fd = open(tmp->token_file, O_RDWR | O_CREAT | O_TRUNC, 0666);
 		if (fd == -1)
-			print_error(NULL, ".here_doc", 1);
-		else if (!heredoc(env, tmp->a_file, fd))
+			print_error(NULL, tmp->token_file, 1);
+		else if (!heredoc(env, tmp->a_file, fd, tmp->here_doc_exp))
 		{
 			fd = -1;
 			write(2, "Error : here_doc fail\n", 22);

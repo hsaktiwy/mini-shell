@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:03:39 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/24 14:16:07 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/25 17:33:45 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,51 @@ void	lexer_err(char *str)
 	ft_putstr_fd("\33[00m\n", 2);
 }
 
+char	*here_doc_name(char *common, int nbr)
+{
+	char	*str;
+	char	*integer;
+
+	integer = ft_itoa(nbr);
+	str = ft_strjoin(common, integer);
+	free(integer);
+	return (str);
+}
+
+int		get_start(char *str)
+{
+	int		i;
+
+	i = 0;
+	surpace_whitesspaces(str, &i);
+	while (str[i] && !iswhitespace(str[i]))
+	{
+		if (str[i] == '\'' || str[i] == '\"')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 void handleHereDoc(t_list **tokens, t_env *env, char *input, int *index)
 {
-	t_token *token = (t_token *)malloc(sizeof(t_token));
+	t_token	*token;
+	int		start;
+	char	*r;
+	
+	token = (t_token *)malloc(sizeof(t_token));
 	if (!token)
 		return;
-		
 	*index += 2;
-	char 	*r = get_token(&input[*index]);
+	r = get_token(&input[*index]);
+	start = get_start(&input[*index]);
+	g_heredoc_count(1);
 	token->type = HERE_DOC;
-	token->value = get_file(env, &input[*index], index);
-	((t_file *)token->value)->token_file = r;
+	token->value = get_file(env, &input[*index], index);// this ca be changed
+	free(((t_file *)token->value)->a_file);
+	((t_file *)token->value)->a_file = r;
+	((t_file *)token->value)->token_file = here_doc_name(".here_doc", g_heredoc_count(-1));
+	((t_file *)token->value)->here_doc_exp = start;
 	ft_lstadd_back(tokens, ft_lstnew(token));
 }
 

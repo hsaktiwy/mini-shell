@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:42:55 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/23 20:23:59 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/25 15:45:56 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	in_red_cmd(t_env *env, t_token **red, t_token **command)
 		cmd = (*command)->value;
 		cmd->cmd_in = fd;
 		if ((*red)->type == HERE_DOC)
-			cmd->file_in = ".here_doc";
+			cmd->file_in = ((t_file *)((*red)->value))->token_file;
 		else
 			cmd->file_in = ((t_file *)((*red)->value))->a_file;
 	}
@@ -103,7 +103,8 @@ int    redirection_habdling(t_env *env, t_list **tokens)
 				cmd = token;
 			current = current->next;
 		}
-		redirect(env, &list, &cmd);
+		if(!redirect(env, &list, &cmd))
+			((t_cmd *)cmd->value)->error = 1;
 		while(list)
 		{
 			token = list->content;

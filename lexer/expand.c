@@ -74,7 +74,6 @@ char    *expand_input(t_env *env, char *line)
 			{
 				arg = ft_realloc(arg, ft_strlen(arg) + 2);
 				ft_strncat(arg, &line[i], 1);
-				i++;
 			}
 			i++;
 		}

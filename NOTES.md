@@ -109,12 +109,10 @@ export > 888	//FIXED
 
 
  [x] ls | | | wc or ls |||| wc (i think it soved)
-<<<<<<< Updated upstream
  [x]export "VA=ls|wc" should consider one cmd
  [x]echo '$USER'$USER"$USER" 
  [x]echo $f "$HOME" segmentation fault
  [x]echo $f"$HOME"
-=======
  export "VA=ls|wc" should consider one cmd
  echo '$USER'$USER"$USER" 
  ls           | cat         <           out1 // space problem
@@ -126,7 +124,6 @@ export > 888	//FIXED
  whats this anyway
  root@abdelatif# echo $$$
  1682$
->>>>>>> Stashed changes
 
 ################################## LEAK REPORT #########################################
 
@@ -290,4 +287,8 @@ include/
 Makefile: one makefile for everyting or each with a makefile
 ##########################################################################$$$########
 
-kill parser_tools.c
+[x] kill parser_tools.c
+
+bash-3.2$ exit ""
+exit
+bash: exit: : numeric argument required

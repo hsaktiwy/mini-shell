@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 17:34:45 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/24 13:58:35 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:16:11 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,27 @@ int	g_heredoc_executing(int i)
 }
 
 int	g_pipe_count(int i)
+{
+	static	int j;
+
+	if (i == -1)
+		return (j);
+	j = i;
+	return (j);
+}
+
+int g_heredoc_count(int	i)
+{
+	static int	j;
+
+	if (i == 1)
+		j++;
+	else if (i == 0)
+		j = 0;
+	return (j);
+}
+
+int g_heredo_numb(int i)
 {
 	static	int j;
 
