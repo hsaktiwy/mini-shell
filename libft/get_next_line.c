@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 20:44:05 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/16 15:58:42 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:45:06 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static char	*ft_read_file(int fd, char *strs, int *eof)
 		return (strs);
 	}
 	buf[bytes] = '\0';
-	tmp = str_join(strs, buf);
+	tmp = ft_strjoin(strs, buf);
 	free(strs);
 	return (tmp);
 }

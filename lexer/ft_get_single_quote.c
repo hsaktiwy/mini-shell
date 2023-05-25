@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_single_quote.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:21:52 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/24 14:12:46 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:44:40 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*get_single_quote(t_env *env, char *s, int *index)
 				c = '\0';
 		}else if (c == '\'')
 		{
-			res = ft_strjoin(res, get_simple_arg(env, &s[i], index));
+			res = str_join(res, get_simple_arg(env, &s[i], index));
 			break ;
 		}
 		else if (s[i] && !c)

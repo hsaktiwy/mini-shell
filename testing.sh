@@ -25,7 +25,7 @@ export USER= // overflow
 }
 
 {
-	export $f = Make
+	export f = Make
 
 	< $f'file' cat
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_double_quote.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:17:59 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/24 20:58:07 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:44:20 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ char	*get_double_quote(t_env *env, char *s, int *index)
 		{
 			//(*index) += i;
 			// printf("from double to -> get_simple_arg(%s)(%d)\n",&s[i], *index);
-			res = ft_strjoin(res, get_simple_arg(env, &s[i], index));
+			res = str_join(res, get_simple_arg(env, &s[i], index));
 			break ;
 		}
 		else if (s[i] && !c)

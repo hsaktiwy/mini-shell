@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:08:05 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/03/16 15:58:40 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:39:41 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,23 @@
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	int		i;
-	char	*res;
-	int		ls1;
-	int		ls2;
+	char	*new_str;
+	char	*temp;
 
-	i = 0;
-	if (!s1 || !s2)
+	if (!s1 && !s2)
 		return (NULL);
-	ls1 = ft_strlen(s1);
-	ls2 = ft_strlen(s2);
-	res = (char *)malloc(ls1 + ls2 + 1);
-	if (!res)
+	if (!s1)
+		return (ft_strdup(s2));
+	if (!s2)
+		return (ft_strdup(s1));
+	new_str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!new_str)
 		return (NULL);
-	while (i < ls1 && s1[i])
-	{
-		res[i] = s1[i];
-		i++;
-	}
-	while (i - ls1 < ls2 && s2[i - ls1])
-	{
-		res[i] = s2[i - ls1];
-		i++;
-	}
-	res[i] = '\0';
-	return (free(s1), free(s2), res);
+	temp = new_str;
+	while (*s1)
+		*temp++ = *s1++;
+	while (*s2)
+		*temp++ = *s2++;
+	*temp = '\0';
+	return (new_str);
 }

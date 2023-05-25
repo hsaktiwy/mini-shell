@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 11:24:21 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/24 18:08:10 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:40:27 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ char	*get_value(char *key, char *arg, t_env *env)
 			tmp = ft_substr(equal_p + 1, 0, ft_strlen(equal_p + 1));
 		else
 			tmp = ft_strdup("");
-		value = str_join(env_value, tmp);
+		value = ft_strjoin(env_value, tmp);
 		free(tmp);
 	}
 	else
