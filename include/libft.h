@@ -40,7 +40,9 @@ int		ft_isprint(int c);
 int		iswhitespace(char c);
 int		str_iswhitespaced(char *str);
 int		surpace_whitesspaces(char *str, int *index);
+
 //
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strchr(const char *s, int c);
 char	*str_join(char const *s1, char const *s2);

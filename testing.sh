@@ -46,3 +46,9 @@ export USER= // overflow
 	> $HOME$test
 	$HOME
 }
+
+{
+
+	cd ~ (segfault if HOME unseted)
+	fix it
+}

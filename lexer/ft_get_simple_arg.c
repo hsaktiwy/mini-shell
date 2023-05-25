@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_simple_arg.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:20:03 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/25 14:44:35 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:47:24 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ char	*get_simple_arg(t_env *env, char *str, int *index)
 
 	i = 0;
 	arg = ft_strdup("");
-	// printf("before annything in simple arg: %s\n", str);
-	// while (iswhitespace(str[i]))
-	// 	i++;
+	while (iswhitespace(str[i]))
+		i++;
 	while (str[i] && !iswhitespace(str[i]) && str[i] != '|'  && str[i] != '<'  && str[i] != '>')
 	{
 		k = 0;

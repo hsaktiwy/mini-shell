@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/24 16:12:12 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:35:48 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ void	close_open_fds(t_list *list)
 			fd = ((t_cmd *)(((t_token *)(list->content))->value))->cmd_in;
 			if (close(fd) == -1)
 				perror("close");
+			// if (ft_strncmp(((t_cmd *)(((t_token *)(list->content))->value))->file_in, ".here_doc", 9) == 0)
+			// {
+			// 	unlink(((t_cmd *)(((t_token *)(list->content))->value))->file_in);
+			// }
 		}
 		if (((t_cmd *)(((t_token *)(list->content))->value))->cmd_out != 1)
 		{
@@ -71,7 +75,8 @@ void	execute_2(t_list *cmd, t_list *list, int *get_exit, t_fd *fd)
 	t_execve_params	ep;
 
 	ft_piping(cmd, fd);
-	if (((t_cmd *)(((t_token *)(cmd->content))->value))->cmd)
+	if (((t_cmd *)(((t_token *)(cmd->content))->value))->cmd
+		&& !(((t_cmd *)(((t_token *)(cmd->content))->value))->error))
 	{
 		ep.path = findcmd(((t_cmd *)((t_token *)(cmd->content))->value)->cmd);
 		ep.args = get_args(cmd);

@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:07:28 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/24 14:12:46 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/25 15:41:11 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_cmd	*ini_cmd(t_env *env)
 	cmd->file_in = NULL;
 	cmd->file_out = NULL;
 	cmd->env = env;
+	cmd->error = 0;
 	return (cmd);
 }
 

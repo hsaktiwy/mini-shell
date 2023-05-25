@@ -20,6 +20,8 @@ void    free_token(void *value)
         || token->type == HERE_DOC || token->type == APPEND_REDIRECT)
     {
         free(((t_file *)token->value)->a_file);
+        if(token->type == HERE_DOC)
+            unlink(((t_file *)token->value)->token_file);
         free(((t_file *)token->value)->token_file);
         free(token->value);
     }else if (token->type == COMMAND)

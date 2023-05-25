@@ -6,7 +6,7 @@
 #    By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 13:01:11 by hsaktiwy          #+#    #+#              #
-#    Updated: 2023/05/25 14:58:58 by hsaktiwy         ###   ########.fr        #
+#    Updated: 2023/05/25 15:38:12 by hsaktiwy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ ENV =  ft_getenv.c ft_setenv.c ft_init_env.c ft_unset_envs.c ft_free_env.c
 LIBFT = ft_t_strdup.c ft_iswhitespace.c ft_strjoin.c  ft_strncat.c ft_isalnum.c  ft_isalpha.c  ft_isdigit.c  ft_isprint.c \
 		ft_strdup.c ft_substr.c ft_lstclear.c ft_lstsize.c ft_lstdelete_index.c ft_lstadd_in_index.c ft_lstadd_front.c  ft_strcmp.c  \
 		ft_realloc.c ft_lstadd_back.c ft_lstnew.c ft_memset.c ft_split.c ft_strlen.c get_next_line.c ft_strchr.c str_join.c ft_atoi.c \
-		ft_strtrim.c ft_itoa.c ft_putnbr_fd.c ft_putstr_fd.c ft_putchar_fd.c
+		ft_strtrim.c ft_itoa.c ft_putnbr_fd.c ft_putstr_fd.c ft_putchar_fd.c ft_strncmp.c
 
 PARSER = parser.c parser_tools.c redirection.c redirection_tools.c
 

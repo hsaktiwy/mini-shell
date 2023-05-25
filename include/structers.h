@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:02:18 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/24 14:12:06 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/25 15:40:36 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct s_command
 	char			*file_in;
 	char			*file_out;
 	t_env			*env;
+	int				error;
 }t_cmd;
 
 #endif
