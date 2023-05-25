@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:02:18 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/25 15:40:36 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/25 17:00:21 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_file
 	t_argument_type arg_type;
     char			*a_file;
 	char			*token_file;
+	int				here_doc_exp;
 }t_file;
 
 typedef struct s_command

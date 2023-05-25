@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/24 14:26:17 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/25 17:30:04 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ void	display_tokens(t_list	*tokens)
 		if (token->type == HERE_DOC)
 		{
 			printf("	type : <<\n");
-			printf("		Data : %s\n", ((t_file *)token->value)->a_file);
+			printf("		Data : |%s|\n", ((t_file *)token->value)->a_file);
 			printf("		Old_data : %s\n", ((t_file *)token->value)->token_file);
+			printf("		Expend here_doc : %d\n", ((t_file *)token->value)->here_doc_exp);
 		}
 		if (token->type == APPEND_REDIRECT)
 		{
