@@ -42,4 +42,6 @@ int		g_stdin_fd(int i);
 t_list *g_token_l(t_list *tokens);
 char	*g_input_line(char *input);
 int		g_pipe_count(int i);
+// if i == 0 output will be 0 i == 1 output will be last output plus 1 (j++, counter) else the stord result will be displayed
+int 	g_heredoc_count(int	i);
 #endif

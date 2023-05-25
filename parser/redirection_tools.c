@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:17:19 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/24 14:46:12 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:07:42 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	in_redirection(t_file *tmp)
 	if (tmp->a_file)
 	{
 		// fd = open(tmp->a_file, O_WRONLY, 0777);
-		fd = open(tmp->token_file, O_RDONLY, 0777);
+		fd = open(tmp->a_file, O_RDONLY, 0777);
 		if (fd == -1)
 			print_error(NULL, tmp->a_file, 1);
 	}
@@ -66,9 +66,7 @@ int	heredoc(t_env *env, char *delimiter, int h_fd)
 					return (g_heredoc_executing(0), free(tmp), free(line), 0);
 			}
 			else
-			{
 				return (g_heredoc_executing(0), free(tmp), free(line), close(h_fd), 1);
-			}
 			free(line);
 			free(tmp);
 			line = NULL;
@@ -85,10 +83,7 @@ int	here_doc_red(t_env *env, t_file *tmp)
 	fd = -1;
 	if(tmp->a_file)
 	{
-		// printf(">>>> ? : %s\n",tmp->a_file);
 		fd = open(".here_doc", O_RDWR | O_CREAT | O_TRUNC, 0666);
-		// if (!tmp->a_file)
-		// 	tmp->a_file = ft_strdup("");
 		if (fd == -1)
 			print_error(NULL, ".here_doc", 1);
 		else if (!heredoc(env, tmp->a_file, fd))

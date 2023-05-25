@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:03:39 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/24 14:16:07 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:56:35 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,17 @@ void	lexer_err(char *str)
 	ft_putstr_fd("\33[33mParse Error near: \33[00m\33[30m", 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd("\33[00m\n", 2);
+}
+
+char	*here_doc_name(char *common, int nbr)
+{
+	char	*str;
+	char	*integer;
+
+	integer = ft_itoa(nbr);
+	str = ft_strjoin(common, integer);
+	free(integer);
+	return (str);
 }
 
 void handleHereDoc(t_list **tokens, t_env *env, char *input, int *index)
