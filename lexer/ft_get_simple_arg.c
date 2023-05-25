@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_simple_arg.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:20:03 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/24 19:18:31 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:44:35 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ char	*get_simple_arg(t_env *env, char *str, int *index)
 		}
 		else if (str[i] == '\'')
 		{
-			arg = ft_strjoin(arg, get_single_quote(env, &str[++i], index));
+			arg = str_join(arg, get_single_quote(env, &str[++i], index));
 			break ;
 		}
 		else if (str[i] == '\"')
 		{
-			arg = ft_strjoin(arg, get_double_quote(env, &str[++i], index));
+			arg = str_join(arg, get_double_quote(env, &str[++i], index));
 			break ;
 		}
 		else if(str[i] && !iswhitespace(str[i]))

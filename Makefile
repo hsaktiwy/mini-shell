@@ -6,7 +6,7 @@
 #    By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 13:01:11 by hsaktiwy          #+#    #+#              #
-#    Updated: 2023/05/25 13:04:43 by aigounad         ###   ########.fr        #
+#    Updated: 2023/05/25 14:21:36 by aigounad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,15 +33,15 @@ EXEC = execute.c execute_utils.c execute_utils_2.c find_cmd.c signals.c builtin_
 
 OBJ = $(LEXER:%.c=obj/lexer/%.o) $(BUILTINS:%.c=obj/builtins/%.o) $(ENV:%.c=obj/environment/%.o)  \
 		$(LIBFT:%.c=obj/libft/%.o) $(PARSER:%.c=obj/parser/%.o) $(EXEC:%.c=obj/execution/%.o)
-# HEADER = minishell.h
+HEADER = include/minishell.h
 NAME = minishell
 INCLUDE_DIR = ./include
-HEAD_LEX = include/lexer.h include/minishell.h
-HEAD_BUI = include/builtins.h include/minishell.h
-HEAD_LIB = include/libft.h include/minishell.h
-HEAD_ENV = include/environment.h include/minishell.h
-HEAD_PAR = include/parser.h include/minishell.h
-HEAD_EXE = include/execution.h include/minishell.h
+HEAD_LEX = include/lexer.h $(HEADER)
+HEAD_BUI = include/builtins.h $(HEADER)
+HEAD_LIB = include/libft.h $(HEADER)
+HEAD_ENV = include/environment.h $(HEADER)
+HEAD_PAR = include/parser.h $(HEADER)
+HEAD_EXE = include/execution.h $(HEADER)
 
 all : $(NAME)
 

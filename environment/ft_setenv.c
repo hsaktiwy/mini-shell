@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_setenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:26:14 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/24 14:23:10 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:40:43 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ char	*join_key_value(char *key, char *value)
 	char	*res;
 	char	*btw;
 
-	btw = str_join(key, "=");
-	res = str_join(btw, value);
+	btw = ft_strjoin(key, "=");
+	res = ft_strjoin(btw, value);
 	free(btw);
 	return (res);
 }
