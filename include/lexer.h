@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 11:59:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/26 15:10:51 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/26 18:18:20 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ void	fix_expanding_issue(t_list **tokens);
 void	ini_arg_count(t_list **tokens);
 int		lexical_erreur(char	*input);
 
+char	*here_doc_name(char *common, int nbr);
 void	lexer_err(char *str);
-void	display_tokens(t_list	*tokens);
 char    *expand_input(t_env *env, char *line);
 char    *expand(t_env *env, char *line);
+
+void	display_tokens(t_list	*tokens);
 #endif

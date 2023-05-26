@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/26 16:02:27 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/26 18:43:31 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,22 @@
 
 int	g_exit_status;
 
+// void	unlink_here_doc()
+// {
+// 	int		size;
+// 	int		i;
+// 	char	*name;
+
+// 	i = 0;
+// 	size = g_heredoc_count(-1);
+// 	while (i < size)
+// 	{
+// 		name = here_doc_name(".here_doc", ++i);
+// 		unlink(name);
+// 		free(name);
+// 	}
+// 	g_heredoc_count(0);
+// }
 void	signal_handler(int sig)
 {
 	int fd;
@@ -25,6 +41,7 @@ void	signal_handler(int sig)
 			printf("^C");
 			fd = dup(STDIN_FILENO);
 			close(STDIN_FILENO);
+			g_cmd_executing(-2);
 			g_stdin_fd(fd);
 		}
 		else if (g_cmd_executing(-1) == 0)
@@ -54,6 +71,7 @@ void	restore_stdin()
 		if (close(g_stdin_fd(-1)) == -1)
 			perror("close");
 	}
+	g_stdin_fd(0);
 }
 
 void	main2(char *input, t_env *env)
@@ -81,6 +99,7 @@ void	main2(char *input, t_env *env)
 		// display_tokens(list);
 		if(list)
 			execute(list);
+		ft_lstclear(&list, NULL);
 	}
 	free_tokens(&tokens);
 }

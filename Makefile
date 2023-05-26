@@ -6,14 +6,14 @@
 #    By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 13:01:11 by hsaktiwy          #+#    #+#              #
-#    Updated: 2023/05/26 16:42:29 by aigounad         ###   ########.fr        #
+#    Updated: 2023/05/26 18:01:40 by aigounad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
 # FLAGS = -Wall -Wextra -Werror -g -I/Users/hsaktiwy/.brew/opt/readline/include -I$(INCLUDE_DIR) -fsanitize=address
-FLAGS = -Wall -Wextra -Werror -g -fsanitize=address -I/Users/aigounad/.brew/opt/readline/include -I$(INCLUDE_DIR)
+FLAGS = -Wall -Wextra -Werror -g -I/Users/aigounad/.brew/opt/readline/include -I$(INCLUDE_DIR) -fsanitize=address
 
 ENV =  ft_getenv.c ft_setenv.c ft_setenv_utils.c ft_init_env.c ft_init_env_utils.c ft_unset_envs.c ft_free_env.c
 
@@ -46,43 +46,52 @@ HEAD_EXE = include/execution.h $(HEADER)
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-#	$(CC) $(FLAGS) $(OBJ) -o $@ -lreadline  -L /Users/hsaktiwy/.brew/opt/readline/lib
-	$(CC) $(FLAGS) $(OBJ) -o $@ -lreadline  -L /Users/aigounad/.brew/opt/readline/lib
+#	@$(CC) $(FLAGS) $(OBJ) -o $@ -lreadline  -L /Users/hsaktiwy/.brew/opt/readline/lib
+	@$(CC) $(FLAGS) $(OBJ) -o $@ -lreadline  -L /Users/aigounad/.brew/opt/readline/lib
+	@echo "Compilation completed."
 
 obj/parser/%.o : parser/%.c $(HEAD_PAR) | obj_dir
-	$(CC) $(FLAGS) -o $@ -c $<
+	@echo "Compiling..."
+	@$(CC) $(FLAGS) -o $@ -c $<
 obj/lexer/%.o : lexer/%.c $(HEAD_LEX) | obj_dir
-	$(CC) $(FLAGS) -o $@ -c $<
+	@echo "Compiling..."
+	@$(CC) $(FLAGS) -o $@ -c $<
 obj/libft/%.o : libft/%.c $(HEAD_LIB) | obj_dir
-	$(CC) $(FLAGS) -o $@ -c $<
+	@echo "Compiling..."
+	@$(CC) $(FLAGS) -o $@ -c $<
 obj/execution/%.o : execution/%.c $(HEAD_EXE) | obj_dir
-	$(CC) $(FLAGS) -o $@ -c $<
+	@echo "Compiling..."
+	@$(CC) $(FLAGS) -o $@ -c $<
 obj/builtins/%.o : builtins/%.c $(HEAD_BUI) | obj_dir
-	$(CC) $(FLAGS) -o $@ -c $<
+	@echo "Compiling..."
+	@$(CC) $(FLAGS) -o $@ -c $<
 obj/environment/%.o : environment/%.c $(HEAD_ENV) | obj_dir
-	$(CC) $(FLAGS) -o $@ -c $<
+	@echo "Compiling..."
+	@$(CC) $(FLAGS) -o $@ -c $<
 
 obj_dir : obj obj/lexer obj/parser obj/libft obj/builtins obj/environment obj/execution
 
 obj :
-	mkdir obj
+	@mkdir obj
 obj/lexer :
-	mkdir obj/lexer
+	@mkdir obj/lexer
 obj/parser :
-	mkdir obj/parser
+	@mkdir obj/parser
 obj/libft :
-	mkdir obj/libft
+	@mkdir obj/libft
 obj/builtins :
-	mkdir obj/builtins
+	@mkdir obj/builtins
 obj/environment :
-	mkdir obj/environment
+	@mkdir obj/environment
 obj/execution :
-	mkdir obj/execution
+	@mkdir obj/execution
 
-clean : 
-	rm -rf obj
+clean :
+	@echo "Cleaning up..."
+	@rm -rf obj
+	@echo "Cleanup completed."
 fclean : clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 re :  fclean all
 
-.PHONY: clean
+.PHONY: all clean fclean obj_dir re

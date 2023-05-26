@@ -60,19 +60,11 @@
 	echo "$d hello"12
 }
 
-### TO_DO_LIST
-	+add signal names
-	- . ..
-	+redirection fails exit_status = 2;
-
 {
 	minishell:$> export u="s "
 	minishell:$> l$u'-la'
 }
 
-### TO_DO_LIST
-	+add signal names
-	- . ..
 {
 	< lexer/ /bin | ls > out (message is not correct)
 }

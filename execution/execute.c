@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/26 16:37:20 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/26 18:41:46 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,11 @@ int	execute_2(t_list *cmd, t_list *list, int *get_exit, t_fd *fd)
 		if (execb1(cmd, list, get_exit, &ep))
 			return (0);
 		if (ft_forking(cmd, list, fd, &ep) == 1)
+		{
+			g_exit_status = 1;
+			*get_exit = 0;
 			return (free(ep.path), free(ep.args), 1);
+		}
 		free(ep.path);
 		free(ep.args);
 	}
@@ -101,6 +105,11 @@ void	execute(t_list *list)
 	int		get_exit;
 	t_fd	fd;
 
+	if (g_cmd_executing(-1) == -2)
+	{
+		g_exit_status = 1;
+		return (g_cmd_executing(0), ft_void());
+	}
 	curr_cmd = list;
 	ft_init_fd(&fd, &get_exit);
 	while (curr_cmd)
@@ -108,11 +117,7 @@ void	execute(t_list *list)
 		g_cmd_executing(1);
 		fd.old_fd = fd.fd[0];
 		if (execute_2(curr_cmd, list, &get_exit, &fd) == 1)
-		{
-			g_exit_status = 1;
-			get_exit = 0;
 			break ;
-		}
 		curr_cmd = curr_cmd->next;
 	}
 	while (wait(NULL) > -1)
@@ -121,5 +126,4 @@ void	execute(t_list *list)
 	close_open_fds(list);
 	if (get_exit)
 		get_exit_status();
-	ft_lstclear(&list, NULL);
 }

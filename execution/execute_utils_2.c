@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:31:17 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/26 17:18:19 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/26 18:30:28 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	dup_redirections(t_list *cmd)
 		else
 			fd = ((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_in;
 		if (dup2(fd, STDIN_FILENO) == -1)
-			perror("dup222");
+			perror("dup2");
 	}
 }
 
