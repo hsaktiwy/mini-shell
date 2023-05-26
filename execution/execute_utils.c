@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:59:30 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/24 16:12:29 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/26 14:37:34 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,24 @@ void	wait_4_last_command(t_list *cmd, pid_t pid)
 void	command_not_found(t_list *cmd, int *get_exit)
 {
 	char	*p;
+	char	*error1;
+	char	*error2;
 
 	p = ((t_cmd *)((t_token *)(cmd->content))->value)->cmd;
-	if (write(2, "minishell: ", 11) == -1
-		|| write(2, p, ft_strlen(p)) == -1
-		|| write(2, ": command not found\n", 20) == -1)
+	if (ft_strcmp(p, ".") == 0)
+	{
+		error1 = "minishell: .: filename argument required\n";
+		error2 = ".: usage: . filename [arguments]\n";
+		if (write(STDERR_FILENO, error1, 41) == -1
+			|| write(STDERR_FILENO, error2, 33) == -1)
+			perror("write");
+		g_exit_status = 2;
+		*get_exit = 0;
+		return ;
+	}
+	if (write(STDERR_FILENO, "minishell: ", 11) == -1
+		|| write(STDERR_FILENO, p, ft_strlen(p)) == -1
+		|| write(STDERR_FILENO, ": command not found\n", 20) == -1)
 		perror("write");
 	*get_exit = 0;
 	g_exit_status = 127;

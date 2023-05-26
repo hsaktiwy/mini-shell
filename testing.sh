@@ -41,6 +41,11 @@
 }	//FIXED
 
 {
+	cd ~ (segfault if HOME unseted)
+	fix itls 
+}	//FIXED
+
+{
 	bash-3.2$ << "$HOME"$test cat
 	> $HOME
 	> $HOME$test
@@ -50,19 +55,14 @@
 }
 
 {
-	cd ~ (segfault if HOME unseted)
-	fix itls 
-}	//FIXED
-
-{
 	...leaks here:
 	ls | echo "$d hello"12 | failed cmd | sleep 10 | echo im wake up rn
 	echo "$d hello"12
 }
 
 {
-	minishell:$> l$u'-la'
 	minishell:$> export u="s "
+	minishell:$> l$u'-la'
 }
 
 ### TO_DO_LIST
