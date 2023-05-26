@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:59:30 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/26 14:37:34 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/26 16:18:42 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	close_pipe(t_list *cmd, t_fd *fd)
 
 void	wait_4_last_command(t_list *cmd, pid_t pid)
 {
+	if (pid == -1)
+		return ;
 	if (!(cmd->next))
 		if (waitpid(pid, &g_exit_status, 0) == -1)
 			perror("waitpid");

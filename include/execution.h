@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:06:48 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/26 12:15:47 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/26 16:36:57 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	get_name_of_signal(int sig);
 char	**get_args(t_list *list);
 char	*findcmd(char *filename);
 void	append_filename(char *filename, char *path, char *des);
-void	ft_forking(t_list *cmd, t_list *list, t_fd *fd, t_execve_params *ep);
+int		ft_forking(t_list *cmd, t_list *list, t_fd *fd, t_execve_params *ep);
 void	ft_piping(t_list *cmd, t_fd *fd);
 void	command_not_found(t_list *cmd, int *get_exit);
 void	wait_4_last_command(t_list *cmd, pid_t pid);
@@ -35,6 +35,7 @@ void	close_pipe(t_list *cmd, t_fd *fd);
 void	save_cmd(t_execve_params *ep, t_env *env);
 void	ft_perror(char *msg);
 void	restore_signals_in_child(void);
+void 	ft_init_fd(t_fd *fd, int *get_exit);
 
 //tmp
 int	isFileDescriptorValid(int fd);
