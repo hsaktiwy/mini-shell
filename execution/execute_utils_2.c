@@ -6,23 +6,49 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:31:17 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/26 12:02:12 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/26 17:18:19 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int	is_a_directory(char *filename)
+{
+	struct stat file_info;
+
+	if (stat(filename, &file_info) == 0)
+	{
+		if (S_ISDIR(file_info.st_mode))
+			return (1);
+		else if (S_ISREG(file_info.st_mode))
+			return (2);
+	}
+	else
+	{
+		return (-1);
+		perror("minishell: stat");
+	}
+	return (0);
+}
+
 void	exec_c(t_execve_params *execve_params, t_env *env)
 {
 	execve(execve_params->path, execve_params->args, env->env);
 	write(2, "minishell: ", 11);
-	perror(execve_params->path);
 	if (errno == EACCES)
 	{
+		if (is_a_directory(execve_params->path) == 1)
+		{
+			write(STDERR_FILENO, execve_params->path, ft_strlen(execve_params->path));
+			write(STDERR_FILENO, ": is a directory\n", 17);
+		}
+		else if (is_a_directory(execve_params->path) == 2)
+			perror(execve_params->path);
 		exit(126);
 	}
 	else if (errno == ENOENT)
 	{
+		perror(execve_params->path);
 		exit(127);
 	}
 }

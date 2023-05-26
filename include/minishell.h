@@ -29,6 +29,7 @@
 # include "lexer.h"
 # include "builtins.h"
 # include "execution.h"
+# include <sys/stat.h>
 
 // global variable
 extern int	g_exit_status;
