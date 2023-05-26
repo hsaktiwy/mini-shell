@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/25 16:35:48 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/26 12:16:37 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,6 @@ void	close_open_fds(t_list *list)
 			fd = ((t_cmd *)(((t_token *)(list->content))->value))->cmd_in;
 			if (close(fd) == -1)
 				perror("close");
-			// if (ft_strncmp(((t_cmd *)(((t_token *)(list->content))->value))->file_in, ".here_doc", 9) == 0)
-			// {
-			// 	unlink(((t_cmd *)(((t_token *)(list->content))->value))->file_in);
-			// }
 		}
 		if (((t_cmd *)(((t_token *)(list->content))->value))->cmd_out != 1)
 		{
@@ -61,6 +57,7 @@ void	ft_forking(t_list *cmd, t_list *list, t_fd *fd, t_execve_params *ep)
 		perror("fork");
 	if (pid == 0)
 	{
+		restore_signals_in_child();
 		dup_stdin_and_stdout(cmd, fd);
 		dup_redirections(cmd);
 		execb2(cmd, list);

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 16:42:55 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/25 17:48:04 by hsaktiwy         ###   ########.fr       */
+/*   Created: 2023/05/26 15:13:31 by hsaktiwy          #+#    #+#             */
+/*   Updated: 2023/05/26 15:13:35 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	in_red_cmd(t_env *env, t_token **red, t_token **command)
 	
 	if ((*red)->type == IN_REDIRECT)
 		fd = in_redirection((*red)->value);
-	else if ((*red)->type == HERE_DOC && g_stdin_fd(-1) == -2)
+	else if ((*red)->type == HERE_DOC && g_stdin_fd(-1) == 0)
 		fd = here_doc_red(env, (*red)->value);
 	if (fd == -1)
 		return (0);

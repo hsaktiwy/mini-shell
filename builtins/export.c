@@ -6,54 +6,46 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 11:24:21 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/25 14:40:27 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/26 01:18:23 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	f(char *key1, char*key2)
-{
-	if (ft_strcmp(key1, key2) <= 0)
-		return (0);
-	else
-		return (1);
-}
-
-t_list	*sort_env_list(t_list *list)
+void	sort_env_list(t_list *head)
 {
 	char	*p;
-	t_list *head;
-	t_list *tmp;
+	t_list	*tmp;
 
-	head = list;
 	while (head)
 	{
 		tmp = head->next;
 		while (tmp)
 		{
 			if (f(((t_holder *)(head->content))->key,
-					((t_holder *)(tmp->content))->key))
+				((t_holder *)(tmp->content))->key))
 			{
 				p = ((t_holder *)(head->content))->key;
-				((t_holder *)(head->content))->key = ((t_holder *)(tmp->content))->key;
+				((t_holder *)(head->content))->key = \
+				((t_holder *)(tmp->content))->key;
 				((t_holder *)(tmp->content))->key = p;
 				p = ((t_holder *)(head->content))->value;
-				((t_holder *)(head->content))->value = ((t_holder *)(tmp->content))->value;
+				((t_holder *)(head->content))->value = \
+				((t_holder *)(tmp->content))->value;
 				((t_holder *)(tmp->content))->value = p;
 			}
 			tmp = tmp->next;
 		}
 		head = head->next;
 	}
-	return (list);
 }
 
 void	print_export(t_cmd *command)
 {
 	t_list	*list;
 
-	list = sort_env_list(command->env->l_env);
+	list = command->env->l_env;
+	sort_env_list(command->env->l_env);
 	while (list)
 	{
 		if (ft_strcmp(((t_holder *)(list->content))->key, "_") != 0)
@@ -98,16 +90,15 @@ char	*get_key(char *arg)
 	return (key);
 }
 
-char	*get_value(char *key, char *arg, t_env *env)
+void	get_value(char *key, char *arg, t_env *env, char **value)
 {
-	char	*value;
 	char	*equal_p;
 	char	*tmp;
 	char	*env_value;
 
 	equal_p = ft_strchr(arg, '=');
 	if (!equal_p)
-		return (NULL);
+		return (*value = NULL, ft_void());
 	if (*(equal_p - 1) == '+')
 	{
 		env_value = ft_getenv(env, key);
@@ -115,17 +106,16 @@ char	*get_value(char *key, char *arg, t_env *env)
 			tmp = ft_substr(equal_p + 1, 0, ft_strlen(equal_p + 1));
 		else
 			tmp = ft_strdup("");
-		value = ft_strjoin(env_value, tmp);
+		*value = ft_strjoin(env_value, tmp);
 		free(tmp);
 	}
 	else
 	{
 		if (*(equal_p + 1))
-			value = ft_substr(equal_p + 1, 0, ft_strlen(equal_p + 1));
+			*value = ft_substr(equal_p + 1, 0, ft_strlen(equal_p + 1));
 		else
-			value = ft_strdup("");
+			*value = ft_strdup("");
 	}
-	return (value);
 }
 
 int	ft_export(t_cmd *command)
@@ -147,7 +137,7 @@ int	ft_export(t_cmd *command)
 			free(key);
 			return (print_error2(arg, 1));
 		}
-		value = get_value(key, arg, command->env);
+		get_value(key, arg, command->env, &value);
 		ft_setenv(&(command->env), key, value);
 		free(key);
 		free(value);
@@ -155,32 +145,3 @@ int	ft_export(t_cmd *command)
 	}
 	return (0);
 }
-
-// void	fun()
-// {
-// 	system("leaks a.out");
-// }
-// // check leaks
-// int main(int ac, char **av, char **env)
-// {
-// 	t_env *env_list;
-// 	t_cmd command;
-
-// 	t_file	*argg = malloc(sizeof(t_file));
-// 	t_list	*list = malloc(sizeof(t_list));
-
-// 	atexit(fun);
-// 	command.arg_count = 1;
-// 	command.arg = list;
-// 	command.arg->content = argg;
-// 	((t_file *)(command.arg->content))->a_file = "HOME+=value";
-// 	command.arg->next = NULL;
-// 	env_list = ft_init_env(env);
-
-// 	ft_export(&command, env_list);
-// 	print_export(&command, env_list);
-	
-// 	free(argg);
-// 	free(list);
-// 	ft_free_env(&env_list);
-// }

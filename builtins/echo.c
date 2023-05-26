@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:34:46 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/24 14:50:03 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:21:25 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,15 @@ int	is_valid_arg(char *arg)
 
 int	ft_echo(t_cmd *command)
 {
-	int	flag;
+	int		flag;
 	t_list	*arg_list;
 
 	flag = 0;
 	arg_list = command->arg;
 	if (command->arg_count > 0)
 	{
-		while (arg_list && is_valid_arg(((t_file *)(arg_list->content))->a_file))
+		while (arg_list
+			&& is_valid_arg(((t_file *)(arg_list->content))->a_file))
 		{
 			flag = 1;
 			arg_list = arg_list->next;
