@@ -68,3 +68,16 @@
 ### TO_DO_LIST
 	+add signal names
 	- . ..
+{
+	< lexer/ /bin | ls > out (message is not correct)
+}
+{
+	< lexer/ /bin | ///// | ok > ///// (message is not correct)
+}
+
+{
+	< lexer/ /bin | "" | ok > "" (messge is not correct)
+}
+{
+	$HOME (messge is not correct)
+}

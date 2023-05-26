@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:07:28 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/25 15:41:11 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/26 15:59:15 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,27 @@ int	is_splitable_env(char *str)
 {
 	int	i;
 
+	// i = 0;
+	// if(str[i] == '$')
+	// 	i++;
+	// else
+	// 	return (0);
+	// while (str[i] && (ft_isalnum(str[i])
+	// 	|| str[i] == '?' || str[i] == '_'))
+	// 	i++;
+	// if (str[i] == '\"' || str[i] == '\''
+	// 	|| str[i] == '$')
+	// 	return (0);
+	// else
+	// 	return (1);
 	i = 0;
-	if(str[i] == '$')
+	while (str[i] && !iswhitespace(str[i]))
+	{
+		if (str[i] == '$')
+			return (1);
 		i++;
-	else
-		return (0);
-	while (str[i] && (ft_isalnum(str[i])
-		|| str[i] == '?' || str[i] == '_'))
-		i++;
-	if (str[i] == '\"' || str[i] == '\''
-		|| str[i] == '$')
-		return (0);
-	else
-		return (1);
+	}
+	return (0);
 }
 
 t_cmd	*get_cmd(t_env *env, char *input, int *index)
@@ -66,7 +74,7 @@ t_cmd	*get_cmd(t_env *env, char *input, int *index)
 		if (input[0] && input[0] != '|')
 		{
 			cmd->cmd = get_simple_arg(env, input, index);
-			if (input[0] == '$')
+			if (is_splitable_env(input))
 				cmd->cmd_type = VARIABLE;
 			else
 				cmd->cmd_type = WORD;

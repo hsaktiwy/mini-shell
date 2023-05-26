@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:31:06 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/24 14:12:46 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/26 15:27:51 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ char	*get_token(char *str)
 		c = double_single_check(str[i], c, &i);
 		if (str[i] && str[i] != '|'
 			&& str[i] != '<' && str[i] != '>'
-			&& !iswhitespace(str[i]) && str[i] != c)
+			&& !iswhitespace(str[i])
+			&& c != str[i] && !(c == '\0'
+			&& (str[i] == '\'' || str[i] == '\"')))
 		{
 			res = ft_realloc(res, ft_strlen(res) + 2);
 			ft_strncat(res, &str[i], 1);

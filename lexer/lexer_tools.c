@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:46:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/24 13:58:35 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/26 15:58:30 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	handleArg(t_list **tokens, t_env *env, char *input, int *index)
 			cmd = tmp;
 		list = list->next;
 	}
-	if (input[*index] == '$' && is_splitable_env(&input[*index]))
+	if (is_splitable_env(&input[*index]))
 	{
 		file = get_simple_arg(env, &input[*index], index);
 		if (file)
