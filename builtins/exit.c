@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 19:06:50 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/25 16:14:06 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/26 11:26:51 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	check_arg(char *arg)
 {
 	int	n;
 
-	if (!arg)
+	if (!arg || !*arg)
 		return (0);
 	n = ft_atoi2(arg);
 	if (n == -1)
