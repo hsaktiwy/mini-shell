@@ -1,12 +1,21 @@
-""
-echo $'HOME'
-echo $"HOME"
-exit ""
-echo $"$"
-echo $'$'
+{
+	""
+	echo $'HOME'
+	echo $"HOME"
+	exit ""
+	echo $"$"
+	echo $'$'
+}
 
-export USER= // overflow
+{
+	export USER=
+	export =
+	export +=
+}
 
+{
+	>> exit status 1 in redirection error
+}
 
 {
 	< f < Makefile cat
@@ -55,3 +64,6 @@ export USER= // overflow
 	minishell:$> l$u'-la'
 	minishell:$> export u="s "
 }
+
+### TO_DO_LIST
+	+add signal names

@@ -251,7 +251,7 @@ bash-3.2$ echo $?
 bash-3.2$ exit 11111111111111111111111111111111111111111111
 exit
 bash: exit: 11111111111111111111111111111111111111111111: numeric argument required
-}
+}	//FIXED
 
 [x] ++ close open file fds in exit
 
@@ -288,7 +288,8 @@ Makefile: one makefile for everyting or each with a makefile
 ##########################################################################$$$########
 
 [x] kill parser_tools.c
-
-bash-3.2$ exit ""
-exit
-bash: exit: : numeric argument required
+{
+	bash-3.2$ exit ""
+	exit
+	bash: exit: : numeric argument required
+}	//FIXED

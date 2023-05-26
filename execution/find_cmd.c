@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:38:32 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/24 16:12:36 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/26 11:50:47 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,13 @@ char	*findcmd(char *filename)
 	char	path[4096];
 	int		i;
 
-	if (is_builtin(filename) || ft_strchr(filename, '/')
+	if (is_builtin(filename)
+		|| ft_strchr(filename, '/')
 		|| !ft_getenv(g_env_s(NULL), "PATH"))
 		return (ft_strdup(filename));
+	if (ft_strcmp(filename, ".") == 0
+		|| ft_strcmp(filename, "..") == 0)
+		return (NULL);
 	paths = ft_split(ft_getenv(g_env_s(NULL), "PATH"), ':');
 	if (!paths)
 		return (NULL);
