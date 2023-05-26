@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:48:28 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/24 17:18:39 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/26 17:48:37 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int check_piping(char *input)
+int	check_piping(char *input)
 {
 	int	c;
 	int	open;
@@ -30,7 +30,8 @@ int check_piping(char *input)
 		else if (input[c] != '|' && !iswhitespace(input[c]) && open == 1)
 		{
 			open = 0;
-		}else if (input[c] == '|' && open == 1)
+		}
+		else if (input[c] == '|' && open == 1)
 			break ;
 		c++;
 	}
@@ -39,7 +40,7 @@ int check_piping(char *input)
 	return (1);
 }
 
-int printf_error(int boolean)
+int	printf_error(int boolean)
 {
 	if (boolean == 0)
 	{
@@ -48,19 +49,42 @@ int printf_error(int boolean)
 	}
 	return (0);
 }
+void	syntaxe_error_display(t_list *list, t_token	*tmp, char *c)
+{
+	if (list && tmp->type != COMMAND && c[0])
+	{
+		ft_putstr_fd("mini-shell: syntax error near unexpected token `", 2);
+		ft_putstr_fd(c, 2);
+		ft_putstr_fd("'\n", 2);
+	}
+	else
+		ft_putstr_fd("mini-shell: syntax error near unexpected token `newline'\n", 2);
+}
+
+char	*special_token_show(t_token_type type)
+{
+	if (type == 1)
+		return ("|");
+	else if (type == 2)
+		return ("<");
+	else if (type == 3)
+		return (">");
+	else if (type == 4)
+		return ("<<");
+	else if (type == 5)
+		return (">>");
+	else
+		return ("");
+}
 
 void	printf_error_redi(t_list *list)
 {
-	t_token *tmp;
+	t_token	*tmp;
 	t_cmd	*cmd;
+	char	*c;
 
-	char c [3];
-
-	c[0] = '\0';
-	c[1] = '\0';
-	c[2] = '\0';
 	tmp = NULL;
-	
+	c = NULL;
 	if (list)
 	{
 		tmp = list->content;
@@ -74,26 +98,9 @@ void	printf_error_redi(t_list *list)
 					tmp = list->content;
 			}
 		}
-		if (tmp->type == 1)
-			c[0] = '|';
-		else if (tmp->type == 2)
-			c[0] = '<';
-		else if (tmp->type == 3)
-			c[0] = '>';
-		else if (tmp->type == 4)
-			(c[0] = '<', c[1] = '<');
-		else if (tmp->type == 5)
-			(c[0] = '>', c[1] = '>');
+		c = special_token_show(tmp->type);
 	}
-	
-	if (list && tmp->type != COMMAND && c[0])
-	{
-		ft_putstr_fd("mini-shell: syntax error near unexpected token `", 2);
-		ft_putstr_fd(c, 2);
-		ft_putstr_fd("'\n", 2);
-	}
-	else
-		ft_putstr_fd("mini-shell: syntax error near unexpected token `newline'\n", 2);
+	syntaxe_error_display(list, tmp, c);
 }
 
 int redirection_error(t_list *tokens, int display)
@@ -110,6 +117,12 @@ int redirection_error(t_list *tokens, int display)
 		{
 			file = token->value;
 			if (!file->a_file && !ft_strlen(file->token_file))
+			{
+				if (display != 1)
+					return (1);
+				return (printf_error_redi(list->next),1);
+			}
+			else if(token->type == HERE_DOC && !file->a_file)
 			{
 				if (display != 1)
 					return (1);
@@ -152,11 +165,6 @@ t_list	*creat_cmd_list(t_list	**tokens)
 		{
 			ft_lstadd_back(&list, ft_lstnew(token));
 		}
-		// ls | >out problem to solve
-		// else if (token->type == PIPE)
-		// {
-		// 	ft_lstadd_back(&list, ft_lstnew(token));
-		// }
 		current = current->next;
 	}
 	return (list);
@@ -171,17 +179,10 @@ t_list	*parser(t_env *env, t_list **tokens, char *input)
 	list = NULL;
 	current = *tokens;
 	err = syntax_error(input, *tokens);
-	// if (err != -1)
-	// {
-		//printf("Error : %d\n", err);
-		if (err == 1)
-		{
-			// if (!redirection_habdling(env, tokens))
-			// 	return (NULL);
-			redirection_habdling(env, tokens);
-			list = creat_cmd_list(&current);
-		}
-	//}
-	// printf("number of pipes = %d\n", g_pipe_count(-1));
+	if (err == 1)
+	{
+		redirection_habdling(env, tokens);
+		list = creat_cmd_list(&current);
+	}
 	return (list);
 }

@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:31:06 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/26 15:27:51 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/26 17:52:53 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,8 @@ char	*get_token(char *str)
 
 	i = 0;
 	c = '\0';
-	res = ft_strdup("");
-	while (iswhitespace(str[i]))
-		i++;
+	res = NULL;
+	surpace_whitesspaces(str, &i);
 	while (str[i] && str[i] != '|'
 		&& str[i] != '<' && str[i] != '>'
 		&& !iswhitespace(str[i]))

@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:25:34 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/24 18:41:27 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/26 17:36:27 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	ft_strncat(char *s1, const char *s2, size_t n)
 		return ;
 	while (s1[i])
 	{
-		// printf("s[%zu] = %c\n", i,s1[i]);
 		i++;
 	}
 	j = 0;
