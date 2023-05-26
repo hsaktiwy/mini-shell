@@ -6,13 +6,13 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 11:24:21 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/25 16:11:51 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/26 01:18:23 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list	*sort_env_list(t_list *head)
+void	sort_env_list(t_list *head)
 {
 	char	*p;
 	t_list	*tmp;
@@ -98,7 +98,7 @@ void	get_value(char *key, char *arg, t_env *env, char **value)
 
 	equal_p = ft_strchr(arg, '=');
 	if (!equal_p)
-		return (NULL);
+		return (*value = NULL, ft_void());
 	if (*(equal_p - 1) == '+')
 	{
 		env_value = ft_getenv(env, key);

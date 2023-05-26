@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:26:20 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/24 14:24:19 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/26 01:08:46 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,16 @@ static t_holder	*ft_lstnewholder(char *key_val, char *pt_equal)
 		return (perror("malloc"), NULL);
 	if (key_val)
 	{
-		holder->key = ft_substr(key_val, 0,pt_equal - key_val);
 		if (!pt_equal)
+		{
+			holder->key = ft_strdup(key_val);
 			holder->value = NULL;
+		}
 		else
-			holder->value = ft_substr(key_val, pt_equal - key_val + 1, ft_strlen(pt_equal + 1));
+		{
+			holder->key = ft_substr(key_val, 0, pt_equal - key_val);
+			holder->value = ft_substr(key_val, pt_equal - key_val, ft_strlen(pt_equal + 1));
+		}
 		return (holder);
 	}
 	else

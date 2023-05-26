@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:45:11 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/25 16:31:33 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/26 01:18:41 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,8 @@ int	f(char *key1, char*key2)
 		return (0);
 	else
 		return (1);
+}
+void	ft_void()
+{
+	return ;
 }
