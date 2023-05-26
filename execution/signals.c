@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:37:22 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/24 16:17:24 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/26 12:13:19 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,9 @@ void	get_name_of_signal(int sig)
 	if (sig == 15)
 		printf("Terminated\n");
 	get_name_of_signal2(sig);
+}
+void	restore_signals_in_child(void)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 }

@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:06:48 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/24 16:17:02 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/26 12:15:47 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	wait_4_last_command(t_list *cmd, pid_t pid);
 void	close_pipe(t_list *cmd, t_fd *fd);
 void	save_cmd(t_execve_params *ep, t_env *env);
 void	ft_perror(char *msg);
+void	restore_signals_in_child(void);
 
 //tmp
 int	isFileDescriptorValid(int fd);
