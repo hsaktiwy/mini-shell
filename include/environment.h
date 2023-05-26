@@ -18,11 +18,17 @@
 // function that initialize the t_env from env
 t_env		*ft_init_env(char **env);
 t_list		*ft_lst_list_holder(char **env);
+t_env 		*g_env_s(t_env *env);
+void		ft_declare_envs(t_env *env);
+void		ft_unset_oldpwd(t_env **env);
 // function that set value to t_env from user
 // function that replace value from key in t_env with new one
 void		ft_setenv(t_env **env, char *key, char *value);
 // function that get value of a special key
 char		*ft_getenv(t_env *env, char *key);
+char		*join_key_value(char *key, char *value);
+ssize_t		get_env_index(char **env_table, char *key);
+int			key_is_in_list(t_list *list, char *key);
 //free
 void		ft_free_env(t_env **env_t);
 

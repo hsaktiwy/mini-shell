@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:25:19 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/24 20:36:02 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/26 13:54:08 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,15 @@
 
 void	free_list(t_list **list)
 {
-	t_holder *holder;
+	t_holder	*holder;
 
 	if (!*list)
-		return;
+		return ;
 	free_list(&((*list)->next));
 	holder = (*list)->content;
-	// free holder node content
 	free(holder->key);
 	free(holder->value);
-	// free holder
 	free(holder);
-	// free list
 	free(*list);
 }
 

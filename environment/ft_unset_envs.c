@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset_envs.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 10:23:53 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/24 13:58:52 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/26 13:33:06 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ void	ft_unset_env_list(t_list **env_l, char *key)
 
 void	ft_unset_env_table(char **env_table, size_t index)
 {
-	char *tmp = env_table[index];
+	char	*tmp;
+
+	tmp = env_table[index];
 	while (env_table[index])
 	{
 		env_table[index] = env_table[index + 1];
