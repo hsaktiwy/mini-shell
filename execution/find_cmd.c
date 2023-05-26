@@ -6,11 +6,18 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:38:32 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/26 11:50:47 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/26 16:37:57 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void ft_init_fd(t_fd *fd, int *get_exit)
+{
+	*get_exit = 1;
+	fd->fd[0] = -1;
+	fd->fd[1] = -1;
+}
 
 static void	free_tab(char **pp)
 {
