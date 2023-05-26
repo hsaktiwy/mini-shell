@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/26 18:43:31 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/26 18:57:22 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ void	restore_stdin()
 	if (!isatty(STDIN_FILENO) && g_stdin_fd(-1) != 0)
 	{
 		if (dup2(g_stdin_fd(-1), STDIN_FILENO) == -1)
-			perror("dup2");
+			perror("minishell: dup2");
 		if (close(g_stdin_fd(-1)) == -1)
-			perror("close");
+			perror("minishell: close");
 	}
 	g_stdin_fd(0);
 }

@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/26 18:41:46 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/26 18:56:33 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	close_open_fds(t_list *list)
 		{
 			fd = ((t_cmd *)(((t_token *)(list->content))->value))->cmd_in;
 			if (close(fd) == -1)
-				perror("close");
+				perror("minishell: close");
 		}
 		if (((t_cmd *)(((t_token *)(list->content))->value))->cmd_out != 1)
 		{
 			fd = ((t_cmd *)(((t_token *)(list->content))->value))->cmd_out;
 			if (close(fd) == -1)
-				perror("close");
+				perror("minishell: close");
 		}
 		list = list->next;
 	}

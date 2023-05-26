@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:59:30 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/26 16:18:42 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/26 18:56:26 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ void	close_pipe(t_list *cmd, t_fd *fd)
 {
 	if (cmd->next)
 		if (close(fd->fd[1]) == -1)
-			perror("close");
+			perror("minishell: close");
 	if (fd->old_fd > 0)
 		if (close(fd->old_fd) == -1)
-			perror("close");
+			perror("minishell: close");
 }
 
 void	wait_4_last_command(t_list *cmd, pid_t pid)
@@ -52,7 +52,7 @@ void	wait_4_last_command(t_list *cmd, pid_t pid)
 		return ;
 	if (!(cmd->next))
 		if (waitpid(pid, &g_exit_status, 0) == -1)
-			perror("waitpid");
+			perror("minishell: waitpid");
 }
 
 void	command_not_found(t_list *cmd, int *get_exit)
@@ -68,7 +68,7 @@ void	command_not_found(t_list *cmd, int *get_exit)
 		error2 = ".: usage: . filename [arguments]\n";
 		if (write(STDERR_FILENO, error1, 41) == -1
 			|| write(STDERR_FILENO, error2, 33) == -1)
-			perror("write");
+			perror("minishell: write");
 		g_exit_status = 2;
 		*get_exit = 0;
 		return ;
@@ -76,7 +76,7 @@ void	command_not_found(t_list *cmd, int *get_exit)
 	if (write(STDERR_FILENO, "minishell: ", 11) == -1
 		|| write(STDERR_FILENO, p, ft_strlen(p)) == -1
 		|| write(STDERR_FILENO, ": command not found\n", 20) == -1)
-		perror("write");
+		perror("minishell: write");
 	*get_exit = 0;
 	g_exit_status = 127;
 }

@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:26:14 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/26 13:45:06 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/26 18:48:04 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static t_holder	*ft_lstnewholder(char *key, char *value)
 
 	holder = (t_holder *)malloc(sizeof(t_holder));
 	if (!holder)
-		return (perror("malloc"), NULL);
+		return (perror("minishell: malloc"), NULL);
 	holder->key = ft_strdup(key);
 	holder->value = ft_strdup(value);
 	return (holder);

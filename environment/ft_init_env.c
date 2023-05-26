@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:26:20 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/26 13:53:04 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/26 18:47:53 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_holder	*ft_lstnewholder(char *key_val, char *pt_equal)
 
 	holder = (t_holder *)malloc(sizeof(t_holder));
 	if (!holder)
-		return (perror("malloc"), NULL);
+		return (perror("minishell: malloc"), NULL);
 	if (key_val)
 	{
 		if (!pt_equal)
@@ -96,7 +96,7 @@ t_env	*ft_init_env(char **env)
 
 	env_l = (t_env *)malloc(sizeof(t_env));
 	if (!env_l)
-		return (perror("malloc"), NULL);
+		return (perror("minishell: malloc"), NULL);
 	env_l->l_env = NULL;
 	if (!env || !*env)
 	{
