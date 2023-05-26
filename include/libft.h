@@ -53,6 +53,8 @@ void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
 int		ft_numlen(int	nb);
+size_t	str_len(const char *s);
+
 // get next line 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 5

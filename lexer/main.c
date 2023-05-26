@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/25 17:34:08 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/26 00:20:59 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,13 @@ void	set_signal_handlers()
 
 void	restore_stdin()
 {
-	if (!isatty(STDIN_FILENO))
+	if (!isatty(STDIN_FILENO) && g_stdin_fd(-1) != 0)
 	{
-		printf("INN\n");
 		if (dup2(g_stdin_fd(-1), STDIN_FILENO) == -1)
 			perror("dup2");
 		if (close(g_stdin_fd(-1)) == -1)
 			perror("close");
 	}
-	g_stdin_fd(-2);
 }
 
 void	main2(char *input, t_env *env)

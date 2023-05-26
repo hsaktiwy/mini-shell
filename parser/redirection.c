@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:42:55 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/25 15:45:56 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/26 00:12:26 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	in_red_cmd(t_env *env, t_token **red, t_token **command)
 	
 	if ((*red)->type == IN_REDIRECT)
 		fd = in_redirection((*red)->value);
-	else if ((*red)->type == HERE_DOC && g_stdin_fd(-1) == -2)
+	else if ((*red)->type == HERE_DOC && g_stdin_fd(-1) == 0)
 		fd = here_doc_red(env, (*red)->value);
 	if (fd == -1)
 		return (0);

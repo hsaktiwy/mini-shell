@@ -45,5 +45,16 @@ export USER= // overflow
 {
 
 	cd ~ (segfault if HOME unseted)
-	fix it
+	fix itls 
 }
+
+{
+	...leaks here:
+	ls | echo "$d hello"12 | failed cmd | sleep 10 | echo im wake up rn
+	echo "$d hello"12
+	cat | echo 89
+	 unset | 9df
+}
+
+minishell:$> export u="s "
+minishell:$> l$u'-la'
