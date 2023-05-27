@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:38:32 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/26 16:37:57 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/27 15:40:26 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ char	*findcmd(char *filename)
 		|| !ft_getenv(g_env_s(NULL), "PATH"))
 		return (ft_strdup(filename));
 	if (ft_strcmp(filename, ".") == 0
-		|| ft_strcmp(filename, "..") == 0)
+		|| ft_strcmp(filename, "..") == 0
+		|| !*filename)
 		return (NULL);
 	paths = ft_split(ft_getenv(g_env_s(NULL), "PATH"), ':');
 	if (!paths)

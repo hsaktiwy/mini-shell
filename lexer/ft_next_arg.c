@@ -6,32 +6,36 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:31:06 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/26 15:27:51 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/27 15:31:06 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-char	double_single_check(char input, char old_c, int *i)
+char	double_single_check(char input, char old_c, int *i, int *v)
 {
 	if (input == '\'' && old_c == '\0')
 	{
 		old_c = '\'';
+		(*v)++;
 		(*i)++;
 	}
 	else if (input == '\"' && old_c == '\0')
 	{
 		old_c = '\"';
+		(*v)++;
 		(*i)++;
 	}
 	else if (input == '\'' && old_c == '\'')
 	{
 		old_c = '\0';
+		(*v)++;
 		(*i)++;
 	}
 	else if (input == '\"' && old_c == '\"')
 	{
 		old_c = '\0';
+		(*v)++;
 		(*i)++;
 	}
 	return (old_c);
@@ -41,18 +45,21 @@ char	*get_token(char *str)
 {
 	int		i;
 	char	c;
-	char 	*res;
+	char	*res;
+	int		c_change;
 
 	i = 0;
+	c_change = 0;
 	c = '\0';
-	res = ft_strdup("");
-	while (iswhitespace(str[i]))
-		i++;
+	res = NULL;
+	surpace_whitesspaces(str, &i);
+	if (str[i] == '#')
+		return (res);
 	while (str[i] && str[i] != '|'
 		&& str[i] != '<' && str[i] != '>'
 		&& !iswhitespace(str[i]))
 	{
-		c = double_single_check(str[i], c, &i);
+		c = double_single_check(str[i], c, &i, &c_change);
 		if (str[i] && str[i] != '|'
 			&& str[i] != '<' && str[i] != '>'
 			&& !iswhitespace(str[i])
@@ -64,6 +71,8 @@ char	*get_token(char *str)
 			i++;
 		}
 	}
+	if (c_change && !res)
+		res = ft_strdup("");
 	return (res);
 }
 

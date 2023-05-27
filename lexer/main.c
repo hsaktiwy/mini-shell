@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/26 18:57:22 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/27 15:39:54 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,13 @@ void	main2(char *input, t_env *env)
 		lexer(&tokens, input, env);
 	if (err_lex == -1)
 	{
-		// display_tokens(tokens);
+		//display_tokens(tokens);
 		fix_expanding_issue(&tokens);
 		ini_arg_count(&tokens);
+		//display_tokens(tokens);
 		list = parser(env, &tokens, input);
 		g_token_l(tokens);
-		// display_tokens(tokens);
+		//display_tokens(tokens);
 		// display_tokens(list);
 		if(list)
 			execute(list);

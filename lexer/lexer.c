@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:03:39 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/25 17:33:45 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/26 17:51:01 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void handleHereDoc(t_list **tokens, t_env *env, char *input, int *index)
 	start = get_start(&input[*index]);
 	g_heredoc_count(1);
 	token->type = HERE_DOC;
-	token->value = get_file(env, &input[*index], index);// this ca be changed
+	token->value = get_file(env, &input[*index], index);
 	free(((t_file *)token->value)->a_file);
 	((t_file *)token->value)->a_file = r;
 	((t_file *)token->value)->token_file = here_doc_name(".here_doc", g_heredoc_count(-1));

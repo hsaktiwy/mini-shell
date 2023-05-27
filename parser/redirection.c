@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 15:13:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/26 15:13:35 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/27 11:20:23 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	out_red_cmd(t_token **red, t_token **command)
 {
-	t_cmd   *cmd;
+	t_cmd	*cmd;
 	int		fd;
 
 	fd = -1;
@@ -32,18 +32,17 @@ int	out_red_cmd(t_token **red, t_token **command)
 
 int	in_red_cmd(t_env *env, t_token **red, t_token **command)
 {
-	t_cmd   *cmd;
+	t_cmd	*cmd;
 	int		fd;
 
 	fd = -1;
-	
 	if ((*red)->type == IN_REDIRECT)
 		fd = in_redirection((*red)->value);
 	else if ((*red)->type == HERE_DOC && g_stdin_fd(-1) == 0)
 		fd = here_doc_red(env, (*red)->value);
 	if (fd == -1)
 		return (0);
-	if(*command)
+	if (*command)
 	{
 		cmd = (*command)->value;
 		cmd->cmd_in = fd;
@@ -57,9 +56,9 @@ int	in_red_cmd(t_env *env, t_token **red, t_token **command)
 
 int	redirect(t_env *env, t_list **list, t_token **cmd)
 {
-	t_list  *start;
-	t_token *red;
-	t_token *tmp;
+	t_list	*start;
+	t_token	*red;
+	t_token	*tmp;
 
 	start = *list;
 	while (start)
@@ -69,50 +68,59 @@ int	redirect(t_env *env, t_list **list, t_token **cmd)
 		{
 			red = tmp;
 			if (!in_red_cmd(env, &red, cmd))
-				return(0);
+				return (0);
 		}
 		else if (tmp->type == OUT_REDIRECT || tmp->type == APPEND_REDIRECT)
 		{
 			red = tmp;
 			if (!out_red_cmd(&red, cmd))
-				return(0);
+				return (0);
 		}
 		else if (tmp->type == PIPE)
-			break;
+			break ;
 		start = (start)->next;
 	}
 	return (1);
 }
 
-int    redirection_habdling(t_env *env, t_list **tokens)
+t_token	*next_cmd(t_list *list)
+{
+	t_token	*token;
+	t_list	*current;
+	t_token	*cmd;
+
+	current = list;
+	cmd = NULL;
+	while (current && !cmd)
+	{
+		token = current->content;
+		if (token->type == COMMAND)
+			cmd = token;
+		current = current->next;
+	}
+	return (cmd);
+}
+
+int	redirection_habdling(t_env *env, t_list **tokens)
 {
 	t_list	*list;
 	t_token	*token;
-	t_list	*current;
 	t_token	*cmd;
 
 	list = *tokens;
 	while (list)
 	{
-		current = list;
-		cmd = NULL;
-		while (current && !cmd)
-		{
-			token = current->content;
-			if (token->type == COMMAND)
-				cmd = token;
-			current = current->next;
-		}
-		if(!redirect(env, &list, &cmd))
+		cmd = next_cmd(list);
+		if (!redirect(env, &list, &cmd))
 		{
 			((t_cmd *)cmd->value)->error = 1;
 		}
-		while(list)
+		while (list)
 		{
 			token = list->content;
 			list = list->next;
 			if (token->type == PIPE)
-				break;
+				break ;
 		}
 	}
 	return (1);
