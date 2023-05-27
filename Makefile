@@ -6,7 +6,7 @@
 #    By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 13:01:11 by hsaktiwy          #+#    #+#              #
-#    Updated: 2023/05/26 18:56:12 by hsaktiwy         ###   ########.fr        #
+#    Updated: 2023/05/27 15:13:59 by hsaktiwy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ LIBFT = ft_t_strdup.c ft_iswhitespace.c ft_strjoin.c  ft_strncat.c ft_isalnum.c 
 		ft_realloc.c ft_lstadd_back.c ft_lstnew.c ft_memset.c ft_split.c ft_strlen.c get_next_line.c ft_strchr.c str_join.c ft_atoi.c \
 		ft_strtrim.c ft_itoa.c ft_putnbr_fd.c ft_putstr_fd.c ft_putchar_fd.c ft_strncmp.c str_len.c
 
-PARSER = parser.c parser_tools.c redirection.c redirection_tools.c
+PARSER = parser.c parser_tools.c redirection.c redirection_tools.c redirection_s_tools.c
 
 BUILTINS = cd.c pwd.c echo.c export.c env.c unset.c exit.c common.c
 

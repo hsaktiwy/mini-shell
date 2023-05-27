@@ -1,1 +1,2 @@
-parser/parser_tools.c: OK!
+parser/redirection_tools.c: Error!
+Error: TOO_MANY_FUNCS       (line: 118, col:   1):	Too many functions in file

@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:20:03 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/25 16:47:24 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/27 15:17:12 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*get_simple_arg(t_env *env, char *str, int *index)
 	arg = ft_strdup("");
 	while (iswhitespace(str[i]))
 		i++;
-	while (str[i] && !iswhitespace(str[i]) && str[i] != '|'  && str[i] != '<'  && str[i] != '>')
+	while (str[i] && str[i] != '#' && !iswhitespace(str[i]) && str[i] != '|'  && str[i] != '<'  && str[i] != '>')
 	{
 		k = 0;
 		if (str[i] == '$' && str[i + 1] && (ft_isalpha(str[i + 1]) || str[i + 1] == '{' || str[i + 1] == '?' || str[i + 1] == '\"' || str[i + 1] == '\'' ||  str[i + 1] == '_') && !iswhitespace(str[i + 1]))
