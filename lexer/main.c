@@ -6,7 +6,11 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/05/27 21:34:29 by aigounad         ###   ########.fr       */
+=======
+/*   Updated: 2023/05/27 20:25:10 by hsaktiwy         ###   ########.fr       */
+>>>>>>> hsaktiwy
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +99,7 @@ void	main2(char *input, t_env *env)
 		//display_tokens(tokens);
 		fix_expanding_issue(&tokens);
 		ini_arg_count(&tokens);
-		display_tokens(tokens);
+		//display_tokens(tokens);
 		list = parser(env, &tokens, input);
 		g_token_l(tokens);
 		//display_tokens(tokens);
@@ -122,7 +126,12 @@ int	main(__attribute__((unused)) int ac,
 	while (1)
 	{
 		restore_stdin();
+		// char buf[4000];
+		// getcwd(buf, 4000);
+		// printf("\33[31mSHLVL:(%s) exit:(%d):~%s#\33[00m", ft_getenv(env_s, "SHLVL"), g_exit_status, buf);
 		input = readline("minibash-3.2$ ");
+		// input = "exit";
+		// if the user pressed Ctr+D
 		if (!input)
 		{
 			ft_free_env(&env_s);
