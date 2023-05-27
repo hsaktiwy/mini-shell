@@ -30,6 +30,7 @@
 # include "builtins.h"
 # include "execution.h"
 # include <sys/stat.h>
+# include <dirent.h>
 
 // global variable
 extern int	g_exit_status;
