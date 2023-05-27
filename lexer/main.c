@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/27 15:39:54 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/27 19:55:25 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	g_exit_status;
 // 	}
 // 	g_heredoc_count(0);
 // }
+
 void	signal_handler(int sig)
 {
 	int fd;
@@ -93,7 +94,7 @@ void	main2(char *input, t_env *env)
 		//display_tokens(tokens);
 		fix_expanding_issue(&tokens);
 		ini_arg_count(&tokens);
-		//display_tokens(tokens);
+		display_tokens(tokens);
 		list = parser(env, &tokens, input);
 		g_token_l(tokens);
 		//display_tokens(tokens);

@@ -6,13 +6,13 @@
 #    By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 13:01:11 by hsaktiwy          #+#    #+#              #
-#    Updated: 2023/05/27 16:41:26 by hsaktiwy         ###   ########.fr        #
+#    Updated: 2023/05/27 17:16:33 by hsaktiwy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-FLAGS = -Wall -Wextra -Werror -g -I/Users/hsaktiwy/.brew/opt/readline/include -I$(INCLUDE_DIR) -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -g -I/Users/hsaktiwy/.brew/opt/readline/include -I$(INCLUDE_DIR) #-fsanitize=address
 #FLAGS = -Wall -Wextra -Werror -g -I/Users/aigounad/.brew/opt/readline/include -I$(INCLUDE_DIR) -fsanitize=address
 
 ENV =  ft_getenv.c ft_setenv.c ft_setenv_utils.c ft_init_env.c ft_init_env_utils.c ft_unset_envs.c ft_free_env.c

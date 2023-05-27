@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:06:48 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/26 16:36:57 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:27:07 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
-#define EXECUTION_H
+# define EXECUTION_H
 # include "minishell.h"
 
 void	execute(t_list *list);
@@ -35,9 +35,9 @@ void	close_pipe(t_list *cmd, t_fd *fd);
 void	save_cmd(t_execve_params *ep, t_env *env);
 void	ft_perror(char *msg);
 void	restore_signals_in_child(void);
-void 	ft_init_fd(t_fd *fd, int *get_exit);
+void	ft_init_fd(t_fd *fd, int *get_exit);
 
 //tmp
-int	isFileDescriptorValid(int fd);
+int		isFileDescriptorValid(int fd);
 
 #endif

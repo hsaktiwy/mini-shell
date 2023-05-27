@@ -6,26 +6,27 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 12:50:27 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/26 17:42:00 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:20:49 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void    *ft_realloc(void *ptr, size_t size)
+void	*ft_realloc(void *ptr, size_t size)
 {
-    char	*res;
+	char	*res;
 	char	*str;
-    int		i;
+	int		i;
 	int		j;
 
 	if (size <= 0)
 		return (ptr);
-    if (!ptr)
-    {
+	if (!ptr)
+	{
 		res = malloc(size);
 		return (res[0] = '\0', res);
-	}else
+	}
+	else
 	{
 		res = malloc(size);
 		i = -1;

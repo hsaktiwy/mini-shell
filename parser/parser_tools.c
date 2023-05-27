@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:52:33 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/27 15:39:32 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/27 18:26:41 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,19 @@ int	printf_error(int boolean)
 	return (0);
 }
 
-void	syntaxe_error_display(t_list *list, t_token	*tmp, char *c)
+void	syntaxe_error_display(t_list *list, t_token *tmp, char *c)
 {
 	if (list && tmp->type != COMMAND && c[0])
 	{
-		ft_putstr_fd("mini-shell: syntax error near unexpected token `", 2);
-		ft_putstr_fd(c, 2);
-		ft_putstr_fd("'\n", 2);
+		ft_putstr_fd("mini-shell: syntax error near unexpected token `",
+			STDERR_FILENO);
+		ft_putstr_fd(c, STDERR_FILENO);
+		ft_putstr_fd("'\n", STDERR_FILENO);
 	}
 	else
 	{
-		ft_putstr_fd("mini-shell: syntax error near ,", 2);
-		ft_putstr_fd("unexpected token `newline'\n", 2);
+		ft_putstr_fd("mini-shell: syntax error near ,", STDERR_FILENO);
+		ft_putstr_fd("unexpected token `newline'\n", STDERR_FILENO);
 	}
 }
 

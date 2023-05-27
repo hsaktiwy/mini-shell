@@ -6,17 +6,21 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:46:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/26 15:58:30 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/27 18:48:26 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	handleCommand(t_list **tokens, t_env *env,char *input, int *index)
+// this int return  is weird need to get more check ?
+
+int	handle_command(t_list **tokens, t_env *env, char *input, int *index)
 {
-	t_token *token = (t_token *)malloc(sizeof(t_token));
+	t_token	*token;
+
+	token = (t_token *)malloc(sizeof(t_token));
 	if (!token)
-		return 0;
+		return (0);
 	token->type = COMMAND;
 	token->value = get_cmd(env, &input[*index], index);
 	if (token->value)
@@ -29,24 +33,33 @@ int	handleCommand(t_list **tokens, t_env *env,char *input, int *index)
 	return (0);
 }
 
-void	handleArg(t_list **tokens, t_env *env, char *input, int *index)
+t_token	*last_cmd(t_list **tokens)
 {
 	t_token	*cmd;
 	t_token	*tmp;
 	t_list	*list;
+
+	cmd = NULL;
+	list = *tokens;
+	while (list)
+	{
+		tmp = list->content;
+		if (tmp->type == COMMAND)
+			cmd = tmp;
+		list = list->next;
+	}
+	return (cmd);
+}
+
+void	handle_arg(t_list **tokens, t_env *env, char *input, int *index)
+{
+	t_token	*cmd;
 	t_list	*node;
 	char	*file;
 
 	cmd = NULL;
 	node = NULL;
-	list = *tokens;
-	while (list)
-	{
-		tmp = list->content;
-		if( tmp->type == COMMAND)
-			cmd = tmp;
-		list = list->next;
-	}
+	cmd = last_cmd(tokens);
 	if (is_splitable_env(&input[*index]))
 	{
 		file = get_simple_arg(env, &input[*index], index);
@@ -72,7 +85,6 @@ void	ini_count(t_token **token)
 	cmd = (*token)->value;
 	cmd->arg_count = 0;
 	current = cmd->arg;
-
 	while (current)
 	{
 		arg = current->content;
@@ -96,6 +108,23 @@ void	ini_arg_count(t_list **tokens)
 		current = current->next;
 	}
 }
+
+void	lexical_errur_helper(char input, char *c, int *c_i, int i)
+{
+	if (input == '\"' && *c == '\0')
+	{
+		*c = '\"';
+		*c_i = i;
+	}
+	else if (input == '\'' && *c == '\0')
+	{
+		*c = '\'';
+		*c_i = i;
+	}
+	else if ((input == '\'' && *c == '\'') || (input == '\"' && *c == '\"'))
+		*c = '\0';
+}
+
 int	lexical_erreur(char	*input)
 {
 	int		i;
@@ -107,24 +136,9 @@ int	lexical_erreur(char	*input)
 	c_i = -1;
 	while (input[++i])
 	{
-		if (input[i] == '\"' && c == '\0')
-		{
-			c = '\"';
-			c_i = i;
-		}
-		else if (input[i] == '\'' && c == '\0')
-		{
-			c = '\'';
-			c_i = i;
-		}
-		else if ((input[i] == '\'' && c == '\'') || (input[i] == '\"' && c == '\"'))
-			c = '\0';
-		if (input[i] != '\0' && !ft_isprint(input[i]))
-			return (i);
+		lexical_errur_helper(input[i], &c, &c_i, i);
 	}
 	if (c == '\'' || c == '\"')
 		return (c_i);
 	return (-1);
 }
-
-

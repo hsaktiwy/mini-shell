@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 19:05:27 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/06 19:05:47 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:22:04 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_lstdelete_index(t_list **list, int index, void (*del)(t_list **))
 	while (node->next && index--)
 	{
 		previous = node;
-		node =  node->next;
+		node = node->next;
 	}
 	previous->next = node->next;
 	node->next = NULL;
