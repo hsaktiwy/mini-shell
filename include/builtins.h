@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:35:46 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/26 15:10:26 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:23:42 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int		ft_unset(t_cmd *command);
 int		ft_exit(t_cmd *command, t_list *list);
 //common functions
 int		check_key(char *key);
-int 	print_error2(char *identifier, int i);
+int		print_error2(char *identifier, int i);
 int		f(char *key1, char*key2);
-void	ft_void();
+void	ft_void(void);
 
 // error handling
-int	print_error(char *command, char *str_error, int print_error);
+int		print_error(char *command, char *str_error, int print_error);
 #endif

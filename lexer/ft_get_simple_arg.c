@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:20:03 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/27 15:17:12 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/27 16:38:02 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ char	*get_simple_arg(t_env *env, char *str, int *index)
 	}
 	if (!ft_strlen(arg) && k != 0)
 		return ((*index) += i, free(arg), NULL);
+	//printf("simple -arg :%s\n", arg);
 	// printf("--> final result to return : [%s]\n", arg);
 	return ((*index) += i,arg);
 }

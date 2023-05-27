@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   structers.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:02:18 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/26 15:13:20 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:34:05 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTERS_H
-#define STRUCTERS_H
+# define STRUCTERS_H
 
 # include "libft.h" 
 
@@ -44,7 +44,7 @@ typedef struct s_holder
 typedef struct s_env
 {
 	t_list	*l_env;
-	char 	**env;
+	char	**env;
 }	t_env;
 
 // tokens 
@@ -77,14 +77,14 @@ typedef enum s_arg_type{
 
 typedef struct s_argument
 {
-    t_argument_type arg_type;
-    char			**args;
+	t_argument_type	arg_type;
+	char			**args;
 }t_arguments;
 
 typedef struct s_file
 {
-	t_argument_type arg_type;
-    char			*a_file;
+	t_argument_type	arg_type;
+	char			*a_file;
 	char			*token_file;
 	int				here_doc_exp;
 }t_file;
@@ -92,7 +92,7 @@ typedef struct s_file
 typedef struct s_command
 {
 	char			*cmd;
-	t_argument_type cmd_type;
+	t_argument_type	cmd_type;
 	t_list			*arg;
 	size_t			arg_count;
 	int				cmd_in;

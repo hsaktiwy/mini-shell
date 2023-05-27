@@ -6,12 +6,12 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:31:44 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/26 18:57:46 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:33:12 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
-#define PARSER_H
+# define PARSER_H
 
 # include "minishell.h"
 
