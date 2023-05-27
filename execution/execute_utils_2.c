@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:31:17 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/26 18:55:33 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/27 16:40:05 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ int	is_a_directory(char *filename)
 		else if (S_ISREG(file_info.st_mode))
 			return (2);
 	}
+	// else if (lstat(filename, &file_info) == 0)
+	// {
+	// 	if (S_ISDIR(file_info.st_mode))
+	// 		return (1);
+	// 	else if (S_ISREG(file_info.st_mode))
+	// 		return (2);
+	// }
 	else
 	{
 		return (-1);

@@ -6,14 +6,14 @@
 #    By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 13:01:11 by hsaktiwy          #+#    #+#              #
-#    Updated: 2023/05/27 15:49:45 by aigounad         ###   ########.fr        #
+#    Updated: 2023/05/27 18:55:40 by aigounad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
 # FLAGS = -Wall -Wextra -Werror -g -I/Users/hsaktiwy/.brew/opt/readline/include -I$(INCLUDE_DIR) -fsanitize=address
-FLAGS = -Wall -Wextra -Werror -g -I/Users/aigounad/.brew/opt/readline/include -I$(INCLUDE_DIR) -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -g -I/Users/aigounad/.brew/opt/readline/include -I$(INCLUDE_DIR) #-fsanitize=address
 
 ENV =  ft_getenv.c ft_setenv.c ft_setenv_utils.c ft_init_env.c ft_init_env_utils.c ft_unset_envs.c ft_free_env.c
 
