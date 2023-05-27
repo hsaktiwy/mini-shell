@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_single_quote.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:21:52 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/25 14:44:40 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/27 16:37:56 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ char	*get_single_quote(t_env *env, char *s, int *index)
 				c = '\'';
 			else
 				c = '\0';
-		}else if (c == '\'')
+		}
+		else if (c == '\'')
 		{
 			res = str_join(res, get_simple_arg(env, &s[i], index));
 			break ;
@@ -42,5 +43,6 @@ char	*get_single_quote(t_env *env, char *s, int *index)
 			i++;
 		}
 	}
+	//printf("single -quote: %s\n", res);
 	return ((*index) += i, res);
 }
