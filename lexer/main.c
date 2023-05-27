@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/27 19:55:25 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/27 21:34:29 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	signal_handler(int sig)
 			rl_replace_line("", 0);
 			rl_redisplay();
 		}
+		g_exit_status = 1;
 	}
 }
 
@@ -106,6 +107,10 @@ void	main2(char *input, t_env *env)
 	free_tokens(&tokens);
 }
 
+// void ft_leaks()
+// {
+// 	system("leaks minishell");
+// }
 int	main(__attribute__((unused)) int ac,
 		__attribute__((unused)) char **av, char **env)
 {
@@ -117,28 +122,20 @@ int	main(__attribute__((unused)) int ac,
 	while (1)
 	{
 		restore_stdin();
-		// char buf[4000];
-		// getcwd(buf, 4000);
-		// printf("\33[31mSHLVL:(%s) exit:(%d):~%s#\33[00m", ft_getenv(env_s, "SHLVL"), g_exit_status, buf);
-		input = readline("\33[31mminishell:$>\33[35m ");
-		// input = "exit";
-		// if the user pressed Ctr+D
+		input = readline("minibash-3.2$ ");
 		if (!input)
 		{
 			ft_free_env(&env_s);
 			write(1, "exit\n", 5);
-			exit(0);
+			exit(g_exit_status);
 		}
-		////////////////////////////
 		if (input && input[0])
 		{
 			add_history(input);
 			input = expand_input(env_s, input);
 			main2(input, env_s);
 		}
-		// system("leaks mini_shell");
 		free(input);
-		// break;
 	}
 	return (0);
 }
