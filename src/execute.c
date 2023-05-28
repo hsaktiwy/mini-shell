@@ -309,7 +309,7 @@ void	execute_2(t_list *cmd, t_list *list, int *get_exit, t_fd *fd)
 	ep.args = get_args(cmd);
 	save_cmd(&ep, ((t_cmd *)((t_token *)(cmd->content))->value)->env);
 	if (!ep.path)
-		return (command_not_found(cmd, get_exit));
+		return (free(ep.args), command_not_found(cmd, get_exit));
 	ft_piping(cmd, fd);
 	if (execb1(cmd, list, get_exit, &ep))
 		return ;
