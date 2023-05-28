@@ -1,15 +1,15 @@
 urgent task:
 	[x] freed everything when exit is called
 	[x] ignore from # to end  
-	[ ]"ls | > out" "ls | <<l" different behaviar
+	[x]"ls | > out" "ls | <<l" different behaviar
 	[x]	signals in parent, fork and heredoc
-	[ ]	$? should expand to exit status
+	[x]	$? should expand to exit status
 	[x]	removed global struct
 	[x] fix the expand problem exepmple : "minishell > $FalS_variable ls -la ___output will be the ls -la result command"
 	[x] I made this ~ exanding to $HOME
 	[x] fix redirection case with file_name have NULL and file name have Empty space 
 	[x] fix the problem that made the redirection don't work where there is no  command: (exemple : bash-3.2$ << kk or < out or < hello)
-	[ ] error management {perror("malloc");
+	[x] error management {perror("malloc");
   							exit(EXIT_FAILURE);}
 	[x] should add a global struct which will contain the exit status of commands
 	[x] creat function destroy env to free t_env
@@ -79,13 +79,12 @@ Linked_T_CMD :  linked->t_file->a_file
 export > 888	//FIXED
 -shell level	//FIXED
 
---env -i ./minishell seg--	//FIXED or not
+--env -i ./minishell seg--	//FIXED 
 --OLDPWD is not set at first-- //FIXED
 
 + expand ~ && -- to home //FIXED or not
 --handle when full path is specified as the name of the command--
 --caling close with invalid file descriptor--
-> "ls | > out" "ls | <<l" different behaviar
 
 +test all builtins 
 
@@ -110,11 +109,15 @@ export > 888	//FIXED
 
 
  [x] ls | | | wc or ls |||| wc (i think it soved)
+ [x]export "VA=ls|wc" should consider one cmd
+ [x]echo '$USER'$USER"$USER" 
+ [x]echo $f "$HOME" segmentation fault
+ [x]echo $f"$HOME"
  export "VA=ls|wc" should consider one cmd
  echo '$USER'$USER"$USER" 
  ls           | cat         <           out1 // space problem
 
- echo $f "$HOME" segmentation fault
+ echo $f "$HOME"
  echo $f"$HOME"
  echo $f"$HOME""                         "
 
@@ -123,92 +126,170 @@ export > 888	//FIXED
  1682$
 
 ################################## LEAK REPORT #########################################
-=TRY TO INVESTIGATE THE ROOT OF THESE LEAKS
-<<TEST 1 WITH ONE input AND A WHILE BREAK>>
-==4047== Memcheck, a memory error detector
-==4047== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==4047== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==4047== Command: ./mini_shell
-==4047== 
-Displaying a tokens (list) : 
-        type : COMMOND
-                CMD : |ls|
-        CMD type cmd(token) = 0
-        CMD count arg = 1
-                Data :|-la|->[0]
-                cmd_in : 0
-                cmd_out : 1
-                file_in : (null)
-                file_out : (null)
-        type : COMMOND
-                CMD : |wc|
-        CMD type cmd(token) = 0
-        CMD count arg = 0
-                Data :
-                cmd_in : 0
-                cmd_out : 1
-                file_in : (null)
-                file_out : (null)
-     24     209    1184
-==4047== 
-==4047== HEAP SUMMARY:
-==4047==     in use at exit: 4 bytes in 1 blocks
-==4047==   total heap usage: 306 allocs, 306 frees, 11,170 bytes allocated
-==4047== 
-==4047== 4 bytes in 1 blocks are definitely lost in loss record 1 of 1
-==4047==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==4047==    by 0x11055E: ft_realloc (ft_realloc.c:28)
-==4047==    by 0x10F7CB: get_simple_arg (ft_get_simple_arg.c:47)
-==4047==    by 0x10B1E2: handleArg (lexer_tools.c:48)
-==4047==    by 0x109EA1: lexer (lexer.c:100)
-==4047==    by 0x10ACA8: executer (executer.c:150)
-==4047==    by 0x10AE75: main (main.c:82)
-==4047== 
-==4047== LEAK SUMMARY:
-==4047==    definitely lost: 4 bytes in 1 blocks
-==4047==    indirectly lost: 0 bytes in 0 blocks
-==4047==      possibly lost: 0 bytes in 0 blocks
-==4047==    still reachable: 0 bytes in 0 blocks
-==4047==         suppressed: 0 bytes in 0 blocks
-==4047== 
-==4047== For lists of detected and suppressed errors, rerun with: -s
-==4047== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
-<<TEST 2 wwith miltiple inputs>>
-=======================================================================================
-==839== 13 bytes in 1 blocks are still reachable in loss record 6 of 68
-==839==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==839==    by 0x11050A: ft_realloc (ft_realloc.c:28)
-==839==    by 0x10F777: get_simple_arg (ft_get_simple_arg.c:47)
-==839==    by 0x10ED38: get_cmd (ft_get_cmd.c:48)
-==839==    by 0x10B0F0: handleCommand (lexer_tools.c:21)
-==839==    by 0x109EC0: lexer (lexer.c:96)
-==839==    by 0x10ACE8: executer (executer.c:150)
-==839==    by 0x10AEA2: main (main.c:82)
-========================================================================================
-==839== 16 bytes in 1 blocks are still reachable in loss record 10 of 68
-==839==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==839==    by 0x10B0B7: handleCommand (lexer_tools.c:17)
-==839==    by 0x109EC0: lexer (lexer.c:96)
-==839==    by 0x10ACE8: executer (executer.c:150)
-==839==    by 0x10AEA2: main (main.c:82)
-=========================================================================================
-==839== 16 bytes in 1 blocks are still reachable in loss record 11 of 68
-==839==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==839==    by 0x1105F8: ft_lstnew (ft_lstnew.c:19)
-==839==    by 0x10B104: handleCommand (lexer_tools.c:22)
-==839==    by 0x109EC0: lexer (lexer.c:96)
-==839==    by 0x10ACE8: executer (executer.c:150)
-==839==    by 0x10AEA2: main (main.c:82)
-==========================================================================================
-==839== 64 bytes in 1 blocks are still reachable in loss record 21 of 68
-==839==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==839==    by 0x10EC28: ini_cmd (ft_get_cmd.c:19)
-==839==    by 0x10ECD8: get_cmd (ft_get_cmd.c:42)
-==839==    by 0x10B0F0: handleCommand (lexer_tools.c:21)
-==839==    by 0x109EC0: lexer (lexer.c:96)
-==839==    by 0x10ACE8: executer (executer.c:150)
-==839==    by 0x10AEA2: main (main.c:82)
 
-
+########################################################################################
  [x] echo '$USER'$USER"$USER" 
- ls           | cat         <           out1 // space problem
+
+ TO DO LIST
+ [x] in redirection not working
+ [ ] ls           | cat         <           out1 // space problem
+ [ ]> "ls | > out" "ls | <<l" different behaviar
+
+############# builtins testing
+[x] exit -21131313
+[x] exit -9223372036854775809
+[x] exit 9223372036854775808
+[x] exit +"100"
+
+[x] export = // SIGSEGV
+
+[x] echo $?HELLO (ft_get_simple_arg i added if(str[k + i + 1] == '?') k++; plus the same for the files expand.c ft_get_doube_quote as the all do the same)
+{
+output bash-3.2$
+	bash-3.2$ echo $?HELLo
+	0HELLo
+	bash-3.2$ echo $?HELLO
+	0HELLO
+	bash-3.2$ echo $??
+	0?
+	bash-3.2$ echo "$?HELLo"
+	0HELLo
+	bash-3.2$ cat << kk
+	> $?HHH
+	> KK
+	> kk
+	0HHH
+	KK
+	bash-3.2$
+our : minishell
+	SHLVL:(2) exit:(0):~/Users/hsaktiwy/Desktop/mini-shell/mini-shell#minishell:$> echo "$?HELLO"
+	exit status = 0
+	0HELLO
+	SHLVL:(2) exit:(0):~/Users/hsaktiwy/Desktop/mini-shell/mini-shell#minishell:$> echo $??
+	exit status = 0
+	0?
+	SHLVL:(2) exit:(0):~/Users/hsaktiwy/Desktop/mini-shell/mini-shell#minishell:$> echo $?HELLO
+	exit status = 0
+	0HELLO
+	SHLVL:(2) exit:(0):~/Users/hsaktiwy/Desktop/mini-shell/mini-shell#minishell:$> cat << kk
+	exit status = 0
+	> $?HHH
+	> KK
+	> kk
+	0HHH
+	KK
+	SHLVL:(2) exit:(0):~/Users/hsaktiwy/Desktop/mini-shell/mini-shell#minishell:$> 
+}
+
+############# syntax testing
+[x] echo hi | < |
+{
+our: minishell
+	SHLVL:(2) exit:(0):~/Users/hsaktiwy/Desktop/mini-shell/mini-shell#minishell:$> echo hi | < |
+	mini-shell:     syntax error near unexpected token `|'
+	exit status = 2
+bash :
+	bash-3.2$ echo hi | < |
+	bash: syntax error near unexpected token `|'
+	bash-3.2$ echo $?
+	258
+notes : 
+	wach machi khasna ndisplayiwe exit status 258 ?
+}
+[x] syntax error  set g_exit_status = 2 
+
+[ ] echo hi | > >>
+{
+our: minishell
+	SHLVL:(2) exit:(2):~/Users/hsaktiwy/Desktop/mini-shell/mini-shell#minishell:$> echo hi | > >>
+	mini-shell:     syntax error near unexpected token `>>'
+	exit status = 2
+bash :
+	bash-3.2$ echo hi | > >>
+	bash: syntax error near unexpected token `>>'
+	bash-3.2$ echo $?
+	258
+}
+[x] mini-shell:     syntax error near unexpected token `newline' <<what are the extra spaces>>
+{
+	hahah ok hadi dartha custum ahaha i did fixed it 
+}
+
+[x] cat    <| ls    <<should be erorr>>
+{
+our: minishell
+	SHLVL:(2) exit:(0):~/Users/hsaktiwy/Desktop/mini-shell/mini-shell#minishell:$> cat    <| ls    <
+	mini-shell: syntax error near unexpected token `|'
+	exit status = 2
+bash : 
+	bash-3.2$ cat    <| ls    <
+	bash: syntax error near unexpected token `|'
+	bash-3.2$ echo $?
+	258
+}
+
+[x]  echo hi <<>
+
+[x] } or { or {} or }{
+
+[x] < ls/ > 		<<nothing should be passed to execution>>
+
+[x] <ls>
+
+// ********************  ?
+bash-3.2$ ls -la | | 
+bash: syntax error near unexpected token `|'
+bash-3.2$ echo $?
+258
+bash-3.2$ ls -la <
+bash: syntax error near unexpected token `newline'
+bash-3.2$ echo $?
+258
+
+[x] fix this problem plus exit status is 255 not 2
+{
+bash-3.2$ exit 11111111111111111111111111111111111111111111
+exit
+bash: exit: 11111111111111111111111111111111111111111111: numeric argument required
+}	//FIXED
+
+[x] ++ close open file fds in exit
+
+##################################################################################
+#######[FINAL_PROJET_STRUCTURE_IDEA]
+#######[FEEL_FREE_TO_EDIT_AS_YOU_THINK_FITS]
+builtins/
+	src: cd.c common.c echo.c env.c exit.c export.c pwd.c unset.c
+	header: builtin.h
+execution/
+	src: execute.c execution_utils.c ...
+	header: execution.h
+environment/
+	src: ft_free_env.c ft_getenv.c ft_init_env.c ft_setenv.c ft_unset_envs.c
+	header: environment.h
+parser/
+	src: parser.c redirection_tools.c redirection.c
+	header:
+lexer/
+	src: lexer.c lexer_tools.c ft_get_* ft_next_.. expand.c expanding_issue.c
+	header:
+????/
+	src: main.c 
+	header: 
+libft/
+	src: everything else hh(u didn't think i was going to write all the files hhhh)
+	header: libfh.h
+include/
+	#All header files
+	#+ minishell.h will include all headers
+	#+ all files will include minishell.h
+
+Makefile: one makefile for everyting or each with a makefile
+##########################################################################$$$########
+
+[x] kill parser_tools.c
+{
+	bash-3.2$ exit ""
+	exit
+	bash: exit: : numeric argument required
+}	//FIXED
