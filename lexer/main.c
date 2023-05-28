@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: lol <lol@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/27 20:25:10 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/28 19:07:22 by lol              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	main2(char *input, t_env *env)
 		list = parser(env, &tokens, input);
 		g_token_l(tokens);
 		//display_tokens(tokens);
-		// display_tokens(list);
+		display_tokens(list);
 		if(list)
 			execute(list);
 		ft_lstclear(&list, NULL);
