@@ -138,6 +138,7 @@ int	main(__attribute__((unused)) int ac,
 		{
 			add_history(input);
 			input = expand_input(env_s, input);
+			input = iswildcards(input);
 			main2(input, env_s);
 		}
 		free(input);
