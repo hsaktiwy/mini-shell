@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/27 21:48:01 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/28 15:37:22 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	signal_handler(int sig)
 
 void	set_signal_handlers()
 {
-	rl_catch_signals = 0;
+	// rl_cach_signals = 0;
 	signal(SIGINT, signal_handler);	// handle Ctr+c
 	signal(SIGQUIT, signal_handler);	// ignore Ctr+'\'
 	signal(SIGTSTP, SIG_IGN);	// ignore Ctr+'z'
