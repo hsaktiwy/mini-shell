@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/05/27 21:34:29 by aigounad         ###   ########.fr       */
-=======
-/*   Updated: 2023/05/27 20:25:10 by hsaktiwy         ###   ########.fr       */
->>>>>>> hsaktiwy
+/*   Updated: 2023/05/29 15:00:25 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +98,8 @@ void	main2(char *input, t_env *env)
 		//display_tokens(tokens);
 		list = parser(env, &tokens, input);
 		g_token_l(tokens);
-		//display_tokens(tokens);
-		// display_tokens(list);
+		display_tokens(tokens);
+		display_tokens(list);
 		if(list)
 			execute(list);
 		ft_lstclear(&list, NULL);
@@ -142,6 +138,7 @@ int	main(__attribute__((unused)) int ac,
 		{
 			add_history(input);
 			input = expand_input(env_s, input);
+			input = iswildcards(input);
 			main2(input, env_s);
 		}
 		free(input);
