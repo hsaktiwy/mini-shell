@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/30 14:37:42 by hsaktiwy          #+#    #+#             */
+/*   Updated: 2023/05/30 14:39:00 by hsaktiwy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-char    *expand(t_env *env, char *line)
+char	*expand(t_env *env, char *line)
 {
 	int		i;
 	int		k;
@@ -17,10 +29,10 @@ char    *expand(t_env *env, char *line)
 				k++;
 			if (line[k + i + 1] == '?')
 				k++;
-			arg = expand_env_var(env ,&line[i + 1], arg, &k);
-			i += k + 1;			
+			arg = expand_env_var(env , &line[i + 1], arg, &k);
+			i += k + 1;
 		}
-		else if(line[i])
+		else if (line[i])
 		{
 			arg = ft_realloc(arg, ft_strlen(arg) + 2);
 			ft_strncat(arg, &line[i], 1);
@@ -77,7 +89,7 @@ char    *expand_input(t_env *env, char *line)
 			}
 			i++;
 		}
-		else if(line[i])
+		else if (line[i])
 		{
 			if (line[i] == '\'' && c == '\0')
 				c = '\'';

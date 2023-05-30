@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 16:24:20 by lol               #+#    #+#             */
-/*   Updated: 2023/05/29 16:39:17 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/30 14:54:08 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,13 @@ char	*add_to_arg(char *arg, char *input, int *i, int *red)
 	char	*res;
 
 	res = arg;
-	if(input[*i] == '<' || input[*i] == '>')
+	if (input[*i] == '<' || input[*i] == '>')
 	{
 		res = ft_realloc(res, ft_strlen(res) + 2);
 		ft_strncat(res, &input[*i], 1);
 		(*i)++;
 		*red = 1;
-		if(input[*i] == '<' || input[*i] == '>')
+		if (input[*i] == '<' || input[*i] == '>')
 		{
 			res = ft_realloc(res, ft_strlen(res) + 2);
 			ft_strncat(res, &input[*i], 1);
@@ -125,9 +125,9 @@ char	double_or_single(char input, char old_c)
 	return (old_c);
 }
 
-char	*add_matchs(struct dirent *entry, char *arg,char	*tmp, int *i)
+char	*add_matchs(struct dirent *entry, char *arg, char	*tmp, int *i)
 {
-	char 	*res;
+	char	*res;
 
 	res = arg;
 	if (entry && entry->d_name[0] != '.')
@@ -158,7 +158,7 @@ char	*local_dir(char *arg, char *tmp)
 		{
 			entry = readdir(dir);
 			res = add_matchs(entry, res, tmp, &i);
-		}while (entry);
+		}while(entry);
 		closedir(dir);
 	}
 	if (i == 0)
@@ -177,13 +177,11 @@ char	*add_wildcards_to_input(char *input, char *tmp)
 
 	i = -1;
 	res = input;
-	printf("entred\n");
 	if (str_iswhitespaced(tmp))
 	{
 		tab = ft_split(tmp, ' ');
 		while (tab[++i])
 		{
-			printf("1entred\n");
 			if (ft_strchr(tab[i], '*'))
 				res = local_dir(res, tab[i]);
 			else
@@ -191,36 +189,31 @@ char	*add_wildcards_to_input(char *input, char *tmp)
 				res = str_join(res, ft_strdup(" "));
 				res = str_join(res, ft_strdup(tab[i]));
 			}
-			printf("2entred\n");
 		}
 		fre_tab(tab);
 	}
 	else
 		res = local_dir(res, tmp);
-	printf("3entred\n");
 	return (res);
 }
 
 char	*wildcards_start(char *arg)
 {
-	int 	x;
-	char 	*tmp;
+	int		x;
+	char	*tmp;
 	char	*res;
 	char	*tmp2;
 
 	res = arg;
 	x = ft_strlen(arg) - 1;
 	while (res[x] && (!iswhitespace(res[x]) && res[x] != '>'
-	&& res[x] != '<' && res[x] != '|'))
+			&& res[x] != '<' && res[x] != '|'))
 		x--;
 	tmp = ft_strdup(&res[++x]);
 	res[x] = '\0';
 	res = ft_realloc(res, ft_strlen(res) + 1);
-	// we had a problem avec this type of argumen export u = "s " command ls $u*$u nee to diaply a error on s but not on *s
 	tmp2 = get_simple_arg(g_env_s(NULL), tmp, &x);
-	printf("tmp = %s\n", tmp2);
 	res = add_wildcards_to_input(res, tmp2);
-	printf("tmp 2 = %s\n", tmp2);
 	free(tmp2);
 	free(tmp);
 	return (res);
@@ -234,11 +227,11 @@ char	*process_wildcard_argument(char	*arg, char *input, int *i)
 	j = 0;
 	res = arg;
 	while (input[*i + j] && (!iswhitespace(input[*i + j]) && input[*i + j] != '>'
-	&& input[*i + j] != '<' && input[*i + j] != '|'))
+			&& input[*i + j] != '<' && input[*i + j] != '|'))
 	{
 		res = ft_realloc(res, ft_strlen(res) + 2);
 		ft_strncat(res, &input[*i + j], 1);
-		j++;	
+		j++;
 	}
 	res = wildcards_start(res);
 	(*i) += j;
@@ -247,7 +240,7 @@ char	*process_wildcard_argument(char	*arg, char *input, int *i)
 
 char	*process_wildcards(char *arg, char	*input, int *i, int *red)
 {
-	char 	*res;
+	char	*res;
 
 	res = arg;
 	if (i != 0 && (input[*i - 1] != '\'' || (input[*i + 1]

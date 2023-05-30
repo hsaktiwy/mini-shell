@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:17:59 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/27 16:37:59 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/30 14:50:14 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 // #include <ctype.h>
 // #include <stdio.h>
 
-int 	is_closed(char *s)
+int	is_closed(char *s)
 {
-	int c;
+	int	c;
 	int	i;
 
 	i = 0;
@@ -36,7 +36,7 @@ int 	is_closed(char *s)
 		else if ((ft_isalpha(s[i]) || s[i] == '?' || s[i] == '_') && (c == '\0' || c == '{'))
 			i++;
 		else
-			break;
+			break ;
 	}
 	if (c == '}')
 		return (i);
@@ -59,7 +59,7 @@ int 	is_closed(char *s)
 // 	}
 // }
 
-char	*expand_env_var(t_env *env, char *s, char *res,int *k)
+char	*expand_env_var(t_env *env, char *s, char *res, int *k)
 {
 	char	v_env[(*k) + 1];
 	char	*re;

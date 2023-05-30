@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:31:06 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/27 15:31:06 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/30 14:51:14 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	check_quotes_validity(char *input)
 	c = '\0';
 	while (input[i])
 	{
-		if(input[i] == '\'' && !c)
+		if (input[i] == '\'' && !c)
 			c = '\'';
 		else if (input[i] == '\'' && c == '\'')
 			c = '\0';
@@ -106,7 +106,7 @@ int	check_quotes_validity(char *input)
 		else if (input[i] == '\"' && c == '\"')
 			c = '\0';
 		else if (input[i] == '|' && c == '\0')
-			break;
+			break ;
 		i++;
 	}
 	if (!c)

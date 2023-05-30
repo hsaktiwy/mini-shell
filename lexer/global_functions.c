@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 17:34:45 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/25 16:16:11 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/30 14:52:04 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ int	g_stdin_fd(int i)
 	return (j);
 }
 
-t_list *g_token_l(t_list *tokens)
+t_list	*g_token_l(t_list *tokens)
 {
-	static t_list *g_tokens;
+	static t_list	*g_tokens;
 
 	if (tokens == NULL)
 		return (g_tokens);
@@ -44,7 +44,7 @@ t_list *g_token_l(t_list *tokens)
 }
 int	g_cmd_executing(pid_t newpid)
 {
-	static pid_t oldpid;
+	static pid_t	oldpid;
 
 	if (newpid != -1)
 		oldpid = newpid;
@@ -54,7 +54,7 @@ int	g_cmd_executing(pid_t newpid)
 int	g_heredoc_executing(int i)
 {
 	static int	j;
-	
+
 	if (i == -1)
 		return (j);
 	j = i;
@@ -63,7 +63,7 @@ int	g_heredoc_executing(int i)
 
 int	g_pipe_count(int i)
 {
-	static	int j;
+	static int	j;
 
 	if (i == -1)
 		return (j);
@@ -71,7 +71,7 @@ int	g_pipe_count(int i)
 	return (j);
 }
 
-int g_heredoc_count(int	i)
+int	g_heredoc_count(int	i)
 {
 	static int	j;
 
@@ -82,9 +82,9 @@ int g_heredoc_count(int	i)
 	return (j);
 }
 
-int g_heredo_numb(int i)
+int	g_heredo_numb(int i)
 {
-	static	int j;
+	static int	j;
 
 	if (i == -1)
 		return (j);

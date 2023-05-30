@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/29 15:00:25 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/30 14:34:10 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ void	main2(char *input, t_env *env)
 		//display_tokens(tokens);
 		list = parser(env, &tokens, input);
 		g_token_l(tokens);
-		display_tokens(tokens);
-		display_tokens(list);
+		//display_tokens(tokens);
+		//display_tokens(list);
 		if(list)
 			execute(list);
 		ft_lstclear(&list, NULL);
@@ -111,6 +111,29 @@ void	main2(char *input, t_env *env)
 // {
 // 	system("leaks minishell");
 // }
+int	check_redirection(char *input)
+{
+	int		i;
+	char	*res;
+
+	res = input;
+	i = -1;
+	while (res)
+	{
+		i++;
+		res = strstr(res, "<<");
+		if (res)
+			res = &res[2];
+	}
+	if (i > 16)
+	{
+		ft_putstr_fd("minibash: maximum here-document count exceeded\n",
+			STDERR_FILENO);
+		return (0);
+	}
+	return (1);
+}
+
 int	main(__attribute__((unused)) int ac,
 		__attribute__((unused)) char **av, char **env)
 {
@@ -139,7 +162,8 @@ int	main(__attribute__((unused)) int ac,
 			add_history(input);
 			input = expand_input(env_s, input);
 			input = iswildcards(input);
-			main2(input, env_s);
+			if(check_redirection(input))
+				main2(input, env_s);
 		}
 		free(input);
 	}
