@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:50:22 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/26 16:40:56 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/30 17:30:56 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,29 +54,66 @@ char	*get_path(t_cmd *command, t_env *env)
 	return (path);
 }
 
+void	change_env_vars(int flag, char *oldpwd)
+{
+	(void)oldpwd;
+	static char	cwd[PATH_MAX + 1];
+	t_env	*env;
+
+	env = g_env_s(NULL);
+	if (!flag)
+		ft_setenv(&env, "OLDPWD", cwd);
+	if (getcwd(cwd, PATH_MAX + 1) != NULL)
+		ft_setenv(&env, "PWD", cwd);
+}
+
+int	handle_special_case(t_cmd *command)
+{
+    DIR* dir = opendir(((t_file *)(command->arg->content))->a_file);
+    if (dir == NULL) {
+        perror("minishell: cd: ..");
+        return 1;
+    }
+    closedir(dir);
+	return (0);
+}
+
 int	ft_cd(t_cmd *command)
 {
 	char	*path;
-	char	cwd[4096];
+	char	cwd[PATH_MAX + 1];
 	char	*oldpwd;
+	int		flag;
+	static	char *tmp;
 
-	getcwd(cwd, 4096);
+
+	if (command->arg_count != 0
+		&& ft_strcmp(((t_file *)(command->arg->content))->a_file, "..") == 0)
+	{
+		if (handle_special_case(command))
+		return (0);
+	}
+	flag = 0;
+	if (getcwd(cwd, PATH_MAX + 1) == NULL)
+	{
+		// printf("cd: error retrieving current directory\n");
+		flag = 1;
+	}
 	path = get_path(command, command->env);
 	if (!path || !*path)
 		return (1);
-	if (chdir(path) != 0)
-	{
-		print_error(command->cmd, path, 1);
-		return (1);
-	}
+	if (chdir(path) == -1)
+		return (print_error(command->cmd, path, 1), 1);
+	/////////////////////////////////////////////////////////////////////
 	if (command->arg_count != 0
 		&& ft_strcmp(((t_file *)(command->arg->content))->a_file, "-") == 0)
 	{
 		oldpwd = ft_getenv(command->env, "OLDPWD");
-		write(command->cmd_out, oldpwd, ft_strlen(oldpwd));
+		if (oldpwd)
+			write(command->cmd_out, oldpwd, ft_strlen(oldpwd));
 		write(command->cmd_out, "\n", 1);
 	}
-	ft_setenv(&(command->env), "OLDPWD", cwd);
-	ft_setenv(&(command->env), "PWD", getcwd(cwd, 4096));
+	//////////////////////////////////////////////////////////////////////
+	change_env_vars(flag, cwd);
 	return (0);
 }
