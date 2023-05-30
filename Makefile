@@ -6,7 +6,7 @@
 #    By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 13:01:11 by hsaktiwy          #+#    #+#              #
-#    Updated: 2023/05/27 21:35:14 by aigounad         ###   ########.fr        #
+#    Updated: 2023/05/29 17:44:33 by aigounad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,22 +51,22 @@ $(NAME) : $(OBJ)
 	@echo "Compilation completed."
 
 obj/parser/%.o : parser/%.c $(HEAD_PAR) | obj_dir
-	@echo "Compiling..."
+	@echo "Compiling" $<
 	@$(CC) $(FLAGS) -o $@ -c $<
 obj/lexer/%.o : lexer/%.c $(HEAD_LEX) | obj_dir
-	@echo "Compiling..."
+	@echo "Compiling" $<
 	@$(CC) $(FLAGS) -o $@ -c $<
 obj/libft/%.o : libft/%.c $(HEAD_LIB) | obj_dir
-	@echo "Compiling..."
+	@echo "Compiling" $<
 	@$(CC) $(FLAGS) -o $@ -c $<
 obj/execution/%.o : execution/%.c $(HEAD_EXE) | obj_dir
-	@echo "Compiling..."
+	@echo "Compiling" $<
 	@$(CC) $(FLAGS) -o $@ -c $<
 obj/builtins/%.o : builtins/%.c $(HEAD_BUI) | obj_dir
-	@echo "Compiling..."
+	@echo "Compiling" $<
 	@$(CC) $(FLAGS) -o $@ -c $<
 obj/environment/%.o : environment/%.c $(HEAD_ENV) | obj_dir
-	@echo "Compiling..."
+	@echo "Compiling" $<
 	@$(CC) $(FLAGS) -o $@ -c $<
 
 obj_dir : obj obj/lexer obj/parser obj/libft obj/builtins obj/environment obj/execution
