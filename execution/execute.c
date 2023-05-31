@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/26 23:22:41 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/31 18:08:45 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	ft_forking(t_list *cmd, t_list *list, t_fd *fd, t_execve_params *ep)
 	if (pid < 0)
 	{
 		perror("minishell: fork");
+		g_exit_status = 1;
 		return (1);
 	}
 	else if (pid == 0)

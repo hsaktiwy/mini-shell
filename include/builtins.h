@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:35:46 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/31 16:18:48 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/31 17:35:20 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,5 @@ void	ft_void(void);
 int		print_error(char *command, char *str_error, int print_error);
 int		print_error2(char *identifier, int i);
 int		print_error3(char *msg);
+
 #endif

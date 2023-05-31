@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/31 17:24:36 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/31 18:47:41 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	signal_handler(int sig)
 
 void	set_signal_handlers()
 {
-	// rl_cach_signals = 0;
+	rl_catch_signals = 0;
 	signal(SIGINT, signal_handler);	// handle Ctr+c
 	signal(SIGQUIT, signal_handler);	// ignore Ctr+'\'
 	signal(SIGTSTP, SIG_IGN);	// ignore Ctr+'z'
@@ -104,7 +104,7 @@ void	main2(char *input, t_env *env)
 	err_lex = lexical_erreur(input);
 	g_pipe_count(0);
 	g_heredoc_count(0);
-	//show_time(NULL);
+	// show_time(NULL);
 	//show_time("Before lexing");
 	//show_time("Before lexing");
 	if (err_lex != -1)
@@ -115,7 +115,7 @@ void	main2(char *input, t_env *env)
 	if (err_lex == -1)
 	{
 		//display_tokens(tokens);
-		//show_time("Before addition data info");
+		// show_time("Before addition data info");
 		fix_expanding_issue(&tokens);
 		ini_arg_count(&tokens);
 		//show_time("After addition data info");
@@ -126,10 +126,10 @@ void	main2(char *input, t_env *env)
 		g_token_l(tokens);
 		//display_tokens(tokens);
 		//display_tokens(list);
-		//show_time("Before execution");
+		// show_time("Before execution");
 		if(list)
 			execute(list);
-		///show_time("After execution");
+		// show_time("After execution");
 		ft_lstclear(&list, NULL);
 	}
 	free_tokens(&tokens);
@@ -157,6 +157,7 @@ int	check_redirection(char *input)
 	{
 		ft_putstr_fd("minibash: maximum here-document count exceeded\n",
 			STDERR_FILENO);
+		// free and exit(2)
 		return (0);
 	}
 	return (1);
