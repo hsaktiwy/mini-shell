@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:06:48 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/27 17:27:07 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/31 00:37:01 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	save_cmd(t_execve_params *ep, t_env *env);
 void	ft_perror(char *msg);
 void	restore_signals_in_child(void);
 void	ft_init_fd(t_fd *fd, int *get_exit);
+
+char	*shell_init_pwd(char *pwd, int stat);
 
 //tmp
 int		isFileDescriptorValid(int fd);

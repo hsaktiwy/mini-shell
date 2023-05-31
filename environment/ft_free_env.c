@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:25:19 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/26 15:10:05 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/31 01:31:28 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ void	ft_free_env(t_env **env_t)
 		free_list(&(*env_t)->l_env);
 	}
 	free(*env_t);
+	shell_init_pwd(NULL, 2);
 }

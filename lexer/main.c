@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/31 14:38:22 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/31 17:24:36 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	g_exit_status;
 // 	}
 // 	g_heredoc_count(0);
 // }
-
 void	signal_handler(int sig)
 {
 	int fd;
@@ -58,7 +57,7 @@ void	signal_handler(int sig)
 
 void	set_signal_handlers()
 {
-	rl_catch_signals = 0;
+	// rl_cach_signals = 0;
 	signal(SIGINT, signal_handler);	// handle Ctr+c
 	signal(SIGQUIT, signal_handler);	// ignore Ctr+'\'
 	signal(SIGTSTP, SIG_IGN);	// ignore Ctr+'z'
@@ -174,12 +173,7 @@ int	main(__attribute__((unused)) int ac,
 	while (1)
 	{
 		restore_stdin();
-		// char buf[4000];
-		// getcwd(buf, 4000);
-		// printf("\33[31mSHLVL:(%s) exit:(%d):~%s#\33[00m", ft_getenv(env_s, "SHLVL"), g_exit_status, buf);
 		input = readline("minibash-3.2$ ");
-		// input = "exit";
-		// if the user pressed Ctr+D
 		if (!input)
 		{
 			ft_free_env(&env_s);

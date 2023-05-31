@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:31:17 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/27 16:40:05 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/29 16:42:38 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	dup_redirections(t_list *cmd)
 	file = ((t_cmd *)(((t_token *)(cmd->content))->value))->file_in;
 	if (file)
 	{
-		if (ft_strncmp(file, ".here_doc", 9) == 0)
+		if (ft_strncmp(file, "/tmp/.here_doc", 9) == 0)
 		{
 			fd = open(file, O_RDONLY, 0666);
 			if (fd == -1)

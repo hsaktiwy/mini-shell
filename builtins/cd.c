@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:50:22 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/26 16:40:56 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/31 17:14:43 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,29 +54,74 @@ char	*get_path(t_cmd *command, t_env *env)
 	return (path);
 }
 
+void	set_pwd(int *flag, char *oldpwd, t_cmd *cmd, t_env *env)
+{
+	char	*cwd;
+	char	*tmp;
+
+	if (!*flag)
+		ft_setenv(&env, "OLDPWD", oldpwd);
+	else
+		ft_setenv(&env, "OLDPWD", "");
+	cwd = getcwd(NULL, PATH_MAX + 1);
+	if ( cwd != NULL)
+	{
+		ft_setenv(&env, "PWD", cwd);
+		shell_init_pwd(cwd, 1);
+		*flag = 0;
+	}
+	else
+	{
+		print_error3("cd");
+		if (ft_strcmp(((t_file *)(cmd->arg->content))->a_file, "..") == 0)
+			tmp = ft_strjoin(shell_init_pwd(NULL, 1), "/..");
+		else
+			tmp = ft_strjoin(shell_init_pwd(NULL, 1), "/.");
+		shell_init_pwd(tmp, 1);
+	}
+	return ;
+}
+
+int	check_prev_dir(t_cmd *cmd, int flag)
+{
+	DIR*	dir;
+	
+	if (flag == 0
+		&& ft_strcmp(((t_file *)(cmd->arg->content))->a_file, "..") == 0)
+	{
+		dir = opendir("..");
+		if (dir == NULL) {
+			perror("minishell: cd: ..");
+			return 1;
+		}
+		closedir(dir);
+	}
+	return (0);
+}
+
 int	ft_cd(t_cmd *command)
 {
-	char	*path;
-	char	cwd[4096];
-	char	*oldpwd;
+	char		*path;
+	char		cwd[PATH_MAX + 1];
+	char		*oldpwd;
+	static int	flag;
 
-	getcwd(cwd, 4096);
+	if (check_prev_dir(command, flag))
+		return (1);
+	if (getcwd(cwd, PATH_MAX + 1) == NULL)
+		flag = 1;
 	path = get_path(command, command->env);
 	if (!path || !*path)
 		return (1);
-	if (chdir(path) != 0)
-	{
-		print_error(command->cmd, path, 1);
-		return (1);
-	}
+	if (chdir(path) == -1)
+		return (print_error(command->cmd, path, 1), 1);
 	if (command->arg_count != 0
 		&& ft_strcmp(((t_file *)(command->arg->content))->a_file, "-") == 0)
 	{
 		oldpwd = ft_getenv(command->env, "OLDPWD");
-		write(command->cmd_out, oldpwd, ft_strlen(oldpwd));
+		if (oldpwd)
+			write(command->cmd_out, oldpwd, ft_strlen(oldpwd));
 		write(command->cmd_out, "\n", 1);
 	}
-	ft_setenv(&(command->env), "OLDPWD", cwd);
-	ft_setenv(&(command->env), "PWD", getcwd(cwd, 4096));
-	return (0);
+	return (set_pwd(&flag, cwd, command, g_env_s(NULL)), 0);
 }

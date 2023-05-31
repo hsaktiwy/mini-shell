@@ -92,3 +92,7 @@
 }
 
     exit 1 in ^C
+
+
+
+test runung bash on  a folder that doesn't exist
