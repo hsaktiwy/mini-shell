@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:50:22 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/31 02:00:13 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/31 17:14:43 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,46 +54,62 @@ char	*get_path(t_cmd *command, t_env *env)
 	return (path);
 }
 
-void	set_pwd(int flag, char *oldpwd)
+void	set_pwd(int *flag, char *oldpwd, t_cmd *cmd, t_env *env)
 {
 	char	*cwd;
-	t_env	*env;
 	char	*tmp;
 
-	env = g_env_s(NULL);
-	if (!flag)
+	if (!*flag)
 		ft_setenv(&env, "OLDPWD", oldpwd);
 	else
 		ft_setenv(&env, "OLDPWD", "");
-
 	cwd = getcwd(NULL, PATH_MAX + 1);
 	if ( cwd != NULL)
 	{
 		ft_setenv(&env, "PWD", cwd);
 		shell_init_pwd(cwd, 1);
+		*flag = 0;
 	}
 	else
 	{
-		tmp = ft_strjoin(shell_init_pwd(NULL, 1), "/..");
+		print_error3("cd");
+		if (ft_strcmp(((t_file *)(cmd->arg->content))->a_file, "..") == 0)
+			tmp = ft_strjoin(shell_init_pwd(NULL, 1), "/..");
+		else
+			tmp = ft_strjoin(shell_init_pwd(NULL, 1), "/.");
 		shell_init_pwd(tmp, 1);
 	}
 	return ;
 }
 
+int	check_prev_dir(t_cmd *cmd, int flag)
+{
+	DIR*	dir;
+	
+	if (flag == 0
+		&& ft_strcmp(((t_file *)(cmd->arg->content))->a_file, "..") == 0)
+	{
+		dir = opendir("..");
+		if (dir == NULL) {
+			perror("minishell: cd: ..");
+			return 1;
+		}
+		closedir(dir);
+	}
+	return (0);
+}
 
 int	ft_cd(t_cmd *command)
 {
-	char	*path;
-	char	cwd[PATH_MAX + 1];
-	char	*oldpwd;
-	int		flag;
+	char		*path;
+	char		cwd[PATH_MAX + 1];
+	char		*oldpwd;
+	static int	flag;
 
-	flag = 0;
+	if (check_prev_dir(command, flag))
+		return (1);
 	if (getcwd(cwd, PATH_MAX + 1) == NULL)
-	{
-		printf("cd: error retrieving current directory\n");
 		flag = 1;
-	}
 	path = get_path(command, command->env);
 	if (!path || !*path)
 		return (1);
@@ -107,5 +123,5 @@ int	ft_cd(t_cmd *command)
 			write(command->cmd_out, oldpwd, ft_strlen(oldpwd));
 		write(command->cmd_out, "\n", 1);
 	}
-	return (set_pwd(flag, cwd), 0);
+	return (set_pwd(&flag, cwd, command, g_env_s(NULL)), 0);
 }
