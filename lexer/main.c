@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/30 14:34:10 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/31 13:35:33 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	set_signal_handlers()
 	signal(SIGTSTP, SIG_IGN);	// ignore Ctr+'z'
 }
 
-void	restore_stdin()
+void	restore_stdin(void)
 {
 	if (!isatty(STDIN_FILENO) && g_stdin_fd(-1) != 0)
 	{
@@ -74,6 +74,25 @@ void	restore_stdin()
 			perror("minishell: close");
 	}
 	g_stdin_fd(0);
+}
+#include <sys/time.h>
+void	show_time(char *str)
+{
+	long int time;
+	static long int s_ts;
+	struct timeval tm;
+
+	if (str == NULL)
+	{
+		gettimeofday(&tm, NULL);
+		s_ts = tm.tv_sec * 1000 + tm.tv_usec / 1000;
+	}
+	else
+	{
+		gettimeofday(&tm, NULL);
+		time = tm.tv_sec * 1000 + tm.tv_usec / 1000;
+		printf("time of %s : %ld(current: %ld, start: %ld)\n", str,time - s_ts, time, s_ts);
+	}
 }
 
 void	main2(char *input, t_env *env)
@@ -86,22 +105,32 @@ void	main2(char *input, t_env *env)
 	err_lex = lexical_erreur(input);
 	g_pipe_count(0);
 	g_heredoc_count(0);
+	show_time(NULL);
+	show_time("Before lexing");
+	show_time("Before lexing");
 	if (err_lex != -1)
 		lexer_err(&input[err_lex]);
 	else
 		lexer(&tokens, input, env);
+	show_time("After lexing");
 	if (err_lex == -1)
 	{
 		//display_tokens(tokens);
+		show_time("Before addition data info");
 		fix_expanding_issue(&tokens);
 		ini_arg_count(&tokens);
+		show_time("After addition data info");
 		//display_tokens(tokens);
+		show_time("Before parser");
 		list = parser(env, &tokens, input);
+		show_time("After parser");
 		g_token_l(tokens);
 		//display_tokens(tokens);
 		//display_tokens(list);
+		show_time("Before execution");
 		if(list)
 			execute(list);
+		show_time("After execution");
 		ft_lstclear(&list, NULL);
 	}
 	free_tokens(&tokens);

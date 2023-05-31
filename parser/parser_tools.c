@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:52:33 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/27 18:26:41 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/30 15:06:16 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	syntaxe_error_display(t_list *list, t_token *tmp, char *c)
 	}
 	else
 	{
-		ft_putstr_fd("mini-shell: syntax error near ,", STDERR_FILENO);
+		ft_putstr_fd("mini-shell: syntax error near ", STDERR_FILENO);
 		ft_putstr_fd("unexpected token `newline'\n", STDERR_FILENO);
 	}
 }
