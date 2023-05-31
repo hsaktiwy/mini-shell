@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:26:20 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/26 18:47:53 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/05/31 01:53:52 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ t_env	*ft_init_env(char **env)
 	t_env	*env_l;
 	size_t	size;
 
+	shell_init_pwd(NULL, 0);
 	env_l = (t_env *)malloc(sizeof(t_env));
 	if (!env_l)
 		return (perror("minishell: malloc"), NULL);
