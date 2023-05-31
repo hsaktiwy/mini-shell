@@ -6,13 +6,21 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/31 18:47:41 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/01 00:14:18 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	g_exit_status;
+
+int	g_fix_sigint(int i)
+{
+	static int	var;
+
+	var += i;
+	return (var);
+}
 
 // void	unlink_here_doc()
 // {
@@ -43,10 +51,12 @@ void	signal_handler(int sig)
 			close(STDIN_FILENO);
 			g_cmd_executing(-2);
 			g_stdin_fd(fd);
+			g_fix_sigint(2);
 		}
 		else if (g_cmd_executing(-1) == 0)
 		{
-			printf("\n");
+			if (g_fix_sigint(0) == 0)
+				printf("\n");
 			rl_on_new_line();
 			rl_replace_line("", 0);
 			rl_redisplay();
@@ -57,7 +67,8 @@ void	signal_handler(int sig)
 
 void	set_signal_handlers()
 {
-	rl_catch_signals = 0;
+	// rl_catch_signals = 0;
+
 	signal(SIGINT, signal_handler);	// handle Ctr+c
 	signal(SIGQUIT, signal_handler);	// ignore Ctr+'\'
 	signal(SIGTSTP, SIG_IGN);	// ignore Ctr+'z'
@@ -73,6 +84,8 @@ void	restore_stdin(void)
 			perror("minishell: close");
 	}
 	g_stdin_fd(0);
+	if (g_fix_sigint(0) > 0)
+		g_fix_sigint(-1);
 }
 #include <sys/time.h>
 void	show_time(char *str)
