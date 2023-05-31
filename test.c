@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 20:34:56 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/29 16:33:01 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/31 14:57:12 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,9 +274,18 @@ int	ft_regx(char *string, char *exp)
 	}
 	return (free_tab(points), corr);
 }
+#include <dirent.h>
 int main(int argc, char **argv)
 {
-	if (argc == 3)
-		printf("%d\n", ft_regx(argv[1], argv[2]));
+	// if (argc == 3)
+	// 	printf("%d\n", ft_regx(argv[1], argv[2]));
+	DIR *dir;
+	struct dirent *entry;
+	dir = opendir(".");
+	
+	while ((entry = readdir(dir)))
+	{
+		printf("dir name:%s\n", entry->d_name);
+	}
 	return (0);
 }

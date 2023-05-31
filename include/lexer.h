@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lol <lol@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 11:59:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/28 17:39:30 by lol              ###   ########.fr       */
+/*   Updated: 2023/05/31 15:25:17 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,24 @@ void	free_tokens(t_list **list);
 void	free_token(void *value);
 int		handle_command(t_list **tokens, t_env *env, char *input, int *index);
 void	handle_arg(t_list **tokens, t_env *env, char *input, int *index);
+void	handle_pipe(t_list **tokens, int *index, int *cmd);
 void	fix_expanding_issue(t_list **tokens);
 void	ini_arg_count(t_list **tokens);
 int		lexical_erreur(char	*input);
 
+t_token	*last_cmd(t_list **tokens);
+int		get_start(char *str);
+void	add_fake_cmd(t_list **tokens, int cmd);
 char	*here_doc_name(char *common, int nbr);
 void	lexer_err(char *str);
 char	*expand_input(t_env *env, char *line);
 char	*expand(t_env *env, char *line);
 
 void	display_tokens(t_list	*tokens);
+// wildcards
 char	*iswildcards(char *input);
+char	double_or_single(char input, char old_c);
+int		isendwith(char *string);
+void	fre_tab(char **pp); // this maybe deleted
+char	*add_wildcards_to_input(char *input, char *tmp);
 #endif

@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/31 13:35:33 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/05/31 14:38:22 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,32 +105,32 @@ void	main2(char *input, t_env *env)
 	err_lex = lexical_erreur(input);
 	g_pipe_count(0);
 	g_heredoc_count(0);
-	show_time(NULL);
-	show_time("Before lexing");
-	show_time("Before lexing");
+	//show_time(NULL);
+	//show_time("Before lexing");
+	//show_time("Before lexing");
 	if (err_lex != -1)
 		lexer_err(&input[err_lex]);
 	else
 		lexer(&tokens, input, env);
-	show_time("After lexing");
+	//show_time("After lexing");
 	if (err_lex == -1)
 	{
 		//display_tokens(tokens);
-		show_time("Before addition data info");
+		//show_time("Before addition data info");
 		fix_expanding_issue(&tokens);
 		ini_arg_count(&tokens);
-		show_time("After addition data info");
+		//show_time("After addition data info");
 		//display_tokens(tokens);
-		show_time("Before parser");
+		//show_time("Before parser");
 		list = parser(env, &tokens, input);
-		show_time("After parser");
+		//show_time("After parser");
 		g_token_l(tokens);
 		//display_tokens(tokens);
 		//display_tokens(list);
-		show_time("Before execution");
+		//show_time("Before execution");
 		if(list)
 			execute(list);
-		show_time("After execution");
+		///show_time("After execution");
 		ft_lstclear(&list, NULL);
 	}
 	free_tokens(&tokens);
