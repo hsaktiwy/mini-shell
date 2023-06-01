@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 16:24:20 by lol               #+#    #+#             */
-/*   Updated: 2023/05/31 16:02:37 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/01 15:29:34 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*wildcards_start(char *arg)
 
 	res = arg;
 	x = ft_strlen(arg) - 1;
-	while (res[x] && (!iswhitespace(res[x]) && res[x] != '>'
+	while (x >= 0 && res[x] && (!iswhitespace(res[x]) && res[x] != '>'
 			&& res[x] != '<' && res[x] != '|'))
 		x--;
 	tmp = ft_strdup(&res[++x]);
@@ -89,10 +89,10 @@ char	*process_wildcards(char *arg, char	*input, int *i, int *red)
 	char	*res;
 
 	res = arg;
-	if (i != 0 && (input[*i - 1] != '\'' || (input[*i + 1]
-				&& input[*i + 1] != '\'')))
+	if (*i == 0)
 		res = process_wildcard_argument(res, input, i);
-	else if (i == 0)
+	else if (*i != 0 && (input[*i - 1] != '\'' || (input[*i + 1]
+				&& input[*i + 1] != '\'')))
 		res = process_wildcard_argument(res, input, i);
 	else
 		res = add_to_arg(res, input, i, red);

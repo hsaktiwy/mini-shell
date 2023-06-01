@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/01 00:14:18 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/01 15:42:11 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ int	check_redirection(char *input)
 {
 	int		i;
 	char	*res;
+	t_env	*env;
 
 	res = input;
 	i = -1;
@@ -170,8 +171,10 @@ int	check_redirection(char *input)
 	{
 		ft_putstr_fd("minibash: maximum here-document count exceeded\n",
 			STDERR_FILENO);
-		// free and exit(2)
-		return (0);
+		env = g_env_s(NULL);
+		ft_free_env(&env);
+		free(input);
+		exit(2);
 	}
 	return (1);
 }
