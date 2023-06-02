@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:31:17 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/02 15:37:26 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/02 18:20:25 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,22 @@ void	exec_c(t_execve_params *execve_params, t_env *env)
 {
 	execve(execve_params->path, execve_params->args, env->env);
 	write(2, "minishell: ", 11);
-	if (errno == EACCES)
+	if (errno == ENOENT)
 	{
-		if (is_a_directory(execve_params->path) == 1)
+		perror(execve_params->path);
+		exit(127);
+	}
+	else
+	{
+		if (errno == EACCES && is_a_directory(execve_params->path) == 1)
 		{
 			write(STDERR_FILENO, execve_params->path,
 				ft_strlen(execve_params->path));
 			write(STDERR_FILENO, ": is a directory\n", 17);
 		}
-		else if (is_a_directory(execve_params->path) == 2)
+		else
 			perror(execve_params->path);
 		exit(126);
-	}
-	else
-	{
-		perror(execve_params->path);
-		exit(127);
 	}
 }
 
@@ -60,11 +60,6 @@ void	dup_stdin_and_stdout(t_list *cmd, t_fd *fd)
 			perror("minishell: close");
 	}
 }
-
-// int	isFileDescriptorValid(int fd)
-// {
-//     return fcntl(fd, F_GETFD) != -1;
-// }
 
 void	dup_redirections(t_list *cmd)
 {

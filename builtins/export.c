@@ -6,39 +6,11 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 11:24:21 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/02 18:06:28 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/02 18:10:53 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	sort_env_list(t_list *head)
-{
-	char	*p;
-	t_list	*tmp;
-
-	while (head)
-	{
-		tmp = head->next;
-		while (tmp)
-		{
-			if (f(((t_holder *)(head->content))->key,
-				((t_holder *)(tmp->content))->key))
-			{
-				p = ((t_holder *)(head->content))->key;
-				((t_holder *)(head->content))->key = \
-				((t_holder *)(tmp->content))->key;
-				((t_holder *)(tmp->content))->key = p;
-				p = ((t_holder *)(head->content))->value;
-				((t_holder *)(head->content))->value = \
-				((t_holder *)(tmp->content))->value;
-				((t_holder *)(tmp->content))->value = p;
-			}
-			tmp = tmp->next;
-		}
-		head = head->next;
-	}
-}
 
 void	print_export(t_cmd *command)
 {
@@ -123,7 +95,7 @@ void	ft_helper(char *key, char *arg, char **value)
 	t_env	*env;
 
 	env = g_env_s(NULL);
-	get_value(key, arg,env, value);
+	get_value(key, arg, env, value);
 	ft_setenv(&env, key, *value);
 	free(key);
 	free(*value);
@@ -151,7 +123,7 @@ int	ft_export(t_cmd *command)
 			free(key);
 			print_error2(arg, 1);
 			status = 1;
-			continue;
+			continue ;
 		}
 		ft_helper(key, arg, &value);
 	}

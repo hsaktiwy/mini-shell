@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:06:48 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/01 20:53:13 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/02 18:11:35 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,8 @@ void	save_cmd(t_execve_params *ep, t_env *env);
 void	ft_perror(char *msg);
 void	restore_signals_in_child(void);
 void	ft_init_fd(t_fd *fd, int *get_exit);
-
+void	sort_env_list(t_list *head);
 char	*shell_init_pwd(char *pwd, int stat);
 int		is_a_directory(char *filename);
-
-//tmp
-int		isFileDescriptorValid(int fd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:50:22 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/02 16:12:03 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/02 18:40:22 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int	check_prev_dir(t_cmd *cmd, int flag)
 {
 	DIR	*dir;
 
+	if (cmd->arg_count <= 0)
+		return (0);
 	if (flag == 0
 		&& ft_strcmp(((t_file *)(cmd->arg->content))->a_file, "..") == 0)
 	{

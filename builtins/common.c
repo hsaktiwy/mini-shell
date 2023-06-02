@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:45:11 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/02 17:54:04 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/02 18:11:07 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,32 @@ int	f(char *key1, char*key2)
 void	ft_void(void)
 {
 	return ;
+}
+
+void	sort_env_list(t_list *head)
+{
+	char	*p;
+	t_list	*tmp;
+
+	while (head)
+	{
+		tmp = head->next;
+		while (tmp)
+		{
+			if (f(((t_holder *)(head->content))->key,
+				((t_holder *)(tmp->content))->key))
+			{
+				p = ((t_holder *)(head->content))->key;
+				((t_holder *)(head->content))->key = \
+				((t_holder *)(tmp->content))->key;
+				((t_holder *)(tmp->content))->key = p;
+				p = ((t_holder *)(head->content))->value;
+				((t_holder *)(head->content))->value = \
+				((t_holder *)(tmp->content))->value;
+				((t_holder *)(tmp->content))->value = p;
+			}
+			tmp = tmp->next;
+		}
+		head = head->next;
+	}
 }
