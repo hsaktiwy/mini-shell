@@ -100,7 +100,7 @@ test runung bash on  a folder that doesn't exist
 #####################################################################
 ➜  myshell42 git:(abdelatif) ✗ ./minishell 
 [x] minibash-3.2$ *.txt
-<<end <<end <<end <<end <<end <<end <<end <<end <<end <<end <<end <<end <<end <<end <<end ||| <<end 
+[x] <<end <<end <<end <<end <<end <<end <<end <<end <<end <<end <<end <<end <<end <<end <<end ||| <<end 
 <<end
 bash: syntax error near unexpected token '|'
 and then herdocs before error are opened
