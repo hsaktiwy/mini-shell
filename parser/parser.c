@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:48:28 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/26 18:53:54 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/02 14:48:17 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ t_list	*parser(t_env *env, t_list **tokens, char *input)
 	list = NULL;
 	current = *tokens;
 	err = syntax_error(input, *tokens);
+	if (err < 0)
+		syntax_error_here_doc(tokens);
 	if (err == 1)
 	{
 		redirection_habdling(env, tokens);

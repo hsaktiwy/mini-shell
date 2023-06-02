@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/02 16:45:08 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/02 19:38:53 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,32 +89,18 @@ void	main2(char *input, t_env *env)
 	err_lex = lexical_erreur(input);
 	g_pipe_count(0);
 	g_heredoc_count(0);
-	// show_time(NULL);
-	//show_time("Before lexing");
-	//show_time("Before lexing");
 	if (err_lex != -1)
 		lexer_err(&input[err_lex]);
 	else
 		lexer(&tokens, input, env);
-	//show_time("After lexing");
 	if (err_lex == -1)
 	{
-		//display_tokens(tokens);
-		// show_time("Before addition data info");
 		fix_expanding_issue(&tokens);
 		ini_arg_count(&tokens);
-		//show_time("After addition data info");
-		//display_tokens(tokens);
-		//show_time("Before parser");
 		list = parser(env, &tokens, input);
-		//show_time("After parser");
 		g_token_l(tokens);
-		//display_tokens(tokens);
-		//display_tokens(list);
-		// show_time("Before execution");
-		if(list)
+		if (list)
 			execute(list);
-		// show_time("After execution");
 		ft_lstclear(&list, NULL);
 	}
 	free_tokens(&tokens);
@@ -124,26 +110,58 @@ void	main2(char *input, t_env *env)
 // {
 // 	system("leaks minishell");
 // }
+int	next_is_not(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (iswhitespace(str[i]))
+			i++;
+		else if (str[i] == c)
+			return (0);
+		else
+			break ;
+	}
+	return (1);
+}
+
 int	check_redirection(char *input)
 {
 	int		i;
 	char	*res;
+	t_env	*env;
+	int		count;
 
 	res = input;
 	i = -1;
-	while (res)
+	count = 0;
+	while (res[++i])
 	{
-		i++;
-		res = strstr(res, "<<");
-		if (res)
-			res = &res[2];
+		if (res[i] == '<' && res[i + 1] && res[i + 1] == '<')
+		{
+			count++;
+			i +=2;
+		}
+		else if (res[i] == '|')
+		{
+			if (i == 0)
+				break ;
+			else if (!next_is_not(&res[i + 1], '|'))
+				break ;
+			else if (!res[i + 1])
+				break ;
+		}
 	}
-	if (i > 16)
+	if (count > 16)
 	{
 		ft_putstr_fd("minibash: maximum here-document count exceeded\n",
 			STDERR_FILENO);
-		// free and exit(2)
-		return (0);
+		env = g_env_s(NULL);
+		ft_free_env(&env);
+		free(input);
+		exit(2);
 	}
 	return (1);
 }
@@ -170,7 +188,6 @@ int	main(__attribute__((unused)) int ac,
 		{
 			add_history(input);
 			input = expand_input(env_s, input);
-			input = iswildcards(input);
 			if(check_redirection(input))
 				main2(input, env_s);
 		}

@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 15:13:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/27 11:20:23 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/02 15:28:31 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	in_red_cmd(t_env *env, t_token **red, t_token **command)
 		fd = here_doc_red(env, (*red)->value);
 	if (fd == -1)
 		return (0);
-	if (*command)
+	if (command && *command)
 	{
 		cmd = (*command)->value;
 		cmd->cmd_in = fd;

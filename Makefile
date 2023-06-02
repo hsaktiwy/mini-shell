@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+         #
+#    By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 13:01:11 by hsaktiwy          #+#    #+#              #
-#    Updated: 2023/05/31 17:26:29 by aigounad         ###   ########.fr        #
+#    Updated: 2023/06/01 15:11:14 by hsaktiwy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-# FLAGS = -Wall -Wextra -Werror -g -I/Users/hsaktiwy/.brew/opt/readline/include -I$(INCLUDE_DIR) #-fsanitize=address
-FLAGS = -Wall -Wextra -Werror -g -I/Users/aigounad/.brew/opt/readline/include -I$(INCLUDE_DIR) -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -g -I/Users/hsaktiwy/.brew/opt/readline/include -I$(INCLUDE_DIR) -fsanitize=address
+#FLAGS = -Wall -Wextra -Werror -g -I/Users/aigounad/.brew/opt/readline/include -I$(INCLUDE_DIR) -fsanitize=address
 
 ENV =  ft_getenv.c ft_setenv.c ft_setenv_utils.c ft_init_env.c ft_init_env_utils.c ft_unset_envs.c ft_free_env.c
 
@@ -47,8 +47,8 @@ HEAD_EXE = include/execution.h $(HEADER)
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-#	@$(CC) $(FLAGS) $(OBJ) -o $@ -lreadline  -L /Users/hsaktiwy/.brew/opt/readline/lib
-	@$(CC) $(FLAGS) $(OBJ) -o $@ -lreadline  -L /Users/aigounad/.brew/opt/readline/lib
+	@$(CC) $(FLAGS) $(OBJ) -o $@ -lreadline  -L /Users/hsaktiwy/.brew/opt/readline/lib
+#	@$(CC) $(FLAGS) $(OBJ) -o $@ -lreadline  -L /Users/aigounad/.brew/opt/readline/lib
 	@echo "Compilation completed."
 
 obj/parser/%.o : parser/%.c $(HEAD_PAR) | obj_dir
