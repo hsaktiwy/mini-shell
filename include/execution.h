@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:06:48 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/31 00:37:01 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/01 20:53:13 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	restore_signals_in_child(void);
 void	ft_init_fd(t_fd *fd, int *get_exit);
 
 char	*shell_init_pwd(char *pwd, int stat);
+int		is_a_directory(char *filename);
 
 //tmp
 int		isFileDescriptorValid(int fd);

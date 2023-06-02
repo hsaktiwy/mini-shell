@@ -6,37 +6,11 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:31:17 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/29 16:42:38 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/02 15:37:26 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	is_a_directory(char *filename)
-{
-	struct stat file_info;
-
-	if (stat(filename, &file_info) == 0)
-	{
-		if (S_ISDIR(file_info.st_mode))
-			return (1);
-		else if (S_ISREG(file_info.st_mode))
-			return (2);
-	}
-	// else if (lstat(filename, &file_info) == 0)
-	// {
-	// 	if (S_ISDIR(file_info.st_mode))
-	// 		return (1);
-	// 	else if (S_ISREG(file_info.st_mode))
-	// 		return (2);
-	// }
-	else
-	{
-		return (-1);
-		perror("minishell: stat");
-	}
-	return (0);
-}
 
 void	exec_c(t_execve_params *execve_params, t_env *env)
 {
@@ -46,14 +20,15 @@ void	exec_c(t_execve_params *execve_params, t_env *env)
 	{
 		if (is_a_directory(execve_params->path) == 1)
 		{
-			write(STDERR_FILENO, execve_params->path, ft_strlen(execve_params->path));
+			write(STDERR_FILENO, execve_params->path,
+				ft_strlen(execve_params->path));
 			write(STDERR_FILENO, ": is a directory\n", 17);
 		}
 		else if (is_a_directory(execve_params->path) == 2)
 			perror(execve_params->path);
 		exit(126);
 	}
-	else if (errno == ENOENT)
+	else
 	{
 		perror(execve_params->path);
 		exit(127);

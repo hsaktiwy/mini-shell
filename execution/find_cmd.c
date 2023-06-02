@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   find_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:38:32 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/27 15:40:26 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/01 18:54:46 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void ft_init_fd(t_fd *fd, int *get_exit)
+void	ft_init_fd(t_fd *fd, int *get_exit)
 {
 	*get_exit = 1;
 	fd->fd[0] = -1;
@@ -47,18 +47,35 @@ void	append_filename(char *filename, char *path, char *des)
 	des[j] = 0;
 }
 
+int	is_a_directory(char *filename)
+{
+	struct stat	file_info;
+
+	if (stat(filename, &file_info) == 0)
+	{
+		if (S_ISDIR(file_info.st_mode))
+			return (1);
+		else if (S_ISREG(file_info.st_mode))
+			return (2);
+	}
+	else
+	{
+		return (-1);
+		perror("minishell: stat");
+	}
+	return (0);
+}
+
 char	*findcmd(char *filename)
 {
 	char	**paths;
 	char	path[4096];
 	int		i;
 
-	if (is_builtin(filename)
-		|| ft_strchr(filename, '/')
+	if (is_builtin(filename) || ft_strchr(filename, '/')
 		|| !ft_getenv(g_env_s(NULL), "PATH"))
 		return (ft_strdup(filename));
-	if (ft_strcmp(filename, ".") == 0
-		|| ft_strcmp(filename, "..") == 0
+	if (ft_strcmp(filename, ".") == 0 || (ft_strcmp(filename, "..") == 0)
 		|| !*filename)
 		return (NULL);
 	paths = ft_split(ft_getenv(g_env_s(NULL), "PATH"), ':');

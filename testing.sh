@@ -170,3 +170,12 @@ Indirect leak of 32 byte(s) in 16 object(s) allocated from:
 
 SUMMARY: AddressSanitizer: 288 byte(s) leaked in 32 allocation(s).
 root@abdelatif:~/mini-shell# 
+
+
+
+-rw-r--r--  1 aigounad  candidate  5 Jun  1 20:56 ls
+minibash-3.2$ chmod +x ls
+minibash-3.2$ ./ls
+minishell: minishell: waitpid: No child processes
+minibash-3.2$ echo $?
+0
