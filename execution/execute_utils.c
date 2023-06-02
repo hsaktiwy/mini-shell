@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:59:30 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/02 15:36:48 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/02 16:09:27 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	wait_4_last_command(t_list *cmd, pid_t pid)
 	if (pid == -1)
 		return ;
 	if (!(cmd->next))
-	if (waitpid(pid, &g_exit_status, 0) == -1)
-		perror("minishell: waitpid");
+		if (waitpid(pid, &g_exit_status, 0) == -1)
+			perror("minishell: waitpid");
 }
 
 void	command_not_found(t_list *cmd, int *get_exit)

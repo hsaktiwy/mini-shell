@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:50:22 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/31 17:14:43 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/02 16:12:03 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	set_pwd(int *flag, char *oldpwd, t_cmd *cmd, t_env *env)
 	else
 		ft_setenv(&env, "OLDPWD", "");
 	cwd = getcwd(NULL, PATH_MAX + 1);
-	if ( cwd != NULL)
+	if (cwd != NULL)
 	{
 		ft_setenv(&env, "PWD", cwd);
 		shell_init_pwd(cwd, 1);
@@ -84,15 +84,16 @@ void	set_pwd(int *flag, char *oldpwd, t_cmd *cmd, t_env *env)
 
 int	check_prev_dir(t_cmd *cmd, int flag)
 {
-	DIR*	dir;
-	
+	DIR	*dir;
+
 	if (flag == 0
 		&& ft_strcmp(((t_file *)(cmd->arg->content))->a_file, "..") == 0)
 	{
 		dir = opendir("..");
-		if (dir == NULL) {
+		if (dir == NULL)
+		{
 			perror("minishell: cd: ..");
-			return 1;
+			return (1);
 		}
 		closedir(dir);
 	}

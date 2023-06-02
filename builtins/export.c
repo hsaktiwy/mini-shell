@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 11:24:21 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/26 01:18:23 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/02 18:06:28 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,30 +118,42 @@ void	get_value(char *key, char *arg, t_env *env, char **value)
 	}
 }
 
+void	ft_helper(char *key, char *arg, char **value)
+{
+	t_env	*env;
+
+	env = g_env_s(NULL);
+	get_value(key, arg,env, value);
+	ft_setenv(&env, key, *value);
+	free(key);
+	free(*value);
+}
+
 int	ft_export(t_cmd *command)
 {
 	t_list	*arg_list;
 	char	*value;
 	char	*key;
 	char	*arg;
+	char	status;
 
+	status = 0;
 	arg_list = command->arg;
 	if (command->arg_count == 0)
 		print_export(command);
 	while (arg_list)
 	{
 		arg = ((t_file *)(arg_list->content))->a_file;
+		arg_list = arg_list->next;
 		key = get_key(arg);
 		if (check_key(key))
 		{
 			free(key);
-			return (print_error2(arg, 1));
+			print_error2(arg, 1);
+			status = 1;
+			continue;
 		}
-		get_value(key, arg, command->env, &value);
-		ft_setenv(&(command->env), key, value);
-		free(key);
-		free(value);
-		arg_list = arg_list->next;
+		ft_helper(key, arg, &value);
 	}
-	return (0);
+	return (status);
 }

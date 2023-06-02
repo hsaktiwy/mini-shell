@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 17:26:20 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/31 16:22:33 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/02 16:12:20 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	print_error3(char *msg)
 
 char	*shell_init_pwd(char *pwd, int stat)
 {
-	static char *cwd;
+	static char	*cwd;
 
 	if (pwd == NULL && stat == 1)
 		return (cwd);
