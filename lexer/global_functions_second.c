@@ -1,25 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstfree_t_file.c                                :+:      :+:    :+:   */
+/*   global_function_second.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/03 15:06:27 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/03 15:06:30 by hsaktiwy         ###   ########.fr       */
+/*   Created: 2023/06/03 14:56:17 by hsaktiwy          #+#    #+#             */
+/*   Updated: 2023/06/03 14:59:00 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "minishell.h"
 
-void	ft_lstfree_t_file(t_list **node)
+int	g_pipe_count(int i)
 {
-	t_file	*file;
+	static int	j;
 
-	if (*node)
-	{
-		file = (*node)->content;
-		free(file->a_file);
-		ft_lstfree_node(node);
-	}
+	if (i == -1)
+		return (j);
+	j = i;
+	return (j);
+}
+
+int	g_heredoc_count(int i)
+{
+	static int	j;
+
+	if (i == 1)
+		j++;
+	else if (i == 0)
+		j = 0;
+	return (j);
+}
+
+int	g_heredo_numb(int i)
+{
+	static int	j;
+
+	if (i == -1)
+		return (j);
+	j = i;
+	return (j);
 }

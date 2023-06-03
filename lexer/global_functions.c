@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 17:34:45 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/30 14:52:04 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/03 14:58:19 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_list	*g_token_l(t_list *tokens)
 		g_tokens = tokens;
 	return (g_tokens);
 }
+
 int	g_cmd_executing(pid_t newpid)
 {
 	static pid_t	oldpid;
@@ -52,37 +53,6 @@ int	g_cmd_executing(pid_t newpid)
 }
 
 int	g_heredoc_executing(int i)
-{
-	static int	j;
-
-	if (i == -1)
-		return (j);
-	j = i;
-	return (j);
-}
-
-int	g_pipe_count(int i)
-{
-	static int	j;
-
-	if (i == -1)
-		return (j);
-	j = i;
-	return (j);
-}
-
-int	g_heredoc_count(int	i)
-{
-	static int	j;
-
-	if (i == 1)
-		j++;
-	else if (i == 0)
-		j = 0;
-	return (j);
-}
-
-int	g_heredo_numb(int i)
 {
 	static int	j;
 

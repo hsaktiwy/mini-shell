@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 16:24:20 by lol               #+#    #+#             */
-/*   Updated: 2023/06/02 19:24:32 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/03 15:30:56 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,19 @@ char	*add_wildcards_to_input(char *input, char *tmp)
 	return (res);
 }
 
+int	is_there_wildcard(char *input)
+{
+	int	i;
+
+	i = -1;
+	while (input[++i])
+	{
+		if (input[i] == '*')
+			return (1);
+	}
+	return (0);
+}
+
 char	*iswildcards(char *input, t_argument_type type)
 {
 	char	*arg;
@@ -47,9 +60,14 @@ char	*iswildcards(char *input, t_argument_type type)
 
 	arg = ft_strdup("");
 	tmp = ft_strtrim(input, " ");
-	if (type == VARIABLE)
-		arg = add_wildcards_to_input(arg, tmp);
+	if (is_there_wildcard(input))
+	{
+		if (type == VARIABLE)
+			arg = add_wildcards_to_input(arg, tmp);
+		else
+			arg = local_dir(arg, tmp);
+		return (free(input), free(tmp), arg);
+	}
 	else
-		arg = local_dir(arg, tmp);
-	return (free(input), free(tmp), arg);
+		return (free(tmp), free(arg), input);
 }
