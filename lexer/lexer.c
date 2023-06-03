@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:03:39 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/31 14:16:00 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/03 15:41:18 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int	lexer(t_list **tokens, char *input, t_env *env)
 			cmd = handle_command(tokens, env, input, &i);
 		else
 			handle_arg(tokens, env, input, &i);
+		printf("cmd = %d\n", cmd);
 		if (iswhitespace(input[i]))
 			i++;
 	}

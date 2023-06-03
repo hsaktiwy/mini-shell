@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:46:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/02 19:34:10 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/03 15:54:53 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,17 @@ void	handle_command_helper(t_cmd **cmd)
 	int		i;
 
 	i = 0;
+	if (!(*(*cmd)->cmd))
+		return ;
 	tab = ft_split((*cmd)->cmd, '#');
 	free((*cmd)->cmd);
-	(*cmd)->cmd = tab[0];
-	while (tab[++i])
+	(*cmd)->cmd = tab[i++];
+	printf("%s_%s\n", tab[0], tab[1]);
+	while (tab[i])
 		ft_lstadd_back(&((*cmd)->arg), ft_lstnew(creat_arg(tab[i], WORD)));
 	(*cmd)->cmd_type = WORD;
+	//printf("??\n");
+	free(tab);
 }
 
 int	handle_command(t_list **tokens, t_env *env, char *input, int *index)
@@ -59,6 +64,7 @@ int	handle_command(t_list **tokens, t_env *env, char *input, int *index)
 		if (!(str_iswhitespaced(cmd->cmd) && cmd->cmd_type != VARIABLE))
 		{
 			cmd->cmd = iswildcards(cmd->cmd, VARIABLE);
+			//printf("cmd = %s\n", cmd->cmd);
 			handle_command_helper(&cmd);
 		}
 		ft_lstadd_back(tokens, ft_lstnew(token));
@@ -79,6 +85,7 @@ void	handle_arg_helper(char *file, t_token **cmd)
 	while (tab[++i])
 		ft_lstadd_back(&(((t_cmd *)(*cmd)->value)->arg),
 			ft_lstnew(creat_arg(tab[i], WORD)));
+	free(tab);
 }
 
 void	handle_arg(t_list **tokens, t_env *env, char *input, int *index)
