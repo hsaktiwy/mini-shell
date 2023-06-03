@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:17:59 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/30 14:50:14 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/03 17:20:05 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,10 +136,9 @@ char	*get_double_quote(t_env *env, char *s, int *index)
 			else
 				c = '\0';
 			i++;
-		}else if (c == '\"')
+		}
+		else if (c == '\"')
 		{
-			//(*index) += i;
-			// printf("from double to -> get_simple_arg(%s)(%d)\n",&s[i], *index);
 			res = str_join(res, get_simple_arg(env, &s[i], index));
 			break ;
 		}
@@ -149,9 +148,6 @@ char	*get_double_quote(t_env *env, char *s, int *index)
 			ft_strncat(res, &s[i], 1);
 			i++;
 		}
-		// printf("??? = %c _ %s(c == [%c])\n", s[i], res, c);
 	}
-	//printf("double -quote :%s\n", res);
-	// printf("final result : |%s|\n", res);
 	return ((*index) += i, res);
 }

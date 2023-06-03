@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 15:07:39 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/02 19:21:31 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/03 17:24:55 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*add_matchs(struct dirent *entry, char *arg, char	*tmp, int *i)
 	{
 		if (ft_regx(entry->d_name, tmp))
 		{
-			res = str_join(res, ft_strdup("#"));
+			res = str_join(res, ft_strdup("\n"));
 			res = str_join(res, ft_strdup(entry->d_name));
 			(*i)++;
 		}
@@ -94,7 +94,7 @@ char	*local_dir(char *arg, char *tmp)
 	}
 	if (i == 0)
 	{
-		res = str_join(res, ft_strdup("#"));
+		res = str_join(res, ft_strdup("\n"));
 		res = str_join(res, ft_strdup(tmp));
 	}
 	return (res);

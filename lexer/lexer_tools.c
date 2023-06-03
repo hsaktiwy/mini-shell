@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:46:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/03 16:04:59 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/03 17:24:08 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	handle_command_helper(t_cmd **cmd)
 		return ;
 	tab = ft_split((*cmd)->cmd, '#');
 	free((*cmd)->cmd);
-	(*cmd)->cmd = tab[i++];
-	while (tab[i])
+	(*cmd)->cmd = tab[0];
+	while (tab[++i])
 		ft_lstadd_back(&((*cmd)->arg), ft_lstnew(creat_arg(tab[i], WORD)));
 	(*cmd)->cmd_type = WORD;
 	free(tab);
@@ -50,11 +50,14 @@ int	handle_command(t_list **tokens, t_env *env, char *input, int *index)
 {
 	t_token	*token;
 	t_cmd	*cmd;
+	// char	*r;
 
 	token = (t_token *)malloc(sizeof(t_token));
 	if (!token)
 		return (0);
 	token->type = COMMAND;
+	// r = get_token(&input[*index]);
+	// printf("%s\n", r);
 	token->value = get_cmd(env, &input[*index], index);
 	if (token->value)
 	{
@@ -78,7 +81,7 @@ void	handle_arg_helper(char *file, t_token **cmd)
 	int		i;
 
 	i = -1;
-	tab = ft_split(file, '#');
+	tab = ft_split(file, '\n');
 	while (tab[++i])
 		ft_lstadd_back(&(((t_cmd *)(*cmd)->value)->arg),
 			ft_lstnew(creat_arg(tab[i], WORD)));
