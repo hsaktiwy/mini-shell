@@ -1,45 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iswhitespace.c                                  :+:      :+:    :+:   */
+/*   ft_replace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/18 18:16:48 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/04 19:20:39 by hsaktiwy         ###   ########.fr       */
+/*   Created: 2023/06/04 15:56:22 by hsaktiwy          #+#    #+#             */
+/*   Updated: 2023/06/04 19:20:28 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	iswhitespace(char c)
+void	ft_replace(void *str, char old, char new)
 {
-	return (c == 32 || (c >= 9 && c <= 13));
-}
+	int		i;
+	char	*tmp;
 
-int	str_iswhitespaced(char *str)
-{
-	int	i;
-
+	tmp = str;
 	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
+	while (tmp[i])
 	{
-		if (iswhitespace(str[i]))
-			return (1);
+		if (tmp[i] == old)
+			tmp[i] = new;
 		i++;
 	}
-	return (0);
-}
-
-int	surpace_whitesspaces(char *str, int *index)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && iswhitespace(str[i]))
-		i++;
-	(*index) += i;
-	return (i);
 }

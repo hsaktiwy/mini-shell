@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 16:24:20 by lol               #+#    #+#             */
-/*   Updated: 2023/06/03 15:30:56 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/04 19:20:21 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,51 @@ int	is_there_wildcard(char *input)
 	return (0);
 }
 
-char	*iswildcards(char *input, t_argument_type type)
+// ini_s is the initial input (i will create a function that repplace
+// trure wildcards with a \n : dfine true(exp : 'test*'* the * that are at 
+//the last of the exp is the true wildcard unlick the one attached to test))
+// i used t_c to help me keep trap if c change like in this case with out this
+//trap : exp (a*'*') result will be (a\n*') while we want (a\n*)
+char	*replace_true_wildcards(char *arg)
+{
+	int		i;
+	char	c;
+	char	*res;
+	char	t_c;
+
+	res = ft_strdup("");
+	i = -1;
+	c = '\0';
+	while (arg[++i])
+	{
+		t_c = c;
+		c = double_or_single(arg[i], c);
+		if (!c && arg[i] == '*')
+		{
+			res = ft_realloc(res, ft_strlen(res) + 2);
+			ft_strncat(res, "\n", 1);
+		}
+		else if ((!c || arg[i] != c) && t_c == c)
+		{
+			res = ft_realloc(res, ft_strlen(res) + 2);
+			ft_strncat(res, &arg[i], 1);
+		}
+	}
+	return (res);
+}
+
+char	*iswildcards(char *input, char	*ini_s)
 {
 	char	*arg;
 	char	*tmp;
 
 	arg = ft_strdup("");
-	tmp = ft_strtrim(input, " ");
-	if (is_there_wildcard(input))
+	if (input && is_there_wildcard(input))
 	{
-		if (type == VARIABLE)
-			arg = add_wildcards_to_input(arg, tmp);
-		else
-			arg = local_dir(arg, tmp);
+		tmp = replace_true_wildcards(ini_s);
+		arg = local_dir(arg, tmp);
 		return (free(input), free(tmp), arg);
 	}
 	else
-		return (free(tmp), free(arg), input);
+		return (free(arg), input);
 }

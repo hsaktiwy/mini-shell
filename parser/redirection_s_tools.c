@@ -6,11 +6,25 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 15:12:29 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/02 15:52:46 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/04 19:19:46 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	get_true_file(t_file *tmp, int *num)
+{
+	char	**res;
+
+	if (tmp->a_file)
+	{
+		res = ft_split(tmp->a_file, '\n');
+		*num = ft_t_strlen(res);
+		free(tmp->a_file);
+		tmp->a_file = ft_strdup(res[0]);
+		fre_tab(res);
+	}
+}
 
 int	find_delimeter(char *line, char *needle)
 {

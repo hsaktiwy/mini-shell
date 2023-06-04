@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:31:06 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/03 15:13:30 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/04 19:20:38 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,60 +115,61 @@ int	check_quotes_validity(char *input)
 		return (0);
 }
 
-void	get_file_helper(t_file *file, char *input, int *i, int *index)
-{
-	t_env	*env;
+// void	get_file_helper(t_file **file, char *input, int *i, int *index)
+// {
+// 	t_env	*env;
 
-	env = g_env_s(NULL);
-	if (input[*i] == '\"'
-		&& check_quotes_validity(&input[*i]))
+// 	env = g_env_s(NULL);
+// 	if (input[*i] == '\"'
+// 		&& check_quotes_validity(&input[*i]))
+// 	{
+// 		(*index)++;
+// 		*file = creat_arg(get_double_quote(env, &input[++(*i)], index), DOUBLE_QUOTE);
+// 	}
+// 	else if (check_quotes_validity(&input[*i]))
+// 	{
+// 		if (input[*i] == '$')
+// 			*file = creat_arg(get_simple_arg(env, &input[*i], index), VARIABLE);
+// 		else
+// 			*file = creat_arg(get_simple_arg(env, &input[*i], index), WORD);
+// 	}
+// }
+int	input_arg_size(char *str)
+{
+	int		i;
+	char	c;
+
+	c = '\0';
+	i = 0;
+	while (str[i] && ((!c && !iswhitespace(str[i]) && str[i] != '|'
+				&& str[i] != '<' &&	str[i] != '>') || c))
 	{
-		(*index)++;
-		file = creat_arg(get_double_quote(env, &input[++(*i)], index), DOUBLE_QUOTE);
+		c = double_or_single(str[i], c);
+		i++;
 	}
-	else if (check_quotes_validity(&input[*i]))
-	{
-		if (input[*i] == '$')
-			file = creat_arg(get_simple_arg(env, &input[*i], index), VARIABLE);
-		else
-			file = creat_arg(get_simple_arg(env, &input[*i], index), WORD);
-	}
+	return (i);
 }
 
 t_file	*get_file(t_env *env, char *input, int *index)
 {
 	t_file	*file;
-	int		i;
+	char	*tmp;
+	char	*r;
 
 	file = NULL;
-	i = 0;
-	i += surpace_whitesspaces(input, index);
-	if (!input || !input[i])
+	surpace_whitesspaces(&input[*index], index);
+	tmp = ft_strdup(&input[*index]);
+	*index += input_arg_size(&input[*index]);
+	tmp = expand_input(env, tmp);
+	if (!tmp || !tmp)
 	{
 		file = creat_arg(NULL, WORD);
 		return (file);
 	}
-	else if (input[i] == '\''
-		&& check_quotes_validity(&input[i]))
-	{
-		(*index)++;
-		file = creat_arg(get_single_quote(env, &input[++i],
-		index), SINGLE_QUOTE);
-	}
 	else
-		get_file_helper(file, input, &i, index);
-	// else if (input[i] == '\"'
-	// 	&& check_quotes_validity(&input[i]))
-	// {
-	// 	(*index)++;
-	// 	file = creat_arg(get_double_quote(env, &input[++i], index), DOUBLE_QUOTE);
-	// }
-	// else if (check_quotes_validity(&input[i]))
-	// {
-	// 	if (input[i] == '$')
-	// 		file = creat_arg(get_simple_arg(env, &input[i], index), VARIABLE);
-	// 	else
-	// 		file = creat_arg(get_simple_arg(env, &input[i], index), WORD);
-	// }
-	return (file);
+		file = creat_arg(get_token(tmp), WORD);
+	r = get_initial_token(tmp);
+	if (file)
+		file->a_file = iswildcards(file->a_file, r);
+	return (free(r), file);
 }

@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 14:37:42 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/04 13:46:37 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/04 19:20:00 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,71 @@ char	*remove_white_spaces(char *p)
 	return (p);
 }
 
+// char    *expand_input(t_env *env, char *line)
+// {
+// 	int		i;
+// 	char 	c;
+// 	int		s;
+// 	char	*arg;
+
+// 	i = 0;
+// 	c = '\0';
+// 	arg = ft_strdup("");
+// 	s = 0;
+// 	while (line[i])
+// 	{
+// 		if ((line[i] == '~' && (iswhitespace(line[i + 1])
+// 			|| line[i + 1] == '\0' || line[i + 1] == '/') && c == '\0'))
+// 		{
+// 			if (ft_getenv(env, "HOME"))
+// 				arg = reallocated_str(arg, ft_getenv(env, "HOME"));
+// 			else
+// 			{
+// 				arg = ft_realloc(arg, ft_strlen(arg) + 2);
+// 				ft_strncat(arg, &line[i], 1);
+// 			}
+// 			i++;
+// 		}
+// 		else if (line[i])
+// 		{
+// 			if (line[i] == '\'' && c == '\0')
+// 				c = '\'';
+// 			else if (line[i] == '\"' && c == '\0')
+// 				c = '\"';
+// 			else if (line[i] == '\'' && c == '\'')
+// 				c = '\0';
+// 			else if (line[i] == '\"' && c == '\"')
+// 				c = '\0';
+// 			if (s == 0 && iswhitespace(line[i]) && c == '\0')
+// 			{
+// 				arg = ft_realloc(arg, ft_strlen(arg) + 2);
+// 				ft_strncat(arg, &line[i], 1);
+// 				s = 1;
+// 			}
+// 			else if (s == 1 && !iswhitespace(line[i]))
+// 			{
+// 				arg = ft_realloc(arg, ft_strlen(arg) + 2);
+// 				ft_strncat(arg, &line[i], 1);
+// 				s = 0;
+// 			}
+// 			else
+// 			{
+// 				arg = ft_realloc(arg, ft_strlen(arg) + 2);
+// 				ft_strncat(arg, &line[i], 1);
+// 			}
+// 			i++;
+// 		}
+// 	}
+// 	free(line);
+// 	return (remove_white_spaces(arg));
+// }
 char    *expand_input(t_env *env, char *line)
 {
 	int		i;
 	char 	c;
 	int		s;
 	char	*arg;
+	int		k;
 
 	i = 0;
 	c = '\0';
@@ -89,33 +148,42 @@ char    *expand_input(t_env *env, char *line)
 			}
 			i++;
 		}
+		else if (s == 0 && (!c || c == '\"') && line[i] == '$' && (ft_isalpha(line[i + 1])
+				|| line[i + 1] == '?' || line[i + 1] == '{'
+				|| line[i + 1] == '_'))
+		{
+			k = 0;
+			while (line[k + i + 1] && line[k + i + 1] != '?' && line[k + i + 1] != '{'
+				&& (ft_isalnum(line[k + i + 1]) || line[k + i + 1] == '_'))
+				k++;
+			if (line[k + i + 1] == '{')
+				k++;
+			if (line[k + i + 1] == '?')
+				k++;
+			arg = expand_env_var(env, &line[i + 1], arg, &k);
+			i += k + 1;
+		}
 		else if (line[i])
 		{
-			if (line[i] == '\'' && c == '\0')
-				c = '\'';
-			else if (line[i] == '\"' && c == '\0')
-				c = '\"';
-			else if (line[i] == '\'' && c == '\'')
-				c = '\0';
-			else if (line[i] == '\"' && c == '\"')
-				c = '\0';
-			if (s == 0 && iswhitespace(line[i]) && c == '\0')
-			{
-				arg = ft_realloc(arg, ft_strlen(arg) + 2);
-				ft_strncat(arg, &line[i], 1);
+			c = double_or_single(line[i], c);
+			// if (s == 0 && iswhitespace(line[i]) && c == '\0')
+			// {
+			// 	arg = ft_realloc(arg, ft_strlen(arg) + 2);
+			// 	ft_strncat(arg, &line[i], 1);
+			// 	s = 1;
+			// }
+			// else if (s == 1 && !iswhitespace(line[i]))
+			// {
+			// 	arg = ft_realloc(arg, ft_strlen(arg) + 2);
+			// 	ft_strncat(arg, &line[i], 1);
+			// 	s = 0;
+			// }
+			if (!c && (line[i] == '<' || line[i] == '>'))
 				s = 1;
-			}
-			else if (s == 1 && !iswhitespace(line[i]))
-			{
-				arg = ft_realloc(arg, ft_strlen(arg) + 2);
-				ft_strncat(arg, &line[i], 1);
+			if (line[i] != '<' && line[i] != '>' && !iswhitespace(line[i]))
 				s = 0;
-			}
-			else
-			{
-				arg = ft_realloc(arg, ft_strlen(arg) + 2);
-				ft_strncat(arg, &line[i], 1);
-			}
+			arg = ft_realloc(arg, ft_strlen(arg) + 2);
+			ft_strncat(arg, &line[i], 1);
 			i++;
 		}
 	}

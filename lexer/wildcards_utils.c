@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 15:07:39 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/02 19:21:31 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/04 19:20:26 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	check_exp_edge(char	**points, char *string, char *exp, int i)
 	char	*tmp;
 
 	corr = 1;
-	if (!points[i] && exp[0] != '*')
+	if (!points[i] && exp[0] != '\n')
 	{
 		tmp = strstr(string, points[0]);
 		if (string < tmp)
@@ -45,7 +45,7 @@ int	ft_regx(char *string, char *exp)
 
 	corr = 1;
 	tmp = string;
-	points = ft_split(exp, '*');
+	points = ft_split(exp, '\n');
 	i = -1;
 	while (tmp && *tmp && points[++i])
 		tmp = strstr(tmp, points[i]);
@@ -64,7 +64,7 @@ char	*add_matchs(struct dirent *entry, char *arg, char	*tmp, int *i)
 	{
 		if (ft_regx(entry->d_name, tmp))
 		{
-			res = str_join(res, ft_strdup("#"));
+			res = str_join(res, ft_strdup("\n"));
 			res = str_join(res, ft_strdup(entry->d_name));
 			(*i)++;
 		}
@@ -94,7 +94,8 @@ char	*local_dir(char *arg, char *tmp)
 	}
 	if (i == 0)
 	{
-		res = str_join(res, ft_strdup("#"));
+		res = str_join(res, ft_strdup("\n"));
+		ft_replace(tmp, '\n', '*');
 		res = str_join(res, ft_strdup(tmp));
 	}
 	return (res);
