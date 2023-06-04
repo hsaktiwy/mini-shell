@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:29:04 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/27 17:29:28 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/04 19:20:32 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
 int		ft_numlen(int nb);
 size_t	str_len(const char *s);
-
+void	ft_replace(void *str, char old, char new);
 // get next line 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 5

@@ -1,45 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iswhitespace.c                                  :+:      :+:    :+:   */
+/*   redirection_t_tools.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/18 18:16:48 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/04 19:20:39 by hsaktiwy         ###   ########.fr       */
+/*   Created: 2023/06/04 19:47:47 by hsaktiwy          #+#    #+#             */
+/*   Updated: 2023/06/04 19:49:37 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "parser.h"
 
-int	iswhitespace(char c)
+void	display_ambiguise(t_file	*tmp)
 {
-	return (c == 32 || (c >= 9 && c <= 13));
-}
-
-int	str_iswhitespaced(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-	{
-		if (iswhitespace(str[i]))
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	surpace_whitesspaces(char *str, int *index)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && iswhitespace(str[i]))
-		i++;
-	(*index) += i;
-	return (i);
+	write(STDERR_FILENO, "minishell : ", 11);
+	write(STDERR_FILENO, tmp->token_file,
+		ft_strlen(tmp->token_file));
+	write(STDERR_FILENO, ": ambiguous redirect\n", 22);
 }

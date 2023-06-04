@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:03:39 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/03 15:41:18 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/04 19:43:08 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,18 @@ void	handle_heredoc(t_list **tokens, t_env *env, char *input, int *index)
 	int		start;
 	char	*r;
 
+	(void) env;
 	token = (t_token *)malloc(sizeof(t_token));
 	if (!token)
 		return ;
 	*index += 2;
+	surpace_whitesspaces(&input[*index], index);
 	r = get_token(&input[*index]);
 	start = get_start(&input[*index]);
 	g_heredoc_count(1);
 	token->type = HERE_DOC;
-	token->value = get_file(env, &input[*index], index);
-	free(((t_file *)token->value)->a_file);
+	*index += input_arg_size(&input[*index]);
+	token->value = creat_arg(NULL, WORD);
 	((t_file *)token->value)->a_file = r;
 	((t_file *)token->value)->token_file = here_doc_name("/tmp/.here_doc",
 			g_heredoc_count(-1));
@@ -46,7 +48,7 @@ void	handle_inredirect(t_list **tokens, t_env *env, char *input, int *index)
 	++(*index);
 	r = get_token(&input[*index]);
 	token->type = IN_REDIRECT;
-	token->value = get_file(env, &input[*index], index);
+	token->value = get_file(env, input, index);
 	((t_file *)token->value)->token_file = r;
 	ft_lstadd_back(tokens, ft_lstnew(token));
 }
@@ -63,7 +65,7 @@ void	handle_appendredirect(t_list **tokens, t_env *env, char *input,
 	*index += 2;
 	r = get_token(&input[*index]);
 	token->type = APPEND_REDIRECT;
-	token->value = get_file(env, &input[*index], index);
+	token->value = get_file(env, input, index);
 	((t_file *)token->value)->token_file = r;
 	ft_lstadd_back(tokens, ft_lstnew(token));
 }
@@ -79,7 +81,7 @@ void	handle_outredirect(t_list **tokens, t_env *env, char *input, int *index)
 	++(*index);
 	r = get_token(&input[*index]);
 	token->type = OUT_REDIRECT;
-	token->value = get_file(env, &input[*index], index);
+	token->value = get_file(env, input, index);
 	((t_file *)token->value)->token_file = r;
 	ft_lstadd_back(tokens, ft_lstnew(token));
 }
@@ -107,7 +109,6 @@ int	lexer(t_list **tokens, char *input, t_env *env)
 			cmd = handle_command(tokens, env, input, &i);
 		else
 			handle_arg(tokens, env, input, &i);
-		printf("cmd = %d\n", cmd);
 		if (iswhitespace(input[i]))
 			i++;
 	}

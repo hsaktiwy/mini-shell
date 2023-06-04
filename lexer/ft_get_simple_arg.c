@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:20:03 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/27 16:38:02 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/04 19:43:14 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*get_simple_arg(t_env *env, char *str, int *index)
 			if (str[k + i + 1] == '?')
 				k++;
 			arg = expand_env_var(env ,&str[i + 1], arg, &k);
-			i += k + 1;	
+			i += k + 1;
 		}
 		else if (str[i] == '\'')
 		{
@@ -50,11 +50,8 @@ char	*get_simple_arg(t_env *env, char *str, int *index)
 			ft_strncat(arg, &str[i], 1);
 			i++;
 		}
-		// printf("??? = %c _ %s\n", str[i], arg);
 	}
 	if (!ft_strlen(arg) && k != 0)
 		return ((*index) += i, free(arg), NULL);
-	//printf("simple -arg :%s\n", arg);
-	// printf("--> final result to return : [%s]\n", arg);
 	return ((*index) += i,arg);
 }

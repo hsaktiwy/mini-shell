@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:17:59 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/30 14:50:14 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/04 19:43:21 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,36 +110,36 @@ char	*get_double_quote(t_env *env, char *s, int *index)
 	char c;
 	char *res;
 	int i;
-	int k;
+	// int k;
 
 	i = 0;
 	c = '\0';
 	res = ft_strdup("");
 	while (s[i] && (!c || (c == '\"' && !iswhitespace(s[i]) && s[i] != '|'  && s[i] != '<'  && s[i] != '>')))
 	{
-		if (s[i] == '$' && (ft_isalpha(s[i + 1]) || s[i + 1] == '?' || s[i + 1] == '{'||  s[i + 1] == '_'))
-		{
-			k = 0;
-			while (s[k + i + 1] && s[k + i + 1] != '?' && s[k + i + 1] != '{' && (ft_isalnum(s[k + i + 1]) || s[k + i + 1] == '_'))
-				k++;
-			if (s[k + i + 1] == '{')
-				k++;
-			if(s[k + i + 1] == '?')
-				k++;
-			res = expand_env_var(env, &s[i + 1], res, &k);
-			i += k + 1;
-		}
-		else if (s[i] == '\"')
+		// if (s[i] == '$' && (ft_isalpha(s[i + 1]) || s[i + 1] == '?' || s[i + 1] == '{'||  s[i + 1] == '_'))
+		// {
+		// 	k = 0;
+		// 	while (s[k + i + 1] && s[k + i + 1] != '?' && s[k + i + 1] != '{' && (ft_isalnum(s[k + i + 1]) || s[k + i + 1] == '_'))
+		// 		k++;
+		// 	if (s[k + i + 1] == '{')
+		// 		k++;
+		// 	if(s[k + i + 1] == '?')
+		// 		k++;
+		// 	res = expand_env_var(env, &s[i + 1], res, &k);
+		// 	i += k + 1;
+		// }
+		// else 
+		if (s[i] == '\"')
 		{
 			if(!c)
 				c = '\"';
 			else
 				c = '\0';
 			i++;
-		}else if (c == '\"')
+		}
+		else if (c == '\"')
 		{
-			//(*index) += i;
-			// printf("from double to -> get_simple_arg(%s)(%d)\n",&s[i], *index);
 			res = str_join(res, get_simple_arg(env, &s[i], index));
 			break ;
 		}
@@ -149,9 +149,6 @@ char	*get_double_quote(t_env *env, char *s, int *index)
 			ft_strncat(res, &s[i], 1);
 			i++;
 		}
-		// printf("??? = %c _ %s(c == [%c])\n", s[i], res, c);
 	}
-	//printf("double -quote :%s\n", res);
-	// printf("final result : |%s|\n", res);
 	return ((*index) += i, res);
 }
