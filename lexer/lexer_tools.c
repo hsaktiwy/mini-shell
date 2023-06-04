@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:46:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/04 19:19:52 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/04 21:22:02 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,27 +66,34 @@ void	handle_command_helper(t_cmd **cmd)
 	(*cmd)->cmd_type = WORD;
 	free(tab);
 }
+void	cmd_helper(t_cmd *cmd, char *ini_t_r)
+{
+	char	**t_r;
+
+	t_r = split(ini_t_r);
+}
 
 int	handle_command(t_list **tokens, t_env *env, char *input, int *index)
 {
 	t_token	*token;
 	t_cmd	*cmd;
 	char	*r;
+	char	*tmp;
 
 	token = (t_token *)malloc(sizeof(t_token));
 	if (!token)
 		return (0);
 	token->type = COMMAND;
 	r = get_initial_token(&input[*index]);
-	token->value = get_cmd(env, &input[*index], index);
-	if (token->value)
+	*index += input_arg_size(&input[*index]);
+	tmp = ft_strdup(r);
+	tmp = expand_input(env, tmp);
+	token->value = ini_cmd(env);
+	if (token->value && tmp)
 	{
 		cmd = token->value;
-		// if (!(str_iswhitespaced(cmd->cmd) && cmd->cmd_type != VARIABLE))
-		// {
-			cmd->cmd = iswildcards(cmd->cmd, r);
-			handle_command_helper(&cmd);
-		// }
+		cmd->cmd = iswildcards(cmd->cmd, r);
+		handle_command_helper(&cmd);
 		ft_lstadd_back(tokens, ft_lstnew(token));
 		return (free(r), 1);
 	}
@@ -112,13 +119,18 @@ void	handle_arg(t_list **tokens, t_env *env, char *input, int *index)
 	t_list	*node;
 	char	*file;
 	char	*r;
+	char	*tmp;
 
 	cmd = NULL;
 	node = NULL;
+	printf("%s\n", &input[*index]);
 	cmd = last_cmd(tokens);
-	r = get_initial_token(&input[*index]);
-	file = get_simple_arg(env, &input[*index], index);
-	//printf("in arguement :file : %s _ r = %s\n", file, r);
+	tmp = ft_strdup(&input[*index]);
+	*index += input_arg_size(tmp);
+	printf("-->%s\n", tmp);
+	r = get_initial_token(tmp);
+	file = expand_input(env, tmp);
+	file = get_token(file);
 	file = iswildcards(file, r);
 	handle_arg_helper(file, &cmd);
 	free(file);

@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:07:28 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/30 14:49:45 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/04 21:16:06 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,25 +58,48 @@ int	is_splitable_env(char *str)
 	return (0);
 }
 
-t_cmd	*get_cmd(t_env *env, char *input, int *index)
-{
-	t_cmd	*cmd;
+// t_cmd	*get_cmd(t_env *env, char *input, int *index)
+// {
+// 	t_cmd	*cmd;
 
-	if (!input)
-		return (NULL);
-	cmd = ini_cmd(env);
-	if (check_quotes_validity(input))
-	{
-		if (input[0] && input[0] != '|')
-		{
-			cmd->cmd = get_simple_arg(env, input, index);
-			if (is_splitable_env(input))
-				cmd->cmd_type = VARIABLE;
-			else
-				cmd->cmd_type = WORD;
-		}
-	}
-	if (cmd->cmd == NULL)
-		return (free(cmd), NULL);
-	return (cmd);
-}
+// 	if (!input)
+// 		return (NULL);
+// 	cmd = ini_cmd(env);
+// 	if (check_quotes_validity(input))
+// 	{
+// 		if (input[0] && input[0] != '|')
+// 		{
+// 			cmd->cmd = get_simple_arg(env, input, index);
+// 			if (is_splitable_env(input))
+// 				cmd->cmd_type = VARIABLE;
+// 			else
+// 				cmd->cmd_type = WORD;
+// 		}
+// 	}
+// 	if (cmd->cmd == NULL)
+// 		return (free(cmd), NULL);
+// 	return (cmd);
+// }
+
+// t_cmd	*get_cmd(t_env *env, char *input)
+// {
+// 	t_cmd	*cmd;
+
+// 	if (!input)
+// 		return (NULL);
+// 	cmd = ini_cmd(env);
+// 	if (check_quotes_validity(input))
+// 	{
+// 		if (input[0] && input[0] != '|')
+// 		{
+// 			cmd->cmd = get_simple_arg(env, input, index);
+// 			if (is_splitable_env(input))
+// 				cmd->cmd_type = VARIABLE;
+// 			else
+// 				cmd->cmd_type = WORD;
+// 		}
+// 	}
+// 	if (cmd->cmd == NULL)
+// 		return (free(cmd), NULL);
+// 	return (cmd);
+// }
