@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 14:37:42 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/04 19:20:00 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/04 19:33:30 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ char	*remove_white_spaces(char *p)
 // 	free(line);
 // 	return (remove_white_spaces(arg));
 // }
+
 char    *expand_input(t_env *env, char *line)
 {
 	int		i;
@@ -166,18 +167,6 @@ char    *expand_input(t_env *env, char *line)
 		else if (line[i])
 		{
 			c = double_or_single(line[i], c);
-			// if (s == 0 && iswhitespace(line[i]) && c == '\0')
-			// {
-			// 	arg = ft_realloc(arg, ft_strlen(arg) + 2);
-			// 	ft_strncat(arg, &line[i], 1);
-			// 	s = 1;
-			// }
-			// else if (s == 1 && !iswhitespace(line[i]))
-			// {
-			// 	arg = ft_realloc(arg, ft_strlen(arg) + 2);
-			// 	ft_strncat(arg, &line[i], 1);
-			// 	s = 0;
-			// }
 			if (!c && (line[i] == '<' || line[i] == '>'))
 				s = 1;
 			if (line[i] != '<' && line[i] != '>' && !iswhitespace(line[i]))
