@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:17:19 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/04 19:19:48 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/04 19:54:20 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,24 +106,26 @@ int	here_doc_red(t_env *env, t_file *tmp)
 
 int	out_append_red(t_file *tmp, int out_app)
 {
-	int	fd;
+	int		fd;
+	int		num;
 
 	fd = -1;
+	num = 1;
+	get_true_file(tmp, &num);
 	if (out_app == OUT_REDIRECT)
 	{
-		if (tmp->a_file)
+		if (num == 1 && tmp->a_file)
 			fd = open(tmp->a_file, O_RDWR | O_CREAT | O_TRUNC, 0644);
 		else if (ft_strlen(tmp->token_file))
-		{
-			write(STDERR_FILENO, "minishell : ", 11);
-			write(STDERR_FILENO, tmp->token_file,
-				ft_strlen(tmp->token_file));
-			write(STDERR_FILENO, ": ambiguous redirect\n", 22);
-			return (fd);
-		}
+			return (display_ambiguise(tmp), -1);
 	}
 	else if (out_app == APPEND_REDIRECT)
-		fd = open(tmp->a_file, O_RDWR | O_CREAT | O_APPEND, 0644);
+	{
+		if (num == 1 && tmp->a_file)
+			fd = open(tmp->a_file, O_RDWR | O_CREAT | O_APPEND, 0644);
+		else if (ft_strlen(tmp->token_file))
+			return (display_ambiguise(tmp), -1);
+	}
 	if (fd == -1)
 		print_error(NULL, tmp->a_file, 1);
 	return (fd);
