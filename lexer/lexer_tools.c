@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:46:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/03 15:54:53 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/03 17:58:56 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	handle_arg_helper(char *file, t_token **cmd)
 	int		i;
 
 	i = -1;
-	tab = ft_split(file, '#');
+	tab = ft_split(file, '\n');
 	while (tab[++i])
 		ft_lstadd_back(&(((t_cmd *)(*cmd)->value)->arg),
 			ft_lstnew(creat_arg(tab[i], WORD)));

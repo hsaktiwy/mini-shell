@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcards.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 16:24:20 by lol               #+#    #+#             */
-/*   Updated: 2023/06/03 15:30:56 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/03 17:58:16 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*add_wildcards_to_input(char *input, char *tmp)
 				res = local_dir(res, tab[i]);
 			else
 			{
-				res = str_join(res, ft_strdup("#"));
+				res = str_join(res, ft_strdup("\n"));
 				res = str_join(res, ft_strdup(tab[i]));
 			}
 		}

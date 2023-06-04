@@ -223,3 +223,11 @@
 		minibash-3.2$ chmod +x ls
 		minibash-3.2$ ./ls
 	}
+{
+	bash-3.2$ cat "'"*
+	testssssss
+	bash-3.2$ cat "*"
+	cat: *: No such file or directory
+	bash-3.2$ cat '*'
+	cat: *: No such file or directory
+}
