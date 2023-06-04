@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/02 19:38:53 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/04 19:34:50 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	main2(char *input, t_env *env)
 	t_list	*list;
 	
 	tokens = NULL;
+	//printf("hello\n");
 	err_lex = lexical_erreur(input);
 	g_pipe_count(0);
 	g_heredoc_count(0);
@@ -93,11 +94,13 @@ void	main2(char *input, t_env *env)
 		lexer_err(&input[err_lex]);
 	else
 		lexer(&tokens, input, env);
+	//printf("lexer_step done\n");
 	if (err_lex == -1)
 	{
 		fix_expanding_issue(&tokens);
 		ini_arg_count(&tokens);
 		list = parser(env, &tokens, input);
+		//display_tokens(tokens);
 		g_token_l(tokens);
 		if (list)
 			execute(list);
@@ -142,7 +145,7 @@ int	check_redirection(char *input)
 		if (res[i] == '<' && res[i + 1] && res[i + 1] == '<')
 		{
 			count++;
-			i +=2;
+			i++;
 		}
 		else if (res[i] == '|')
 		{
@@ -188,6 +191,7 @@ int	main(__attribute__((unused)) int ac,
 		{
 			add_history(input);
 			input = expand_input(env_s, input);
+			//printf("our input : %s\n", input);
 			if(check_redirection(input))
 				main2(input, env_s);
 		}

@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:17:19 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/27 19:56:09 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/04 19:19:48 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 int	in_redirection(t_file *tmp)
 {
-	int	fd;
+	int		fd;
+	int		num;
 
+	num = 1;
+	get_true_file(tmp, &num);
 	fd = -1;
-	if (tmp->a_file)
+	if (num == 1 && tmp->a_file)
 	{
 		fd = open(tmp->a_file, O_RDONLY, 0777);
 		if (fd == -1)

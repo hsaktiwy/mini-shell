@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 15:09:25 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/31 15:10:23 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/04 19:20:25 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	isendwith(char *string)
 	if (string)
 	{
 		i = ft_strlen(string);
-		if (string[i - 1] == '*')
+		if (string[i - 1] == '\n')
 			return (1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:17:59 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/03 17:20:05 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/04 19:43:21 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,26 +110,27 @@ char	*get_double_quote(t_env *env, char *s, int *index)
 	char c;
 	char *res;
 	int i;
-	int k;
+	// int k;
 
 	i = 0;
 	c = '\0';
 	res = ft_strdup("");
 	while (s[i] && (!c || (c == '\"' && !iswhitespace(s[i]) && s[i] != '|'  && s[i] != '<'  && s[i] != '>')))
 	{
-		if (s[i] == '$' && (ft_isalpha(s[i + 1]) || s[i + 1] == '?' || s[i + 1] == '{'||  s[i + 1] == '_'))
-		{
-			k = 0;
-			while (s[k + i + 1] && s[k + i + 1] != '?' && s[k + i + 1] != '{' && (ft_isalnum(s[k + i + 1]) || s[k + i + 1] == '_'))
-				k++;
-			if (s[k + i + 1] == '{')
-				k++;
-			if(s[k + i + 1] == '?')
-				k++;
-			res = expand_env_var(env, &s[i + 1], res, &k);
-			i += k + 1;
-		}
-		else if (s[i] == '\"')
+		// if (s[i] == '$' && (ft_isalpha(s[i + 1]) || s[i + 1] == '?' || s[i + 1] == '{'||  s[i + 1] == '_'))
+		// {
+		// 	k = 0;
+		// 	while (s[k + i + 1] && s[k + i + 1] != '?' && s[k + i + 1] != '{' && (ft_isalnum(s[k + i + 1]) || s[k + i + 1] == '_'))
+		// 		k++;
+		// 	if (s[k + i + 1] == '{')
+		// 		k++;
+		// 	if(s[k + i + 1] == '?')
+		// 		k++;
+		// 	res = expand_env_var(env, &s[i + 1], res, &k);
+		// 	i += k + 1;
+		// }
+		// else 
+		if (s[i] == '\"')
 		{
 			if(!c)
 				c = '\"';

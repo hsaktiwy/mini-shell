@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 11:59:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/02 19:22:59 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/04 19:20:36 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,13 @@ char	*expand(t_env *env, char *line);
 
 void	display_tokens(t_list	*tokens);
 // wildcards
-char	*iswildcards(char *input, t_argument_type type);
+char	*iswildcards(char *input, char	*ini_s);
 char	double_or_single(char input, char old_c);
 int		isendwith(char *string);
 void	fre_tab(char **pp); // this maybe deleted
 // char	*add_wildcards_to_input(char *input, char *tmp);
 char	*local_dir(char *arg, char *tmp);
 int		is_spaced_double_single(char *str);
+char	*get_initial_token(char *str);
+int		input_arg_size(char *str);
 #endif
