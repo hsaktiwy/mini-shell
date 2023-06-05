@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:46:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/04 20:41:57 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/05 01:36:41 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,12 @@ void	handle_arg_helper(char *file, t_token **cmd)
 void	handle_arg(t_list **tokens, t_env *env, char *input, int *index)
 {
 	t_token	*cmd;
-	t_list	*node;
+	// t_list	*node;
 	char	*file;
 	char	*r;
 
 	cmd = NULL;
-	node = NULL;
+	// node = NULL;
 	cmd = last_cmd(tokens);
 	r = get_initial_token(&input[*index]);
 	file = get_simple_arg(env, &input[*index], index);

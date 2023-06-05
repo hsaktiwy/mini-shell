@@ -231,3 +231,45 @@
 	bash-3.2$ cat '*'
 	cat: *: No such file or directory
 }
+
+{
+	$ cat *b
+	$ ./
+	>>>>leaks
+	##########################################
+	==19029==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 720 byte(s) in 30 object(s) allocated from:
+    #0 0x7fb84948d867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+    #1 0x55611a2dc7e0 in ft_split libft/ft_split.c:78
+    #2 0x55611a2d4138 in ft_regx lexer/wildcards_utils.c:48
+    #3 0x55611a2d42e4 in add_matchs lexer/wildcards_utils.c:65
+    #4 0x55611a2d44b9 in local_dir lexer/wildcards_utils.c:90
+    #5 0x55611a2d2fba in iswildcards lexer/wildcards.c:98
+    #6 0x55611a2d0f91 in handle_command lexer/lexer_tools.c:87
+    #7 0x55611a2d02bc in lexer lexer/lexer.c:109
+    #8 0x55611a2c9d3c in main2 lexer/main.c:96
+    #9 0x55611a2ca586 in main lexer/main.c:196
+    #10 0x7fb849186d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 570 byte(s) in 60 object(s) allocated from:
+    #0 0x7fb84948d867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+    #1 0x55611a2db2b2 in ft_substr libft/ft_substr.c:25
+    #2 0x55611a2dc6ff in splited libft/ft_split.c:56
+    #3 0x55611a2dc88c in ft_split libft/ft_split.c:85
+    #4 0x55611a2d4138 in ft_regx lexer/wildcards_utils.c:48
+    #5 0x55611a2d42e4 in add_matchs lexer/wildcards_utils.c:65
+    #6 0x55611a2d44b9 in local_dir lexer/wildcards_utils.c:90
+    #7 0x55611a2d2fba in iswildcards lexer/wildcards.c:98
+    #8 0x55611a2d0f91 in handle_command lexer/lexer_tools.c:87
+    #9 0x55611a2d02bc in lexer lexer/lexer.c:109
+    #10 0x55611a2c9d3c in main2 lexer/main.c:96
+    #11 0x55611a2ca586 in main lexer/main.c:196
+    #12 0x7fb849186d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+	####################################################################
+}
+
+{
+	echo $*
+}
+
