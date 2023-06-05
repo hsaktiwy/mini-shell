@@ -15,3 +15,5 @@ a.out.dSYM/*
 test.c
 cat.sh
 TESTING
+minishell
+.trash/

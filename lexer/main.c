@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/05 01:36:13 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/05 13:49:27 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,10 @@ void	main2(char *input, t_env *env)
 	free_tokens(&tokens);
 }
 
-// void ft_leaks()
-// {
-// 	system("leaks minishell");
-// }
+void ft_leaks()
+{
+	system("leaks minishell");
+}
 int	next_is_not(char *str, char c)
 {
 	int	i;
@@ -175,6 +175,7 @@ int	main(__attribute__((unused)) int ac,
 	char	*input;
 	t_env	*env_s;
 
+	atexit(ft_leaks);
 	set_signal_handlers();
 	env_s = ft_init_env(env);
 	while (1)
