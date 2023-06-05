@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 11:59:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/04 19:20:36 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/05 14:37:16 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 // helper to check input
 void	ft_lstfree_t_file(t_list **node);
+void	s_free(void *value);
 char	*get_token(char *str);
 char	*get_single_quote(t_env *env, char *s, int *index);
 char	*get_double_quote(t_env *env, char *s, int *index);
@@ -25,7 +26,8 @@ char	*expand_env_var(t_env *env, char *s, char *res, int *k);
 int		check_quotes_validity(char *input);
 int		is_splitable_env(char *str);
 t_file	*get_file(t_env *env, char *input, int *index);
-t_cmd	*get_cmd(t_env *env, char *input, int *index);
+// t_cmd	*get_cmd(t_env *env, char *input, int *index);
+t_cmd	*get_cmd(char *cmd);
 t_file	*creat_arg(char *file_name, t_argument_type type);
 t_cmd	*ini_cmd(t_env *env);
 
@@ -55,7 +57,7 @@ char	double_or_single(char input, char old_c);
 int		isendwith(char *string);
 void	fre_tab(char **pp); // this maybe deleted
 // char	*add_wildcards_to_input(char *input, char *tmp);
-char	*local_dir(char *arg, char *tmp);
+char	*local_dir(char *tmp);
 int		is_spaced_double_single(char *str);
 char	*get_initial_token(char *str);
 int		input_arg_size(char *str);
