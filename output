@@ -1,2 +1,0 @@
-FSAN = -fsanitize=address
-FLAGS = -Wall -Wextra -Werror -g -I/Users/hsaktiwy/.brew/opt/readline/include -I/Users/aigounad/.brew/opt/readline/include -I$(INCLUDE_DIR) $(FSAN)
