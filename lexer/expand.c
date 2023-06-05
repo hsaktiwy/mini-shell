@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 14:37:42 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/04 19:33:30 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/05 13:19:52 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*remove_white_spaces(char *p)
 	tmp = p;
 	p = ft_strtrim(tmp, " ");
 	free(tmp);
-	g_input_line(p);
+	//g_input_line(p);
 	return (p);
 }
 
@@ -123,10 +123,10 @@ char	*remove_white_spaces(char *p)
 // 	return (remove_white_spaces(arg));
 // }
 
-char    *expand_input(t_env *env, char *line)
+char	*expand_input(t_env *env, char *line)
 {
 	int		i;
-	char 	c;
+	char	c;
 	int		s;
 	char	*arg;
 	int		k;

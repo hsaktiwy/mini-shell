@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:31:06 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/04 19:20:38 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/05 12:44:27 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,30 @@ char	*get_token(char *str)
 	surpace_whitesspaces(str, &i);
 	if (str[i] == '#')
 		return (res);
-	while (str[i] && str[i] != '|'
+	while (str[i] && ((!c && str[i] != '|'
 		&& str[i] != '<' && str[i] != '>'
-		&& !iswhitespace(str[i]))
+		&& !iswhitespace(str[i])) || c))
 	{
 		c = double_single_check(str[i], c, &i, &c_change);
-		if (str[i] && str[i] != '|'
+		// if (str[i] && str[i] != '|'
+		// 	&& str[i] != '<' && str[i] != '>'
+		// 	&& !iswhitespace(str[i])
+		// 	&& c != str[i] && !(c == '\0'
+		// 		&& (str[i] == '\'' || str[i] == '\"')))
+		// {
+		// 	res = ft_realloc(res, ft_strlen(res) + 2);
+		// 	ft_strncat(res, &str[i], 1);
+		// 	i++;
+		// }
+		if (str[i] && ((!c && str[i] != '|'
 			&& str[i] != '<' && str[i] != '>'
-			&& !iswhitespace(str[i])
-			&& c != str[i] && !(c == '\0'
-				&& (str[i] == '\'' || str[i] == '\"')))
+			&& !iswhitespace(str[i]))|| c))
 		{
 			res = ft_realloc(res, ft_strlen(res) + 2);
 			ft_strncat(res, &str[i], 1);
 			i++;
 		}
+		printf("c = %c, s[i] = %c, arg=|%s|\n", c, str[i], res);
 	}
 	if (c_change && !res)
 		res = ft_strdup("");

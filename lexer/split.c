@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 20:55:40 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/04 21:36:32 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/05 11:47:11 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,12 @@ static int	numsplits(const char *s)
 	return (counter);
 }
 
-static const char	*nextsplit(const char *s, char c)
+static const char	*nextsplit(const char *s)
 {
 	int		i;
-	char	c;
 
-	c = '\0';
 	i = 0;
-	while (s[i] && s[i] == c)
+	while (s[i] && s[i] == 32)
 		i++;
 	return ((char *)&s[i]);
 }
