@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:17:59 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/05 19:12:28 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/05 20:18:05 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,8 @@ char	*expand_env_var(t_env *env, char *s, char *res, int *k)
 			return (free(tmp), re);
 		}
 		tmp = ft_getenv(env, tmp_env);
-		tmp = encapsulation(tmp);
+		if (tmp)
+			tmp = encapsulation(tmp);
 		size = ft_strlen(tmp);
 		re = ft_realloc(res, ft_strlen(res) + size + 1 + 2);
 		ft_strncat(re, tmp, size);
@@ -152,7 +153,8 @@ char	*expand_env_var(t_env *env, char *s, char *res, int *k)
 			return (free(tmp), re);
 		}
 		tmp = ft_getenv(env, v_env);
-		tmp = encapsulation(tmp);
+		if (tmp)
+			tmp = encapsulation(tmp);
 		size = ft_strlen(tmp);
 		re = ft_realloc(res, ft_strlen(res) + size + 1 + 2);
 		ft_strncat(re, tmp, size);

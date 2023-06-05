@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/05 19:16:08 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/05 20:31:10 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	signal_handler(int sig)
 
 void	set_signal_handlers()
 {
-	// rl_catch_signals = 0;
+	rl_catch_signals = 0;
 
 	signal(SIGINT, signal_handler);	// handle Ctr+c
 	signal(SIGQUIT, signal_handler);	// ignore Ctr+'\'
@@ -84,22 +84,24 @@ void	main2(char *input, t_env *env)
 	t_list	*tokens;
 	int		err_lex;
 	t_list	*list;
-	
+	char	*data;
+
+	data = ft_strtrim(input, " ");
 	tokens = NULL;
 	//printf("hello\n");
-	err_lex = lexical_erreur(input);
+	err_lex = lexical_erreur(data);
 	g_pipe_count(0);
 	g_heredoc_count(0);
 	if (err_lex != -1)
-		lexer_err(&input[err_lex]);
+		lexer_err(&data[err_lex]);
 	else
-		lexer(&tokens, input, env);
+		lexer(&tokens, data, env);
 	//printf("lexer_step done\n");
 	if (err_lex == -1)
 	{
-		fix_expanding_issue(&tokens);
+		//fix_expanding_issue(&tokens);
 		ini_arg_count(&tokens);
-		list = parser(env, &tokens, input);
+		list = parser(env, &tokens, data);
 		display_tokens(tokens);
 		g_token_l(tokens);
 		if (list)
@@ -107,6 +109,7 @@ void	main2(char *input, t_env *env)
 		ft_lstclear(&list, NULL);
 	}
 	free_tokens(&tokens);
+	free(data);
 }
 
 void ft_leaks()

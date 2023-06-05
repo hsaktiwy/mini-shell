@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:31:06 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/05 19:34:34 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/05 20:41:12 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,11 +159,11 @@ t_file	*get_file(t_env *env, char *input, int *index)
 
 	file = NULL;
 	surpace_whitesspaces(&input[*index], index);
-	tmp = ft_strdup(&input[*index]);
-	printf("tmp 1= %s\n", tmp);
+	tmp = get_token(&input[*index]);
+	printf("tmp 1= %p\n", tmp);
 	*index += input_arg_size(&input[*index]);
 	tmp = expand_input(env, tmp);
-	printf("tmp 2= %s\n", tmp);
+	printf("tmp 2= %p\n", tmp);
 	if (!tmp)
 	{
 		file = creat_arg(NULL, WORD);
@@ -178,5 +178,5 @@ t_file	*get_file(t_env *env, char *input, int *index)
 	if (file)
 		file->a_file = iswildcards(file->a_file, r);
 	printf("3\n");
-	return (free(r), free(tmp),file);
+	return (free(r), free(tmp), file);
 }

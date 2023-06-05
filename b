@@ -1,0 +1,39 @@
+total 448
+drwxr-xr-x  37 hsaktiwy  candidate    1258 Jun  5 20:48 .
+drwxr-xr-x  57 hsaktiwy  candidate    2006 Jun  5 20:45 ..
+drwxr-xr-x  15 hsaktiwy  candidate     510 Jun  5 19:54 .git
+-rw-r--r--   1 hsaktiwy  candidate     148 Jun  5 15:27 .gitignore
+drwxr-xr-x   3 hsaktiwy  candidate     102 Jun  5 18:24 .vscode
+-rw-r--r--   1 hsaktiwy  candidate    1055 Jun  4 19:35 8_syntax_errors.sh
+-rw-r--r--   1 hsaktiwy  candidate     995 Jun  4 19:35 IsFileDescriptorValid.c
+-rw-r--r--   1 hsaktiwy  candidate    4119 Jun  5 16:43 Makefile
+-rw-r--r--   1 hsaktiwy  candidate    3710 Jun  4 19:35 NOTES.md
+-rw-r--r--   1 hsaktiwy  candidate    2918 Jun  5 20:43 ReadMe.md
+-rw-r--r--   1 hsaktiwy  candidate     258 Jun  4 19:35 TO_DO_LIST.md
+drwxr-xr-x   5 hsaktiwy  candidate     170 Jun  4 19:35 Tests
+-rw-r--r--   1 hsaktiwy  candidate       0 Jun  5 20:48 a
+-rw-r--r--   1 hsaktiwy  candidate       0 Jun  5 20:48 b
+drwxr-xr-x  10 hsaktiwy  candidate     340 Jun  5 15:27 builtins
+-rw-r--r--   1 hsaktiwy  candidate       8 Jun  5 20:13 echo
+drwxr-xr-x   9 hsaktiwy  candidate     306 Jun  4 19:35 environment
+drwxr-xr-x   8 hsaktiwy  candidate     272 Jun  4 19:35 execution
+-rw-r--r--   1 hsaktiwy  candidate      10 Jun  5 19:55 file
+-rw-r--r--   1 hsaktiwy  candidate      16 Jun  5 20:12 hello
+-rw-r--r--   1 hsaktiwy  candidate       0 Jun  5 20:08 helloe
+drwxr-xr-x  10 hsaktiwy  candidate     340 Jun  5 16:43 include
+drwxr-xr-x  23 hsaktiwy  candidate     782 Jun  5 19:54 lexer
+drwxr-xr-x  37 hsaktiwy  candidate    1258 Jun  5 15:20 libft
+-rw-r--r--   1 hsaktiwy  candidate       7 Jun  5 20:45 log
+-rwxr-xr-x   1 hsaktiwy  candidate  142144 Jun  5 20:41 minishell
+drwxr-xr-x   8 hsaktiwy  candidate     272 Jun  5 20:41 obj
+-rw-r--r--   1 hsaktiwy  candidate      16 Jun  5 20:03 out
+-rw-r--r--   1 hsaktiwy  candidate       0 Jun  5 20:13 out1
+-rw-r--r--   1 hsaktiwy  candidate       2 Jun  5 20:23 out2
+drwxr-xr-x   8 hsaktiwy  candidate     272 Jun  4 19:58 parser
+-rw-r--r--   1 hsaktiwy  candidate       0 Jun  5 19:56 salut
+-rw-r--r--   1 hsaktiwy  candidate     362 Jun  4 19:35 script.sh
+-rw-r--r--   1 hsaktiwy  candidate       8 Jun  5 19:54 test
+
+-rw-r--r--   1 hsaktiwy  candidate     255 Jun  5 15:20 test test
+-rw-r--r--   1 hsaktiwy  candidate    5299 Jun  4 19:35 test.c
+-rw-r--r--   1 hsaktiwy  candidate    8050 Jun  5 15:27 testing.sh
