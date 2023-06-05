@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 19:06:50 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/26 11:26:51 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/05 16:00:00 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	ft_exit(t_cmd *command, t_list *list)
 	char			*arg;
 
 	do_exit = 1;
-	status = 0;
+	status = g_exit_status;
 	if (ft_lstsize(list) == 1)
 		write(2, "exit\n", 5);
 	if (command->arg_count != 0)

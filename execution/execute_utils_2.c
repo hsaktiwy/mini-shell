@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:31:17 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/02 18:20:25 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/05 16:17:02 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ char	**get_args(t_list *list)
 	while (arg_list)
 	{
 		curr_arg = ((t_file *)(arg_list->content))->a_file;
+		//TODO:
+		//add empty args
 		if (*curr_arg)
 			args[index++] = curr_arg;
 		arg_list = arg_list->next;

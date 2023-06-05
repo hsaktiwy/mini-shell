@@ -51,7 +51,7 @@ tmarx
 - [x] "exit retour a la ligne"
 - [ ] minishell # binary not in path without "./" before
 - [x] cat diufosgid # check exit code
-- [!!] exit # should return the last exit code value
+- [!!] exit # should return the last exit code value [FIXED]
 - [x] exit -10
 - [x] exit +10
 - [b] ;

@@ -1,3 +1,4 @@
+minishell
 obj/
 obj/*
 a.out
@@ -15,5 +16,4 @@ a.out.dSYM/*
 test.c
 cat.sh
 TESTING
-minishell
 .trash/

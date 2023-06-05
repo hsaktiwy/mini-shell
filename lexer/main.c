@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/05 16:08:17 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/05 16:45:17 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	main2(char *input, t_env *env)
 		fix_expanding_issue(&tokens);
 		ini_arg_count(&tokens);
 		list = parser(env, &tokens, input);
-		//display_tokens(tokens);
+		display_tokens(tokens);
 		g_token_l(tokens);
 		if (list)
 			execute(list);
