@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:31:06 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/05 12:44:27 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/05 15:18:52 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*get_token(char *str)
 			ft_strncat(res, &str[i], 1);
 			i++;
 		}
-		printf("c = %c, s[i] = %c, arg=|%s|\n", c, str[i], res);
+		//printf("c = %c, s[i] = %c, arg=|%s|\n", c, str[i], res);
 	}
 	if (c_change && !res)
 		res = ft_strdup("");

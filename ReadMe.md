@@ -6,13 +6,13 @@ These tests are not all mines. Credits to vgoldman, mashar, and jecaudal.
 tmarx
 # Tests
 
-- [ ] echo bonjour ; |
-- [ ] echo bonjour | |
-- [ ] |
-- [ ] echo bonjour |;
-- [ ] echo bonjour \; ls
-- [ ] echo bonjour > test\ 1
-- [ ] cd $HOME/Documents
+- [x] echo bonjour ; |
+- [x] echo bonjour | |
+- [x] |
+- [x] echo bonjour |;
+- [x] echo bonjour \; ls
+- [x] echo bonjour > test\ 1
+- [x] cd $HOME/Documents
 - [ ] echo "\s" & echo "\\s"
 - [ ] echo \>
 - [ ] echo -n -n -nnnn -nnnnm

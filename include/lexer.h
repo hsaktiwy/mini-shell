@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 11:59:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/05 12:18:22 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/05 14:37:16 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	double_or_single(char input, char old_c);
 int		isendwith(char *string);
 void	fre_tab(char **pp); // this maybe deleted
 // char	*add_wildcards_to_input(char *input, char *tmp);
-char	*local_dir(char *arg, char *tmp);
+char	*local_dir(char *tmp);
 int		is_spaced_double_single(char *str);
 char	*get_initial_token(char *str);
 int		input_arg_size(char *str);

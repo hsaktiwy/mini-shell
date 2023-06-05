@@ -6,39 +6,39 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 16:24:20 by lol               #+#    #+#             */
-/*   Updated: 2023/06/04 19:20:21 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/05 14:38:39 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*add_wildcards_to_input(char *input, char *tmp)
-{
-	char	*res;
-	char	**tab;
-	int		i;
+// char	*add_wildcards_to_input(char *input, char *tmp)
+// {
+// 	char	*res;
+// 	char	**tab;
+// 	int		i;
 
-	i = -1;
-	res = input;
-	if (is_spaced_double_single(tmp))
-	{
-		tab = ft_split(tmp, ' ');
-		while (tab[++i])
-		{
-			if (ft_strchr(tab[i], '*'))
-				res = local_dir(res, tab[i]);
-			else
-			{
-				res = str_join(res, ft_strdup("#"));
-				res = str_join(res, ft_strdup(tab[i]));
-			}
-		}
-		fre_tab(tab);
-	}
-	else
-		res = local_dir(res, tmp);
-	return (res);
-}
+// 	i = -1;
+// 	res = input;
+// 	if (is_spaced_double_single(tmp))
+// 	{
+// 		tab = ft_split(tmp, ' ');
+// 		while (tab[++i])
+// 		{
+// 			if (ft_strchr(tab[i], '*'))
+// 				res = local_dir(res, tab[i]);
+// 			else
+// 			{
+// 				res = str_join(res, ft_strdup("#"));
+// 				res = str_join(res, ft_strdup(tab[i]));
+// 			}
+// 		}
+// 		fre_tab(tab);
+// 	}
+// 	else
+// 		res = local_dir(res, tmp);
+// 	return (res);
+// }
 
 int	is_there_wildcard(char *input)
 {
@@ -91,13 +91,12 @@ char	*iswildcards(char *input, char	*ini_s)
 	char	*arg;
 	char	*tmp;
 
-	arg = ft_strdup("");
 	if (input && is_there_wildcard(input))
 	{
 		tmp = replace_true_wildcards(ini_s);
-		arg = local_dir(arg, tmp);
+		arg = local_dir(tmp);
 		return (free(input), free(tmp), arg);
 	}
 	else
-		return (free(arg), input);
+		return (input);
 }
