@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/05 15:23:53 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/05 16:08:17 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ int	main(__attribute__((unused)) int ac,
 	char	*input;
 	t_env	*env_s;
 
-	atexit(ft_leaks);
+	//atexit(ft_leaks);
 	set_signal_handlers();
 	env_s = ft_init_env(env);
 	while (1)

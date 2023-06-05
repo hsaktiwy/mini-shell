@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:31:06 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/05 15:18:52 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/05 16:17:49 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char	*get_token(char *str)
 	char	c;
 	char	*res;
 	int		c_change;
+	int		t_c;
 
 	i = 0;
 	c_change = 0;
@@ -56,23 +57,14 @@ char	*get_token(char *str)
 	if (str[i] == '#')
 		return (res);
 	while (str[i] && ((!c && str[i] != '|'
-		&& str[i] != '<' && str[i] != '>'
-		&& !iswhitespace(str[i])) || c))
+				&& str[i] != '<' && str[i] != '>'
+				&& !iswhitespace(str[i])) || c))
 	{
+		t_c = c;
 		c = double_single_check(str[i], c, &i, &c_change);
-		// if (str[i] && str[i] != '|'
-		// 	&& str[i] != '<' && str[i] != '>'
-		// 	&& !iswhitespace(str[i])
-		// 	&& c != str[i] && !(c == '\0'
-		// 		&& (str[i] == '\'' || str[i] == '\"')))
-		// {
-		// 	res = ft_realloc(res, ft_strlen(res) + 2);
-		// 	ft_strncat(res, &str[i], 1);
-		// 	i++;
-		// }
-		if (str[i] && ((!c && str[i] != '|'
-			&& str[i] != '<' && str[i] != '>'
-			&& !iswhitespace(str[i]))|| c))
+		if (t_c == c && str[i] && ((!c && str[i] != '|'
+					&& str[i] != '<' && str[i] != '>'
+					&& !iswhitespace(str[i]))|| c))
 		{
 			res = ft_realloc(res, ft_strlen(res) + 2);
 			ft_strncat(res, &str[i], 1);
@@ -168,17 +160,19 @@ t_file	*get_file(t_env *env, char *input, int *index)
 	file = NULL;
 	surpace_whitesspaces(&input[*index], index);
 	tmp = ft_strdup(&input[*index]);
+	printf("tmp 1= %s\n", tmp);
 	*index += input_arg_size(&input[*index]);
 	tmp = expand_input(env, tmp);
-	if (!tmp || !tmp)
+	printf("tmp 2= %s\n", tmp);
+	if (!tmp)
 	{
 		file = creat_arg(NULL, WORD);
-		return (file);
+		return (file);// this may never enter here 
 	}
 	else
 		file = creat_arg(get_token(tmp), WORD);
 	r = get_initial_token(tmp);
 	if (file)
 		file->a_file = iswildcards(file->a_file, r);
-	return (free(r), file);
+	return (free(r), free(tmp),file);
 }

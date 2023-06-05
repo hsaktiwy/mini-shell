@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:46:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/05 15:23:44 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/05 16:41:27 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ t_list	*turn_command_to_lst(char *ini_t_r)
 		size += ft_strlen(tmp);
 		surpace_whitesspaces(&ini_t_r[size], &size);
 		ft_lstadd_back(&store, ft_lstnew(ft_strtrim(tmp, " ")));
-		//printf("tmp : %s : size :%d\n", tmp, size);
+		printf("tmp : %s : size :%d\n", tmp, size);
 		free(tmp);
 	}
 	return (store);
@@ -118,8 +118,8 @@ void	wildcard_the_list(t_list **list)
 	while (current)
 	{
 		tmp = current->content;
-		res = iswildcards(get_initial_arg(tmp), tmp);
-		free(tmp);
+		res = iswildcards(tmp, tmp);
+		//free(tmp);
 		current->content = res;
 		current = current->next;
 	}
@@ -143,6 +143,32 @@ void	cmd_filer(t_token **cmd, char	*r)
 		handle_command_helper(&command, current->content);
 	// printf("4\n");
 		current = current->next;
+		while (current)
+		{
+			handle_arg_helper(current->content, cmd);
+			current = current->next;
+		}
+	}
+	ft_lstclear(&c_args, s_free);
+}
+void	arg_filer(t_token **cmd, char	*r)
+{
+	t_list	*c_args;
+	t_list	*current;
+	t_cmd	*command;
+
+	command = ((t_cmd *)(*cmd)->value);
+	c_args = turn_command_to_lst(r);
+	// printf("1\n");
+	wildcard_the_list(&c_args);
+	// printf("2\n");
+	current = c_args;
+	// printf("3\n");
+	if (current)
+	{
+	// 	handle_command_helper(&command, current->content);
+	// // printf("4\n");
+	// 	current = current->next;
 		while (current)
 		{
 			handle_arg_helper(current->content, cmd);
@@ -215,14 +241,16 @@ void	handle_arg(t_list **tokens, t_env *env, char *input, int *index)
 	r = get_initial_token(tmp);
 	//printf("--> r = %s\n", r);
 	file = expand_input(env, tmp);
-	//printf("--> expand = %s\n", file);
+	printf("--> expand = %s\n", file);
 	tmp = file;
-	file = get_token(tmp);
-	//printf("--> tokened = %s\n", file);
-	file = iswildcards(file, r);
-	//printf("--> whilded = %s\n", file);
-	handle_arg_helper(file, &cmd);
-	free(tmp);
+	// file = get_token(tmp);
+	// printf("--> tokened = %s\n", file);
+	// file = iswildcards(file, r);
+	// printf("--> whilded = %s\n", file);
+	arg_filer(&cmd, tmp);
+	// cmd_filer(cmd, tmp);
+	// handle_arg_helper(file, &cmd);
+	// free(tmp);
 	free(file);
 	free(r);
 }

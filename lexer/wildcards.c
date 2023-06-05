@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcards.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:24:11 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/05 15:24:18 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/05 16:28:58 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ char	*iswildcards(char *input, char	*ini_s)
 	if (input && is_there_wildcard(input))
 	{
 		tmp = replace_true_wildcards(ini_s);
+		printf("tmp == ?? [%s]\n", tmp);
 		arg = local_dir(tmp);
 		return (free(input), free(tmp), arg);
 	}

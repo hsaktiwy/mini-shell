@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:29:04 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/05 14:57:46 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/05 15:28:13 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stddef.h>
- 
+
 typedef struct s_list
 {
 	void			*content;
