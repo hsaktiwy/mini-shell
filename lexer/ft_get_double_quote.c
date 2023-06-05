@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:17:59 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/04 19:43:21 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/05 19:12:28 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,57 @@ int	is_closed(char *s)
 // 		printf("result is  : %d _ ->(%s)\n", res, &c[res]);
 // 	}
 // }
+char	*add_back(char *arg, char *input, char *c)
+{
+	char	*res;
+
+	res = ft_realloc(arg, ft_strlen(arg) + 3);
+	ft_strncat(res, input, 1);
+	if (input[0] == '\'')
+		ft_strncat(res, "\"", 1);
+	else
+		ft_strncat(res, "\'", 1);
+	*c = double_or_single(input[0], *c);
+	return (res);
+}
+
+char	*add_front(char *arg, char *input, char *c)
+{
+	char	*res;
+
+	res = ft_realloc(arg, ft_strlen(arg) + 3);
+	if (input[0] == '\'')
+		ft_strncat(res, "\"", 1);
+	else
+		ft_strncat(res, "\'", 1);
+	ft_strncat(res, input, 1);
+	*c = double_or_single(input[0], *c);
+	return (res);
+}
+
+char	*encapsulation(char *str)
+{
+	int		i;
+	char	*res;
+	char	c;
+
+	i = -1;
+	c = '\0';
+	res = ft_strdup("");
+	while (str[++i])
+	{
+		if (!c && (str[i] == '\'' || str[i] == '\"'))
+			res = add_front(res, &str[i], &c);
+		else if (c && c == str[i])
+			res = add_back(res, &str[i], &c);
+		else
+		{
+			res = ft_realloc(res, ft_strlen(res) + 2);
+			ft_strncat(res, &str[i], 1);
+		}
+	}
+	return (res);
+}
 
 char	*expand_env_var(t_env *env, char *s, char *res, int *k)
 {
@@ -78,14 +129,16 @@ char	*expand_env_var(t_env *env, char *s, char *res, int *k)
 		{
 			tmp = ft_itoa(g_exit_status);
 			size = ft_strlen(tmp);
-			re = ft_realloc(res, ft_strlen(res) + size + 1);
+			re = ft_realloc(res, ft_strlen(res) + size + 1 + 2);
 			ft_strncat(re, tmp, size);
-			return (free(tmp),re);
+			return (free(tmp), re);
 		}
-		size = ft_strlen(ft_getenv(env, tmp_env));
-		re = ft_realloc(res, ft_strlen(res) + size + 1);
-		ft_strncat(re, ft_getenv(env, tmp_env), size);
-		return (free(tmp),re);
+		tmp = ft_getenv(env, tmp_env);
+		tmp = encapsulation(tmp);
+		size = ft_strlen(tmp);
+		re = ft_realloc(res, ft_strlen(res) + size + 1 + 2);
+		ft_strncat(re, tmp, size);
+		return (free(tmp), re);
 	}
 	else
 	{
@@ -94,15 +147,17 @@ char	*expand_env_var(t_env *env, char *s, char *res, int *k)
 		{
 			tmp = ft_itoa(g_exit_status);
 			size = ft_strlen(tmp);
-			re = ft_realloc(res, ft_strlen(res) + size + 1);
+			re = ft_realloc(res, ft_strlen(res) + size + 1 + 2);
 			ft_strncat(re, tmp, size);
 			return (free(tmp), re);
 		}
-		size = ft_strlen(ft_getenv(env, v_env));
-		re = ft_realloc(res, ft_strlen(res) + size + 1);
-		ft_strncat(re, ft_getenv(env, v_env), size);
+		tmp = ft_getenv(env, v_env);
+		tmp = encapsulation(tmp);
+		size = ft_strlen(tmp);
+		re = ft_realloc(res, ft_strlen(res) + size + 1 + 2);
+		ft_strncat(re, tmp, size);
 	}
-	return (re);
+	return (free(tmp), re);
 }
 
 char	*get_double_quote(t_env *env, char *s, int *index)

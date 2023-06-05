@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:46:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/05 16:41:27 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/05 19:49:52 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,24 +50,19 @@ void	handle_pipe(t_list **tokens, int *index, int *cmd)
 	*cmd = 0;
 }
 
-// this int return  is weird need to get more check ?
 void	handle_command_helper(t_cmd **cmd, char *args)
 {
 	char	**tab;
 	int		i;
 
 	i = 0;
-	// if (!(*(*cmd)->cmd))
-	// 	return ;
 	tab = ft_split(args, '\n');
-	//free((*cmd)->cmd);
 	(*cmd)->cmd = tab[0];
 	while (tab[++i])
 		ft_lstadd_back(&((*cmd)->arg), ft_lstnew(creat_arg(tab[i], WORD)));
 	(*cmd)->cmd_type = WORD;
 	free(tab);
 }
-	// function that splite the initial r; then re allocated it in a linked list
 
 char	*get_initial_arg(char *str)
 {
@@ -102,7 +97,7 @@ t_list	*turn_command_to_lst(char *ini_t_r)
 		size += ft_strlen(tmp);
 		surpace_whitesspaces(&ini_t_r[size], &size);
 		ft_lstadd_back(&store, ft_lstnew(ft_strtrim(tmp, " ")));
-		printf("tmp : %s : size :%d\n", tmp, size);
+		//printf("tmp : %s : size :%d\n", tmp, size);
 		free(tmp);
 	}
 	return (store);
@@ -118,8 +113,8 @@ void	wildcard_the_list(t_list **list)
 	while (current)
 	{
 		tmp = current->content;
-		res = iswildcards(tmp, tmp);
-		//free(tmp);
+		res = iswildcards(get_initial_arg(tmp), tmp);
+		free(tmp);
 		current->content = res;
 		current = current->next;
 	}
@@ -133,15 +128,11 @@ void	cmd_filer(t_token **cmd, char	*r)
 
 	command = ((t_cmd *)(*cmd)->value);
 	c_args = turn_command_to_lst(r);
-	// printf("1\n");
 	wildcard_the_list(&c_args);
-	// printf("2\n");
 	current = c_args;
-	// printf("3\n");
 	if (current)
 	{
 		handle_command_helper(&command, current->content);
-	// printf("4\n");
 		current = current->next;
 		while (current)
 		{
@@ -151,6 +142,7 @@ void	cmd_filer(t_token **cmd, char	*r)
 	}
 	ft_lstclear(&c_args, s_free);
 }
+
 void	arg_filer(t_token **cmd, char	*r)
 {
 	t_list	*c_args;
@@ -159,16 +151,10 @@ void	arg_filer(t_token **cmd, char	*r)
 
 	command = ((t_cmd *)(*cmd)->value);
 	c_args = turn_command_to_lst(r);
-	// printf("1\n");
 	wildcard_the_list(&c_args);
-	// printf("2\n");
 	current = c_args;
-	// printf("3\n");
 	if (current)
 	{
-	// 	handle_command_helper(&command, current->content);
-	// // printf("4\n");
-	// 	current = current->next;
 		while (current)
 		{
 			handle_arg_helper(current->content, cmd);
@@ -187,7 +173,6 @@ int	handle_command(t_list **tokens, t_env *env, char *input, int *index)
 	token = (t_token *)malloc(sizeof(t_token));
 	if (!token)
 		return (0);
-	//printf("command\n");
 	token->type = COMMAND;
 	r = get_initial_token(&input[*index]);
 	*index += input_arg_size(&input[*index]);
@@ -200,7 +185,7 @@ int	handle_command(t_list **tokens, t_env *env, char *input, int *index)
 		if (((t_cmd *)(token->value))->cmd)
 		{
 			ft_lstadd_back(tokens, ft_lstnew(token));
-			return (free(r), free(tmp), 1);// that a weird behavior
+			return (free(r), free(tmp), 1);
 		}
 	}
 	return (free(token), free(r), free(tmp), 0);
@@ -214,6 +199,12 @@ void	handle_arg_helper(char *file, t_token **cmd)
 	i = -1;
 	if (file)
 	{
+		if (!*file)
+		{
+			ft_lstadd_back(&(((t_cmd *)(*cmd)->value)->arg),
+				ft_lstnew(creat_arg(ft_strdup(""), WORD)));
+			return ;
+		}
 		tab = ft_split(file, '\n');
 		while (tab[++i])
 			ft_lstadd_back(&(((t_cmd *)(*cmd)->value)->arg),
@@ -221,36 +212,24 @@ void	handle_arg_helper(char *file, t_token **cmd)
 		free(tab);
 	}
 }
-// if this work it will changes a lot of things
+
 void	handle_arg(t_list **tokens, t_env *env, char *input, int *index)
 {
 	t_token	*cmd;
-	// t_list	*node;
 	char	*file;
 	char	*r;
 	char	*tmp;
 
 	cmd = NULL;
-	// node = NULL;
-	//printf("variable\n");
-	//printf("%s\n", &input[*index]);
+	printf("input -> %s\n", &input[*index]);
 	cmd = last_cmd(tokens);
 	tmp = ft_strdup(&input[*index]);
 	*index += input_arg_size(tmp);
-	//printf("-->%s\n", tmp);
 	r = get_initial_token(tmp);
-	//printf("--> r = %s\n", r);
-	file = expand_input(env, tmp);
-	printf("--> expand = %s\n", file);
-	tmp = file;
-	// file = get_token(tmp);
-	// printf("--> tokened = %s\n", file);
-	// file = iswildcards(file, r);
-	// printf("--> whilded = %s\n", file);
-	arg_filer(&cmd, tmp);
-	// cmd_filer(cmd, tmp);
-	// handle_arg_helper(file, &cmd);
-	// free(tmp);
+	printf("r->%s\n", r);
+	file = expand_input(env, r);
+	printf("r->%s\n", file);
+	arg_filer(&cmd, file);
 	free(file);
-	free(r);
+	free(tmp);
 }
