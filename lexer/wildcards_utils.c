@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 15:07:39 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/04 19:42:30 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/05 15:20:34 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ int	check_exp_edge(char	**points, char *string, char *exp, int i)
 	corr = 1;
 	if (!points[i] && exp[0] != '\n')
 	{
-		tmp = strstr(string, points[0]);
+		tmp = ft_strstr(string, points[0]);
 		if (string < tmp)
 			corr = 0;
 	}
 	if (!points[i] && !isendwith(exp) && corr)
 	{
 		tmp = string;
-		while (strstr(&tmp[1], points[i - 1]))
-			tmp = strstr(&tmp[1], points[i - 1]);
+		while (ft_strstr(&tmp[1], points[i - 1]))
+			tmp = ft_strstr(&tmp[1], points[i - 1]);
 		tmp = &tmp[ft_strlen(points[i - 1])];
 		if (*tmp)
 			corr = 0;
@@ -48,9 +48,9 @@ int	ft_regx(char *string, char *exp)
 	points = ft_split(exp, '\n');
 	i = -1;
 	while (tmp && *tmp && points[++i])
-		tmp = strstr(tmp, points[i]);
+		tmp = ft_strstr(tmp, points[i]);
 	if (!tmp)
-		return (0);
+		return (fre_tab(points), 0);
 	corr = check_exp_edge(points, string, exp, i);
 	return (fre_tab(points), corr);
 }
@@ -60,10 +60,12 @@ char	*add_matchs(struct dirent *entry, char *arg, char	*tmp, int *i)
 	char	*res;
 
 	res = arg;
+	//printf("-->[%s]\n", tmp);
 	if (entry && entry->d_name[0] != '.')
 	{
 		if (ft_regx(entry->d_name, tmp))
 		{
+	//		printf("in\n");
 			res = str_join(res, ft_strdup("\n"));
 			res = str_join(res, ft_strdup(entry->d_name));
 			(*i)++;
@@ -72,7 +74,7 @@ char	*add_matchs(struct dirent *entry, char *arg, char	*tmp, int *i)
 	return (res);
 }
 
-char	*local_dir(char *arg, char *tmp)
+char	*local_dir(char *tmp)
 {
 	char			*res;
 	DIR				*dir;
@@ -80,7 +82,7 @@ char	*local_dir(char *arg, char *tmp)
 	int				i;
 
 	i = 0;
-	res = arg;
+	res = ft_strdup("");
 	dir = opendir(".");
 	if (dir)
 	{
@@ -94,7 +96,7 @@ char	*local_dir(char *arg, char *tmp)
 	}
 	if (i == 0)
 	{
-		res = str_join(res, ft_strdup("\n"));
+		// res = str_join(res, ft_strdup("\n"));
 		ft_replace(tmp, '\n', '*');
 		res = str_join(res, ft_strdup(tmp));
 	}

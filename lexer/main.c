@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/04 19:34:50 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/05 13:20:23 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,8 +190,9 @@ int	main(__attribute__((unused)) int ac,
 		if (input && input[0])
 		{
 			add_history(input);
-			input = expand_input(env_s, input);
+			//input = expand_input(env_s, input);
 			//printf("our input : %s\n", input);
+			g_input_line(input);
 			if(check_redirection(input))
 				main2(input, env_s);
 		}

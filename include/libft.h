@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:29:04 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/04 19:20:32 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/05 14:57:46 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		ft_isprint(int c);
 int		iswhitespace(char c);
 int		str_iswhitespaced(char *str);
 int		surpace_whitesspaces(char *str, int *index);
-
+char	*ft_strstr(const char *haystack, const char *needle);
 //
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_strcmp(const char *s1, const char *s2);
