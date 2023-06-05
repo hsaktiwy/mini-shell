@@ -18,12 +18,12 @@ tmarx
 - [x] echo -n -n -nnnn -nnnnm
 - [x] cat /dev/random | head -n 1 | cat -e
 - [x] unset var1 # with undefined var1
-- [!!]  export "" et unset ""
-- [!!] echo test > file test1 [+leaks]
+- [x]  export "" et unset ""
+- [x] echo test > file test1 [+leaks]
 - [x] $
 - [x] not_cmd bonjour > salut
 - [x] env puis export puis env # vars aren't sorted
-- [!!] cat Makefile | grep pr | head -n 5 | cd test # check status code
+- [x] cat Makefile | grep pr | head -n 5 | cd test # check status code
 - [x] cat Makefile | grep pr | head -n 5 | cat test (bin) # check status code
 - [x] cat Makefile | grep pr | head -n 5 | hello (NA) # check status code
 - [x] echo bonjour >>> test
@@ -47,9 +47,9 @@ tmarx
 - [x] /bin/echo bonjour
 - [x] not_cmd
 - [x] sleep 5 | exit
-- [!!] echo bonjour > $test w/ t
+- [x] echo bonjour > $test w/ t
 - [x] "exit retour a la ligne"
-- [ ] minishell # binary not in path without "./" before
+- [x] minishell # binary not in path without "./" before
 - [x] cat diufosgid # check exit code
 - [!!] exit # should return the last exit code value [FIXED]
 - [x] exit -10
@@ -97,9 +97,9 @@ tmarx
 - [x] cat < >
 - [x] cat < <
 - [x] cat > >
-- [!!] > a ls > b < Makefile
-- [!!] echo > a Hello World!
-- [!!] > a echo Hello World!
-- [!!] cat < Makefile | grep gcc > output
+- [x] > a ls > b < Makefile
+- [x] echo > a Hello World!
+- [x] > a echo Hello World!
+- [x] cat < Makefile | grep gcc > output
 - [x] exit 0 | exit 1
 - [x] exit 1 | exit 0

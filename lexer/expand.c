@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 14:37:42 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/05 13:19:52 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/05 20:17:00 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,9 @@ char	*expand_input(t_env *env, char *line)
 				k++;
 			if (line[k + i + 1] == '?')
 				k++;
+			printf("expand_env_var in\n");
 			arg = expand_env_var(env, &line[i + 1], arg, &k);
+			printf("expand_env_var out\n");
 			i += k + 1;
 		}
 		else if (line[i])
