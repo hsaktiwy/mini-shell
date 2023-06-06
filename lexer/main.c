@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/05 20:31:10 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/06 19:47:45 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void	main2(char *input, t_env *env)
 	//printf("lexer_step done\n");
 	if (err_lex == -1)
 	{
+		display_tokens(tokens);
 		//fix_expanding_issue(&tokens);
 		ini_arg_count(&tokens);
 		list = parser(env, &tokens, data);

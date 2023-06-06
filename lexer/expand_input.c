@@ -6,22 +6,11 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:50:13 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/06 15:27:32 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/06 19:16:01 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// char	*reallocated_str(char *str, char *add)
-// {
-// 	int		size;
-// 	char	*res;
-
-// 	size = ft_strlen(add);
-// 	res = ft_realloc(str, ft_strlen(str) + size + 1);
-// 	ft_strncat(res, add, size);
-// 	return (res);
-// }
 
 //g_input_line(p); it was inthe remove_white_spaces but i remove 
 //it cause it gave faulse alarm every expand of input

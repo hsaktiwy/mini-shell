@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:17:19 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/04 19:54:20 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/06 20:11:04 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,7 @@ int	in_redirection(t_file *tmp)
 			print_error(NULL, tmp->a_file, 1);
 	}
 	else if (ft_strlen(tmp->token_file))
-	{
-		write(STDERR_FILENO, "minishell : ", 11);
-		write(STDERR_FILENO, tmp->token_file, ft_strlen(tmp->token_file));
-		write(STDERR_FILENO, ": ambiguous redirect\n", 22);
-	}
+		display_ambiguise(tmp);
 	return (fd);
 }
 

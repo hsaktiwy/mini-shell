@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 11:59:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/05 14:37:16 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/06 19:19:51 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@ void	fix_expanding_issue(t_list **tokens);
 void	ini_arg_count(t_list **tokens);
 int		lexical_erreur(char	*input);
 
+char	*get_initial_arg(char *str);
+t_list	*turn_command_to_lst(char *ini_t_r);
+void	wildcard_the_list(t_list **list);
+void	handle_arg_helper(char *file, t_token **cmd);
+void	handle_command_helper(t_cmd **cmd, char *args);
+
 t_token	*last_cmd(t_list **tokens);
 int		get_start(char *str);
 void	add_fake_cmd(t_list **tokens, int cmd);
@@ -49,8 +55,9 @@ char	*here_doc_name(char *common, int nbr);
 void	lexer_err(char *str);
 char	*expand_input(t_env *env, char *line);
 char	*expand(t_env *env, char *line);
-
+char	*reallocated_str(char *str, char *add);
 void	display_tokens(t_list	*tokens);
+
 // wildcards
 char	*iswildcards(char *input, char	*ini_s);
 char	double_or_single(char input, char old_c);
