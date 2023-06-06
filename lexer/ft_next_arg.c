@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:31:06 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/06 20:16:37 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/06 21:24:01 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,13 +162,13 @@ t_file	*get_file(t_env *env, char *input, int *index)
 	r = get_initial_token(&input[*index]);
 	if (r)
 		r = expand_input(env, r);
-	printf("r = %s\n",r);
+	// printf("r = %s\n",r);
 	tmp = get_token(&input[*index]);
-	printf("tmp 1= %s\n", tmp);
+	// printf("tmp 1= %s\n", tmp);
 	*index += input_arg_size(&input[*index]);
 	if (tmp)
 		tmp = expand_input(env, tmp);
-	printf("tmp 2= %s\n", tmp);
+	// printf("tmp 2= %s\n", tmp);
 	if (!tmp)
 	{
 		file = creat_arg(NULL, WORD);
@@ -176,9 +176,9 @@ t_file	*get_file(t_env *env, char *input, int *index)
 	}
 	else
 		file = creat_arg(tmp, WORD);
-	printf("ahdajsdka = %s\n",file->a_file);
+	// printf("ahdajsdka = %s\n",file->a_file);
 	if (file)
 		file->a_file = iswildcards(file->a_file, r);
-	printf("end : file->a_file :%s\n", file->a_file);
+	// printf("end : file->a_file :%s\n", file->a_file);
 	return (free(r), file);
 }

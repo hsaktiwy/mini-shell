@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:50:13 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/06 19:16:01 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/06 21:24:09 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ char	*remove_white_spaces(char *p)
 	char	*tmp;
 
 	tmp = p;
-	printf("??\n");
+	// printf("??\n");
 	p = ft_strtrim(tmp, " ");
-	printf("maybe\n");
+	// printf("maybe\n");
 	free(tmp);
 	return (p);
 }
