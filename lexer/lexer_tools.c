@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:46:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/05 20:11:17 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/05 22:31:00 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,9 +147,9 @@ void	arg_filer(t_token **cmd, char	*r)
 {
 	t_list	*c_args;
 	t_list	*current;
-	t_cmd	*command;
+	// t_cmd	*command;
 
-	command = ((t_cmd *)(*cmd)->value);
+	// command = ((t_cmd *)(*cmd)->value);
 	c_args = turn_command_to_lst(r);
 	wildcard_the_list(&c_args);
 	current = c_args;

@@ -1,4 +1,55 @@
 
+cat '"|"'* "'"
+
+minibash-3.2$ wc
+      0       0       0
+minibash-3.2$ 
+exit
+
+=================================================================
+==3554==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 432 byte(s) in 27 object(s) allocated from:
+    #0 0x7f33eddf7867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+    #1 0x55d9788961d7 in ft_split libft/ft_split.c:78
+    #2 0x55d97888dc1c in ft_regx lexer/wildcards_utils.c:48
+    #3 0x55d97888ddc8 in add_matchs lexer/wildcards_utils.c:65
+    #4 0x55d97888df9d in local_dir lexer/wildcards_utils.c:90
+    #5 0x55d97888ca34 in add_wildcards_to_input lexer/wildcards.c:39
+    #6 0x55d97888ca97 in iswildcards lexer/wildcards.c:51
+    #7 0x55d97888ac8b in handle_command lexer/lexer_tools.c:61
+    #8 0x55d97888a2b6 in lexer lexer/lexer.c:107
+    #9 0x55d978883d3c in main2 lexer/main.c:95
+    #10 0x55d978884586 in main lexer/main.c:192
+    #11 0x7f33edaf0d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Direct leak of 16 byte(s) in 1 object(s) allocated from:
+    #0 0x7f33eddf7867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+    #1 0x55d9788961d7 in ft_split libft/ft_split.c:78
+    #2 0x55d97888a7a8 in handle_command_helper lexer/lexer_tools.c:38
+    #3 0x55d97888acbb in handle_command lexer/lexer_tools.c:62
+    #4 0x55d97888a2b6 in lexer lexer/lexer.c:107
+    #5 0x55d978883d3c in main2 lexer/main.c:95
+    #6 0x55d978884586 in main lexer/main.c:192
+    #7 0x7f33edaf0d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+Indirect leak of 81 byte(s) in 27 object(s) allocated from:
+    #0 0x7f33eddf7867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+    #1 0x55d978894ca9 in ft_substr libft/ft_substr.c:25
+    #2 0x55d9788960f6 in splited libft/ft_split.c:56
+    #3 0x55d978896283 in ft_split libft/ft_split.c:85
+    #4 0x55d97888dc1c in ft_regx lexer/wildcards_utils.c:48
+    #5 0x55d97888ddc8 in add_matchs lexer/wildcards_utils.c:65
+    #6 0x55d97888df9d in local_dir lexer/wildcards_utils.c:90
+    #7 0x55d97888ca34 in add_wildcards_to_input lexer/wildcards.c:39
+    #8 0x55d97888ca97 in iswildcards lexer/wildcards.c:51
+    #9 0x55d97888ac8b in handle_command lexer/lexer_tools.c:61
+    #10 0x55d97888a2b6 in lexer lexer/lexer.c:107
+    #11 0x55d978883d3c in main2 lexer/main.c:95
+    #12 0x55d978884586 in main lexer/main.c:192
+    #13 0x7f33edaf0d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+
 ##################################################################################
 [FINAL_PROJET_STRUCTURE_IDEA]
 [FEEL_FREE_TO_EDIT_AS_YOU_THINK_FITS]
