@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcards.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:24:11 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/05 19:47:17 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/06 13:53:36 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	*iswildcards(char *input, char	*ini_s)
 	char	*tmp;
 
 	tmp = NULL;
-	printf("iswildcards=%s\n", input);
+	// printf("iswildcards=%s\n", input);
 	if (input && is_there_wildcard(input))
 	{
 		tmp = replace_true_wildcards(ini_s);
@@ -105,6 +105,6 @@ char	*iswildcards(char *input, char	*ini_s)
 	}
 	if (input)
 		tmp = get_token(input);
-	printf("??? = %s\n", tmp);
+	// printf("??? = %s\n", tmp);
 	return (free(input), tmp);
 }

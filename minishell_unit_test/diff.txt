@@ -1,0 +1,35 @@
+[33menv | grep USER(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDOUT -----(B[m
+1d0
+< USER=root
+2a2
+> USER=root
+
+
+[33mexport zz zzz= zzzz=asd | echo $zz$zzz$zzzz| export | grep zz(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 0)
+(B[m
+
+[33mexport /dont/export/this=hola | export | grep /dont/export/this(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 0)
+(B[m
+
+[33mexport $(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 0)
+(B[m
+
+[33mexport ?=42(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 0)
+(B[m
+
+[33mexit 21 42(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 0)
+(B[m
+

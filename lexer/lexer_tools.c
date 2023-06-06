@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:46:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/05 22:31:00 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/06 13:55:48 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,14 +221,14 @@ void	handle_arg(t_list **tokens, t_env *env, char *input, int *index)
 	char	*tmp;
 
 	cmd = NULL;
-	printf("input -> %s\n", &input[*index]);
+	// printf("input -> %s\n", &input[*index]);
 	cmd = last_cmd(tokens);
 	tmp = ft_strdup(&input[*index]);
 	*index += input_arg_size(tmp);
 	r = get_initial_token(tmp);
-	printf("r->%p\n", r);
+	// printf("r->%p\n", r);
 	file = expand_input(env, r);
-	printf("r->%p\n", file);
+	// printf("r->%p\n", file);
 	arg_filer(&cmd, file);
 	free(file);
 	free(tmp);

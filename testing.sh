@@ -273,3 +273,4 @@ Indirect leak of 570 byte(s) in 60 object(s) allocated from:
 	echo $*
 }
 
+unset aa

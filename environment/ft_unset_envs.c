@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 10:23:53 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/26 13:33:06 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/06 13:54:48 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_unset_env_list(t_list **env_l, char *key)
 	{
 		if (ft_strcmp(((t_holder *)(head->content))->key, key) == 0)
 		{
+			// printf(">>>>>>>>><<<<<<<<<<<[%s]\n", ((t_holder *)(head->content))->key);
 			ft_lstdelete_index(env_l, index, del);
 			return ;
 		}

@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/05 22:30:06 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/06 13:52:29 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	main2(char *input, t_env *env)
 		//fix_expanding_issue(&tokens);
 		ini_arg_count(&tokens);
 		list = parser(env, &tokens, data);
-		display_tokens(tokens);
+		// display_tokens(tokens);
 		g_token_l(tokens);
 		if (list)
 			execute(list);
@@ -181,6 +181,30 @@ int	main(__attribute__((unused)) int ac,
 	//atexit(ft_leaks);
 	set_signal_handlers();
 	env_s = ft_init_env(env);
+	if (ac == 3)
+	{
+		if (ft_strcmp(av[1], "-c") == 0)
+		{
+			input = ft_strdup(av[2]);
+			if (!input)
+			{
+				ft_free_env(&env_s);
+				write(1, "exit\n", 5);
+				exit(g_exit_status);
+			}
+			if (input && input[0])
+			{
+				add_history(input);
+				//input = expand_input(env_s, input);
+				//printf("our input : %s\n", input);
+				g_input_line(input);
+				if(check_redirection(input))
+					main2(input, env_s);
+			}
+			free(input);
+		}
+		return (0);
+	}
 	while (1)
 	{
 		restore_stdin();
