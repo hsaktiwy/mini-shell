@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 15:13:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/04 19:19:42 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/06 20:54:50 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int	redirection_habdling(t_env *env, t_list **tokens)
 		if (!redirect(env, &list, &cmd))
 		{
 			((t_cmd *)cmd->value)->error = 1;
+			g_exit_status = 1;
 		}
 		while (list)
 		{

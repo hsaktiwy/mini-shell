@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:46:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/06 20:16:52 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/06 21:25:18 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,7 @@ void	arg_filer(t_token **cmd, char	*r)
 {
 	t_list	*c_args;
 	t_list	*current;
-	// t_cmd	*command;
 
-	// command = ((t_cmd *)(*cmd)->value);
 	c_args = turn_command_to_lst(r);
 	wildcard_the_list(&c_args);
 	current = c_args;
@@ -104,9 +102,11 @@ int	handle_command(t_list **tokens, t_env *env, char *input, int *index)
 		return (0);
 	token->type = COMMAND;
 	r = get_initial_token(&input[*index]);
+	// printf("r = %s\n", r);
 	*index += input_arg_size(&input[*index]);
 	tmp = ft_strdup(r);
 	tmp = expand_input(env, tmp);
+	// printf("tmp = %s\n", tmp);
 	token->value = ini_cmd(env);
 	if (token->value && tmp)
 	{
@@ -133,9 +133,9 @@ void	handle_arg(t_list **tokens, t_env *env, char *input, int *index)
 	tmp = ft_strdup(&input[*index]);
 	*index += input_arg_size(tmp);
 	r = get_initial_token(tmp);
-	printf("r->%s\n", r);
+	// printf("r->%s\n", r);
 	file = expand_input(env, r);
-	printf("r->%s\n", file);
+	// printf("r->%s\n", file);
 	arg_filer(&cmd, file);
 	free(file);
 	free(tmp);

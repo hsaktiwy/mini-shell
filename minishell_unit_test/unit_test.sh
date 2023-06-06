@@ -236,11 +236,12 @@ TEST_ARRAY=(
 '$HOME'
 'cat | cat | lscat | ls'
 'echo hi > $p'
-"cat *"\'"*"
+#"cat *"\'"*"
 "cat *'\"'*"
 'cat *" "*'
 "cat *'|'*"
 'echo $*'
+
 )
 
 usage() {

@@ -1,10 +1,296 @@
+[33mexit(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 42(B[m
+[35m< bash       (exited with 42)(B[m
+[35m> minishell  (exited with 42)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit -42(B[m
+[35m< bash       (exited with 214)(B[m
+[35m> minishell  (exited with 214)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 512(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 1407(B[m
+[35m< bash       (exited with 127)(B[m
+[35m> minishell  (exited with 127)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 21 42(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 1)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit notanumber(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mtouch ucantexecme.e | chmod 000 ucantexecme.e | ./ucantexecme.e(B[m
+[35m< bash       (exited with 127)(B[m
+[35m> minishell  (exited with 126)
+(B[m[94m----- STDERR -----(B[m
+1,2c1
+< minishell: ./ucantexecme.e: No such file or directory
+< chmod: ucantexecme.e: No such file or directory
+---
+> minishell: ./ucantexecme.e: Permission denied
+
+
+[33m|(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 2)
+(B[m[94m----- STDERR -----(B[m
+1,2c1
+< minishell: -c: syntax error near unexpected token `|'
+< minishell: -c: `|'
+---
+> mini-shell: syntax error near unexpected token `|'
+
+
+[33m|(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 2)
+(B[m[94m----- STDERR -----(B[m
+1,2c1
+< minishell: -c: syntax error near unexpected token `|'
+< minishell: -c: `|'
+---
+> mini-shell: syntax error near unexpected token `|'
+
+
+[33m|b(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 2)
+(B[m[94m----- STDERR -----(B[m
+1,2c1
+< minishell: -c: syntax error near unexpected token `|'
+< minishell: -c: `|b'
+---
+> mini-shell: syntax error near unexpected token `|'
+
+
+[33ma|||b(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 2)
+(B[m[94m----- STDERR -----(B[m
+1,2c1
+< minishell: -c: syntax error near unexpected token `|'
+< minishell: -c: `a|||b'
+---
+> mini-shell: syntax error near unexpected token `|'
+
+
+[33m> > a(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 2)
+(B[m[94m----- STDERR -----(B[m
+1,2c1
+< minishell: -c: syntax error near unexpected token `>'
+< minishell: -c: `> > a'
+---
+> mini-shell: syntax error near unexpected token `>'
+
+
+[33m< < a(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 2)
+(B[m[94m----- STDERR -----(B[m
+1,2c1
+< minishell: -c: syntax error near unexpected token `<'
+< minishell: -c: `< < a'
+---
+> mini-shell: syntax error near unexpected token `<'
+
+
+[33m< >> a(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 2)
+(B[m[94m----- STDERR -----(B[m
+1,2c1
+< minishell: -c: syntax error near unexpected token `>>'
+< minishell: -c: `< >> a'
+---
+> mini-shell: syntax error near unexpected token `>>'
+
+
+[33m>>> a(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 2)
+(B[m[94m----- STDERR -----(B[m
+1,2c1
+< minishell: -c: syntax error near unexpected token `>'
+< minishell: -c: `>>> a'
+---
+> mini-shell: syntax error near unexpected token `>'
+
+
+[33m<<<< a(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 2)
+(B[m[94m----- STDERR -----(B[m
+1,2c1
+< minishell: -c: syntax error near unexpected token `<'
+< minishell: -c: `<<<< a'
+---
+> mini-shell: syntax error near unexpected token `<<'
+
+
+[33ma<<<<(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 2)
+(B[m[94m----- STDERR -----(B[m
+1,2c1
+< minishell: -c: syntax error near unexpected token `<'
+< minishell: -c: `a<<<<'
+---
+> mini-shell: syntax error near unexpected token `<<'
+
+
+[33mpwd >|(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 2)
+(B[m[94m----- STDERR -----(B[m
+1,2c1
+< minishell: -c: syntax error near unexpected token `newline'
+< minishell: -c: `pwd >|'
+---
+> mini-shell: syntax error near unexpected token `|'
+
+
+[33m|pwd(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 2)
+(B[m[94m----- STDERR -----(B[m
+1,2c1
+< minishell: -c: syntax error near unexpected token `|'
+< minishell: -c: `|pwd'
+---
+> mini-shell: syntax error near unexpected token `|'
+
+
+[33mpwd ||(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 2)
+(B[m[94m----- STDERR -----(B[m
+1c1
+< minishell: -c: line 1: syntax error: unexpected end of file
+---
+> mini-shell: syntax error near unexpected token `|'
+
+
+[33mecho " '$PWD' \"$PWD\" '$PWD' "(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDOUT -----(B[m
+1c1
+<  '/Users/hsaktiwy/mini-shell/minishell_unit_test' "/Users/hsaktiwy/mini-shell/minishell_unit_test" '/Users/hsaktiwy/mini-shell/minishell_unit_test' 
+---
+>  '/Users/hsaktiwy/mini-shell/minishell_unit_test' \/Users/hsaktiwy/mini-shell/minishell_unit_test\ '/Users/hsaktiwy/mini-shell/minishell_unit_test' 
+
+
+[33mecho "\$HOME"(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDOUT -----(B[m
+1c1
+< $HOME
+---
+> \/Users/hsaktiwy
+
+
+[33mecho \\\n(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDOUT -----(B[m
+1c1
+< \n
+---
+> \\\n
+
+
+[33mecho\" should not work neiter\"(B[m
+[35m< bash       (exited with 127)(B[m
+[35m> minishell  (exited with 127)
+(B[m[94m----- STDERR -----(B[m
+1c1
+< minishell: echo": command not found
+---
+> minishell: echo\ should not work neiter\: command not found
+
+
+[33mpwd > dir(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 129)
+(B[m
+
+[33mpwd >> dir(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 129)
+(B[m
+
+[33mtouch a | < a(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 129)
+(B[m
+
+[33mtouch a b c| echo sorry > d| cat < a < b < c < d(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 129)
+(B[m
+
+[33mecho ayayay > a | cat < doesnotexist < a(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 129)
+(B[m
+
+[33m< doesnotexist(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 129)
+(B[m
+
+[33mcat < doesnotexist(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 129)
+(B[m
+
 [33mecho >(B[m
 [35m< bash       (exited with 2)(B[m
-[35m> minishell  (exited with 139)
+[35m> minishell  (exited with 2)
 (B[m[94m----- STDERR -----(B[m
-1,2d0
+1,2c1
 < minishell: -c: syntax error near unexpected token `newline'
 < minishell: -c: `echo >'
+---
+> mini-shell: syntax error near unexpected token `newline'
 
 
 [33munset ""(B[m
@@ -16,20 +302,24 @@ Binary files err1 and err2 differ
 
 [33mecho bonjour >>> test(B[m
 [35m< bash       (exited with 2)(B[m
-[35m> minishell  (exited with 139)
+[35m> minishell  (exited with 2)
 (B[m[94m----- STDERR -----(B[m
-1,2d0
+1,2c1
 < minishell: -c: syntax error near unexpected token `>'
 < minishell: -c: `echo bonjour >>> test'
+---
+> mini-shell: syntax error near unexpected token `>'
 
 
 [33mecho bonjour > > out(B[m
 [35m< bash       (exited with 2)(B[m
-[35m> minishell  (exited with 139)
+[35m> minishell  (exited with 2)
 (B[m[94m----- STDERR -----(B[m
-1,2d0
+1,2c1
 < minishell: -c: syntax error near unexpected token `>'
 < minishell: -c: `echo bonjour > > out'
+---
+> mini-shell: syntax error near unexpected token `>'
 
 
 [33mecho 2 >> out1 > out2(B[m
@@ -50,14 +340,14 @@ Binary files err1 and err2 differ
 
 [33mecho bonjour > $test(B[m
 [35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 0)
+[35m> minishell  (exited with 129)
 (B[m[94m----- STDERR -----(B[m
 Binary files err1 and err2 differ
 
 
 [33mecho bonjour > $test w t(B[m
 [35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 0)
+[35m> minishell  (exited with 129)
 (B[m[94m----- STDERR -----(B[m
 Binary files err1 and err2 differ
 
@@ -110,7 +400,7 @@ Binary files err1 and err2 differ
 
 [33m> a ls > b < Makefile(B[m
 [35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 0)
+[35m> minishell  (exited with 129)
 (B[m
 
 [33mexit -21131313(B[m
@@ -211,98 +501,39 @@ Binary files err1 and err2 differ
 
 [33m< f < Makefile cat(B[m
 [35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 0)
+[35m> minishell  (exited with 129)
 (B[m
 
 [33mls<dadd(B[m
 [35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 0)
+[35m> minishell  (exited with 129)
 (B[m
 
 [33mls | < dadd(B[m
 [35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 0)
+[35m> minishell  (exited with 129)
 (B[m
 
 [33m< lexer/ /bin | ///// | ok > /////(B[m
 [35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 0)
-(B[m[94m----- STDERR -----(B[m
-2d1
-< minishell: /////: is a directory
-3a3
-> minishell: /////: is a directory
-
+[35m> minishell  (exited with 129)
+(B[m
 
 [33m< lexer/ /bin | "" | ok > ""(B[m
 [35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 2)
+[35m> minishell  (exited with 129)
 (B[m[94m----- STDERR -----(B[m
-1,3c1
-< minishell: lexer/: No such file or directory
+2,3c2
 < minishell: : command not found
 < minishell: : No such file or directory
 ---
-> mini-shell: syntax error near unexpected token `newline'
+> minishell: No such file or directory
 
 
 [33mecho hi > $p(B[m
 [35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 0)
+[35m> minishell  (exited with 129)
 (B[m[94m----- STDERR -----(B[m
 Binary files err1 and err2 differ
-
-
-[33mcat *'*(B[m
-[35m< bash       (exited with 2)(B[m
-[35m> minishell  (exited with 0)
-(B[m[94m----- STDERR -----(B[m
-1,2c1
-< minishell: -c: unexpected EOF while looking for matching `''
-< minishell: -c: line 1: syntax error: unexpected end of file
----
-> [33mParse Error near: [00m[30m'*[00m
-
-
-[33mcat *'"'*(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDOUT -----(B[m
-0a1,3
-> tmp == ?? [
-> "
-> ]
-
-
-[33mcat *" "*(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDOUT -----(B[m
-0a1,3
-> tmp == ?? [
->  
-> ]
-
-
-[33mcat *'|'*(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDOUT -----(B[m
-0a1,3
-> tmp == ?? [
-> |
-> ]
-
-
-[33mecho $*(B[m
-[35m< bash       (exited with 0)(B[m
-[35m> minishell  (exited with 0)
-(B[m[94m----- STDOUT -----(B[m
-1c1,3
-< 
----
-> $*
-> tmp == ?? [$
-> ]
 
 

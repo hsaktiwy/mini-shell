@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:50:13 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/06 19:16:01 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/06 21:16:13 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ char	*remove_white_spaces(char *p)
 	char	*tmp;
 
 	tmp = p;
-	printf("??\n");
+	// printf("??\n");
 	p = ft_strtrim(tmp, " ");
-	printf("maybe\n");
+	// printf("maybe\n");
 	free(tmp);
 	return (p);
 }
@@ -49,6 +49,8 @@ char	*go_to_expand_var(t_env *env, char *arg, char *line, int *i)
 
 	res = arg;
 	k = 0;
+	if (line[*i + 1] == '*')
+		return ((*i) += 2, res);
 	while (line[k + *i + 1] && line[k + *i + 1] != '?'
 		&& line[k + *i + 1] != '{' && (ft_isalnum(line[k + *i + 1])
 			|| line[k + *i + 1] == '_'))
@@ -95,7 +97,7 @@ char	*expand_input(t_env *env, char *line)
 			arg = expand_tilde(env, arg, line, &i);
 		else if (s == 0 && (!c || c == '\"') && line[i] == '$'
 			&& (ft_isalpha(line[i + 1]) || line[i + 1] == '?'
-				|| line[i + 1] == '{' || line[i + 1] == '_'))
+			|| line[i + 1] == '*' || line[i + 1] == '{' || line[i + 1] == '_'))
 			arg = go_to_expand_var(env, arg, line, &i);
 		else if (line[i])
 		{
