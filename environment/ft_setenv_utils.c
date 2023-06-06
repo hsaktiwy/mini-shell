@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 13:35:13 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/26 13:43:24 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/06 20:09:07 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ ssize_t	get_env_index(char **env_table, char *key)
 	size_t	k;
 
 	index = 0;
+	//
+	// if (ft_getenv(g_env_s(NULL), key) == )
 	while (env_table[index])
 	{
 		j = 0;

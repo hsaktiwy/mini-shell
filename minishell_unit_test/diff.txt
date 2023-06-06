@@ -1,35 +1,308 @@
-[33menv | grep USER(B[m
+[33mecho >(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 139)
+(B[m[94m----- STDERR -----(B[m
+1,2d0
+< minishell: -c: syntax error near unexpected token `newline'
+< minishell: -c: `echo >'
+
+
+[33munset ""(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDERR -----(B[m
+Binary files err1 and err2 differ
+
+
+[33mecho bonjour >>> test(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 139)
+(B[m[94m----- STDERR -----(B[m
+1,2d0
+< minishell: -c: syntax error near unexpected token `>'
+< minishell: -c: `echo bonjour >>> test'
+
+
+[33mecho bonjour > > out(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 139)
+(B[m[94m----- STDERR -----(B[m
+1,2d0
+< minishell: -c: syntax error near unexpected token `>'
+< minishell: -c: `echo bonjour > > out'
+
+
+[33mecho 2 >> out1 > out2(B[m
 [35m< bash       (exited with 0)(B[m
 [35m> minishell  (exited with 0)
 (B[m[94m----- STDOUT -----(B[m
+0a1
+> 2
+
+
+[33mecho 2 > out1 >> out2(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDOUT -----(B[m
+0a1
+> 2
+
+
+[33mecho bonjour > $test(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDERR -----(B[m
+Binary files err1 and err2 differ
+
+
+[33mecho bonjour > $test w t(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDERR -----(B[m
+Binary files err1 and err2 differ
+
+
+[33m exit (B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit -10(B[m
+[35m< bash       (exited with 246)(B[m
+[35m> minishell  (exited with 246)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit +10(B[m
+[35m< bash       (exited with 10)(B[m
+[35m> minishell  (exited with 10)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mecho hudifg d | | hugdfihd(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 2)
+(B[m[94m----- STDERR -----(B[m
+1,2c1
+< minishell: -c: syntax error near unexpected token `|'
+< minishell: -c: `echo hudifg d | | hugdfihd'
+---
+> mini-shell: syntax error near unexpected token `|'
+
+
+[33m| echo(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 2)
+(B[m[94m----- STDERR -----(B[m
+1,2c1
+< minishell: -c: syntax error near unexpected token `|'
+< minishell: -c: `| echo'
+---
+> mini-shell: syntax error near unexpected token `|'
+
+
+[33m> a ls > b < Makefile(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 0)
+(B[m
+
+[33mexit -21131313(B[m
+[35m< bash       (exited with 207)(B[m
+[35m> minishell  (exited with 207)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit -9223372036854775809(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 9223372036854775808(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit +100(B[m
+[35m< bash       (exited with 100)(B[m
+[35m> minishell  (exited with 100)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 11111111111111111111111111111111111111111111(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33m""(B[m
+[35m< bash       (exited with 127)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDERR -----(B[m
 1d0
-< USER=root
-2a2
-> USER=root
+< minishell: : command not found
 
 
-[33mexport zz zzz= zzzz=asd | echo $zz$zzz$zzzz| export | grep zz(B[m
+[33mecho $'HOME'(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDOUT -----(B[m
+1c1
+< HOME
+---
+> $HOME
+
+
+[33mecho $"HOME"(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDOUT -----(B[m
+1c1
+< HOME
+---
+> $HOME
+
+
+[33mexit ""(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mecho $"$"(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDOUT -----(B[m
+1c1
+< $
+---
+> $$
+
+
+[33mecho $'$'(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDOUT -----(B[m
+1c1
+< $
+---
+> $$
+
+
+[33m< f < Makefile cat(B[m
 [35m< bash       (exited with 1)(B[m
 [35m> minishell  (exited with 0)
 (B[m
 
-[33mexport /dont/export/this=hola | export | grep /dont/export/this(B[m
+[33mls<dadd(B[m
 [35m< bash       (exited with 1)(B[m
 [35m> minishell  (exited with 0)
 (B[m
 
-[33mexport $(B[m
+[33mls | < dadd(B[m
 [35m< bash       (exited with 1)(B[m
 [35m> minishell  (exited with 0)
 (B[m
 
-[33mexport ?=42(B[m
+[33m< lexer/ /bin | ///// | ok > /////(B[m
 [35m< bash       (exited with 1)(B[m
 [35m> minishell  (exited with 0)
-(B[m
+(B[m[94m----- STDERR -----(B[m
+2d1
+< minishell: /////: is a directory
+3a3
+> minishell: /////: is a directory
 
-[33mexit 21 42(B[m
+
+[33m< lexer/ /bin | "" | ok > ""(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 2)
+(B[m[94m----- STDERR -----(B[m
+1,3c1
+< minishell: lexer/: No such file or directory
+< minishell: : command not found
+< minishell: : No such file or directory
+---
+> mini-shell: syntax error near unexpected token `newline'
+
+
+[33mecho hi > $p(B[m
 [35m< bash       (exited with 1)(B[m
 [35m> minishell  (exited with 0)
-(B[m
+(B[m[94m----- STDERR -----(B[m
+Binary files err1 and err2 differ
+
+
+[33mcat *'*(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDERR -----(B[m
+1,2c1
+< minishell: -c: unexpected EOF while looking for matching `''
+< minishell: -c: line 1: syntax error: unexpected end of file
+---
+> [33mParse Error near: [00m[30m'*[00m
+
+
+[33mcat *'"'*(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 1)
+(B[m[94m----- STDOUT -----(B[m
+0a1,3
+> tmp == ?? [
+> "
+> ]
+
+
+[33mcat *" "*(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 1)
+(B[m[94m----- STDOUT -----(B[m
+0a1,3
+> tmp == ?? [
+>  
+> ]
+
+
+[33mcat *'|'*(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 1)
+(B[m[94m----- STDOUT -----(B[m
+0a1,3
+> tmp == ?? [
+> |
+> ]
+
+
+[33mecho $*(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDOUT -----(B[m
+1c1,3
+< 
+---
+> $*
+> tmp == ?? [$
+> ]
+
 

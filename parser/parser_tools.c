@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_tools.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:52:33 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/30 15:06:16 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/06 16:16:02 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ int	printf_error(int boolean)
 {
 	if (boolean == 0)
 	{
-		printf("mini-shell:	syntax error near unexpected token `|'\n");
+		// printf("mini-shell:	syntax error near unexpected token `|'\n");
+		ft_putstr_fd("mini-shell: syntax error near unexpected token `|'\n",
+			STDERR_FILENO);
 		return (1);
 	}
 	return (0);

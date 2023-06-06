@@ -6,11 +6,11 @@ These tests are not all mines. Credits to vgoldman, mashar, and jecaudal.
 tmarx
 # Tests
 
-- [b] echo bonjour ; |
+- [x] echo bonjour |
 - [x] echo bonjour | |
 - [x] |
-- [x] echo bonjour |;
-- [x] echo bonjour \; ls
+- [x] echo bonjour |
+- [x] echo bonjour \ ls
 - [x] echo bonjour > test\ 1 [leaks]
 - [x] cd $HOME/Documents
 - [x] echo "\s" & echo "\\s"
@@ -34,8 +34,6 @@ tmarx
 - [x] export var; export var=test
 - [x] echo bonjour > $test # with test not defined
 - [x] file_name_in_current_dir
-- [x] cd ../../../../../.. ; pwd
-- [x] ctrl-C . 130 sur bin(ex : sleep 10)&line vide
 - [x] ctrl-\ .131 sur bin
 - [x] echo "bip | bip ; coyotte > < \" "
 - [x] cat | cat | cat | ls # check outputs order
@@ -54,11 +52,8 @@ tmarx
 - [!!] exit # should return the last exit code value [FIXED]
 - [x] exit -10
 - [x] exit +10
-- [b] ;
-- [b] echo coucou | ;
 - [x] echo "$HOME"
 - [x] echo '$HOME'
-- [b] export ; env # display is different for both commands
 - [x] echo \$HOME
 - [x] > log echo coucou
 - [x] echo hudifg d | | hugdfihd
@@ -70,9 +65,6 @@ tmarx
 - [x] echo "\\"
 - [x] echo "\n \n \n"
 - [x] echo "\n \\n \\\n"
-- [b] echo ;;
-- [b] echo hi";" hihi
-- [b] echo hi "   ;   " hihi
 - [x] cd
 - [x] cd .
 - [x] cd ~

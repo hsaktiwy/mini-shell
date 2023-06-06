@@ -59,28 +59,12 @@
 	[x] ls | | | wc or ls |||| wc (i think it soved)
 	[x]export "VA=ls|wc" should consider one cmd
 	[x]echo '$USER'$USER"$USER" 
-	[x]echo $f "$HOME" segmentation fault
-	[x]echo $f"$HOME"
+
 	[ ]export "VA=ls|wc" should consider one cmd
-	[ ]echo '$USER'$USER"$USER" 
-	[ ]ls           | cat         <           out1 // space problem
-	[ ]echo $f "$HOME"
-	[ ]echo $f"$HOME"
-	[ ]echo $f"$HOME""                         "
-	[x] echo '$USER'$USER"$USER" 
+
 	[x] in redirection not working
-	[ ] ls           | cat         <           out1 // space problem
-	[ ]> "ls | > out" "ls | <<l" different behaviar
-	[x] exit -21131313
-	[x] exit -9223372036854775809
-	[x] exit 9223372036854775808
-	[x] exit +"100
-	[x] export = // SIGSEGV
-	[x] echo $?HELLO (ft_get_simple_arg i added if(str[k + i + 1] == '?') k++; plus the same for the files expand.c ft_get_doube_quote as the all do the same)
-	[ ]echo $?HELLo
-	[ ]echo $?HELLO
-	[ ]echo $??
-	[ ]echo "$?HELLo"
+
+
 	[ ]{
 		bash-3.2$ cat << kk
 		> $?HHH
@@ -104,38 +88,14 @@
 	[x] } or { or {} or }{
 	[x] < ls/ > 		<<nothing should be passed to execution>>
 	[x] <ls>
-
+	[ ]"ls                  <<kk"
 	[x] fix this problem plus exit status is 255 not 2
 	[ ]exit 11111111111111111111111111111111111111111111
-	[ ]exit: 11111111111111111111111111111111111111111111: numeric argument required
 	[x] ++ close open file fds in exit
-
-{
-	""
-	echo $'HOME'
-	echo $"HOME"
-	exit ""
-	echo $"$"
-	echo $'$'
-}
-
-{
-	export USER=
-	export =
-	export +=
-}
 
 {
 	>> exit status 1 in redirection error
 }
-
-{
-	< f < Makefile cat
-	ls<dadd				##bash: f: No such file or directory
-	ls | < dadd		
-	< dadd | ls		##bash: dadd: No such file or directory and ls executed
-	should add another flag if there is an error so i don't execute the command.
-}	//FIXED
 
 {
 	export f=Make
@@ -179,28 +139,8 @@
 }
 
 {
-	< lexer/ /bin | ls > out (message is not correct)
-}   //FIXED
+	l$u' -la'  // u='s'
 
-{
-	< lexer/ /bin | ///// | ok > ///// (message is not correct)
-}   //FIXED
-
-{
-	< lexer/ /bin | "" | ok > "" (messge is not correct)
-}   //FIXED
-
-{
-	$HOME (messge is not correct)
-}   //FIXED
-
-{
-	cat | cat | lscat | ls
-	l$u' -la'  // u='s'    lah ismeh lya mnak awdi a hamza
-}
-
-{
-    echo hi > $p
 }
     [ ]exit 1 in ^C
 	[ ]test runung bash on  a folder that doesn't exist
@@ -274,3 +214,5 @@ Indirect leak of 570 byte(s) in 60 object(s) allocated from:
 }
 
 unset aa
+unset "" //return value
+ls | <<l

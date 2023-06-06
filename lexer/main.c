@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/06 13:52:29 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/06 17:10:00 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	signal_handler(int sig)
 
 void	set_signal_handlers()
 {
-	// rl_catch_signals = 0;
+	rl_catch_signals = 0;
 
 	signal(SIGINT, signal_handler);	// handle Ctr+c
 	signal(SIGQUIT, signal_handler);	// ignore Ctr+'\'
@@ -181,6 +181,8 @@ int	main(__attribute__((unused)) int ac,
 	//atexit(ft_leaks);
 	set_signal_handlers();
 	env_s = ft_init_env(env);
+	////////////////////////////////////////////
+	//this part is for tester
 	if (ac == 3)
 	{
 		if (ft_strcmp(av[1], "-c") == 0)
@@ -195,16 +197,15 @@ int	main(__attribute__((unused)) int ac,
 			if (input && input[0])
 			{
 				add_history(input);
-				//input = expand_input(env_s, input);
-				//printf("our input : %s\n", input);
 				g_input_line(input);
 				if(check_redirection(input))
 					main2(input, env_s);
 			}
 			free(input);
 		}
-		return (0);
+		return (g_exit_status);
 	}
+	//////////////////////////////////////////////
 	while (1)
 	{
 		restore_stdin();

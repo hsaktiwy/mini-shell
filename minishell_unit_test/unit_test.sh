@@ -128,6 +128,119 @@ TEST_ARRAY=(
 '< doesnotexist'
 'cat < doesnotexist'
 'cat < dir'
+'################	    		MINE				#################'
+'echo my test'
+'echo bonjour  ls'
+'echo bonjour > test 1 [leaks]'
+'cd $HOME/Documents'
+'echo >'
+'echo -n -n -nnnn -nnnnm'
+'unset var1'
+'export ""'
+'unset ""'
+'echo test > file test1 [+leaks]'
+'$'
+'not_cmd bonjour > salut'
+'cat Makefile | grep pr | head -n 5 | cat test'
+'cat Makefile | grep pr | head -n 5 | hello'
+'echo bonjour >>> test'
+'echo bonjour > > out'
+'echo 2 >> out1 > out2'
+'echo 2 > out1 >> out2'
+'cat < test'
+'echo bonjour > $test'
+'file_name_in_current_dir'
+'$bla'
+'export var ="cat Makefile | grep >"'
+'export "test=ici"=coucou'
+'c$var Makefile'
+'$LESS$VAR'
+'/bin/echo bonjour'
+'not_cmd'
+'sleep 1 | exit'
+'echo bonjour > $test w t'
+'"exit retour a la ligne"'
+'minishell'
+'cat diufosgid'
+' exit '
+'exit -10'
+'exit +10'
+'echo "$HOME"'
+"echo '$HOME'"
+'> log echo coucou'
+'echo hudifg d | | hugdfihd'
+'echo'
+'echo simple'
+'echo -n simple'
+"echo '\'"
+'cd'
+'cd .'
+'cd ~'
+'cd /'
+'cd no_file'
+'cd a b c d'
+'pwd a'
+'pwd a b c d'
+'export LOL=lala ROR=rara'
+'unset LOL ROR'
+'export "HI= hi"'
+'export "HI =hi"'
+'/bin/ls'
+'echo $?'
+'l^Ds'
+'| echo'
+'> a ls > b < Makefile'
+'echo > a Hello World!'
+'> a echo Hello World!'
+'cat < Makefile | grep gcc > output'
+'exit 0 | exit 1'
+'exit 1 | exit 0'
+'ls -la "|"'
+'ls           | cat         <           out1'
+'echo $f "$HOME"'
+'echo $f"$HOME"'
+'echo '$USER'$USER"$USER" '
+'echo $f "$HOME"'
+'echo $f"$HOME"'
+'echo $f"$HOME""                         "'
+'echo '$USER'$USER"$USER"'
+'ls           | cat         <           out1'
+'ls | > out'
+'exit -21131313'
+'exit -9223372036854775809'
+'exit 9223372036854775808'
+'exit +100'
+'export ='
+'echo $?HELLO'
+'echo $?HELLo'
+'echo $?HELLO'
+'echo $??'
+'echo "$?HELLo"'
+'exit 11111111111111111111111111111111111111111111'
+'""'
+"echo $'HOME'"
+'echo $"HOME"'
+'exit ""'
+'echo $"$"'
+"echo $'$'"
+'export USER='
+'export ='
+'export +='
+'< f < Makefile cat'
+'ls<dadd'
+'ls | < dadd'
+'dadd | ls'
+'< lexer/ /bin | ls > out'
+'< lexer/ /bin | ///// | ok > /////'
+'< lexer/ /bin | "" | ok > ""'
+'$HOME'
+'cat | cat | lscat | ls'
+'echo hi > $p'
+"cat *"\'"*"
+"cat *'\"'*"
+'cat *" "*'
+"cat *'|'*"
+'echo $*'
 )
 
 usage() {
@@ -200,6 +313,11 @@ do
 	-l|--left-redirection)
 	DFL_TEST=0
 	TO_TEST+=('LEFT')
+	shift
+	;;
+	-m|--mine)
+	DFL_TEST=0
+	TO_TEST+=('MINE')
 	shift
 	;;
 	-d|--double-redirection)
@@ -396,5 +514,6 @@ fi
 printf "\n\n\t\t\'cat diff.txt | less\'  for detailed information\n\n"
 
 rm -rf minishell out1 out2 err1 err2 a b c d pum lscp hpc hp testfile
+rm -rf file log out output salut test 'test 1' test\\ ';' '000' 'chmod' 'd;' 'a;'
 chmod +r dirwithoutpermissions
 rm -rf ucantexecme.e dir dir/encoreuneautredir dirwithoutpermissions
