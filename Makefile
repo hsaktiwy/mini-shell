@@ -6,7 +6,7 @@
 #    By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 13:01:11 by hsaktiwy          #+#    #+#              #
-#    Updated: 2023/06/05 16:45:34 by aigounad         ###   ########.fr        #
+#    Updated: 2023/06/06 20:15:27 by aigounad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ BUILTINS = cd.c pwd.c echo.c export.c env.c unset.c exit.c common.c
 
 LEXER = main.c ft_get_cmd.c ft_next_arg.c ft_get_double_quote.c ft_get_simple_arg.c ft_get_single_quote.c ft_lstfree_t_file.c \
 		expand.c lexer.c lexer_tools.c expanding_issue.c free_token.c display_tokens.c global_functions.c wildcards.c lexer_utils.c \
-		lexer_second_utils.c wildcards_utils.c wildcards_second_utils.c global_functions_second.c
+		lexer_second_utils.c wildcards_utils.c wildcards_second_utils.c global_functions_second.c expand_input.c lexer_tools_second.c \
+		expand_input_tools.c 
 
 EXEC = execute.c execute_utils.c execute_utils_2.c find_cmd.c signals.c builtin_execution.c
 

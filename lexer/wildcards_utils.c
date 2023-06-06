@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcards_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 15:07:39 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/05 15:23:58 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/06 14:21:19 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,10 @@ char	*add_matchs(struct dirent *entry, char *arg, char	*tmp, int *i)
 	char	*res;
 
 	res = arg;
-	//printf("-->[%s]\n", tmp);
 	if (entry && entry->d_name[0] != '.')
 	{
 		if (ft_regx(entry->d_name, tmp))
 		{
-	//		printf("in\n");
 			res = str_join(res, ft_strdup("\n"));
 			res = str_join(res, ft_strdup(entry->d_name));
 			(*i)++;
@@ -96,7 +94,6 @@ char	*local_dir(char *tmp)
 	}
 	if (i == 0)
 	{
-		// res = str_join(res, ft_strdup("\n"));
 		ft_replace(tmp, '\n', '*');
 		res = str_join(res, ft_strdup(tmp));
 	}

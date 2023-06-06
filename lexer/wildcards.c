@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:24:11 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/06 13:53:36 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/06 20:17:22 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,16 +95,16 @@ char	*iswildcards(char *input, char	*ini_s)
 	char	*tmp;
 
 	tmp = NULL;
-	// printf("iswildcards=%s\n", input);
-	if (input && is_there_wildcard(input))
+	printf("iswildcards=%s\n", input);
+	if (input && ini_s && is_there_wildcard(ini_s))
 	{
 		tmp = replace_true_wildcards(ini_s);
 		printf("tmp == ?? [%s]\n", tmp);
 		arg = local_dir(tmp);
 		return (free(input), free(tmp), arg);
 	}
-	if (input)
-		tmp = get_token(input);
-	// printf("??? = %s\n", tmp);
+	if (ini_s)
+		tmp = get_token(ini_s);
+	printf("??? = %s\n", tmp);
 	return (free(input), tmp);
 }
