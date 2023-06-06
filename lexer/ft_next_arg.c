@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:31:06 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/05 20:41:12 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/06 14:38:49 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,8 @@ t_file	*get_file(t_env *env, char *input, int *index)
 	tmp = get_token(&input[*index]);
 	printf("tmp 1= %p\n", tmp);
 	*index += input_arg_size(&input[*index]);
-	tmp = expand_input(env, tmp);
+	if (tmp)
+		tmp = expand_input(env, tmp);
 	printf("tmp 2= %p\n", tmp);
 	if (!tmp)
 	{

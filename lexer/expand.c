@@ -6,11 +6,22 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 14:37:42 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/05 20:17:00 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/06 14:37:46 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	cond_env_expand(char c, char next_c)
+{
+	return ((c == '$' && next_c && (ft_isalpha(next_c) || next_c == '{'
+				| next_c == '?' || next_c == '_') && !iswhitespace(next_c)));
+}
+
+int	cond_env_expand_todefinekey(char c)
+{
+	return ((c && c != '?' && c != '{' && (ft_isalnum(c) || c == '_')));
+}
 
 char	*expand(t_env *env, char *line)
 {
@@ -22,10 +33,11 @@ char	*expand(t_env *env, char *line)
 	arg = ft_strdup("");
 	while (line[i])
 	{
-		if (line[i] == '$' && line[i + 1] && (ft_isalpha(line[i + 1]) || line[i + 1] == '{' || line[i + 1] == '?' ||  line[i + 1] == '_') && !iswhitespace(line[i + 1]))
+		if (line[i + 1] && cond_env_expand(line[i], line[i + 1]))
 		{
 			k = 0;
-			while (line[k + i + 1] && line[k + i + 1] != '?' && line[k + i + 1] != '{' && (ft_isalnum(line[k + i + 1]) || line[k + i + 1] == '_'))
+			//while (line[k + i + 1] && line[k + i + 1] != '?' && line[k + i + 1] != '{' && (ft_isalnum(line[k + i + 1]) || line[k + i + 1] == '_'))
+			while (cond_env_expand_todefinekey(line[k + i + 1]))
 				k++;
 			if (line[k + i + 1] == '?')
 				k++;
@@ -58,7 +70,9 @@ char	*remove_white_spaces(char *p)
 	char	*tmp;
 
 	tmp = p;
+	printf("??\n");
 	p = ft_strtrim(tmp, " ");
+	printf("maybe\n");
 	free(tmp);
 	//g_input_line(p);
 	return (p);
@@ -161,9 +175,7 @@ char	*expand_input(t_env *env, char *line)
 				k++;
 			if (line[k + i + 1] == '?')
 				k++;
-			printf("expand_env_var in\n");
 			arg = expand_env_var(env, &line[i + 1], arg, &k);
-			printf("expand_env_var out\n");
 			i += k + 1;
 		}
 		else if (line[i])
