@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 11:59:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/06 21:19:44 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/07 14:42:17 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ char	*here_doc_name(char *common, int nbr);
 void	lexer_err(char *str);
 char	*expand_input(t_env *env, char *line);
 char	*expand(t_env *env, char *line);
-char	*go_to_expand_var(t_env *env, char *arg, char *line, int *i);
+int		cond_env_expand_input(char next_c);
+char	*go_to_expand_var(char *arg, char *line, int *i, char c);
 char	*reallocated_str(char *str, char *add);
 void	display_tokens(t_list	*tokens);
 

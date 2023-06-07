@@ -73,7 +73,7 @@
 < minishell: -c: syntax error near unexpected token `|'
 < minishell: -c: `|'
 ---
-> mini-shell: syntax error near unexpected token `|'
+> minishell: syntax error near unexpected token `|'
 
 
 [33m|(B[m
@@ -84,7 +84,7 @@
 < minishell: -c: syntax error near unexpected token `|'
 < minishell: -c: `|'
 ---
-> mini-shell: syntax error near unexpected token `|'
+> minishell: syntax error near unexpected token `|'
 
 
 [33m|b(B[m
@@ -95,7 +95,7 @@
 < minishell: -c: syntax error near unexpected token `|'
 < minishell: -c: `|b'
 ---
-> mini-shell: syntax error near unexpected token `|'
+> minishell: syntax error near unexpected token `|'
 
 
 [33ma|||b(B[m
@@ -106,7 +106,7 @@
 < minishell: -c: syntax error near unexpected token `|'
 < minishell: -c: `a|||b'
 ---
-> mini-shell: syntax error near unexpected token `|'
+> minishell: syntax error near unexpected token `|'
 
 
 [33m> > a(B[m
@@ -117,7 +117,7 @@
 < minishell: -c: syntax error near unexpected token `>'
 < minishell: -c: `> > a'
 ---
-> mini-shell: syntax error near unexpected token `>'
+> minishell: syntax error near unexpected token `>'
 
 
 [33m< < a(B[m
@@ -128,7 +128,7 @@
 < minishell: -c: syntax error near unexpected token `<'
 < minishell: -c: `< < a'
 ---
-> mini-shell: syntax error near unexpected token `<'
+> minishell: syntax error near unexpected token `<'
 
 
 [33m< >> a(B[m
@@ -139,7 +139,7 @@
 < minishell: -c: syntax error near unexpected token `>>'
 < minishell: -c: `< >> a'
 ---
-> mini-shell: syntax error near unexpected token `>>'
+> minishell: syntax error near unexpected token `>>'
 
 
 [33m>>> a(B[m
@@ -150,7 +150,7 @@
 < minishell: -c: syntax error near unexpected token `>'
 < minishell: -c: `>>> a'
 ---
-> mini-shell: syntax error near unexpected token `>'
+> minishell: syntax error near unexpected token `>'
 
 
 [33m<<<< a(B[m
@@ -161,7 +161,7 @@
 < minishell: -c: syntax error near unexpected token `<'
 < minishell: -c: `<<<< a'
 ---
-> mini-shell: syntax error near unexpected token `<<'
+> minishell: syntax error near unexpected token `<<'
 
 
 [33ma<<<<(B[m
@@ -172,7 +172,7 @@
 < minishell: -c: syntax error near unexpected token `<'
 < minishell: -c: `a<<<<'
 ---
-> mini-shell: syntax error near unexpected token `<<'
+> minishell: syntax error near unexpected token `<<'
 
 
 [33mpwd >|(B[m
@@ -183,7 +183,7 @@
 < minishell: -c: syntax error near unexpected token `newline'
 < minishell: -c: `pwd >|'
 ---
-> mini-shell: syntax error near unexpected token `|'
+> minishell: syntax error near unexpected token `|'
 
 
 [33m|pwd(B[m
@@ -194,7 +194,7 @@
 < minishell: -c: syntax error near unexpected token `|'
 < minishell: -c: `|pwd'
 ---
-> mini-shell: syntax error near unexpected token `|'
+> minishell: syntax error near unexpected token `|'
 
 
 [33mpwd ||(B[m
@@ -204,7 +204,7 @@
 1c1
 < minishell: -c: line 1: syntax error: unexpected end of file
 ---
-> mini-shell: syntax error near unexpected token `|'
+> minishell: syntax error near unexpected token `|'
 
 
 [33mecho " '$PWD' \"$PWD\" '$PWD' "(B[m
@@ -290,7 +290,7 @@
 < minishell: -c: syntax error near unexpected token `newline'
 < minishell: -c: `echo >'
 ---
-> mini-shell: syntax error near unexpected token `newline'
+> minishell: syntax error near unexpected token `newline'
 
 
 [33munset ""(B[m
@@ -308,7 +308,7 @@ Binary files err1 and err2 differ
 < minishell: -c: syntax error near unexpected token `>'
 < minishell: -c: `echo bonjour >>> test'
 ---
-> mini-shell: syntax error near unexpected token `>'
+> minishell: syntax error near unexpected token `>'
 
 
 [33mecho bonjour > > out(B[m
@@ -319,7 +319,7 @@ Binary files err1 and err2 differ
 < minishell: -c: syntax error near unexpected token `>'
 < minishell: -c: `echo bonjour > > out'
 ---
-> mini-shell: syntax error near unexpected token `>'
+> minishell: syntax error near unexpected token `>'
 
 
 [33mecho 2 >> out1 > out2(B[m
@@ -384,7 +384,7 @@ Binary files err1 and err2 differ
 < minishell: -c: syntax error near unexpected token `|'
 < minishell: -c: `echo hudifg d | | hugdfihd'
 ---
-> mini-shell: syntax error near unexpected token `|'
+> minishell: syntax error near unexpected token `|'
 
 
 [33m| echo(B[m
@@ -395,7 +395,7 @@ Binary files err1 and err2 differ
 < minishell: -c: syntax error near unexpected token `|'
 < minishell: -c: `| echo'
 ---
-> mini-shell: syntax error near unexpected token `|'
+> minishell: syntax error near unexpected token `|'
 
 
 [33m> a ls > b < Makefile(B[m
@@ -443,60 +443,12 @@ Binary files err1 and err2 differ
 > exit
 
 
-[33m""(B[m
-[35m< bash       (exited with 127)(B[m
-[35m> minishell  (exited with 0)
-(B[m[94m----- STDERR -----(B[m
-1d0
-< minishell: : command not found
-
-
-[33mecho $'HOME'(B[m
-[35m< bash       (exited with 0)(B[m
-[35m> minishell  (exited with 0)
-(B[m[94m----- STDOUT -----(B[m
-1c1
-< HOME
----
-> $HOME
-
-
-[33mecho $"HOME"(B[m
-[35m< bash       (exited with 0)(B[m
-[35m> minishell  (exited with 0)
-(B[m[94m----- STDOUT -----(B[m
-1c1
-< HOME
----
-> $HOME
-
-
 [33mexit ""(B[m
 [35m< bash       (exited with 255)(B[m
 [35m> minishell  (exited with 255)
 (B[m[94m----- STDERR -----(B[m
 0a1
 > exit
-
-
-[33mecho $"$"(B[m
-[35m< bash       (exited with 0)(B[m
-[35m> minishell  (exited with 0)
-(B[m[94m----- STDOUT -----(B[m
-1c1
-< $
----
-> $$
-
-
-[33mecho $'$'(B[m
-[35m< bash       (exited with 0)(B[m
-[35m> minishell  (exited with 0)
-(B[m[94m----- STDOUT -----(B[m
-1c1
-< $
----
-> $$
 
 
 [33m< f < Makefile cat(B[m
@@ -517,17 +469,21 @@ Binary files err1 and err2 differ
 [33m< lexer/ /bin | ///// | ok > /////(B[m
 [35m< bash       (exited with 1)(B[m
 [35m> minishell  (exited with 129)
-(B[m
+(B[m[94m----- STDERR -----(B[m
+2d1
+< minishell: /////: is a directory
+3a3
+> minishell: /////: is a directory
+
 
 [33m< lexer/ /bin | "" | ok > ""(B[m
 [35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 129)
+[35m> minishell  (exited with 127)
 (B[m[94m----- STDERR -----(B[m
-2,3c2
+2d1
 < minishell: : command not found
-< minishell: : No such file or directory
----
-> minishell: No such file or directory
+3a3
+> minishell: : command not found
 
 
 [33mecho hi > $p(B[m

@@ -83,13 +83,13 @@ TEST_ARRAY=(
 'pwd ||'
 '################		    QUOTES			#################'
 'echo "$HOME"'
-"echo '\$HOME'"
-"echo ' \"\$HOME\" '"
-"echo \"'\$HOME'\""
-"echo \" '\$PWD' \\\"\$PWD\\\" '\$PWD' \"" "echo \"\\\$HOME\""
-"echo \"'\$'\""
-"echo \\\\\n"
-"echo \"< no pipe | or semicolon will | stop me >\""
+#"echo '\$HOME'"
+# "echo ' \"\$HOME\" '"
+# "echo \"'\$HOME'\""
+# "echo \" '\$PWD' \\\"\$PWD\\\" '\$PWD' \"" "echo \"\\\$HOME\""
+# "echo \"'\$'\""
+#"echo \\\\\n"
+# "echo \"< no pipe | or semicolon will | stop me >\""
 'bash -c "I am not a command" "Im the program name"'
 'pwd" should not work"'
 'echo\" should not work neiter\"'

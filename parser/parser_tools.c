@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_tools.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:52:33 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/06 16:16:02 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/07 14:25:44 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	printf_error(int boolean)
 	if (boolean == 0)
 	{
 		// printf("mini-shell:	syntax error near unexpected token `|'\n");
-		ft_putstr_fd("mini-shell: syntax error near unexpected token `|'\n",
+		ft_putstr_fd("minishell: syntax error near unexpected token `|'\n",
 			STDERR_FILENO);
 		return (1);
 	}
@@ -56,14 +56,14 @@ void	syntaxe_error_display(t_list *list, t_token *tmp, char *c)
 {
 	if (list && tmp->type != COMMAND && c[0])
 	{
-		ft_putstr_fd("mini-shell: syntax error near unexpected token `",
+		ft_putstr_fd("minishell: syntax error near unexpected token `",
 			STDERR_FILENO);
 		ft_putstr_fd(c, STDERR_FILENO);
 		ft_putstr_fd("'\n", STDERR_FILENO);
 	}
 	else
 	{
-		ft_putstr_fd("mini-shell: syntax error near ", STDERR_FILENO);
+		ft_putstr_fd("minishell: syntax error near ", STDERR_FILENO);
 		ft_putstr_fd("unexpected token `newline'\n", STDERR_FILENO);
 	}
 }

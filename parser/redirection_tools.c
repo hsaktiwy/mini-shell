@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:17:19 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/06 20:53:59 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/07 14:20:44 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	in_redirection(t_file *tmp)
 	{
 		fd = open(tmp->a_file, O_RDONLY, 0777);
 		if (fd == -1)
-			print_error(NULL, tmp->a_file, 1);
+			print_error(tmp->a_file, NULL, 1);
 	}
 	else if (ft_strlen(tmp->token_file))
 		display_ambiguise(tmp);
@@ -123,6 +123,6 @@ int	out_append_red(t_file *tmp, int out_app)
 			return (display_ambiguise(tmp), -1);
 	}
 	if (fd == -1)
-		print_error(NULL, tmp->a_file, 1);
+		print_error(tmp->a_file, NULL, 1);
 	return (fd);
 }
