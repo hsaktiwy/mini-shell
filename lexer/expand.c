@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 14:37:42 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/06 20:16:17 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/07 01:30:42 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	cond_env_expand(char c, char next_c)
 {
-	return ((c == '$' && next_c && (ft_isalpha(next_c) || next_c == '{'
-				| next_c == '?' || next_c == '_') && !iswhitespace(next_c)));
+	return (((c == '$') && next_c && (ft_isalpha(next_c) ||( next_c == '{')
+				| (next_c == '?') || (next_c == '_')) && !iswhitespace(next_c)));
 }
 
 int	cond_env_expand_todefinekey(char c)

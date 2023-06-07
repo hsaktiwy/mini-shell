@@ -1,35 +1,491 @@
+[33menv | grep USER(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDOUT -----(B[m
+1d0
+< USER=root
+2a2
+> USER=root
+
+
+[33mexit(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 42(B[m
+[35m< bash       (exited with 42)(B[m
+[35m> minishell  (exited with 42)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit -42(B[m
+[35m< bash       (exited with 214)(B[m
+[35m> minishell  (exited with 214)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 512(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 1407(B[m
+[35m< bash       (exited with 127)(B[m
+[35m> minishell  (exited with 127)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 21 42(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 1)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit notanumber(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33menv -i ./minishell: cd(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 1)
+(B[m[94m----- STDERR -----(B[m
+1c1
+< minishell: line 1: cd: HOME not set
+---
+> minishell: cd: HOME not set
+
+
+[33m|(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 2)
+(B[m[94m----- STDERR -----(B[m
+1,2c1
+< minishell: -c: syntax error near unexpected token `|'
+< minishell: -c: `|'
+---
+> mini-shell: syntax error near unexpected token `|'
+
+
+[33m|(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 2)
+(B[m[94m----- STDERR -----(B[m
+1,2c1
+< minishell: -c: syntax error near unexpected token `|'
+< minishell: -c: `|'
+---
+> mini-shell: syntax error near unexpected token `|'
+
+
+[33m|b(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 2)
+(B[m[94m----- STDERR -----(B[m
+1,2c1
+< minishell: -c: syntax error near unexpected token `|'
+< minishell: -c: `|b'
+---
+> mini-shell: syntax error near unexpected token `|'
+
+
+[33ma|||b(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 2)
+(B[m[94m----- STDERR -----(B[m
+1,2c1
+< minishell: -c: syntax error near unexpected token `|'
+< minishell: -c: `a|||b'
+---
+> mini-shell: syntax error near unexpected token `|'
+
+
+[33m> > a(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 1)
+(B[m[94m----- STDERR -----(B[m
+1,2c1,18
+< minishell: -c: syntax error near unexpected token `>'
+< minishell: -c: `> > a'
+---
+> mini-shell: syntax error near unexpected token `>'
+> 
+> =================================================================
+> ==14841==ERROR: LeakSanitizer: detected memory leaks
+> 
+> Direct leak of 1 byte(s) in 1 object(s) allocated from:
+>     #0 0x7fa11a5d2867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+>     #1 0x5571df3cff99 in ft_strtrim libft/ft_strtrim.c:45
+>     #2 0x5571df3c52d1 in remove_white_spaces lexer/expand_input.c:23
+>     #3 0x5571df3c64ea in expand_input lexer/expand_input.c:106
+>     #4 0x5571df3bcbb9 in get_file lexer/ft_next_arg.c:164
+>     #5 0x5571df3c0339 in handle_outredirect lexer/lexer.c:84
+>     #6 0x5571df3c093e in lexer lexer/lexer.c:105
+>     #7 0x5571df3bad5c in main2 lexer/main.c:98
+>     #8 0x5571df3bb62f in main lexer/main.c:203
+>     #9 0x7fa11a2cbd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+> 
+> SUMMARY: AddressSanitizer: 1 byte(s) leaked in 1 allocation(s).
+
+
+[33m< < a(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 1)
+(B[m[94m----- STDERR -----(B[m
+1,2c1,18
+< minishell: -c: syntax error near unexpected token `<'
+< minishell: -c: `< < a'
+---
+> mini-shell: syntax error near unexpected token `<'
+> 
+> =================================================================
+> ==14852==ERROR: LeakSanitizer: detected memory leaks
+> 
+> Direct leak of 1 byte(s) in 1 object(s) allocated from:
+>     #0 0x7f6bf938b867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+>     #1 0x55f43f443f99 in ft_strtrim libft/ft_strtrim.c:45
+>     #2 0x55f43f4392d1 in remove_white_spaces lexer/expand_input.c:23
+>     #3 0x55f43f43a4ea in expand_input lexer/expand_input.c:106
+>     #4 0x55f43f430bb9 in get_file lexer/ft_next_arg.c:164
+>     #5 0x55f43f434069 in handle_inredirect lexer/lexer.c:51
+>     #6 0x55f43f43470b in lexer lexer/lexer.c:101
+>     #7 0x55f43f42ed5c in main2 lexer/main.c:98
+>     #8 0x55f43f42f62f in main lexer/main.c:203
+>     #9 0x7f6bf9084d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+> 
+> SUMMARY: AddressSanitizer: 1 byte(s) leaked in 1 allocation(s).
+
+
+[33m< >> a(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 1)
+(B[m[94m----- STDERR -----(B[m
+1,2c1,18
+< minishell: -c: syntax error near unexpected token `>>'
+< minishell: -c: `< >> a'
+---
+> mini-shell: syntax error near unexpected token `>>'
+> 
+> =================================================================
+> ==14866==ERROR: LeakSanitizer: detected memory leaks
+> 
+> Direct leak of 1 byte(s) in 1 object(s) allocated from:
+>     #0 0x7fbcc3c7c867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+>     #1 0x5624a7277f99 in ft_strtrim libft/ft_strtrim.c:45
+>     #2 0x5624a726d2d1 in remove_white_spaces lexer/expand_input.c:23
+>     #3 0x5624a726e4ea in expand_input lexer/expand_input.c:106
+>     #4 0x5624a7264bb9 in get_file lexer/ft_next_arg.c:164
+>     #5 0x5624a7268069 in handle_inredirect lexer/lexer.c:51
+>     #6 0x5624a726870b in lexer lexer/lexer.c:101
+>     #7 0x5624a7262d5c in main2 lexer/main.c:98
+>     #8 0x5624a726362f in main lexer/main.c:203
+>     #9 0x7fbcc3975d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+> 
+> SUMMARY: AddressSanitizer: 1 byte(s) leaked in 1 allocation(s).
+
+
+[33m>>> a(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 1)
+(B[m[94m----- STDERR -----(B[m
+1,2c1,18
+< minishell: -c: syntax error near unexpected token `>'
+< minishell: -c: `>>> a'
+---
+> mini-shell: syntax error near unexpected token `>'
+> 
+> =================================================================
+> ==14877==ERROR: LeakSanitizer: detected memory leaks
+> 
+> Direct leak of 1 byte(s) in 1 object(s) allocated from:
+>     #0 0x7f5dc54bd867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+>     #1 0x556d98383f99 in ft_strtrim libft/ft_strtrim.c:45
+>     #2 0x556d983792d1 in remove_white_spaces lexer/expand_input.c:23
+>     #3 0x556d9837a4ea in expand_input lexer/expand_input.c:106
+>     #4 0x556d98370bb9 in get_file lexer/ft_next_arg.c:164
+>     #5 0x556d983741d1 in handle_appendredirect lexer/lexer.c:68
+>     #6 0x556d9837484e in lexer lexer/lexer.c:103
+>     #7 0x556d9836ed5c in main2 lexer/main.c:98
+>     #8 0x556d9836f62f in main lexer/main.c:203
+>     #9 0x7f5dc51b6d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+> 
+> SUMMARY: AddressSanitizer: 1 byte(s) leaked in 1 allocation(s).
+
+
+[33m<<<< a(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 2)
+(B[m[94m----- STDERR -----(B[m
+1,2c1
+< minishell: -c: syntax error near unexpected token `<'
+< minishell: -c: `<<<< a'
+---
+> mini-shell: syntax error near unexpected token `<<'
+
+
+[33ma<<<<(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 2)
+(B[m[94m----- STDERR -----(B[m
+1,2c1
+< minishell: -c: syntax error near unexpected token `<'
+< minishell: -c: `a<<<<'
+---
+> mini-shell: syntax error near unexpected token `<<'
+
+
+[33mpwd >|(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 1)
+(B[m[94m----- STDERR -----(B[m
+1,2c1,18
+< minishell: -c: syntax error near unexpected token `newline'
+< minishell: -c: `pwd >|'
+---
+> mini-shell: syntax error near unexpected token `|'
+> 
+> =================================================================
+> ==14910==ERROR: LeakSanitizer: detected memory leaks
+> 
+> Direct leak of 1 byte(s) in 1 object(s) allocated from:
+>     #0 0x7f49b3ccd867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+>     #1 0x557f887a5f99 in ft_strtrim libft/ft_strtrim.c:45
+>     #2 0x557f8879b2d1 in remove_white_spaces lexer/expand_input.c:23
+>     #3 0x557f8879c4ea in expand_input lexer/expand_input.c:106
+>     #4 0x557f88792bb9 in get_file lexer/ft_next_arg.c:164
+>     #5 0x557f88796339 in handle_outredirect lexer/lexer.c:84
+>     #6 0x557f8879693e in lexer lexer/lexer.c:105
+>     #7 0x557f88790d5c in main2 lexer/main.c:98
+>     #8 0x557f8879162f in main lexer/main.c:203
+>     #9 0x7f49b39c6d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+> 
+> SUMMARY: AddressSanitizer: 1 byte(s) leaked in 1 allocation(s).
+
+
+[33m|pwd(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 2)
+(B[m[94m----- STDERR -----(B[m
+1,2c1
+< minishell: -c: syntax error near unexpected token `|'
+< minishell: -c: `|pwd'
+---
+> mini-shell: syntax error near unexpected token `|'
+
+
+[33mpwd ||(B[m
+[35m< bash       (exited with 2)(B[m
+[35m> minishell  (exited with 2)
+(B[m[94m----- STDERR -----(B[m
+1c1
+< minishell: -c: line 1: syntax error: unexpected end of file
+---
+> mini-shell: syntax error near unexpected token `|'
+
+
+[33mecho " '$PWD' \"$PWD\" '$PWD' "(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDOUT -----(B[m
+1c1
+<  '/root/mini-shell/minishell_unit_test' "/root/mini-shell/minishell_unit_test" '/root/mini-shell/minishell_unit_test' 
+---
+>  '/root/mini-shell/minishell_unit_test' \/root/mini-shell/minishell_unit_test\ '/root/mini-shell/minishell_unit_test' 
+
+
+[33mecho "\$HOME"(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDOUT -----(B[m
+1c1
+< $HOME
+---
+> \/root
+
+
+[33mecho \\\n(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDOUT -----(B[m
+1c1
+< \n
+---
+> \\\n
+
+
+[33mecho\" should not work neiter\"(B[m
+[35m< bash       (exited with 127)(B[m
+[35m> minishell  (exited with 127)
+(B[m[94m----- STDERR -----(B[m
+1c1
+< minishell: echo": command not found
+---
+> minishell: echo\ should not work neiter\: command not found
+
+
+[33mls > a -f | cat a(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDOUT -----(B[m
+0a1,21
+> out
+> test
+> ucantexecme.e
+> file
+> ..
+> unit_test.sh
+> out1
+> err2
+> minishell
+> .
+> pum
+> out2
+> output
+> lscp
+> log
+> a
+> dirwithoutpermissions
+> salut
+> dir
+> err1
+> diff.txt
+
+
+[33mpwd >> a | ls >> a -f | cat a(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDOUT -----(B[m
+1a2,22
+> out
+> test
+> ucantexecme.e
+> file
+> ..
+> unit_test.sh
+> out1
+> err2
+> minishell
+> .
+> pum
+> out2
+> output
+> lscp
+> log
+> a
+> dirwithoutpermissions
+> salut
+> dir
+> err1
+> diff.txt
+
+
 [33mecho >(B[m
 [35m< bash       (exited with 2)(B[m
-[35m> minishell  (exited with 139)
+[35m> minishell  (exited with 1)
 (B[m[94m----- STDERR -----(B[m
-1,2d0
+1,2c1,18
 < minishell: -c: syntax error near unexpected token `newline'
 < minishell: -c: `echo >'
+---
+> mini-shell: syntax error near unexpected token `newline'
+> 
+> =================================================================
+> ==15560==ERROR: LeakSanitizer: detected memory leaks
+> 
+> Direct leak of 1 byte(s) in 1 object(s) allocated from:
+>     #0 0x7f8003952867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+>     #1 0x55f3fd0a9f99 in ft_strtrim libft/ft_strtrim.c:45
+>     #2 0x55f3fd09f2d1 in remove_white_spaces lexer/expand_input.c:23
+>     #3 0x55f3fd0a04ea in expand_input lexer/expand_input.c:106
+>     #4 0x55f3fd096bb9 in get_file lexer/ft_next_arg.c:164
+>     #5 0x55f3fd09a339 in handle_outredirect lexer/lexer.c:84
+>     #6 0x55f3fd09a93e in lexer lexer/lexer.c:105
+>     #7 0x55f3fd094d5c in main2 lexer/main.c:98
+>     #8 0x55f3fd09562f in main lexer/main.c:203
+>     #9 0x7f800364bd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+> 
+> SUMMARY: AddressSanitizer: 1 byte(s) leaked in 1 allocation(s).
 
 
 [33munset ""(B[m
 [35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 0)
+[35m> minishell  (exited with 1)
 (B[m[94m----- STDERR -----(B[m
 Binary files err1 and err2 differ
 
 
 [33mecho bonjour >>> test(B[m
 [35m< bash       (exited with 2)(B[m
-[35m> minishell  (exited with 139)
+[35m> minishell  (exited with 1)
 (B[m[94m----- STDERR -----(B[m
-1,2d0
+1,2c1,18
 < minishell: -c: syntax error near unexpected token `>'
 < minishell: -c: `echo bonjour >>> test'
+---
+> mini-shell: syntax error near unexpected token `>'
+> 
+> =================================================================
+> ==15678==ERROR: LeakSanitizer: detected memory leaks
+> 
+> Direct leak of 1 byte(s) in 1 object(s) allocated from:
+>     #0 0x7f8a13108867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+>     #1 0x55f7e0858f99 in ft_strtrim libft/ft_strtrim.c:45
+>     #2 0x55f7e084e2d1 in remove_white_spaces lexer/expand_input.c:23
+>     #3 0x55f7e084f4ea in expand_input lexer/expand_input.c:106
+>     #4 0x55f7e0845bb9 in get_file lexer/ft_next_arg.c:164
+>     #5 0x55f7e08491d1 in handle_appendredirect lexer/lexer.c:68
+>     #6 0x55f7e084984e in lexer lexer/lexer.c:103
+>     #7 0x55f7e0843d5c in main2 lexer/main.c:98
+>     #8 0x55f7e084462f in main lexer/main.c:203
+>     #9 0x7f8a12e01d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+> 
+> SUMMARY: AddressSanitizer: 1 byte(s) leaked in 1 allocation(s).
 
 
 [33mecho bonjour > > out(B[m
 [35m< bash       (exited with 2)(B[m
-[35m> minishell  (exited with 139)
+[35m> minishell  (exited with 1)
 (B[m[94m----- STDERR -----(B[m
-1,2d0
+1,2c1,18
 < minishell: -c: syntax error near unexpected token `>'
 < minishell: -c: `echo bonjour > > out'
+---
+> mini-shell: syntax error near unexpected token `>'
+> 
+> =================================================================
+> ==15689==ERROR: LeakSanitizer: detected memory leaks
+> 
+> Direct leak of 1 byte(s) in 1 object(s) allocated from:
+>     #0 0x7fe8c69dd867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+>     #1 0x560abb894f99 in ft_strtrim libft/ft_strtrim.c:45
+>     #2 0x560abb88a2d1 in remove_white_spaces lexer/expand_input.c:23
+>     #3 0x560abb88b4ea in expand_input lexer/expand_input.c:106
+>     #4 0x560abb881bb9 in get_file lexer/ft_next_arg.c:164
+>     #5 0x560abb885339 in handle_outredirect lexer/lexer.c:84
+>     #6 0x560abb88593e in lexer lexer/lexer.c:105
+>     #7 0x560abb87fd5c in main2 lexer/main.c:98
+>     #8 0x560abb88062f in main lexer/main.c:203
+>     #9 0x7fe8c66d6d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+> 
+> SUMMARY: AddressSanitizer: 1 byte(s) leaked in 1 allocation(s).
 
 
 [33mecho 2 >> out1 > out2(B[m
@@ -50,14 +506,35 @@ Binary files err1 and err2 differ
 
 [33mecho bonjour > $test(B[m
 [35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 0)
+[35m> minishell  (exited with 1)
 (B[m[94m----- STDERR -----(B[m
 Binary files err1 and err2 differ
 
 
+[33m$bla(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 1)
+(B[m[94m----- STDERR -----(B[m
+0a1,14
+> 
+> =================================================================
+> ==15755==ERROR: LeakSanitizer: detected memory leaks
+> 
+> Direct leak of 72 byte(s) in 1 object(s) allocated from:
+>     #0 0x7fe49f8f0867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+>     #1 0x55f723411834 in ini_cmd lexer/ft_get_cmd.c:19
+>     #2 0x55f723417963 in handle_command lexer/lexer_tools.c:110
+>     #3 0x55f723416a34 in lexer lexer/lexer.c:109
+>     #4 0x55f723410d5c in main2 lexer/main.c:98
+>     #5 0x55f72341162f in main lexer/main.c:203
+>     #6 0x7fe49f5e9d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+> 
+> SUMMARY: AddressSanitizer: 72 byte(s) leaked in 1 allocation(s).
+
+
 [33mecho bonjour > $test w t(B[m
 [35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 0)
+[35m> minishell  (exited with 1)
 (B[m[94m----- STDERR -----(B[m
 Binary files err1 and err2 differ
 
@@ -108,11 +585,6 @@ Binary files err1 and err2 differ
 > mini-shell: syntax error near unexpected token `|'
 
 
-[33m> a ls > b < Makefile(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 0)
-(B[m
-
 [33mexit -21131313(B[m
 [35m< bash       (exited with 207)(B[m
 [35m> minishell  (exited with 207)
@@ -155,10 +627,70 @@ Binary files err1 and err2 differ
 
 [33m""(B[m
 [35m< bash       (exited with 127)(B[m
-[35m> minishell  (exited with 0)
+[35m> minishell  (exited with 1)
 (B[m[94m----- STDERR -----(B[m
-1d0
+1c1,59
 < minishell: : command not found
+---
+> =================================================================
+> ==16501==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6020000015d8 at pc 0x559b325dceb3 bp 0x7fffc8dd23e0 sp 0x7fffc8dd23d0
+> READ of size 8 at 0x6020000015d8 thread T0
+>     #0 0x559b325dceb2 in handle_command_helper lexer/lexer_tools_second.c:100
+>     #1 0x559b325d7356 in cmd_filer lexer/lexer_tools.c:64
+>     #2 0x559b325d79ff in handle_command lexer/lexer_tools.c:113
+>     #3 0x559b325d6a34 in lexer lexer/lexer.c:109
+>     #4 0x559b325d0d5c in main2 lexer/main.c:98
+>     #5 0x559b325d162f in main lexer/main.c:203
+>     #6 0x7f03f46a5d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+>     #7 0x7f03f46a5e3f in __libc_start_main_impl ../csu/libc-start.c:392
+>     #8 0x559b325d0764 in _start (/root/mini-shell/minishell_unit_test/minishell+0x6764)
+> 
+> 0x6020000015d8 is located 0 bytes to the right of 8-byte region [0x6020000015d0,0x6020000015d8)
+> allocated by thread T0 here:
+>     #0 0x7f03f49ac867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+>     #1 0x559b325e4d8a in ft_split libft/ft_split.c:78
+>     #2 0x559b325dcd77 in handle_command_helper lexer/lexer_tools_second.c:98
+>     #3 0x559b325d7356 in cmd_filer lexer/lexer_tools.c:64
+>     #4 0x559b325d79ff in handle_command lexer/lexer_tools.c:113
+>     #5 0x559b325d6a34 in lexer lexer/lexer.c:109
+>     #6 0x559b325d0d5c in main2 lexer/main.c:98
+>     #7 0x559b325d162f in main lexer/main.c:203
+>     #8 0x7f03f46a5d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+> 
+> SUMMARY: AddressSanitizer: heap-buffer-overflow lexer/lexer_tools_second.c:100 in handle_command_helper
+> Shadow bytes around the buggy address:
+>   0x0c047fff8260: fa fa 03 fa fa fa 00 04 fa fa 03 fa fa fa 03 fa
+>   0x0c047fff8270: fa fa 00 00 fa fa fd fa fa fa fd fa fa fa 03 fa
+>   0x0c047fff8280: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+>   0x0c047fff8290: fa fa 03 fa fa fa fd fa fa fa fd fa fa fa fd fa
+>   0x0c047fff82a0: fa fa fd fa fa fa 00 00 fa fa fd fa fa fa fd fa
+> =>0x0c047fff82b0: fa fa fd fa fa fa 01 fa fa fa 00[fa]fa fa fa fa
+>   0x0c047fff82c0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+>   0x0c047fff82d0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+>   0x0c047fff82e0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+>   0x0c047fff82f0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+>   0x0c047fff8300: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+> Shadow byte legend (one shadow byte represents 8 application bytes):
+>   Addressable:           00
+>   Partially addressable: 01 02 03 04 05 06 07 
+>   Heap left redzone:       fa
+>   Freed heap region:       fd
+>   Stack left redzone:      f1
+>   Stack mid redzone:       f2
+>   Stack right redzone:     f3
+>   Stack after return:      f5
+>   Stack use after scope:   f8
+>   Global redzone:          f9
+>   Global init order:       f6
+>   Poisoned by user:        f7
+>   Container overflow:      fc
+>   Array cookie:            ac
+>   Intra object redzone:    bb
+>   ASan internal:           fe
+>   Left alloca redzone:     ca
+>   Right alloca redzone:    cb
+>   Shadow gap:              cc
+> ==16501==ABORTING
 
 
 [33mecho $'HOME'(B[m
@@ -209,24 +741,34 @@ Binary files err1 and err2 differ
 > $$
 
 
-[33m< f < Makefile cat(B[m
+[33mexport +=(B[m
 [35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 0)
-(B[m
+[35m> minishell  (exited with 1)
+(B[m[94m----- STDERR -----(B[m
+1a2,19
+> 
+> =================================================================
+> ==16586==ERROR: LeakSanitizer: detected memory leaks
+> 
+> Direct leak of 1 byte(s) in 1 object(s) allocated from:
+>     #0 0x7f20b7aa1867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+>     #1 0x5580bd5b085c in ft_substr libft/ft_substr.c:25
+>     #2 0x5580bd5abb1c in get_key builtins/export.c:56
+>     #3 0x5580bd5ac198 in ft_export builtins/export.c:120
+>     #4 0x5580bd5b9bd7 in exec_builtin execution/builtin_execution.c:37
+>     #5 0x5580bd5b9f5c in execb1 execution/builtin_execution.c:72
+>     #6 0x5580bd5b7428 in execute_2 execution/execute.c:89
+>     #7 0x5580bd5b797f in execute execution/execute.c:120
+>     #8 0x5580bd59de1a in main2 lexer/main.c:109
+>     #9 0x5580bd59e62f in main lexer/main.c:203
+>     #10 0x7f20b779ad8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+> 
+> SUMMARY: AddressSanitizer: 1 byte(s) leaked in 1 allocation(s).
 
-[33mls<dadd(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 0)
-(B[m
-
-[33mls | < dadd(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 0)
-(B[m
 
 [33m< lexer/ /bin | ///// | ok > /////(B[m
 [35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 0)
+[35m> minishell  (exited with 1)
 (B[m[94m----- STDERR -----(B[m
 2d1
 < minishell: /////: is a directory
@@ -236,19 +778,77 @@ Binary files err1 and err2 differ
 
 [33m< lexer/ /bin | "" | ok > ""(B[m
 [35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 2)
+[35m> minishell  (exited with 1)
 (B[m[94m----- STDERR -----(B[m
-1,3c1
+1,3c1,59
 < minishell: lexer/: No such file or directory
-< minishell: : command not found
 < minishell: : No such file or directory
+< minishell: : command not found
 ---
-> mini-shell: syntax error near unexpected token `newline'
+> =================================================================
+> ==16677==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x602000001f18 at pc 0x556960987eb3 bp 0x7ffd95c77700 sp 0x7ffd95c776f0
+> READ of size 8 at 0x602000001f18 thread T0
+>     #0 0x556960987eb2 in handle_command_helper lexer/lexer_tools_second.c:100
+>     #1 0x556960982356 in cmd_filer lexer/lexer_tools.c:64
+>     #2 0x5569609829ff in handle_command lexer/lexer_tools.c:113
+>     #3 0x556960981a34 in lexer lexer/lexer.c:109
+>     #4 0x55696097bd5c in main2 lexer/main.c:98
+>     #5 0x55696097c62f in main lexer/main.c:203
+>     #6 0x7fe517badd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+>     #7 0x7fe517bade3f in __libc_start_main_impl ../csu/libc-start.c:392
+>     #8 0x55696097b764 in _start (/root/mini-shell/minishell_unit_test/minishell+0x6764)
+> 
+> 0x602000001f18 is located 0 bytes to the right of 8-byte region [0x602000001f10,0x602000001f18)
+> allocated by thread T0 here:
+>     #0 0x7fe517eb4867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+>     #1 0x55696098fd8a in ft_split libft/ft_split.c:78
+>     #2 0x556960987d77 in handle_command_helper lexer/lexer_tools_second.c:98
+>     #3 0x556960982356 in cmd_filer lexer/lexer_tools.c:64
+>     #4 0x5569609829ff in handle_command lexer/lexer_tools.c:113
+>     #5 0x556960981a34 in lexer lexer/lexer.c:109
+>     #6 0x55696097bd5c in main2 lexer/main.c:98
+>     #7 0x55696097c62f in main lexer/main.c:203
+>     #8 0x7fe517badd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+> 
+> SUMMARY: AddressSanitizer: heap-buffer-overflow lexer/lexer_tools_second.c:100 in handle_command_helper
+> Shadow bytes around the buggy address:
+>   0x0c047fff8390: fa fa 00 00 fa fa 00 00 fa fa 00 00 fa fa fd fa
+>   0x0c047fff83a0: fa fa fd fa fa fa 03 fa fa fa fd fa fa fa fd fa
+>   0x0c047fff83b0: fa fa fd fa fa fa fd fa fa fa 03 fa fa fa fd fa
+>   0x0c047fff83c0: fa fa fd fa fa fa fd fa fa fa fd fa fa fa 00 00
+>   0x0c047fff83d0: fa fa fd fa fa fa fd fa fa fa fd fa fa fa 01 fa
+> =>0x0c047fff83e0: fa fa 00[fa]fa fa fa fa fa fa fa fa fa fa fa fa
+>   0x0c047fff83f0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+>   0x0c047fff8400: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+>   0x0c047fff8410: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+>   0x0c047fff8420: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+>   0x0c047fff8430: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+> Shadow byte legend (one shadow byte represents 8 application bytes):
+>   Addressable:           00
+>   Partially addressable: 01 02 03 04 05 06 07 
+>   Heap left redzone:       fa
+>   Freed heap region:       fd
+>   Stack left redzone:      f1
+>   Stack mid redzone:       f2
+>   Stack right redzone:     f3
+>   Stack after return:      f5
+>   Stack use after scope:   f8
+>   Global redzone:          f9
+>   Global init order:       f6
+>   Poisoned by user:        f7
+>   Container overflow:      fc
+>   Array cookie:            ac
+>   Intra object redzone:    bb
+>   ASan internal:           fe
+>   Left alloca redzone:     ca
+>   Right alloca redzone:    cb
+>   Shadow gap:              cc
+> ==16677==ABORTING
 
 
 [33mecho hi > $p(B[m
 [35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 0)
+[35m> minishell  (exited with 1)
 (B[m[94m----- STDERR -----(B[m
 Binary files err1 and err2 differ
 
@@ -264,45 +864,13 @@ Binary files err1 and err2 differ
 > [33mParse Error near: [00m[30m'*[00m
 
 
-[33mcat *'"'*(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDOUT -----(B[m
-0a1,3
-> tmp == ?? [
-> "
-> ]
-
-
-[33mcat *" "*(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDOUT -----(B[m
-0a1,3
-> tmp == ?? [
->  
-> ]
-
-
-[33mcat *'|'*(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDOUT -----(B[m
-0a1,3
-> tmp == ?? [
-> |
-> ]
-
-
 [33mecho $*(B[m
 [35m< bash       (exited with 0)(B[m
 [35m> minishell  (exited with 0)
 (B[m[94m----- STDOUT -----(B[m
-1c1,3
+1c1
 < 
 ---
 > $*
-> tmp == ?? [$
-> ]
 
 
