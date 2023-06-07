@@ -1,0 +1,32 @@
+total 408
+-rw-r--r--   1 hsaktiwy  candidate       0 Jun  7 17:13 '*'
+-rw-r--r--   1 hsaktiwy  candidate       0 Jun  7 17:09 '*' * * *
+-rw-r--r--   1 hsaktiwy  candidate       0 Jun  7 17:09 'te''st'
+-rw-r--r--   1 hsaktiwy  candidate       6 Jun  7 17:14 *
+drwxr-xr-x  31 hsaktiwy  candidate    1054 Jun  7 18:09 .
+drwxr-xr-x  61 hsaktiwy  candidate    2142 Jun  7 18:09 ..
+drwxr-xr-x  15 hsaktiwy  candidate     510 Jun  7 15:34 .git
+-rw-r--r--   1 hsaktiwy  candidate     148 Jun  6 20:19 .gitignore
+drwxr-xr-x   3 hsaktiwy  candidate     102 Jun  5 18:24 .vscode
+-rw-r--r--   1 hsaktiwy  candidate    1055 Jun  4 19:35 8_syntax_errors.sh
+-rw-r--r--   1 hsaktiwy  candidate     995 Jun  4 19:35 IsFileDescriptorValid.c
+-rw-r--r--   1 hsaktiwy  candidate    4242 Jun  7 15:34 Makefile
+-rw-r--r--   1 hsaktiwy  candidate    6264 Jun  6 20:19 NOTES.md
+-rw-r--r--   1 hsaktiwy  candidate    2678 Jun  6 20:19 ReadMe.md
+-rw-r--r--   1 hsaktiwy  candidate     258 Jun  4 19:35 TO_DO_LIST.md
+drwxr-xr-x   5 hsaktiwy  candidate     170 Jun  4 19:35 Tests
+-rw-r--r--   1 hsaktiwy  candidate     267 Jun  7 18:09 a
+drwxr-xr-x  10 hsaktiwy  candidate     340 Jun  7 15:34 builtins
+drwxr-xr-x   9 hsaktiwy  candidate     306 Jun  7 15:34 environment
+drwxr-xr-x   8 hsaktiwy  candidate     272 Jun  7 15:34 execution
+-rw-r--r--   1 hsaktiwy  candidate       0 Jun  7 18:11 home
+drwxr-xr-x  10 hsaktiwy  candidate     340 Jun  7 15:25 include
+drwxr-xr-x  25 hsaktiwy  candidate     850 Jun  7 15:34 lexer
+drwxr-xr-x  37 hsaktiwy  candidate    1258 Jun  5 15:20 libft
+-rwxr-xr-x   1 hsaktiwy  candidate  143312 Jun  7 18:09 minishell
+drwxr-xr-x   4 hsaktiwy  candidate     136 Jun  7 18:04 minishell_unit_test
+drwxr-xr-x   8 hsaktiwy  candidate     272 Jun  7 18:07 obj
+drwxr-xr-x   8 hsaktiwy  candidate     272 Jun  7 15:25 parser
+-rw-r--r--   1 hsaktiwy  candidate     362 Jun  4 19:35 script.sh
+-rw-r--r--   1 hsaktiwy  candidate    5299 Jun  4 19:35 test.c
+-rw-r--r--   1 hsaktiwy  candidate    7408 Jun  7 15:34 testing.sh

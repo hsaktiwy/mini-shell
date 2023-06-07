@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:52:33 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/07 14:25:44 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/07 17:59:28 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_piping(char *input)
 	c = 0;
 	if (input[c] == '|')
 		return (0);
-	while (input[c] && ft_isprint(input[c]))
+	while (input[c] && input[c] != '#' && ft_isprint(input[c]))
 	{
 		if (input[c] == '|' && open != 1)
 		{
@@ -44,7 +44,6 @@ int	printf_error(int boolean)
 {
 	if (boolean == 0)
 	{
-		// printf("mini-shell:	syntax error near unexpected token `|'\n");
 		ft_putstr_fd("minishell: syntax error near unexpected token `|'\n",
 			STDERR_FILENO);
 		return (1);

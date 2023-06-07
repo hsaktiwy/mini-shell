@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:31:06 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/07 15:28:03 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/07 19:07:29 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,23 +54,16 @@ char	*get_token(char *str)
 	c = '\0';
 	res = NULL;
 	surpace_whitesspaces(str, &i);
-	if (str[i] == '#')
-		return (res);
-	while (str[i] && ((!c && str[i] != '|'
-				&& str[i] != '<' && str[i] != '>'
-				&& !iswhitespace(str[i])) || c))
+	while (cond_get_token_one(str[i], c))
 	{
 		t_c = c;
 		c = double_single_check(str[i], c, &i, &c_change);
-		if (t_c == c && str[i] && ((!c && str[i] != '|'
-					&& str[i] != '<' && str[i] != '>'
-					&& !iswhitespace(str[i]))|| c))
+		if (cond_get_token_sec(str[i], t_c, c))
 		{
 			res = ft_realloc(res, ft_strlen(res) + 2);
 			ft_strncat(res, &str[i], 1);
 			i++;
 		}
-		//printf("c = %c, s[i] = %c, arg=|%s|\n", c, str[i], res);
 	}
 	if (c_change && !res)
 		res = ft_strdup("");
@@ -89,32 +82,32 @@ t_file	*creat_arg(char *file_name, t_argument_type type)
 	return (arg);
 }
 
-int	check_quotes_validity(char *input)
-{
-	char	c;
-	int		i;
+// int	check_quotes_validity(char *input)
+// {
+// 	char	c;
+// 	int		i;
 
-	i = 0;
-	c = '\0';
-	while (input[i])
-	{
-		if (input[i] == '\'' && !c)
-			c = '\'';
-		else if (input[i] == '\'' && c == '\'')
-			c = '\0';
-		else if (input[i] == '\"' && !c)
-			c = '\"';
-		else if (input[i] == '\"' && c == '\"')
-			c = '\0';
-		else if (input[i] == '|' && c == '\0')
-			break ;
-		i++;
-	}
-	if (!c)
-		return (1);
-	else
-		return (0);
-}
+// 	i = 0;
+// 	c = '\0';
+// 	while (input[i])
+// 	{
+// 		if (input[i] == '\'' && !c)
+// 			c = '\'';
+// 		else if (input[i] == '\'' && c == '\'')
+// 			c = '\0';
+// 		else if (input[i] == '\"' && !c)
+// 			c = '\"';
+// 		else if (input[i] == '\"' && c == '\"')
+// 			c = '\0';
+// 		else if (input[i] == '|' && c == '\0')
+// 			break ;
+// 		i++;
+// 	}
+// 	if (!c)
+// 		return (1);
+// 	else
+// 		return (0);
+// }
 
 // void	get_file_helper(t_file **file, char *input, int *i, int *index)
 // {
@@ -125,7 +118,8 @@ int	check_quotes_validity(char *input)
 // 		&& check_quotes_validity(&input[*i]))
 // 	{
 // 		(*index)++;
-// 		*file = creat_arg(get_double_quote(env, &input[++(*i)], index), DOUBLE_QUOTE);
+// 		*file = creat_arg(get_double_quote(env, &input[++(*i)], index),
+// DOUBLE_QUOTE);
 // 	}
 // 	else if (check_quotes_validity(&input[*i]))
 // 	{
@@ -143,7 +137,7 @@ int	input_arg_size(char *str)
 	c = '\0';
 	i = 0;
 	while (str[i] && ((!c && !iswhitespace(str[i]) && str[i] != '|'
-				&& str[i] != '<' &&	str[i] != '>') || c))
+				&& str[i] != '<' && str[i] != '>') || c))
 	{
 		c = double_or_single(str[i], c);
 		i++;
@@ -160,25 +154,18 @@ t_file	*get_file(t_env *env, char *input, int *index)
 	file = NULL;
 	surpace_whitesspaces(&input[*index], index);
 	r = get_initial_token(&input[*index]);
-	if (r)
+	if (r && *r)
 		r = expand_input(env, r);
-	// printf("r = %s\n",r);
 	tmp = get_token(&input[*index]);
-	// printf("tmp 1= %s\n", tmp);
 	*index += input_arg_size(&input[*index]);
-	if (tmp)
-		tmp = expand_input(env, tmp);
-	// printf("tmp 2= %s\n", tmp);
 	if (!tmp)
 	{
 		file = creat_arg(NULL, WORD);
-		return (file);
+		return (free(r), file);
 	}
 	else
 		file = creat_arg(tmp, WORD);
-	// printf("ahdajsdka = %s\n",file->a_file);
 	if (file)
 		file->a_file = iswildcards(file->a_file, r);
-	// printf("end : file->a_file :%s\n", file->a_file);
 	return (free(r), file);
 }

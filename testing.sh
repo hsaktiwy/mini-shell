@@ -1,4 +1,4 @@
-
+	[ ] expand_issue ?? maybe it should go
 	[x] freed everything when exit is called
 	[x] ignore from # to end  
 	[x]"ls | > out" "ls | <<l" different behaviar

@@ -6,32 +6,11 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:46:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/07 15:29:09 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/07 19:55:17 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*get_initial_token(char *str)
-{
-	int		i;
-	char	*arg;
-	char	c;
-
-	c = '\0';
-	i = 0;
-	arg = ft_strdup("");
-	while (str[i] && ((!c && str[i] != '#' && !iswhitespace(str[i])
-				&& str[i] != '|' && str[i] != '<' && str[i] != '>')
-			|| c))
-	{
-		c = double_or_single(str[i], c);
-		arg = ft_realloc(arg, ft_strlen(arg) + 2);
-		ft_strncat(arg, &str[i], 1);
-		i++;
-	}
-	return (arg);
-}
 
 void	handle_pipe(t_list **tokens, int *index, int *cmd)
 {
@@ -102,11 +81,9 @@ int	handle_command(t_list **tokens, t_env *env, char *input, int *index)
 		return (0);
 	token->type = COMMAND;
 	r = get_initial_token(&input[*index]);
-	// printf("r = %s\n", r);
 	*index += input_arg_size(&input[*index]);
 	tmp = ft_strdup(r);
 	tmp = expand_input(env, tmp);
-	// printf("tmp = %s\n", tmp);
 	token->value = ini_cmd(env);
 	if (token->value && tmp)
 	{
@@ -128,14 +105,11 @@ void	handle_arg(t_list **tokens, t_env *env, char *input, int *index)
 	char	*tmp;
 
 	cmd = NULL;
-	// printf("input -> %s\n", &input[*index]);
 	cmd = last_cmd(tokens);
 	tmp = ft_strdup(&input[*index]);
 	*index += input_arg_size(tmp);
 	r = get_initial_token(tmp);
-	// printf("r->%s\n", r);
 	file = expand_input(env, r);
-	// printf("r->%s\n", file);
 	arg_filer(&cmd, file);
 	free(file);
 	free(tmp);

@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 11:59:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/07 14:42:17 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/07 20:12:58 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*get_token(char *str);
 char	*get_single_quote(t_env *env, char *s, int *index);
 char	*get_double_quote(t_env *env, char *s, int *index);
 char	*get_simple_arg(t_env *env, char *str, int *index);
-char	*expand_env_var(t_env *env, char *s, char *res, int *k);
+char	*expand_env_var(char *s, char *res, int *k);
 int		check_quotes_validity(char *input);
 int		is_splitable_env(char *str);
 t_file	*get_file(t_env *env, char *input, int *index);
@@ -53,11 +53,20 @@ int		get_start(char *str);
 void	add_fake_cmd(t_list **tokens, int cmd);
 char	*here_doc_name(char *common, int nbr);
 void	lexer_err(char *str);
+// expand functions
 char	*expand_input(t_env *env, char *line);
-char	*expand(t_env *env, char *line);
+char	*expand(char *line);
 int		cond_env_expand_input(char next_c);
+int		cond_get_token_one(char str, char c);
+int		cond_get_token_sec(char str, char t_c, char c);
 char	*go_to_expand_var(char *arg, char *line, int *i, char c);
 char	*reallocated_str(char *str, char *add);
+char	*add_back(char *arg, char *input, char *c);
+char	*add_front(char *arg, char *input, char *c);
+char	*encapsulation(char *str);
+
+int		check_redirection(char *input);
+
 void	display_tokens(t_list	*tokens);
 
 // wildcards

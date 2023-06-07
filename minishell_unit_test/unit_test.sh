@@ -145,8 +145,8 @@ TEST_ARRAY=(
 'cat Makefile | grep pr | head -n 5 | hello'
 'echo bonjour >>> test'
 'echo bonjour > > out'
-'echo 2 >> out1 > out2'
-'echo 2 > out1 >> out2'
+'echo 2 >> outfile1 > outfile2'
+'echo 2 > outfile1 >> outfile2'
 'cat < test'
 'echo bonjour > $test'
 'file_name_in_current_dir'
@@ -196,7 +196,7 @@ TEST_ARRAY=(
 'exit 0 | exit 1'
 'exit 1 | exit 0'
 'ls -la "|"'
-'ls           | cat         <           out1'
+'ls           | cat         <           outfile1'
 'echo $f "$HOME"'
 'echo $f"$HOME"'
 'echo $USER$USER"$USER" '
@@ -204,7 +204,7 @@ TEST_ARRAY=(
 'echo $f"$HOME"'
 'echo $f"$HOME""                         "'
 'echo "$USER"$USER"$USER"'
-'ls           | cat         <           out1'
+'ls           | cat         <           outfile1'
 'ls | > out'
 'exit -21131313'
 'exit -9223372036854775809'
@@ -515,6 +515,6 @@ fi
 printf "\n\n\t\t\'cat diff.txt | less\'  for detailed information\n\n"
 
 rm -rf minishell out1 out2 err1 err2 a b c d pum lscp hpc hp testfile
-rm -rf file log out output salut test 'test 1' test\\ ';' '000' 'chmod' 'd;' 'a;'
+rm -rf file log out outfile1 outfile2 output salut test 'test 1' test\\ ';' '000' 'chmod' 'd;' 'a;'
 chmod +r dirwithoutpermissions
 rm -rf ucantexecme.e dir dir/encoreuneautredir dirwithoutpermissions
