@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:50:13 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/06 21:24:09 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/07 15:28:09 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,17 @@ char	*expand_tilde(t_env *env, char *arg, char *line, int *i)
 	return (res);
 }
 
-char	*go_to_expand_var(t_env *env, char *arg, char *line, int *i)
+char	*go_to_expand_var(char *arg, char *line, int *i, char c)
 {
 	char	*res;
 	int		k;
 
 	res = arg;
 	k = 0;
+	if (!c && (line[*i + 1] == '\"' || line[*i + 1] == '\''))
+		return ((*i)++, res);
+	if (line[*i + 1] == '*')
+		return ((*i) += 2, res);
 	while (line[k + *i + 1] && line[k + *i + 1] != '?'
 		&& line[k + *i + 1] != '{' && (ft_isalnum(line[k + *i + 1])
 			|| line[k + *i + 1] == '_'))
@@ -57,7 +61,7 @@ char	*go_to_expand_var(t_env *env, char *arg, char *line, int *i)
 		k++;
 	if (line[k + *i + 1] == '?')
 		k++;
-	res = expand_env_var(env, &line[*i + 1], res, &k);
+	res = expand_env_var(g_env_s(NULL), &line[*i + 1], res, &k);
 	(*i) += k + 1;
 	return (res);
 }
@@ -93,10 +97,10 @@ char	*expand_input(t_env *env, char *line)
 		if ((line[i] == '~' && (iswhitespace(line[i + 1]) || line[i + 1] == '\0'
 					|| line[i + 1] == '/') && c == '\0'))
 			arg = expand_tilde(env, arg, line, &i);
-		else if (s == 0 && (!c || c == '\"') && line[i] == '$'
-			&& (ft_isalpha(line[i + 1]) || line[i + 1] == '?'
-				|| line[i + 1] == '{' || line[i + 1] == '_'))
-			arg = go_to_expand_var(env, arg, line, &i);
+		else if (s == 0 && line[i] == '$' && line[i + 1] && (!c || (c == '\"'
+					&& line[i + 1] != '\"' && line[i + 1] != '\''))
+			&& cond_env_expand_input(line[i + 1]))
+			arg = go_to_expand_var(arg, line, &i, c);
 		else if (line[i])
 		{
 			arg = add_c_expanded_input(arg, &line[i], &s, &c);

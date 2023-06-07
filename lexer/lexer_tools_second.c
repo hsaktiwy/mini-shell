@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 19:09:08 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/06 19:18:23 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/07 14:10:56 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,18 @@ void	handle_command_helper(t_cmd **cmd, char *args)
 	int		i;
 
 	i = 0;
-	tab = ft_split(args, '\n');
-	(*cmd)->cmd = tab[0];
-	while (tab[++i])
-		ft_lstadd_back(&((*cmd)->arg), ft_lstnew(creat_arg(tab[i], WORD)));
-	(*cmd)->cmd_type = WORD;
-	free(tab);
+	if (args)
+	{
+		if (!(*args))
+		{
+			(*cmd)->cmd = ft_strdup("");
+			return ;
+		}
+		tab = ft_split(args, '\n');
+		(*cmd)->cmd = tab[0];
+		while (tab[++i])
+			ft_lstadd_back(&((*cmd)->arg), ft_lstnew(creat_arg(tab[i], WORD)));
+		(*cmd)->cmd_type = WORD;
+		free(tab);
+	}
 }

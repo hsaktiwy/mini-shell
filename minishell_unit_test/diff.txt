@@ -571,7 +571,7 @@ Binary files err1 and err2 differ
 < minishell: -c: syntax error near unexpected token `|'
 < minishell: -c: `echo hudifg d | | hugdfihd'
 ---
-> mini-shell: syntax error near unexpected token `|'
+> minishell: syntax error near unexpected token `|'
 
 
 [33m| echo(B[m
@@ -582,7 +582,7 @@ Binary files err1 and err2 differ
 < minishell: -c: syntax error near unexpected token `|'
 < minishell: -c: `| echo'
 ---
-> mini-shell: syntax error near unexpected token `|'
+> minishell: syntax error near unexpected token `|'
 
 
 [33mexit -21131313(B[m

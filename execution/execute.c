@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/07 01:55:11 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/07 15:28:14 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	get_exit_status(void)
 		g_exit_status = WEXITSTATUS(g_exit_status);
 	else if (WIFSIGNALED(g_exit_status))
 	{
+		// printf("IN<<<<<<<<<< [%d]\n", g_exit_status);
 		sig = WTERMSIG(g_exit_status);
 		g_exit_status = sig + 128;
 		get_name_of_signal(sig);
