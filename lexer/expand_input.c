@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:50:13 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/07 15:28:09 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/07 19:31:38 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ char	*remove_white_spaces(char *p)
 	char	*tmp;
 
 	tmp = p;
-	// printf("??\n");
-	p = ft_strtrim(tmp, " ");
-	// printf("maybe\n");
-	free(tmp);
+	if (p && *p)
+	{
+		p = ft_strtrim(tmp, " ");
+		free(tmp);
+	}
 	return (p);
 }
 
@@ -59,9 +60,9 @@ char	*go_to_expand_var(char *arg, char *line, int *i, char c)
 		k++;
 	if (line[k + *i + 1] == '{')
 		k++;
-	if (line[k + *i + 1] == '?')
+	if (line[*i + 1] == '?')
 		k++;
-	res = expand_env_var(g_env_s(NULL), &line[*i + 1], res, &k);
+	res = expand_env_var(&line[*i + 1], res, &k);
 	(*i) += k + 1;
 	return (res);
 }

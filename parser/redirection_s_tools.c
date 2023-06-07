@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 15:12:29 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/06 20:03:07 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/07 17:54:52 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	syntax_error_here_doc(t_list **tokens)
 		token = current->content;
 		if (token->type == HERE_DOC)
 		{
-			if (!in_red_cmd(g_env_s(NULL), &token, NULL))
+			if (!in_red_cmd(&token, NULL))
 				break ;
 		}
 		else if (token->type == PIPE)

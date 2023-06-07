@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 14:37:42 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/07 15:29:01 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/07 17:51:46 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,25 @@ int	cond_env_expand_input(char next_c)
 		|| next_c == '_');
 }
 
-char	*expand(t_env *env, char *line)
+int	cond_get_token_one(char str, char c)
+{
+	return (str && ((!c && str != '|'
+				&& str != '<' && str != '>' && str != '#'
+				&& !iswhitespace(str)) || c));
+}
+
+int	cond_get_token_sec(char str, char t_c, char c)
+{
+	return (t_c == c && str && ((!c && str != '|'
+				&& str != '<' && str != '>'
+				&& !iswhitespace(str)) || c));
+}
+
+char	*expand(char *line)
 {
 	int		i;
 	char	*arg;
-	(void)env;
+
 	i = 0;
 	arg = ft_strdup("");
 	while (line[i])

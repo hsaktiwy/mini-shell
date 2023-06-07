@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:48:28 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/04 19:19:44 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/07 17:57:04 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_list	*creat_cmd_list(t_list	**tokens)
 	return (list);
 }
 
-t_list	*parser(t_env *env, t_list **tokens, char *input)
+t_list	*parser(t_list **tokens, char *input)
 {
 	t_list	*list;
 	t_list	*current;
@@ -100,7 +100,7 @@ t_list	*parser(t_env *env, t_list **tokens, char *input)
 		syntax_error_here_doc(tokens);
 	if (err == 1)
 	{
-		redirection_habdling(env, tokens);
+		redirection_habdling(tokens);
 		list = creat_cmd_list(&current);
 	}
 	return (list);

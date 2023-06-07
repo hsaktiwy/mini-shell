@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:17:19 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/07 14:20:44 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/07 17:54:00 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ int	in_redirection(t_file *tmp)
 	return (fd);
 }
 
-int	heredoc_helper(t_env *env, char *line, int h_fd, int exp)
+int	heredoc_helper(char *line, int h_fd, int exp)
 {
 	char	*tmp;
 
 	if (exp)
-		tmp = expand(env, line);
+		tmp = expand(line);
 	else
 		tmp = line;
 	if (write(h_fd, tmp, ft_strlen(tmp)) == -1
@@ -47,7 +47,7 @@ int	heredoc_helper(t_env *env, char *line, int h_fd, int exp)
 	return (1);
 }
 
-int	heredoc(t_env *env, char *delimiter, int h_fd, int exp)
+int	heredoc(char *delimiter, int h_fd, int exp)
 {
 	char	*line;
 
@@ -59,7 +59,7 @@ int	heredoc(t_env *env, char *delimiter, int h_fd, int exp)
 		{
 			if (!find_delimeter(line, delimiter) && g_heredoc_executing(-1))
 			{
-				if (!heredoc_helper(env, line, h_fd, exp))
+				if (!heredoc_helper(line, h_fd, exp))
 					return (g_heredoc_executing(0),
 						free(line), close(h_fd), 0);
 			}
@@ -73,7 +73,7 @@ int	heredoc(t_env *env, char *delimiter, int h_fd, int exp)
 	}
 }
 
-int	here_doc_red(t_env *env, t_file *tmp)
+int	here_doc_red(t_file *tmp)
 {
 	int	fd;
 
@@ -91,7 +91,7 @@ int	here_doc_red(t_env *env, t_file *tmp)
 				g_exit_status = 1;
 			print_error(NULL, tmp->token_file, 1);
 		}
-		else if (!heredoc(env, tmp->a_file, fd, tmp->here_doc_exp))
+		else if (!heredoc(tmp->a_file, fd, tmp->here_doc_exp))
 		{
 			fd = -1;
 			write(2, "Error : here_doc fail\n", 22);

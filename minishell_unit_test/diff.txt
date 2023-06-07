@@ -1,46 +1,5 @@
-[33mexport(B[m
+[33mexit(B[m
 [35m< bash       (exited with 0)(B[m
-[35m> minishell  (exited with 0)
-(B[m[94m----- STDOUT -----(B[m
-38d37
-< declare -x _="/bin/bash"
-
-
-[33mexport --TEST=123(B[m
-[35m< bash       (exited with 2)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-1,2c1
-< minishell: export: --: invalid option
-< export: usage: export [-nf] [name[=value] ...] or export -p
----
-> minishell: export: `--TEST=123': not a valid identifier
-
-
-[33mexport -TEST=100(B[m
-[35m< bash       (exited with 2)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-1,2c1
-< minishell: export: -T: invalid option
-< export: usage: export [-nf] [name[=value] ...] or export -p
----
-> minishell: export: `-TEST=100': not a valid identifier
-
-
-[33mexport -TEST=123(B[m
-[35m< bash       (exited with 2)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-1,2c1
-< minishell: export: -T: invalid option
-< export: usage: export [-nf] [name[=value] ...] or export -p
----
-> minishell: export: `-TEST=123': not a valid identifier
-
-
-[33mexport TES#T=123(B[m
-[35m< bash       (exited with 1)(B[m
 [35m> minishell  (exited with 0)
 (B[m[94m----- STDERR -----(B[m
 1d0
@@ -219,6 +178,7 @@ Binary files err1 and err2 differ
 Binary files err1 and err2 differ
 
 
+<<<<<<< HEAD
 [33munset +++++++(B[m
 [35m< bash       (exited with 1)(B[m
 [35m> minishell  (exited with 1)
@@ -290,6 +250,17 @@ Binary files err1 and err2 differ
 < -rw-r--r--   1 aigounad  candidate       0 Jun  7 20:35 out1
 ---
 > -rw-r--r--   1 aigounad  candidate     831 Jun  7 20:35 out1
+=======
+[33mtouch ucantexecme.e | chmod 000 ucantexecme.e | ./ucantexecme.e(B[m
+[35m< bash       (exited with 127)(B[m
+[35m> minishell  (exited with 126)
+(B[m[94m----- STDERR -----(B[m
+1,2c1
+< minishell: ./ucantexecme.e: No such file or directory
+< chmod: ucantexecme.e: No such file or directory
+---
+> minishell: ./ucantexecme.e: Permission denied
+>>>>>>> aebc0a9512e829fd20d9e3067b2be5e6a9d45f06
 
 
 [33m|(B[m
@@ -482,6 +453,7 @@ Binary files err1 and err2 differ
 < minishell: -c: `echo bonjour > > out'
 ---
 > minishell: syntax error near unexpected token `>'
+<<<<<<< HEAD
 
 
 [33mecho 2 >> out1 > out2(B[m
@@ -498,6 +470,8 @@ Binary files err1 and err2 differ
 (B[m[94m----- STDOUT -----(B[m
 0a1
 > 2
+=======
+>>>>>>> aebc0a9512e829fd20d9e3067b2be5e6a9d45f06
 
 
 [33mecho bonjour > $test(B[m
@@ -508,6 +482,7 @@ Binary files err1 and err2 differ
 
 
 [33mecho bonjour > $test w t(B[m
+<<<<<<< HEAD
 [35m< bash       (exited with 1)(B[m
 [35m> minishell  (exited with 1)
 (B[m[94m----- STDERR -----(B[m
@@ -557,6 +532,8 @@ Binary files err1 and err2 differ
 
 
 [33mecho hi > $p(B[m
+=======
+>>>>>>> aebc0a9512e829fd20d9e3067b2be5e6a9d45f06
 [35m< bash       (exited with 1)(B[m
 [35m> minishell  (exited with 1)
 (B[m[94m----- STDERR -----(B[m
@@ -816,6 +793,7 @@ Binary files err1 and err2 differ
 > minishell: syntax error near unexpected token `<'
 
 
+<<<<<<< HEAD
 [33mecho seg < > echo seg(B[m
 [35m< bash       (exited with 2)(B[m
 [35m> minishell  (exited with 2)
@@ -852,6 +830,11 @@ Binary files err1 and err2 differ
 [33mecho seg < < < > echo segf(B[m
 [35m< bash       (exited with 2)(B[m
 [35m> minishell  (exited with 2)
+=======
+[33mexit ""(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+>>>>>>> aebc0a9512e829fd20d9e3067b2be5e6a9d45f06
 (B[m[94m----- STDERR -----(B[m
 1,2c1
 < minishell: -c: syntax error near unexpected token `<'
@@ -860,6 +843,7 @@ Binary files err1 and err2 differ
 > minishell: syntax error near unexpected token `<'
 
 
+<<<<<<< HEAD
 [33mecho segf > | echo is this invalid(B[m
 [35m< bash       (exited with 2)(B[m
 [35m> minishell  (exited with 2)
@@ -896,6 +880,11 @@ Binary files err1 and err2 differ
 [33mecho < < | < ok(B[m
 [35m< bash       (exited with 2)(B[m
 [35m> minishell  (exited with 2)
+=======
+[33m< lexer/ /bin | ///// | ok > /////(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 1)
+>>>>>>> aebc0a9512e829fd20d9e3067b2be5e6a9d45f06
 (B[m[94m----- STDERR -----(B[m
 1,2c1
 < minishell: -c: syntax error near unexpected token `<'
@@ -908,11 +897,18 @@ Binary files err1 and err2 differ
 [35m< bash       (exited with 2)(B[m
 [35m> minishell  (exited with 2)
 (B[m[94m----- STDERR -----(B[m
+<<<<<<< HEAD
 1,2c1
 < minishell: -c: syntax error near unexpected token `<'
 < minishell: -c: `echo < < | > echo'
 ---
 > minishell: syntax error near unexpected token `<'
+=======
+2d1
+< minishell: : command not found
+3a3
+> minishell: : command not found
+>>>>>>> aebc0a9512e829fd20d9e3067b2be5e6a9d45f06
 
 
 [33mecho segfault < " < < < " < < amazing(B[m
@@ -926,6 +922,7 @@ Binary files err1 and err2 differ
 > minishell: syntax error near unexpected token `<'
 
 
+<<<<<<< HEAD
 [33mecho seg <  > echo seg(B[m
 [35m< bash       (exited with 2)(B[m
 [35m> minishell  (exited with 2)
@@ -1083,3 +1080,5 @@ Binary files err1 and err2 differ
 < -nnnnnnnnnnn -n
 
 
+=======
+>>>>>>> aebc0a9512e829fd20d9e3067b2be5e6a9d45f06

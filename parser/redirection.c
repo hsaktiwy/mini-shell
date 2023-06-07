@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 15:13:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/06 20:54:50 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/07 17:56:46 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	out_red_cmd(t_token **red, t_token **command)
 	return (1);
 }
 
-int	in_red_cmd(t_env *env, t_token **red, t_token **command)
+int	in_red_cmd(t_token **red, t_token **command)
 {
 	t_cmd	*cmd;
 	int		fd;
@@ -39,7 +39,7 @@ int	in_red_cmd(t_env *env, t_token **red, t_token **command)
 	if ((*red)->type == IN_REDIRECT)
 		fd = in_redirection((*red)->value);
 	else if ((*red)->type == HERE_DOC && g_stdin_fd(-1) == 0)
-		fd = here_doc_red(env, (*red)->value);
+		fd = here_doc_red((*red)->value);
 	if (fd == -1)
 		return (0);
 	if (command && *command)
@@ -54,7 +54,7 @@ int	in_red_cmd(t_env *env, t_token **red, t_token **command)
 	return (1);
 }
 
-int	redirect(t_env *env, t_list **list, t_token **cmd)
+int	redirect(t_list **list, t_token **cmd)
 {
 	t_list	*start;
 	t_token	*red;
@@ -67,7 +67,7 @@ int	redirect(t_env *env, t_list **list, t_token **cmd)
 		if (tmp->type == IN_REDIRECT || tmp->type == HERE_DOC)
 		{
 			red = tmp;
-			if (!in_red_cmd(env, &red, cmd))
+			if (!in_red_cmd(&red, cmd))
 				return (0);
 		}
 		else if (tmp->type == OUT_REDIRECT || tmp->type == APPEND_REDIRECT)
@@ -101,7 +101,7 @@ t_token	*next_cmd(t_list *list)
 	return (cmd);
 }
 
-int	redirection_habdling(t_env *env, t_list **tokens)
+int	redirection_habdling(t_list **tokens)
 {
 	t_list	*list;
 	t_token	*token;
@@ -111,7 +111,7 @@ int	redirection_habdling(t_env *env, t_list **tokens)
 	while (list)
 	{
 		cmd = next_cmd(list);
-		if (!redirect(env, &list, &cmd))
+		if (!redirect(&list, &cmd))
 		{
 			((t_cmd *)cmd->value)->error = 1;
 			g_exit_status = 1;

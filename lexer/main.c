@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/07 20:22:40 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/07 20:40:26 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,25 +59,6 @@ void	restore_stdin(void)
 	}
 	g_stdin_fd(0);
 }
-#include <sys/time.h>
-void	show_time(char *str)
-{
-	long int time;
-	static long int s_ts;
-	struct timeval tm;
-
-	if (str == NULL)
-	{
-		gettimeofday(&tm, NULL);
-		s_ts = tm.tv_sec * 1000 + tm.tv_usec / 1000;
-	}
-	else
-	{
-		gettimeofday(&tm, NULL);
-		time = tm.tv_sec * 1000 + tm.tv_usec / 1000;
-		printf("time of %s : %ld(current: %ld, start: %ld)\n", str,time - s_ts, time, s_ts);
-	}
-}
 
 void	main2(char *input, t_env *env)
 {
@@ -102,8 +83,8 @@ void	main2(char *input, t_env *env)
 		// display_tokens(tokens);
 		//fix_expanding_issue(&tokens);
 		ini_arg_count(&tokens);
-		list = parser(env, &tokens, data);
-		// display_tokens(tokens);
+		list = parser(&tokens, data);
+		//display_tokens(tokens);
 		g_token_l(tokens);
 		if (list)
 			execute(list);
@@ -113,73 +94,12 @@ void	main2(char *input, t_env *env)
 	free(data);
 }
 
-void ft_leaks()
-{
-	system("leaks minishell");
-}
-int	next_is_not(char *str, char c)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (iswhitespace(str[i]))
-			i++;
-		else if (str[i] == c)
-			return (0);
-		else
-			break ;
-	}
-	return (1);
-}
-
-int	check_redirection(char *input)
-{
-	int		i;
-	char	*res;
-	t_env	*env;
-	int		count;
-
-	res = input;
-	i = -1;
-	count = 0;
-	while (res[++i])
-	{
-		if (res[i] == '<' && res[i + 1] && res[i + 1] == '<')
-		{
-			count++;
-			i++;
-		}
-		else if (res[i] == '|')
-		{
-			if (i == 0)
-				break ;
-			else if (!next_is_not(&res[i + 1], '|'))
-				break ;
-			else if (!res[i + 1])
-				break ;
-		}
-	}
-	if (count > 16)
-	{
-		ft_putstr_fd("minibash: maximum here-document count exceeded\n",
-			STDERR_FILENO);
-		env = g_env_s(NULL);
-		ft_free_env(&env);
-		free(input);
-		exit(2);
-	}
-	return (1);
-}
-
 int	main(__attribute__((unused)) int ac,
 		__attribute__((unused)) char **av, char **env)
 {
 	char	*input;
 	t_env	*env_s;
 
-	//atexit(ft_leaks);
 	set_signal_handlers();
 	env_s = ft_init_env(env);
 	////////////////////////////////////////////
