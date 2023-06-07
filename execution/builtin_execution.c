@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:27:40 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/07 19:41:44 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/07 20:45:29 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	is_builtin(char *cmd)
 {
 	if (!ft_strcmp(cmd, "echo")
-		|| !ft_strcmp(cmd, "ECHO")
 		|| !ft_strcmp(cmd, "cd")
 		|| !ft_strcmp(cmd, "pwd")
 		|| !ft_strcmp(cmd, "PWD")
@@ -30,7 +29,7 @@ int	is_builtin(char *cmd)
 
 int	exec_builtin(t_cmd *cmd, t_list *list)
 {
-	if (!ft_strcmp(cmd->cmd, "echo") || !ft_strcmp(cmd->cmd, "ECHO"))
+	if (!ft_strcmp(cmd->cmd, "echo"))
 		return (ft_echo(cmd));
 	if (!ft_strcmp(cmd->cmd, "cd"))
 		return (ft_cd(cmd));
