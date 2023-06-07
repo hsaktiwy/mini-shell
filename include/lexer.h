@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 11:59:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/07 20:12:58 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/07 20:30:59 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ char	*encapsulation(char *str);
 int		check_redirection(char *input);
 
 void	display_tokens(t_list	*tokens);
+void	show_time(char *str);
 
 // wildcards
 char	*iswildcards(char *input, char	*ini_s);
