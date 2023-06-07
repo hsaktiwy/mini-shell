@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:27:40 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/29 17:45:19 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/07 19:41:44 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 int	is_builtin(char *cmd)
 {
 	if (!ft_strcmp(cmd, "echo")
+		|| !ft_strcmp(cmd, "ECHO")
 		|| !ft_strcmp(cmd, "cd")
 		|| !ft_strcmp(cmd, "pwd")
+		|| !ft_strcmp(cmd, "PWD")
 		|| !ft_strcmp(cmd, "export")
 		|| !ft_strcmp(cmd, "unset")
 		|| !ft_strcmp(cmd, "env")
+		|| !ft_strcmp(cmd, "ENV")
 		|| !ft_strcmp(cmd, "exit"))
 		return (1);
 	return (0);
@@ -27,15 +30,15 @@ int	is_builtin(char *cmd)
 
 int	exec_builtin(t_cmd *cmd, t_list *list)
 {
-	if (!ft_strcmp(cmd->cmd, "echo"))
+	if (!ft_strcmp(cmd->cmd, "echo") || !ft_strcmp(cmd->cmd, "ECHO"))
 		return (ft_echo(cmd));
 	if (!ft_strcmp(cmd->cmd, "cd"))
 		return (ft_cd(cmd));
-	if (!ft_strcmp(cmd->cmd, "pwd"))
+	if (!ft_strcmp(cmd->cmd, "pwd") || !ft_strcmp(cmd->cmd, "PWD"))
 		return (ft_pwd(cmd));
 	if (!ft_strcmp(cmd->cmd, "export"))
 		return (ft_export(cmd));
-	if (!ft_strcmp(cmd->cmd, "env"))
+	if (!ft_strcmp(cmd->cmd, "env") || !ft_strcmp(cmd->cmd, "ENV"))
 		return (ft_env(cmd));
 	if (!ft_strcmp(cmd->cmd, "unset"))
 		return (ft_unset(cmd));
