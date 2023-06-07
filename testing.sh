@@ -216,3 +216,20 @@ Indirect leak of 570 byte(s) in 60 object(s) allocated from:
 unset aa
 unset "" //return value
 ls | <<l
+
+
+LEAKS:
+command: echo $>
+==8791==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 1 byte(s) in 1 object(s) allocated from:
+    #0 0x7ff6d9dce867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+    #1 0x564c34fb7fc6 in ft_strtrim libft/ft_strtrim.c:45
+    #2 0x564c34fad2fe in remove_white_spaces lexer/expand_input.c:23
+    #3 0x564c34fae517 in expand_input lexer/expand_input.c:106
+    #4 0x564c34fa4be6 in get_file lexer/ft_next_arg.c:164
+    #5 0x564c34fa8366 in handle_outredirect lexer/lexer.c:84
+    #6 0x564c34fa896b in lexer lexer/lexer.c:105
+    #7 0x564c34fa2d5c in main2 lexer/main.c:98
+    #8 0x564c34fa379b in main lexer/main.c:227
+    #9 0x7ff6d9ac7d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58

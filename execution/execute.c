@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/07 14:12:15 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/07 15:28:14 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,14 @@ int	execute_2(t_list *cmd, t_list *list, int *get_exit, t_fd *fd)
 		if (execb1(cmd, list, get_exit, &ep))
 			return (close_pipe(cmd, fd), 0);
 		if (ft_forking(cmd, list, fd, &ep) == 1)
-		{
-			g_exit_status = 1;
-			*get_exit = 0;
-			return (close_pipe(cmd, fd), free(ep.path), free(ep.args), 1);
-		}
+			return (g_exit_status = 1, *get_exit = 0, close_pipe(cmd, fd),
+				free(ep.path), free(ep.args), 1);
 		free(ep.path);
 		free(ep.args);
 	}
 	close_pipe(cmd, fd);
+	if ((((t_cmd *)(((t_token *)(cmd->content))->value))->error) && !cmd->next)
+		return (*get_exit = 0, g_exit_status = 1, 0);
 	return (0);
 }
 

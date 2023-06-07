@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/07 14:11:27 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/07 15:27:53 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	signal_handler(int sig)
 
 void	set_signal_handlers()
 {
-	rl_catch_signals = 0;
+	// rl_catch_signals = 0;
 
 	signal(SIGINT, signal_handler);	// handle Ctr+c
 	signal(SIGQUIT, signal_handler);	// ignore Ctr+'\'
