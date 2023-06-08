@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:52:33 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/07 17:59:28 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:28:32 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,25 @@
 
 int	check_piping(char *input)
 {
-	int	c;
-	int	open;
+	int		i;
+	int		open;
+	char	c;
 
 	open = -1;
-	c = 0;
-	if (input[c] == '|')
+	i = 0;
+	c = '\0';
+	if (input[i] == '|')
 		return (0);
-	while (input[c] && input[c] != '#' && ft_isprint(input[c]))
+	while (input[i] && input[i] != '#' && ft_isprint(input[i]))
 	{
-		if (input[c] == '|' && open != 1)
-		{
+		c = double_or_single(input[i], c);
+		if (!c && input[i] == '|' && open != 1)
 			open = 1;
-		}
-		else if (input[c] != '|' && !iswhitespace(input[c]) && open == 1)
-		{
+		else if (input[i] != '|' && !iswhitespace(input[i]) && open == 1)
 			open = 0;
-		}
-		else if (input[c] == '|' && open == 1)
+		else if (!c && input[i] == '|' && open == 1)
 			break ;
-		c++;
+		i++;
 	}
 	if (open == 1)
 		return (0);

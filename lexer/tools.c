@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 20:03:54 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/08 15:32:11 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:38:13 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,20 @@ int	next_is_not(char *str, char c)
 
 int	isnot_red_syntaxe_error(char *res, int *i)
 {
-	// printf("t_1re: %c\n", res[*i]);
-	if (res[*i + 1] == '>')
+	if (res[*i] == '>' && res[*i + 1] == '>')
 		(*i)++;
-	// printf("t_2re: %c\n", res[*i]);
 	(*i)++;
-	// printf("t_3re: %c\n", res[*i]);
-	surpace_whitesspaces(res, i);
-	// printf("t_4re: %c\n", res[*i]);
+	surpace_whitesspaces(&res[*i], i);
 	if (!res[*i] || res[*i] == '|' || res[*i] == '>'
 		|| res[*i] == '<')
 		return (0);
 	return (1);
 }
 
-int	check_redirection_helper(char *res, int *i, int *count)
+int	check_redirection_helper(char *res, int *i, int *count, char *c)
 {
-	if (res[*i] == '<' && res[*i + 1] && res[*i + 1] == '<')
+	*c = double_or_single(res[*i], *c);
+	if (!(*c) && res[*i] == '<' && res[*i + 1] && res[*i + 1] == '<')
 	{
 		(*i)++;
 		if (isnot_red_syntaxe_error(res, i))
@@ -55,9 +52,10 @@ int	check_redirection_helper(char *res, int *i, int *count)
 		else
 			return (0);
 	}
-	else if ((res[*i] == '<' || res[*i] == '>') && !isnot_red_syntaxe_error(res, i))
+	else if (!(*c) && (res[*i] == '<' || res[*i] == '>')
+		&& !isnot_red_syntaxe_error(res, i))
 		return (0);
-	else if (res[*i] == '|')
+	else if (!(*c) && res[*i] == '|')
 	{
 		if (*i == 0)
 			return (0);
@@ -65,7 +63,6 @@ int	check_redirection_helper(char *res, int *i, int *count)
 			return (0);
 		else if (!res[*i + 1])
 			return (0);
-		return (1);
 	}
 	return (1);
 }
@@ -76,13 +73,15 @@ int	check_redirection(char *input)
 	char	*res;
 	t_env	*env;
 	int		count;
+	char	c;
 
+	c = '\0';
 	res = input;
 	i = -1;
 	count = 0;
 	while (res[++i])
 	{
-		if (!check_redirection_helper(res, &i, &count))
+		if (!check_redirection_helper(res, &i, &count, &c))
 			break ;
 	}
 	if (count > 16)
@@ -94,7 +93,6 @@ int	check_redirection(char *input)
 		free(input);
 		exit(2);
 	}
-	// printf("count = %d\n", count);
 	return (1);
 }
 

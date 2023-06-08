@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 19:06:50 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/07 16:01:20 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/08 17:37:51 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	ft_exit(t_cmd *command, t_list *list)
 	do_exit = 1;
 	status = g_exit_status;
 	if (ft_lstsize(list) == 1)
-		write(STDOUT_FILENO, "exit\n", 5);
+		write(STDERR_FILENO, "exit\n", 5);
 	if (command->arg_count != 0)
 	{
 		arg = ((t_file *)(command->arg->content))->a_file;

@@ -1,18 +1,21 @@
-[33mecho 1 '||' echo 2(B[m
-[35m< bash       (exited with 0)(B[m
-[35m> minishell  (exited with 2)
-(B[m[94m----- STDOUT -----(B[m
-1d0
-< 1 || echo 2
-[94m----- STDERR -----(B[m
-0a1
-> minishell: syntax error near unexpected token `|'
-
-
 [33mls | cat << stop | ls -la | cat << stop1 | ls | cat << stop2 | ls -la > > out | cat << stop3(B[m
 [35m< bash       (exited with 2)(B[m
 [35m> minishell  (exited with 2)
-(B[m[94m----- STDERR -----(B[m
+(B[m[94m----- STDOUT -----(B[m
+0a1,12
+> [?2004h> 
+> [?2004l[?2004h> 
+> [?2004l[?2004h> 
+> [?2004l[?2004h> 
+> [?2004l[?2004h> 
+> [?2004l[?2004h> 
+> [?2004l[?2004h> 
+> [?2004l[?2004h> 
+> [?2004l[?2004h> 
+> [?2004l[?2004h> [?2004l
+> [?2004h> [?2004l
+> [?2004h> [?2004l
+[94m----- STDERR -----(B[m
 1,2c1
 < minishell: -c: syntax error near unexpected token `>'
 < minishell: -c: `ls | cat << stop | ls -la | cat << stop1 | ls | cat << stop2 | ls -la > > out | cat << stop3'
