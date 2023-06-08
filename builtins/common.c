@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   common.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:45:11 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/02 18:11:07 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/08 17:22:34 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	print_error2(char *identifier, int i)
 	if (i == 1)
 		write(STDERR_FILENO, "minishell: export: `", 20);
 	if (i == 2)
-		write(STDERR_FILENO, "minishell: unset: `", 20);
+		write(STDERR_FILENO, "minishell: unset: `", 19);
 	write(STDERR_FILENO, identifier, ft_strlen(identifier));
 	write(STDERR_FILENO, "': not a valid identifier\n", 26);
 	return (1);

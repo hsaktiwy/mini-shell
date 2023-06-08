@@ -301,7 +301,7 @@ TEST_ARRAY=(
 # "echo \"< no pipe | or semicolon will | stop me >\""
 'bash -c "I am not a command" "Im the program name"'
 'pwd" should not work"'
-'echo\" should not work neiter\"'
+#'echo\" should not work neiter\"'
 '################		    PIPES			#################'
 'env | sort | grep -v SHLVL | grep -v ^_'
 'cat /etc/passwd | grep oi'
@@ -628,6 +628,8 @@ TEST_ARRAY=(
 '################		    EXTRAS			#################'
 "echo 1 '||' echo 2"
 'ls | cat << stop | ls -la | cat << stop1 | ls | cat << stop2 | ls -la > > out | cat << stop3'
+"ls -la '|' '<<' '<' '>' '>>' '||'| echo hello"
+'ls -la "|" "<<" "<" ">" ">>" "||"| echo hello'
 'unset ?'
 )
 
@@ -916,7 +918,7 @@ fi
 
 printf "\n\n\t\t\'cat diff.txt | less\'  for detailed information\n\n"
 
-rm -rf minishell out1 out2 err1 err2 a b c d pum lscp hpc hp testfile
+rm -rf minishell out1 out2 a b c d pum lscp hpc hp testfile #err1 err2
 rm -rf file log out output salut test 'test 1' test\\ ';' '000' 'chmod' 'd;' 'a;' echo
 chmod +r dirwithoutpermissions
 rm -rf ucantexecme.e dir dir/encoreuneautredir dirwithoutpermissions

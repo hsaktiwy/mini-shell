@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:17:19 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/07 17:54:00 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:37:52 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ int	here_doc_red(t_file *tmp)
 			write(2, "Error : here_doc fail\n", 22);
 		}
 	}
+	else
+		return (-1);
 	return (0);
 }
 
