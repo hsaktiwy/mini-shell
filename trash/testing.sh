@@ -196,3 +196,43 @@ TAKE YOUR TIME AND TRY NOT BREAK SOMETHING ELSE WHILE FIXING THIS
 }
 
 
+➜  mini-shell git:(abdelatif) ✗ ./minishell
+minibash-3.2$ echo $?
+=================================================================
+==17403==ERROR: AddressSanitizer: heap-use-after-free on address 0x602000004070 at pc 0x55aa6c480099 bp 0x7ffc69714930 sp 0x7ffc69714920
+READ of size 1 at 0x602000004070 thread T0
+    #0 0x55aa6c480098 in ft_strncat libft/ft_strncat.c:23
+    #1 0x55aa6c470fda in expand_nor_var lexer/expand_var_tools.c:59
+    #2 0x55aa6c47151f in expand_env_var lexer/expand_var_tools.c:116
+    #3 0x55aa6c477bae in go_to_expand_var lexer/expand_input.c:65
+    #4 0x55aa6c478543 in expand_input lexer/expand_input.c:104
+    #5 0x55aa6c4747ea in handle_arg lexer/lexer_tools.c:112
+    #6 0x55aa6c4737e2 in lexer lexer/lexer.c:111
+    #7 0x55aa6c46ea95 in main2 lexer/main.c:79
+    #8 0x55aa6c46eff0 in main lexer/main.c:159
+    #9 0x7ff146cd3d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #10 0x7ff146cd3e3f in __libc_start_main_impl ../csu/libc-start.c:392
+    #11 0x55aa6c46e704 in _start (/root/mini-shell/minishell+0x6704)
+
+0x602000004070 is located 0 bytes inside of 2-byte region [0x602000004070,0x602000004072)
+freed by thread T0 here:
+    #0 0x7ff146fda517 in __interceptor_free ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:127
+    #1 0x55aa6c471507 in expand_env_var lexer/expand_var_tools.c:116
+    #2 0x55aa6c477bae in go_to_expand_var lexer/expand_input.c:65
+    #3 0x55aa6c478543 in expand_input lexer/expand_input.c:104
+    #4 0x55aa6c4747ea in handle_arg lexer/lexer_tools.c:112
+    #5 0x55aa6c4737e2 in lexer lexer/lexer.c:111
+    #6 0x55aa6c46ea95 in main2 lexer/main.c:79
+    #7 0x55aa6c46eff0 in main lexer/main.c:159
+    #8 0x7ff146cd3d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+previously allocated by thread T0 here:
+    #0 0x7ff146fda867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+    #1 0x55aa6c471448 in expand_env_var lexer/expand_var_tools.c:111
+    #2 0x55aa6c477bae in go_to_expand_var lexer/expand_input.c:65
+    #3 0x55aa6c478543 in expand_input lexer/expand_input.c:104
+    #4 0x55aa6c4747ea in handle_arg lexer/lexer_tools.c:112
+    #5 0x55aa6c4737e2 in lexer lexer/lexer.c:111
+    #6 0x55aa6c46ea95 in main2 lexer/main.c:79
+    #7 0x55aa6c46eff0 in main lexer/main.c:159
+    #8 0x7ff146cd3d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
