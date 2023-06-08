@@ -1,421 +1,21 @@
-[33mexport =============123(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport =(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport =42(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport ''=''(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport ""=""(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport $? (B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport ''=''(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport "="="="(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport '='='='(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport TE-ST=100(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport TEST-=100(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport ==========(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport 1TEST=(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport ""=""(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport TE+S=T=""(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport TES.T=123(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport TES.T=123(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport TES+T=123(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport TES}T=123(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport TES{T=123(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport TES-T=123(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport TE*ST=123(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport TES#T=123(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport TES@T=123(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport TES!T=123(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport =============123(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport +++++++=123(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport TES^T=123(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport TES!T=123(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
 [33mexport TES\~T=123(B[m
 [35m< bash       (exited with 1)(B[m
 [35m> minishell  (exited with 1)
 (B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport =a | echo $a(B[m
-[35m< bash       (exited with 0)(B[m
-[35m> minishell  (exited with 0)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport /dont/export/this=hola | export | grep /dont/export/this(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport $(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport ?=42(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset ""(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset =(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset "="(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset ""=(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset =""(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset ==(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset ?(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset "?"(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset $(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset "$"(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset $""(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset TES.T(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset TES+T(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset TES=T(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset TES}T(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset TES{T(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset TES-T(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset TE*ST(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset TES#T(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset TES@T(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset TES!T(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset ============(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset +++++++(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset TES^T(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset TES!T(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
+1c1
+< minishell: export: `TES~T=123': not a valid identifier
+---
+> minishell: export: `TES\~T=123': not a valid identifier
 
 
 [33munset TES\~T(B[m
 [35m< bash       (exited with 1)(B[m
 [35m> minishell  (exited with 1)
 (B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
+1c1
+< minishell: unset: `TES~T': not a valid identifier
+---
+> minishell: unset: `TES\~T': not a valid identifier
 
 
 [33menv -i ./minishell: |(B[m
@@ -625,30 +225,6 @@ Binary files err1 and err2 differ
 > minishell: syntax error near unexpected token `newline'
 
 
-[33mexport ""(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33munset ""(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mcat Makefile | grep pr | head -n 5 | hello(B[m
-[35m< bash       (exited with 127)(B[m
-[35m> minishell  (exited with 127)
-(B[m[94m----- STDERR -----(B[m
-1d0
-< minishell: hello: command not found
-2a2
-> minishell: hello: command not found
-
-
 [33mecho bonjour >>> test(B[m
 [35m< bash       (exited with 2)(B[m
 [35m> minishell  (exited with 2)
@@ -675,21 +251,20 @@ Binary files err1 and err2 differ
 [35m< bash       (exited with 1)(B[m
 [35m> minishell  (exited with 1)
 (B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport var ="cat Makefile | grep >"(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
+1c1
+< minishell: $test: ambiguous redirect
+---
+> minishell: : No such file or directory
 
 
 [33mecho bonjour > $test w t(B[m
 [35m< bash       (exited with 1)(B[m
 [35m> minishell  (exited with 1)
 (B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
+1c1
+< minishell: $test: ambiguous redirect
+---
+> minishell: : No such file or directory
 
 
 [33mecho hudifg d | | hugdfihd(B[m
@@ -703,13 +278,6 @@ Binary files err1 and err2 differ
 > minishell: syntax error near unexpected token `|'
 
 
-[33mexport "HI =hi"(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
 [33m| echo(B[m
 [35m< bash       (exited with 2)(B[m
 [35m> minishell  (exited with 2)
@@ -721,25 +289,14 @@ Binary files err1 and err2 differ
 > minishell: syntax error near unexpected token `|'
 
 
-[33mexport =(B[m
+[33m< lexer/ /bin | ///// | ok > /////(B[m
 [35m< bash       (exited with 1)(B[m
 [35m> minishell  (exited with 1)
 (B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport =(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
-
-
-[33mexport +=(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
+2d1
+< minishell: /////: is a directory
+3a3
+> minishell: /////: is a directory
 
 
 [33m< lexer/ /bin | "" | ok > ""(B[m
@@ -756,7 +313,10 @@ Binary files err1 and err2 differ
 [35m< bash       (exited with 1)(B[m
 [35m> minishell  (exited with 1)
 (B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
+1c1
+< minishell: $p: ambiguous redirect
+---
+> minishell: : No such file or directory
 
 
 [33m<>(B[m
@@ -1268,12 +828,5 @@ Binary files err1 and err2 differ
 < minishell: -c: `ls | cat << stop | ls -la | cat << stop1 | ls | cat << stop2 | ls -la > > out | cat << stop3'
 ---
 > minishell: syntax error near unexpected token `>'
-
-
-[33munset ?(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-Binary files err1 and err2 differ
 
 

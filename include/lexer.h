@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 11:59:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/07 20:30:59 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/08 19:09:41 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,6 @@ char	*local_dir(char *tmp);
 int		is_spaced_double_single(char *str);
 char	*get_initial_token(char *str);
 int		input_arg_size(char *str);
+char	double_single_check(char input, char old_c, int *i, int *v);
+char	*get_heredoc_token(char *str);
 #endif

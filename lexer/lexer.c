@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:03:39 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/05 20:29:01 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/08 19:02:48 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	handle_heredoc(t_list **tokens, t_env *env, char *input, int *index)
 		return ;
 	*index += 2;
 	surpace_whitesspaces(&input[*index], index);
-	r = get_token(&input[*index]);
+	r = get_heredoc_token(&input[*index]);
 	start = get_start(&input[*index]);
 	g_heredoc_count(1);
 	token->type = HERE_DOC;

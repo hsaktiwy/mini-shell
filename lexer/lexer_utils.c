@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 14:11:29 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/04 19:20:24 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/08 19:02:20 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,20 @@ char	*here_doc_name(char *common, int nbr)
 int	get_start(char *str)
 {
 	int		i;
+	char	*res;
 
 	i = 0;
+	res = ft_strdup("");
 	surpace_whitesspaces(str, &i);
 	while (str[i] && !iswhitespace(str[i]))
 	{
-		if (str[i] == '\'' || str[i] == '\"')
-			return (0);
+		res = ft_realloc(res, ft_strlen(res) + 2);
+		ft_strncat(res, &str[i], 1);
 		i++;
 	}
-	return (1);
+	if (ft_strstr(res, "\'") || ft_strstr(res, "\""))
+		return (free(res), 0);
+	return (free(res), 1);
 }
 // this may need to be in int not void cause it can return 
 //0 when the allocation fail (this can cause some indefine behavior)
