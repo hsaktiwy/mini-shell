@@ -327,9 +327,10 @@ TEST_ARRAY=(
 'ls | wc | wc -l | bc'
 'echo "cat traveler" | cat | cat | cat | cat | cat | cat'
 '################	        RIGHT REDIRECTION		#################'
-'> a | ls'
+'ls'
+'> aaa | ls'
 'pwd > a | cat a'
-'ls > a -f | cat a'
+'ls > bbb -f | cat a'
 'echo entre el clavel y la rosa > a su majestad es coja| cat a'
 '> a echo cucu cantaba la rana| cat a'
 'echo "redirection party trick" > a > b > c > d | ls | cat d'
@@ -917,6 +918,6 @@ fi
 printf "\n\n\t\t\'cat diff.txt | less\'  for detailed information\n\n"
 
 rm -rf minishell out1 out2 err1 err2 a b c d pum lscp hpc hp testfile
-rm -rf file log out output salut test 'test 1' test\\ ';' '000' 'chmod' 'd;' 'a;' echo
+rm -rf file log out output salut test 'test 1' test\\ ';' '000' 'chmod' 'd;' 'a;' echo outfile1 outfile2 aaa bbb
 chmod +r dirwithoutpermissions
 rm -rf ucantexecme.e dir dir/encoreuneautredir dirwithoutpermissions
