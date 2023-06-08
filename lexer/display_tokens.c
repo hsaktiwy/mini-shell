@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   display_tokens.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/27 18:39:13 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/07 20:30:46 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+#include <sys/time.h>
 void	display_tokens(t_list	*tokens)
 {
 	t_list	*list;
@@ -74,5 +74,24 @@ void	display_tokens(t_list	*tokens)
 			printf("		file_out : %s\n", ((t_cmd *)token->value)->file_out);
 		}
 		list = list->next;
+	}
+}
+
+void	show_time(char *str)
+{
+	long int time;
+	static long int s_ts;
+	struct timeval tm;
+
+	if (str == NULL)
+	{
+		gettimeofday(&tm, NULL);
+		s_ts = tm.tv_sec * 1000 + tm.tv_usec / 1000;
+	}
+	else
+	{
+		gettimeofday(&tm, NULL);
+		time = tm.tv_sec * 1000 + tm.tv_usec / 1000;
+		printf("time of %s : %ld(current: %ld, start: %ld)\n", str,time - s_ts, time, s_ts);
 	}
 }

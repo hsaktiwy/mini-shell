@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var_tools.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:17:59 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/07 19:49:14 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/08 02:37:15 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,9 @@ char	*expand_in_brace(char	*s, int *k, char *res)
 char	*expand_env_var(char *s, char *res, int *k)
 {
 	char	*v_env;
-	char	*tmp;
+	// char	*tmp;
 
-	tmp = NULL;
+	// tmp = NULL;
 	v_env = malloc((*k) + 1);
 	v_env[0] = '\0';
 	if (*s == '{' && is_closed(s) > 0)

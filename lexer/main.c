@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/08 00:44:11 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/08 02:36:54 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	main2(char *input, t_env *env)
 		//fix_expanding_issue(&tokens);
 		ini_arg_count(&tokens);
 		list = parser(&tokens, data);
-		//display_tokens(tokens);
+		// display_tokens(tokens);
 		g_token_l(tokens);
 		if (list)
 			execute(list);

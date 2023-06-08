@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 20:03:54 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/07 20:15:45 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/07 21:00:20 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	*get_initial_token(char *str)
 	c = '\0';
 	i = 0;
 	arg = ft_strdup("");
-	while (str[i] && ((!c && str[i] != '#' && !iswhitespace(str[i])
+	while (str[i] && ((!c && !iswhitespace(str[i])
 				&& str[i] != '|' && str[i] != '<' && str[i] != '>')
 			|| c))
 	{
