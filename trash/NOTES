@@ -87,7 +87,7 @@ Makefile: one makefile for everyting or each with a makefile
 	bash-3.2$ exit ""
 	exit
 	bash: exit: : numeric argument required
-
+}
 [export]
 {
 	>export KEY=VALUE

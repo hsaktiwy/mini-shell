@@ -3,70 +3,46 @@
 	[x] ignore from # to end  
 	[x]"ls | > out" "ls | <<l" different behaviar
 	[x]	signals in parent, fork and heredoc
-	[x]	$? should expand to exit status
-	[x]	removed global struct
 	[x] fix the expand problem exepmple : "minishell > $FalS_variable ls -la ___output will be the ls -la result command"
 	[x] I made this ~ exanding to $HOME
 	[x] fix redirection case with file_name have NULL and file name have Empty space 
 	[x] fix the problem that made the redirection don't work where there is no  command: (exemple : bash-3.2$ << kk or < out or < hello)
 	[x] error management {perror("malloc");
   							exit(EXIT_FAILURE);}
-	[x] should add a global struct which will contain the exit status of commands
-	[x] creat function destroy env to free t_env
-	[x] fix the double erreur display in this case "minishell:$> >"
-	[x] added .gitignore file, add files u don't need to push to avoid unnecessary conflicts
-		and only commit the files that u have modified(this doesn't include files with modified headers!!)
-	[x]do redirection in all types(Parcinf fase)
-	[x]replace ast with a simple list only (t_cmd)
 	[x]fix the problem where u need to keep argument type (is it from "" or '' or $, not "$"-> is from "" ...)
 	[x]Expand variables in here doc
-	[x]Expand env using our one env (it must be a linked list [key = "", value = ""])
-	[x]$a = "ls -la" 
-		bash-3.2$ $a
-	[x]$b = "| wc -l"
-		bash-3.2$ $a $b
-		bash-3.2$ $a "$b"
-	[ ]where in this case we will need to identifie the diffrence between a argument where it was walled bye \' \" and where there is just simple $variables
+	[x]{
+		export $a="ls -la" 
+		$a
+	}
+	[x]{
+		export b="| wc -l"
+		$b
+		"$b"
+	}
 	[ ]{	
-			plus i linked the extra argument that apear in this wierd cases :
-			[]case1 : 
-				bash-3.2$ ls -la << here_doc > output file
-					> jshdja
-					> asjkdga
-					> kk
-					> here_doc
-					ls: file: No such file or directory
-				where the 'file' input in the case1 will behave like a argument for our first detected commad
+		ls -la << here_doc > output file
+		> kk
+		> here_doc
+		ls: file: No such file or directory
+		where the 'file' input in the case1 will behave like a argument for our first detected commad
 	}
 	[x]ls -la "|"
 	[ ]"ls                  <<kk"
 	[ ]space and #
-	[ ]export > 888	//FIXED
-	[ ]shell level	//FIXED
-	[ ]env -i ./minishell seg--	//FIXED 
+	[x]export > 888	//FIXED
+	[x]shell level	//FIXED
 	[ ]OLDPWD is not set at first-- //FIXED
 	[ ]expand ~ && -- to home //FIXED or not
 	[ ]handle when full path is specified as the name of the command--
 	[ ]caling close with invalid file descriptor--
 	[ ]test all builtins 
-	[ ]close fds	//FIXED
-	[ ]bash-3.2$ /tmp
-	[ ]bash: /tmp: is a directory ## exit 126
-	[ ]bash-3.2$ /bin/lsds
-	[ ]bash: /bin/lsds: No such file or directory ## exit 127
-	[ ]bash-3.2$ sdsf
-	[ ]bash: sdsf: command not found ## exit 127
 	[x] ls | | | wc or ls |||| wc (i think it soved)
 	[x]export "VA=ls|wc" should consider one cmd
 	[x]echo '$USER'$USER"$USER" 
-
 	[ ]export "VA=ls|wc" should consider one cmd
-
-	[x] in redirection not working
-
-
 	[ ]{
-		bash-3.2$ cat << kk
+		cat << kk
 		> $?HHH
 		> KK
 		> kk
@@ -89,9 +65,6 @@
 	[x] < ls/ > 		<<nothing should be passed to execution>>
 	[x] <ls>
 	[ ]"ls                  <<kk"
-	[x] fix this problem plus exit status is 255 not 2
-	[ ]exit 11111111111111111111111111111111111111111111
-	[x] ++ close open file fds in exit
 
 {
 	>> exit status 1 in redirection error
@@ -173,43 +146,6 @@
 }
 
 {
-	$ cat *b
-	$ ./
-	>>>>leaks
-	##########################################
-	==19029==ERROR: LeakSanitizer: detected memory leaks
-
-Direct leak of 720 byte(s) in 30 object(s) allocated from:
-    #0 0x7fb84948d867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
-    #1 0x55611a2dc7e0 in ft_split libft/ft_split.c:78
-    #2 0x55611a2d4138 in ft_regx lexer/wildcards_utils.c:48
-    #3 0x55611a2d42e4 in add_matchs lexer/wildcards_utils.c:65
-    #4 0x55611a2d44b9 in local_dir lexer/wildcards_utils.c:90
-    #5 0x55611a2d2fba in iswildcards lexer/wildcards.c:98
-    #6 0x55611a2d0f91 in handle_command lexer/lexer_tools.c:87
-    #7 0x55611a2d02bc in lexer lexer/lexer.c:109
-    #8 0x55611a2c9d3c in main2 lexer/main.c:96
-    #9 0x55611a2ca586 in main lexer/main.c:196
-    #10 0x7fb849186d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
-
-Indirect leak of 570 byte(s) in 60 object(s) allocated from:
-    #0 0x7fb84948d867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
-    #1 0x55611a2db2b2 in ft_substr libft/ft_substr.c:25
-    #2 0x55611a2dc6ff in splited libft/ft_split.c:56
-    #3 0x55611a2dc88c in ft_split libft/ft_split.c:85
-    #4 0x55611a2d4138 in ft_regx lexer/wildcards_utils.c:48
-    #5 0x55611a2d42e4 in add_matchs lexer/wildcards_utils.c:65
-    #6 0x55611a2d44b9 in local_dir lexer/wildcards_utils.c:90
-    #7 0x55611a2d2fba in iswildcards lexer/wildcards.c:98
-    #8 0x55611a2d0f91 in handle_command lexer/lexer_tools.c:87
-    #9 0x55611a2d02bc in lexer lexer/lexer.c:109
-    #10 0x55611a2c9d3c in main2 lexer/main.c:96
-    #11 0x55611a2ca586 in main lexer/main.c:196
-    #12 0x7fb849186d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
-	####################################################################
-}
-
-{
 	echo $*
 }
 
@@ -233,3 +169,30 @@ Direct leak of 1 byte(s) in 1 object(s) allocated from:
     #7 0x564c34fa2d5c in main2 lexer/main.c:98
     #8 0x564c34fa379b in main lexer/main.c:227
     #9 0x7ff6d9ac7d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+
+
+TAKE YOUR TIME AND TRY NOT BREAK SOMETHING ELSE WHILE FIXING THIS
+{
+	[herdoc doesn't work after syntax error]
+	ls | cat << stop | ls -la | cat << stop1 | ls | cat << stop2 | ls -la > > out | cat << stop3
+
+	echo segfault <"<<<"<<amazing
+	something
+	amazing
+}
+
+}
+	echo 1 '||' echo 2
+}
+
+{	
+	[not working+heap-use-after-free]
+	export T="<<" 
+	$T.	
+
+	export T="|"
+	$T$T$T$T$T$T$T
+}
+
+

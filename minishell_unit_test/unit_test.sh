@@ -582,7 +582,6 @@ TEST_ARRAY=(
 'echo seg <<> echo segf'
 'echo seg <<<> echo segf'
 'echo segf <|< echo super valid'
-'################		    EXTRAS			#################'
 '">>" asd'
 '>">" asd'
 '/bin/rm -f ">"'
@@ -626,6 +625,10 @@ TEST_ARRAY=(
 '"PWD "'
 '"pwd "'
 "'pwd '"
+'################		    EXTRAS			#################'
+"echo 1 '||' echo 2"
+'ls | cat << stop | ls -la | cat << stop1 | ls | cat << stop2 | ls -la > > out | cat << stop3'
+'unset ?'
 )
 
 usage() {

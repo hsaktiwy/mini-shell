@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/07 20:40:26 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/08 00:44:11 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,17 +130,29 @@ int	main(__attribute__((unused)) int ac,
 	while (1)
 	{
 		restore_stdin();
-		input = readline("minibash-3.2$ ");
+		// input = readline("minibash-3.2$ ");
+		//
+		if (isatty(STDIN_FILENO))
+			input = readline("minibash-3.2$ ");
+		else
+		{
+			char *line;
+			line = get_next_line(STDIN_FILENO);
+			input = ft_strtrim(line, "\n");
+			free(line);
+		}
+		//
 		if (!input)
 		{
 			ft_free_env(&env_s);
-			write(1, "exit\n", 5);
+			if (isatty(STDIN_FILENO))
+				write(1, "exit\n", 5);
 			exit(g_exit_status);
 		}
 		if (input && input[0])
 		{
 			add_history(input);
-			//input = expand_input(env_s, input);
+			// input = expand_input(env_s, input);
 			//printf("our input : %s\n", input);
 			g_input_line(input);
 			if(check_redirection(input))
