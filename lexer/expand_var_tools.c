@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var_tools.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:17:59 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/08 02:37:15 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/08 15:26:40 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,15 @@ int	is_closed(char *s)
 	return (0);
 }
 
-char	*expand_nor_var(char *res, char *v_env, char *s, int *k)
+char	*expand_nor_var(char *res, char *s, int *k)
 {
 	char	*tmp;
 	int		size;
 	char	*re;
+	char	*v_env;
 
+	v_env = malloc((*k) + 1);
+	v_env[0] = '\0';
 	ft_strncat(v_env, s, *k);
 	if (ft_strcmp(v_env, "?") == 0)
 	{
@@ -63,7 +66,7 @@ char	*expand_nor_var(char *res, char *v_env, char *s, int *k)
 		size = ft_strlen(tmp);
 		re = ft_realloc(res, ft_strlen(res) + size + 1 + 2);
 		ft_strncat(re, tmp, size);
-		return (free(tmp), re);
+		return (free(v_env), free(tmp), re);
 	}
 	tmp = ft_getenv(g_env_s(NULL), v_env);
 	if (tmp)
@@ -71,7 +74,7 @@ char	*expand_nor_var(char *res, char *v_env, char *s, int *k)
 	size = ft_strlen(tmp);
 	re = ft_realloc(res, ft_strlen(res) + size + 1 + 2);
 	ft_strncat(re, tmp, size);
-	return (free(tmp), re);
+	return (free(v_env), free(tmp), re);
 }
 
 char	*expand_in_brace(char	*s, int *k, char *res)
@@ -104,14 +107,8 @@ char	*expand_in_brace(char	*s, int *k, char *res)
 
 char	*expand_env_var(char *s, char *res, int *k)
 {
-	char	*v_env;
-	// char	*tmp;
-
-	// tmp = NULL;
-	v_env = malloc((*k) + 1);
-	v_env[0] = '\0';
 	if (*s == '{' && is_closed(s) > 0)
-		return (free(v_env), expand_in_brace(s, k, res));
+		return (expand_in_brace(s, k, res));
 	else
-		return (free(v_env), expand_nor_var(res, v_env, s, k));
+		return (expand_nor_var(res, s, k));
 }
