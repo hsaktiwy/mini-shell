@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 15:12:29 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/07 17:54:52 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:03:27 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,37 +40,25 @@ int	find_delimeter(char *line, char *needle)
 	return (0);
 }
 
-int	isfake_cmd(t_list	*list)
+int	isnext(t_list *current)
 {
-	t_token	*tmp;
-	t_cmd	*cmd;
+	t_token	*token;
+	t_file	*file;
 
-	if (!list)
-		return (-1);
-	tmp = list->content;
-	if (tmp->type == COMMAND)
+	token = current->content;
+	if (token->type == PIPE)
 	{
-		cmd = tmp->value;
-		if (cmd->cmd == NULL)
-			return (1);
+		if (fack_cmd_next_pipe(current))
+			return (0);
 	}
-	return (0);
-}
-
-int	fack_cmd_next_pipe(t_list *current)
-{
-	t_token	*tmp;
-
-	if (isfake_cmd(current->next))
+	else if (token->type == IN_REDIRECT || token->type == OUT_REDIRECT
+		|| token->type == APPEND_REDIRECT)
 	{
-		if (current->next->next)
-		{
-			tmp = current->next->next->content;
-			if (tmp->type == PIPE)
-				return (1);
-		}
+		file = token->value;
+		if (file->a_file == NULL)
+			return (0);
 	}
-	return (0);
+	return (1);
 }
 
 void	syntax_error_here_doc(t_list **tokens)
@@ -93,9 +81,8 @@ void	syntax_error_here_doc(t_list **tokens)
 			if (!in_red_cmd(&token, NULL))
 				break ;
 		}
-		else if (token->type == PIPE)
-			if (fack_cmd_next_pipe(current))
-				break ;
+		else if (!isnext(current))
+			break ;
 		current = current->next;
 	}
 }

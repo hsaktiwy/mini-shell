@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:31:44 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/07 17:57:21 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:01:21 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,6 @@ int		find_delimeter(char *line, char *needle);
 int		in_red_cmd(t_token **red, t_token **command);
 void	get_true_file(t_file *tmp, int *num);
 void	display_ambiguise(t_file	*tmp);
+int		fack_cmd_next_pipe(t_list *current);
+int		isfake_cmd(t_list	*list);
 #endif

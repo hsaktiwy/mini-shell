@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 20:03:54 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/08 15:32:11 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:04:42 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,10 @@ int	next_is_not(char *str, char c)
 
 int	isnot_red_syntaxe_error(char *res, int *i)
 {
-	// printf("t_1re: %c\n", res[*i]);
-	if (res[*i + 1] == '>')
+	if (res[*i] == '>' && res[*i + 1] == '>')
 		(*i)++;
-	// printf("t_2re: %c\n", res[*i]);
 	(*i)++;
-	// printf("t_3re: %c\n", res[*i]);
-	surpace_whitesspaces(res, i);
-	// printf("t_4re: %c\n", res[*i]);
+	surpace_whitesspaces(&res[*i], i);
 	if (!res[*i] || res[*i] == '|' || res[*i] == '>'
 		|| res[*i] == '<')
 		return (0);
@@ -55,7 +51,8 @@ int	check_redirection_helper(char *res, int *i, int *count)
 		else
 			return (0);
 	}
-	else if ((res[*i] == '<' || res[*i] == '>') && !isnot_red_syntaxe_error(res, i))
+	else if ((res[*i] == '<' || res[*i] == '>')
+		&& !isnot_red_syntaxe_error(res, i))
 		return (0);
 	else if (res[*i] == '|')
 	{
@@ -94,7 +91,6 @@ int	check_redirection(char *input)
 		free(input);
 		exit(2);
 	}
-	// printf("count = %d\n", count);
 	return (1);
 }
 
