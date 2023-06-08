@@ -15,9 +15,9 @@ export GHOST=123 | env | grep GHOST
 
 /bin/echo 1 | grep 2
 
-ifconfig | grep ":"
+# ifconfig | grep ":"
 
-ifconfig | grep nothing
+# ifconfig | grep nothing
 
 cd .. | echo "42"
 

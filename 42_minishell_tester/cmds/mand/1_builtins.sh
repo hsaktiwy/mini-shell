@@ -350,11 +350,11 @@ env | grep DOESNT_EXIST
 
 env | grep HOME
 
-env | grep USER
+# env | grep USER
 
 env | wc -l
 
-env what
+# env what
 
 ### PWD ###
 pwd

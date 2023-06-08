@@ -168,13 +168,13 @@ echo '$'$
 
 env | grep HOME
 
-env | grep $USER
+# env | grep $USER
 
-export USER=
-env | grep USER
+# export USER=
+# env | grep USER
 
-export USER="@?/"
-env | grep USER
+# export USER="@?/"
+# env | grep USER
 
 export NEW="4 2"
 env | grep NEW

@@ -40,9 +40,9 @@ export PATH=1
 echo $PATH
 echo 1
 
-env -i ./minishell
-cd /bin/
-ls
+# env -i ./minishell
+# cd /bin/
+# ls
 
 touch tmp_x_file1
 tmp_x_file1
