@@ -236,3 +236,7 @@ previously allocated by thread T0 here:
     #6 0x55aa6c46ea95 in main2 lexer/main.c:79
     #7 0x55aa6c46eff0 in main lexer/main.c:159
     #8 0x7ff146cd3d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+
+
+// test leals in script mode
