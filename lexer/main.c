@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/09 19:40:49 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/09 19:59:42 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,12 @@ void	restore_stdin(void)
 	g_stdin_fd(0);
 }
 
-void	main2(char *input, t_env *env)
+void	main2(char *data, t_env *env)
 {
 	t_list	*tokens;
 	int		err_lex;
 	t_list	*list;
-	char	*data;
 
-	data = ft_strtrim(input, " \t\v");
 	tokens = NULL;
 	//printf("hello\n");
 	err_lex = lexical_erreur(data);// parsing Errur
@@ -91,7 +89,6 @@ void	main2(char *input, t_env *env)
 		ft_lstclear(&list, NULL);
 	}
 	free_tokens(&tokens);
-	free(data);
 }
 
 char	*get_input(void)
@@ -100,14 +97,14 @@ char	*get_input(void)
 	char	*line;
 
 	if (isatty(STDIN_FILENO))
-		input = readline("minibash-3.2$ ");
+		line = readline("minibash-3.2$ ");
 	else
 	{
 		g_script_mode(1);
 		line = get_next_line(STDIN_FILENO);
-		input = ft_strtrim(line, " \t\v\n");
-		free(line);
 	}
+	input = ft_strtrim(line, " \t\v\n");
+	free(line);
 	return (input);
 }
 void	leaks()
