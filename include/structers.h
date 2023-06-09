@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:02:18 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/27 17:34:05 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/09 16:49:33 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ typedef enum types{
 	APPEND_REDIRECT,
 }t_token_type;
 
-// Grammar types 	// INPUT,
-typedef enum g_types{
-	G_COMMAND,
-	S_COMMAND,
-	PIPELINE,
-	G_PIPE,
-	REDIRECTION,
-	CMD,
-}t_g_types;
+// // Grammar types 	// INPUT,
+// typedef enum g_types{
+// 	G_COMMAND,
+// 	S_COMMAND,
+// 	PIPELINE,
+// 	G_PIPE,
+// 	REDIRECTION,
+// 	CMD,
+// }t_g_types;
 
 // envirement variable
 typedef struct s_holder
@@ -92,14 +92,14 @@ typedef struct s_file
 typedef struct s_command
 {
 	char			*cmd;
-	t_argument_type	cmd_type;
+	t_argument_type	cmd_type;// this maybe  neeed to be deleted  cmd_type
 	t_list			*arg;
 	size_t			arg_count;
 	int				cmd_in;
 	int				cmd_out;
 	char			*file_in;
 	char			*file_out;
-	t_env			*env;
+	t_env			*env;// this maybe  neeed to be deleted env 
 	int				error;
 }t_cmd;
 

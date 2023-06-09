@@ -788,16 +788,6 @@
 > exit
 
 
-[33m< lexer/ /bin | ///// | ok > /////(B[m
-[35m< bash       (exited with 1)(B[m
-[35m> minishell  (exited with 1)
-(B[m[94m----- STDERR -----(B[m
-2d1
-< minishell: /////: is a directory
-3a3
-> minishell: /////: is a directory
-
-
 [33m< lexer/ /bin | "" | ok > ""(B[m
 [35m< bash       (exited with 1)(B[m
 [35m> minishell  (exited with 1)

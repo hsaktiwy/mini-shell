@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 14:14:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/31 14:15:30 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/09 15:50:19 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,8 @@ int	lexical_erreur(char	*input)
 	c = '\0';
 	c_i = -1;
 	while (input[++i])
-	{
 		lexical_errur_helper(input[i], &c, &c_i, i);
-	}
-	if (c == '\'' || c == '\"')
+	if (c)
 		return (c_i);
 	return (-1);
 }

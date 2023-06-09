@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 11:59:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/08 19:09:41 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/09 15:42:29 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ t_cmd	*ini_cmd(t_env *env);
 int		lexer(t_list **tokens, char *input, t_env *env);
 void	free_tokens(t_list **list);
 void	free_token(void *value);
-int		handle_command(t_list **tokens, t_env *env, char *input, int *index);
-void	handle_arg(t_list **tokens, t_env *env, char *input, int *index);
-void	handle_pipe(t_list **tokens, int *index, int *cmd);
+int		handle_command(t_list **tokens, t_env *env, char *input, int *index);// ?
+void	handle_arg(t_list **tokens, t_env *env, char *input, int *index);// ?
+void	handle_pipe(t_list **tokens, int *index, int *cmd);// ?
 void	fix_expanding_issue(t_list **tokens);
 void	ini_arg_count(t_list **tokens);
 int		lexical_erreur(char	*input);

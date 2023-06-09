@@ -6,19 +6,18 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:03:39 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/08 19:02:48 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/09 15:43:07 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handle_heredoc(t_list **tokens, t_env *env, char *input, int *index)
+void	handle_heredoc(t_list **tokens, char *input, int *index)
 {
 	t_token	*token;
 	int		start;
 	char	*r;
 
-	(void) env;
 	token = (t_token *)malloc(sizeof(t_token));
 	if (!token)
 		return ;
@@ -96,7 +95,7 @@ int	lexer(t_list **tokens, char *input, t_env *env)
 	while (input[i] && input[i] != '#')
 	{
 		if (input[i] == '<' && input[i + 1] && input[i + 1] == '<')
-			handle_heredoc(tokens, env, input, &i);
+			handle_heredoc(tokens, input, &i);
 		else if (input[i] == '<' && input[i + 1] != '<')
 			handle_inredirect(tokens, env, input, &i);
 		else if (input[i] == '>' && input[i + 1] && input[i + 1] == '>')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:50:22 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/03 15:46:20 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/09 18:15:40 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	print_error(char *command, char *str_error, int print_error)
 {
 	write(STDERR_FILENO, "minishell: ", 11);
+	script_line();
 	if (command)
 	{
 		write(STDERR_FILENO, command, ft_strlen(command));

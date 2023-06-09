@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/08 23:18:09 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/09 20:19:37 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	g_exit_status;
 
 void	signal_handler(int sig)
 {
-	int fd;
+	int	fd;
 
 	if (sig == SIGINT)
 	{
@@ -67,11 +67,11 @@ void	main2(char *input, t_env *env)
 	t_list	*list;
 	char	*data;
 
-	data = ft_strtrim(input, " ");
+	data = ft_strtrim(input, " \t\v");
 	tokens = NULL;
 	//printf("hello\n");
-	err_lex = lexical_erreur(data);
-	g_pipe_count(0);
+	err_lex = lexical_erreur(data);// parsing Errur
+	g_pipe_count(0);// ?
 	g_heredoc_count(0);
 	if (err_lex != -1)
 		lexer_err(&data[err_lex]);
@@ -94,12 +94,33 @@ void	main2(char *input, t_env *env)
 	free(data);
 }
 
+char	*get_input(void)
+{
+	char	*input;
+	char	*line;
+
+	if (isatty(STDIN_FILENO))
+		input = readline("minibash-3.2$ ");
+	else
+	{
+		g_script_mode(1);
+		line = get_next_line(STDIN_FILENO);
+		input = ft_strtrim(line, " \t\v\n");
+		free(line);
+	}
+	return (input);
+}
+void	leaks()
+{
+	system("leaks minishell");
+}
 int	main(__attribute__((unused)) int ac,
 		__attribute__((unused)) char **av, char **env)
 {
 	char	*input;
 	t_env	*env_s;
-
+	// atexit(leaks);
+	
 	set_signal_handlers();
 	env_s = ft_init_env(env);
 	////////////////////////////////////////////
@@ -131,17 +152,7 @@ int	main(__attribute__((unused)) int ac,
 	{
 		restore_stdin();
 		// input = readline("minibash-3.2$ ");
-		//
-		if (isatty(STDIN_FILENO))
-			input = readline("minibash-3.2$ ");
-		else
-		{
-			char *line;
-			line = get_next_line(STDIN_FILENO);
-			input = ft_strtrim(line, "\n");
-			free(line);
-		}
-		//
+		input = get_input();
 		if (!input)
 		{
 			ft_free_env(&env_s);
@@ -149,13 +160,13 @@ int	main(__attribute__((unused)) int ac,
 				write(1, "exit\n", 5);
 			exit(g_exit_status);
 		}
-		if (input && input[0])
+		if (input && input[0] && input[0] != '#')
 		{
 			add_history(input);
 			// input = expand_input(env_s, input);
 			//printf("our input : %s\n", input);
 			g_input_line(input);
-			if(check_redirection(input))
+			if (check_redirection(input))
 				main2(input, env_s);
 		}
 		free(input);

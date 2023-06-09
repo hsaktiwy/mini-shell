@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 14:11:29 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/08 19:02:20 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/09 16:46:20 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,15 @@ int	get_start(char *str)
 {
 	int		i;
 	char	*res;
+	char	c;
 
+	c= '\0';
 	i = 0;
 	res = ft_strdup("");
 	surpace_whitesspaces(str, &i);
-	while (str[i] && !iswhitespace(str[i]))
+	while (cond_get_token_one(str[i], c))
 	{
+		c = double_or_single(str[i], c);
 		res = ft_realloc(res, ft_strlen(res) + 2);
 		ft_strncat(res, &str[i], 1);
 		i++;
