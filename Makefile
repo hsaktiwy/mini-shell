@@ -6,7 +6,7 @@
 #    By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 13:01:11 by hsaktiwy          #+#    #+#              #
-#    Updated: 2023/06/09 20:19:58 by aigounad         ###   ########.fr        #
+#    Updated: 2023/06/09 21:22:17 by aigounad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ LEXER = main.c ft_get_cmd.c ft_next_arg.c expand_var.c expand_var_tools.c ft_lst
 		lexer_second_utils.c wildcards_utils.c wildcards_second_utils.c global_functions_second.c expand_input.c lexer_tools_second.c \
 		expand_input_tools.c tools.c
 
-EXEC = execute.c execute_utils_1.c execute_utils_2.c execute_utils_3.c find_cmd.c builtin_execution.c
+EXEC = execute.c execute_utils_1.c execute_utils_2.c execute_utils_3.c execute_utils_4.c builtin_execution.c
 
 OBJ = $(LEXER:%.c=obj/lexer/%.o) $(BUILTINS:%.c=obj/builtins/%.o) $(ENV:%.c=obj/environment/%.o)  \
 		$(LIBFT:%.c=obj/libft/%.o) $(PARSER:%.c=obj/parser/%.o) $(EXEC:%.c=obj/execution/%.o)

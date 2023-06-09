@@ -1,13 +1,13 @@
 "           " # pwd
-><
-# cat xxx
-# ls llll
-# /
-# # xxx
-# # .
-# # <ssss
-# # <| test
-# # jjjjj
-# # |
-# # ls
-#
+cat xxx
+ls llll
+/
+# |
+# ><
+xxx
+.
+<ssss
+<| test
+jjjjj
+|
+ls

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils_3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:37:22 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/09 19:11:56 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/09 21:30:42 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,31 @@ void	restore_signals_in_child(void)
 	signal(SIGQUIT, SIG_DFL);
 }
 
+void	signal_handler(int sig)
+{
+	int	fd;
+
+	if (sig == SIGINT)
+	{
+		if (g_heredoc_executing(-1))
+		{
+			printf("^C");
+			fd = dup(STDIN_FILENO);
+			close(STDIN_FILENO);
+			g_cmd_executing(-2);
+			g_stdin_fd(fd);
+		}
+		else if (g_cmd_executing(-1) == 0)
+		{
+			printf("\n");
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
+		}
+		g_exit_status = 1;
+	}
+}
+
 void	script_line(void)
 {
 	if (g_script_mode(-1))
@@ -62,7 +87,7 @@ void	before_exiting2(void)
 	t_env	*env;
 
 	tokens = g_token_l(NULL);
-	// free_tokens(&tokens);
+	free_tokens(&tokens);
 	free(g_input_line(NULL));
 	env = g_env_s(NULL);
 	ft_free_env(&env);
