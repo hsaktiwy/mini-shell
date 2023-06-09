@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_utils.c                                    :+:      :+:    :+:   */
+/*   execute_utils_1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:59:30 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/02 16:09:27 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/09 18:13:45 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,22 +61,21 @@ void	command_not_found(t_list *cmd, int *get_exit)
 	char	*error1;
 	char	*error2;
 
+	write(STDERR_FILENO, "minishell: ", 11);
+	script_line();
 	p = ((t_cmd *)((t_token *)(cmd->content))->value)->cmd;
 	if (ft_strcmp(p, ".") == 0)
 	{
-		error1 = "minishell: .: filename argument required\n";
+		error1 = ".: filename argument required\n";
 		error2 = ".: usage: . filename [arguments]\n";
-		if (write(STDERR_FILENO, error1, 41) == -1
-			|| write(STDERR_FILENO, error2, 33) == -1)
-			perror("minishell: write");
+		write(STDERR_FILENO, error1, 30);
+		write(STDERR_FILENO, error2, 33);
 		g_exit_status = 2;
 		*get_exit = 0;
 		return ;
 	}
-	if (write(STDERR_FILENO, "minishell: ", 11) == -1
-		|| write(STDERR_FILENO, p, ft_strlen(p)) == -1
-		|| write(STDERR_FILENO, ": command not found\n", 20) == -1)
-		perror("minishell: write");
+	write(STDERR_FILENO, p, ft_strlen(p));
+	write(STDERR_FILENO, ": command not found\n", 20);
 	*get_exit = 0;
 	g_exit_status = 127;
 }

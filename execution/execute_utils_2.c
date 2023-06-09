@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:31:17 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/06 13:12:19 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/09 18:11:54 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	exec_c(t_execve_params *execve_params, t_env *env)
 {
 	execve(execve_params->path, execve_params->args, env->env);
 	write(2, "minishell: ", 11);
+	script_line();
 	if (errno == ENOENT)
 	{
 		perror(execve_params->path);

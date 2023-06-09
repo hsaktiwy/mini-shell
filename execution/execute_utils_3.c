@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   execute_utils_3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:37:22 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/26 14:11:21 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/09 19:11:56 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,28 @@ void	restore_signals_in_child(void)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
+}
+
+void	script_line(void)
+{
+	if (g_script_mode(-1))
+	{
+		write(STDERR_FILENO, "line ", 5);
+		ft_putnbr_fd(g_script_mode(-1), STDERR_FILENO);
+		write(STDERR_FILENO, ": ", 2);
+	}
+}
+
+void	before_exiting2(void)
+{
+	t_list	*tokens;
+	t_env	*env;
+
+	tokens = g_token_l(NULL);
+	// free_tokens(&tokens);
+	free(g_input_line(NULL));
+	env = g_env_s(NULL);
+	ft_free_env(&env);
+	rl_clear_history();
+	exit(2);
 }

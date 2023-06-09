@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+         #
+#    By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 13:01:11 by hsaktiwy          #+#    #+#              #
-#    Updated: 2023/06/08 17:04:16 by aigounad         ###   ########.fr        #
+#    Updated: 2023/06/09 18:10:54 by hsaktiwy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 FSAN = -fsanitize=address
-# FLAGS = -Wall -Wextra -Werror -g -I/Users/hsaktiwy/.brew/opt/readline/include -I$(INCLUDE_DIR) $(FSAN)
-FLAGS = -Wall -Wextra -Werror -g -I/Users/aigounad/.brew/opt/readline/include -I$(INCLUDE_DIR) $(FSAN)
+FLAGS = -Wall -Wextra -Werror -g -I/Users/hsaktiwy/.brew/opt/readline/include -I$(INCLUDE_DIR) $(FSAN)
+# FLAGS = -Wall -Wextra -Werror -g -I/Users/aigounad/.brew/opt/readline/include -I$(INCLUDE_DIR) $(FSAN)
 
 ENV =  ft_getenv.c ft_setenv.c ft_setenv_utils.c ft_init_env.c ft_init_env_utils.c ft_unset_envs.c ft_free_env.c
 
@@ -31,7 +31,7 @@ LEXER = main.c ft_get_cmd.c ft_next_arg.c expand_var.c expand_var_tools.c ft_lst
 		lexer_second_utils.c wildcards_utils.c wildcards_second_utils.c global_functions_second.c expand_input.c lexer_tools_second.c \
 		expand_input_tools.c tools.c
 
-EXEC = execute.c execute_utils.c execute_utils_2.c find_cmd.c signals.c builtin_execution.c
+EXEC = execute.c execute_utils_1.c execute_utils_2.c execute_utils_3.c find_cmd.c builtin_execution.c
 
 OBJ = $(LEXER:%.c=obj/lexer/%.o) $(BUILTINS:%.c=obj/builtins/%.o) $(ENV:%.c=obj/environment/%.o)  \
 		$(LIBFT:%.c=obj/libft/%.o) $(PARSER:%.c=obj/parser/%.o) $(EXEC:%.c=obj/execution/%.o)
