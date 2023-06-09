@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 15:24:11 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/07 15:53:20 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/08 18:08:21 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,10 @@ char	*iswildcards(char *input, char	*ini_s)
 		return (free(input), free(tmp), arg);
 	}
 	if (ini_s)
+	{
 		tmp = get_token(ini_s);
+		if (!tmp)
+			tmp = ft_strdup(ini_s);
+	}
 	return (free(input), tmp);
 }

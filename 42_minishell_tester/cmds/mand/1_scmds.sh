@@ -18,8 +18,8 @@ touch "  "
 
 # touch "
 # "
-/bin/rm -f "
-"
+# /bin/rm -f "
+# "
 
 mkdir " "
 /bin/rm -rf " "

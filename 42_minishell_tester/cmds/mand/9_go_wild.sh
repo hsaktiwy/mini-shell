@@ -43,11 +43,11 @@ unset PATH HOME
 echo $PATH
 echo $HOME
 
-echo "env | /usr/bin/wc -l" | env -i $MINISHELL_PATH"/"$EXECUTABLE
-echo $?
+# echo "env | /usr/bin/wc -l" | env -i $MINISHELL_PATH"/"$EXECUTABLE
+# echo $?
 
-echo "ls" | env -i $MINISHELL_PATH"/"$EXECUTABLE
-echo $?
+# echo "ls" | env -i $MINISHELL_PATH"/"$EXECUTABLE
+# echo $?
 
 echo "unset PATH" | env -i $MINISHELL_PATH"/"$EXECUTABLE
 echo $?

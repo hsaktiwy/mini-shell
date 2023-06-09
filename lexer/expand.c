@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 14:37:42 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/07 20:54:58 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/08 20:17:25 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	cond_env_expand_input(char next_c)
 int	cond_get_token_one(char str, char c)
 {
 	return (str && ((!c && str != '|'
-				&& str != '<' && str != '>' 
-				&& !iswhitespace(str)) || c));//&& str != '#'
+				&& str != '<' && str != '>'
+				&& !iswhitespace(str)) || c));
 }
 
 int	cond_get_token_sec(char str, char t_c, char c)

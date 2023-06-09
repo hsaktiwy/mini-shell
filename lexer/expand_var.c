@@ -63,3 +63,42 @@ char	*encapsulation(char *str)
 	}
 	return (res);
 }
+
+char	*add_c_to_string(char	*arg, char *str, int *i)
+{
+	char	*res;
+
+	res = arg;
+	res = ft_realloc(res, ft_strlen(res) + 2);
+	ft_strncat(res, &str[*i], 1);
+	(*i)++;
+	return (res);
+}
+
+char	*get_heredoc_token(char *str)
+{
+	int		i;
+	char	c;
+	char	*res;
+	int		c_change;
+	int		t_c;
+
+	i = 0;
+	c_change = 0;
+	c = '\0';
+	res = NULL;
+	surpace_whitesspaces(str, &i);
+	while (cond_get_token_one(str[i], c))
+	{
+		t_c = c;
+		c = double_single_check(str[i], c, &i, &c_change);
+		if (!c && str[i] == '$' && str[i + 1]
+			&& (str[i + 1] == '\'' || str[i + 1] == '\"'))
+			i++;
+		else if (cond_get_token_sec(str[i], t_c, c))
+			res = add_c_to_string(res, str, &i);
+	}
+	if (c_change && !res)
+		res = ft_strdup("");
+	return (res);
+}
