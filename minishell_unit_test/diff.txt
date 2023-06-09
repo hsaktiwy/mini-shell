@@ -18,6 +18,446 @@
 > minishell: unset: `TES\~T': not a valid identifier
 
 
+[33mexit 9223372036854775807(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit something somethingv2(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 0 0(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 1)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit ""(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit "+100"(B[m
+[35m< bash       (exited with 100)(B[m
+[35m> minishell  (exited with 100)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit "-100"(B[m
+[35m< bash       (exited with 156)(B[m
+[35m> minishell  (exited with 156)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit -9223372036854775805(B[m
+[35m< bash       (exited with 3)(B[m
+[35m> minishell  (exited with 3)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 0(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 10(B[m
+[35m< bash       (exited with 10)(B[m
+[35m> minishell  (exited with 10)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 42(B[m
+[35m< bash       (exited with 42)(B[m
+[35m> minishell  (exited with 42)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 1(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 1)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit +++++(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit ++++++(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit +1(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 1)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit ++1(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit ++12560(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit -----(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit ------(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit -1(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit --1(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit -12560(B[m
+[35m< bash       (exited with 240)(B[m
+[35m> minishell  (exited with 240)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit --12560(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 255(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 1 2(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 1)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 1 2 3(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 1)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit A(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit A 2 3(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit "A"(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit "+++"(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit ++++3193912939(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 01(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 1)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 001(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 1)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 0001(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 1)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit +++000(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit ++++000(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit ---000(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit ----000(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit "something"(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit x(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit echo(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit cd ..(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit exit(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 42 42 42 42 42 (B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 1)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 42(B[m
+[35m< bash       (exited with 42)(B[m
+[35m> minishell  (exited with 42)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit -42(B[m
+[35m< bash       (exited with 214)(B[m
+[35m> minishell  (exited with 214)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 512(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 1407(B[m
+[35m< bash       (exited with 127)(B[m
+[35m> minishell  (exited with 127)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 21 42(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 1)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit notanumber(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33menv -i ./minishell: exit asd(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33menv -i ./minishell: exit 5(B[m
+[35m< bash       (exited with 5)(B[m
+[35m> minishell  (exited with 5)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33menv -i ./minishell: exit 5 asd(B[m
+[35m< bash       (exited with 1)(B[m
+[35m> minishell  (exited with 1)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33menv -i ./minishell: exit(B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
 [33menv -i ./minishell: |(B[m
 [35m< bash       (exited with 2)(B[m
 [35m> minishell  (exited with 2)
@@ -191,29 +631,6 @@
 > minishell: syntax error near unexpected token `|'
 
 
-[33mls > a -f | cat a(B[m
-[35m< bash       (exited with 0)(B[m
-[35m> minishell  (exited with 0)
-(B[m[94m----- STDOUT -----(B[m
-0a1,16
-> .
-> ..
-> a
-> diff.txt
-> dir
-> dirwithoutpermissions
-> err1
-> err2
-> lscp
-> mand
-> minishell
-> out1
-> out2
-> outfile1
-> outfile2
-> unit_test.sh
-
-
 [33mecho >(B[m
 [35m< bash       (exited with 2)(B[m
 [35m> minishell  (exited with 2)
@@ -223,6 +640,16 @@
 < minishell: -c: `echo >'
 ---
 > minishell: syntax error near unexpected token `newline'
+
+
+[33mcat Makefile | grep pr | head -n 5 | hello(B[m
+[35m< bash       (exited with 127)(B[m
+[35m> minishell  (exited with 127)
+(B[m[94m----- STDERR -----(B[m
+1d0
+< minishell: hello: command not found
+2a2
+> minishell: hello: command not found
 
 
 [33mecho bonjour >>> test(B[m
@@ -267,6 +694,30 @@
 > minishell: : No such file or directory
 
 
+[33m exit (B[m
+[35m< bash       (exited with 0)(B[m
+[35m> minishell  (exited with 0)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit -10(B[m
+[35m< bash       (exited with 246)(B[m
+[35m> minishell  (exited with 246)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit +10(B[m
+[35m< bash       (exited with 10)(B[m
+[35m> minishell  (exited with 10)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
 [33mecho hudifg d | | hugdfihd(B[m
 [35m< bash       (exited with 2)(B[m
 [35m> minishell  (exited with 2)
@@ -287,6 +738,54 @@
 < minishell: -c: `| echo'
 ---
 > minishell: syntax error near unexpected token `|'
+
+
+[33mexit -21131313(B[m
+[35m< bash       (exited with 207)(B[m
+[35m> minishell  (exited with 207)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit -9223372036854775809(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 9223372036854775808(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit +100(B[m
+[35m< bash       (exited with 100)(B[m
+[35m> minishell  (exited with 100)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit 11111111111111111111111111111111111111111111(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
+
+
+[33mexit ""(B[m
+[35m< bash       (exited with 255)(B[m
+[35m> minishell  (exited with 255)
+(B[m[94m----- STDERR -----(B[m
+0a1
+> exit
 
 
 [33m< lexer/ /bin | ///// | ok > /////(B[m
@@ -812,39 +1311,5 @@
 < minishell: -c: `echo segf <|< echo super valid'
 ---
 > minishell: syntax error near unexpected token `|'
-
-
-[33mls | cat << stop | ls -la | cat << stop1 | ls | cat << stop2 | ls -la > > out | cat << stop3(B[m
-[35m< bash       (exited with 2)(B[m
-[35m> minishell  (exited with 2)
-(B[m[94m----- STDOUT -----(B[m
-0a1,12
-> [?2004h> 
-> [?2004l
-[?2004h> 
-> [?2004l
-[?2004h> 
-> [?2004l
-[?2004h> 
-> [?2004l
-[?2004h> 
-> [?2004l
-[?2004h> 
-> [?2004l
-[?2004h> 
-> [?2004l
-[?2004h> 
-> [?2004l
-[?2004h> 
-> [?2004l
-[?2004h> [?2004l
-> [?2004h> [?2004l
-> [?2004h> [?2004l
-[94m----- STDERR -----(B[m
-1,2c1
-< minishell: -c: syntax error near unexpected token `>'
-< minishell: -c: `ls | cat << stop | ls -la | cat << stop1 | ls | cat << stop2 | ls -la > > out | cat << stop3'
----
-> minishell: syntax error near unexpected token `>'
 
 
