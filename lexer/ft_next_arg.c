@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:31:06 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/07 19:07:29 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/10 16:45:03 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*get_token(char *str)
 	return (res);
 }
 
-t_file	*creat_arg(char *file_name, t_argument_type type)
+t_file	*creat_arg(char *file_name)
 {
 	t_file	*arg;
 
@@ -78,57 +78,9 @@ t_file	*creat_arg(char *file_name, t_argument_type type)
 	if (!arg)
 		return (NULL);
 	arg->a_file = file_name;
-	arg->arg_type = type;
 	return (arg);
 }
 
-// int	check_quotes_validity(char *input)
-// {
-// 	char	c;
-// 	int		i;
-
-// 	i = 0;
-// 	c = '\0';
-// 	while (input[i])
-// 	{
-// 		if (input[i] == '\'' && !c)
-// 			c = '\'';
-// 		else if (input[i] == '\'' && c == '\'')
-// 			c = '\0';
-// 		else if (input[i] == '\"' && !c)
-// 			c = '\"';
-// 		else if (input[i] == '\"' && c == '\"')
-// 			c = '\0';
-// 		else if (input[i] == '|' && c == '\0')
-// 			break ;
-// 		i++;
-// 	}
-// 	if (!c)
-// 		return (1);
-// 	else
-// 		return (0);
-// }
-
-// void	get_file_helper(t_file **file, char *input, int *i, int *index)
-// {
-// 	t_env	*env;
-
-// 	env = g_env_s(NULL);
-// 	if (input[*i] == '\"'
-// 		&& check_quotes_validity(&input[*i]))
-// 	{
-// 		(*index)++;
-// 		*file = creat_arg(get_double_quote(env, &input[++(*i)], index),
-// DOUBLE_QUOTE);
-// 	}
-// 	else if (check_quotes_validity(&input[*i]))
-// 	{
-// 		if (input[*i] == '$')
-// 			*file = creat_arg(get_simple_arg(env, &input[*i], index), VARIABLE);
-// 		else
-// 			*file = creat_arg(get_simple_arg(env, &input[*i], index), WORD);
-// 	}
-// }
 int	input_arg_size(char *str)
 {
 	int		i;
@@ -160,11 +112,11 @@ t_file	*get_file(t_env *env, char *input, int *index)
 	*index += input_arg_size(&input[*index]);
 	if (!tmp)
 	{
-		file = creat_arg(NULL, WORD);
+		file = creat_arg(NULL);
 		return (free(r), file);
 	}
 	else
-		file = creat_arg(tmp, WORD);
+		file = creat_arg(tmp);
 	if (file)
 		file->a_file = iswildcards(file->a_file, r);
 	return (free(r), file);

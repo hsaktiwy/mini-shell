@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/10 16:02:14 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/10 17:08:29 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	main2(char *data, t_env *env)
 
 	tokens = NULL;
 	err_lex = parser_erreur(data);
-	g_pipe_count(0);// ?
 	g_heredoc_count(0);
 	if (err_lex != -1)
 		lexer_err(&data[err_lex]);
@@ -103,12 +102,12 @@ char	*get_input(void)
 	return (input);
 }
 
-int	main(__attribute__((unused)) int ac,
-		__attribute__((unused)) char **av, char **env)
+int	main(__attribute__((unused)) int ac, __attribute__((unused)) char **av,
+		char **env)
 {
 	char	*input;
 	t_env	*env_s;
-	
+
 	set_signal_handlers();
 	env_s = ft_init_env(env);
 	////////////////////////////////////////////
@@ -139,7 +138,6 @@ int	main(__attribute__((unused)) int ac,
 	while (1)
 	{
 		restore_stdin();
-		// input = readline("minibash-3.2$ ");
 		input = get_input();
 		if (!input)
 		{

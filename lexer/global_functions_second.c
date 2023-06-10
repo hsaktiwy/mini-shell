@@ -6,21 +6,11 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 14:56:17 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/09 18:57:27 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/10 16:48:22 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	g_pipe_count(int i)
-{
-	static int	j;
-
-	if (i == -1)
-		return (j);
-	j = i;
-	return (j);
-}
 
 int	g_heredoc_count(int i)
 {

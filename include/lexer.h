@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 11:59:09 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/10 16:08:51 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/10 16:33:20 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		is_splitable_env(char *str);
 t_file	*get_file(t_env *env, char *input, int *index);
 // t_cmd	*get_cmd(t_env *env, char *input, int *index);
 t_cmd	*get_cmd(char *cmd);
-t_file	*creat_arg(char *file_name, t_argument_type type);
+t_file	*creat_arg(char *file_name);
 t_cmd	*ini_cmd(t_env *env);
 
 // lexer

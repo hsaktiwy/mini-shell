@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:37:22 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/09 19:11:56 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/10 16:32:55 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	before_exiting2(void)
 	t_env	*env;
 
 	tokens = g_token_l(NULL);
-	// free_tokens(&tokens);
 	free(g_input_line(NULL));
 	env = g_env_s(NULL);
 	ft_free_env(&env);

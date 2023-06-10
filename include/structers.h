@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:02:18 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/10 16:09:03 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/10 16:39:24 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,8 @@ typedef enum s_arg_type{
 	VARIABLE
 }	t_argument_type;
 
-typedef struct s_argument
-{
-	t_argument_type	arg_type;
-	char			**args;
-}t_arguments;
-
 typedef struct s_file
 {
-	t_argument_type	arg_type;
 	char			*a_file;
 	char			*token_file;
 	int				here_doc_exp;
@@ -82,14 +75,13 @@ typedef struct s_file
 typedef struct s_command
 {
 	char			*cmd;
-	t_argument_type	cmd_type;// this maybe  neeed to be deleted  cmd_type
 	t_list			*arg;
 	size_t			arg_count;
 	int				cmd_in;
 	int				cmd_out;
 	char			*file_in;
 	char			*file_out;
-	t_env			*env;// this maybe  neeed to be deleted env 
+	t_env			*env;
 	int				error;
 }t_cmd;
 
