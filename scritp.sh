@@ -1,1 +1,2 @@
-/usr/bin/printf "%s\n" ***"Mak"'e'** | sort
+exit
+# /usr/bin/printf "%s\n" "."* | sort

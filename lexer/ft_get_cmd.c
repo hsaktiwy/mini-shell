@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:07:28 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/10 16:53:31 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/10 19:00:22 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ t_cmd	*ini_cmd(t_env *env)
 	return (cmd);
 }
 
-int	is_splitable_env(char *str)
-{
-	int	i;
+// int	is_splitable_env(char *str)
+// {
+// 	int	i;
 
-	i = 0;
-	while (str[i] && !iswhitespace(str[i]))
-	{
-		if (str[i] == '$')
-			return (1);
-		i++;
-	}
-	return (0);
-}
+// 	i = 0;
+// 	while (str[i] && !iswhitespace(str[i]))
+// 	{
+// 		if (str[i] == '$')
+// 			return (1);
+// 		i++;
+// 	}
+// 	return (0);
+// }

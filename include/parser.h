@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:31:44 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/08 16:01:21 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/10 19:26:45 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,5 @@ void	get_true_file(t_file *tmp, int *num);
 void	display_ambiguise(t_file	*tmp);
 int		fack_cmd_next_pipe(t_list *current);
 int		isfake_cmd(t_list	*list);
+char	*get_line(void);
 #endif

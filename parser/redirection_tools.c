@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:17:19 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/10 18:41:30 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/10 19:23:23 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	heredoc(char *delimiter, int h_fd, int exp)
 	while (1)
 	{
 		g_heredoc_executing(1);
-		line = readline("> ");
+		line = get_line();
 		if (g_heredoc_executing(-1) && line)
 		{
 			if (!find_delimeter(line, delimiter) && g_heredoc_executing(-1))

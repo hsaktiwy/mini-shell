@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 19:47:47 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/10 16:07:41 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/10 19:27:11 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,20 @@ int	fack_cmd_next_pipe(t_list *current)
 		}
 	}
 	return (0);
+}
+
+char	*get_line(void)
+{
+	char	*line;
+	char	*res;
+
+	if (isatty(STDIN_FILENO))
+		line = readline("> ");
+	else
+	{
+		res = get_next_line(STDIN_FILENO);
+		line = ft_strtrim(res, "\n");
+		free(res);
+	}
+	return (line);
 }

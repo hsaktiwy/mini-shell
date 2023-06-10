@@ -1,10 +1,10 @@
 unset PATH
 ls
 
-unset PATH
-env
+# unset PATH
+# env
 
-env
+# env
 
 export
 

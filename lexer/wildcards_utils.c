@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 15:07:39 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/06 14:21:19 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/10 20:32:44 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,13 @@ int	ft_regx(char *string, char *exp)
 	tmp = string;
 	points = ft_split(exp, '\n');
 	i = -1;
-	while (tmp && *tmp && points[++i])
+	while (tmp && points[++i] && *tmp)
+	{
 		tmp = ft_strstr(tmp, points[i]);
-	if (!tmp)
+		if (tmp)
+			tmp = tmp + ft_strlen(points[i]);
+	}
+	if (!tmp || (!*tmp && points[i]))
 		return (fre_tab(points), 0);
 	corr = check_exp_edge(points, string, exp, i);
 	return (fre_tab(points), corr);
@@ -60,13 +64,16 @@ char	*add_matchs(struct dirent *entry, char *arg, char	*tmp, int *i)
 	char	*res;
 
 	res = arg;
-	if (entry && entry->d_name[0] != '.')
+	if (entry)
 	{
-		if (ft_regx(entry->d_name, tmp))
+		if (entry->d_name[0] != '.' || tmp[0] == '.')
 		{
-			res = str_join(res, ft_strdup("\n"));
-			res = str_join(res, ft_strdup(entry->d_name));
-			(*i)++;
+			if (ft_regx(entry->d_name, tmp))
+			{
+				res = str_join(res, ft_strdup("\n"));
+				res = str_join(res, ft_strdup(entry->d_name));
+				(*i)++;
+			}
 		}
 	}
 	return (res);
