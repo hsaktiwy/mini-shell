@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:46:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/08 20:17:58 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/10 16:54:55 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	handle_command(t_list **tokens, t_env *env, char *input, int *index)
 	*index += input_arg_size(&input[*index]);
 	tmp = ft_strdup(r);
 	tmp = expand_input(env, tmp);
-	token->value = ini_cmd(env);
+	token->value = init_cmd();
 	if (token->value && tmp)
 	{
 		cmd_filer(&token, tmp);

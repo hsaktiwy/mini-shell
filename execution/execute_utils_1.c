@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:59:30 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/09 21:24:58 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/10 17:49:38 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	close_pipe(t_list *cmd, t_fd *fd)
 		if (close(fd->fd[1]) == -1)
 			perror("minishell: close");
 	}
-	if (fd->old_fd > 0)
+	if (fd->old_fd != -1)
 	{
 		if (close(fd->old_fd) == -1)
 			perror("minishell: close");

@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:35:46 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/07 23:54:08 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/10 18:23:32 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define BUILTINS_H
 
 # include "minishell.h"
+
+# define PATH_MAX 4096
 
 int		ft_echo(t_cmd *command);
 int		ft_cd(t_cmd *command);

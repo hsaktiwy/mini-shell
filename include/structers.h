@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structers.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:02:18 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/09 16:49:33 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/10 16:50:16 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ typedef struct s_command
 	int				cmd_out;
 	char			*file_in;
 	char			*file_out;
-	t_env			*env;// this maybe  neeed to be deleted env 
 	int				error;
 }t_cmd;
 

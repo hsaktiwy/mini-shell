@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 14:11:29 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/09 16:46:20 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/10 16:55:22 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	add_fake_cmd(t_list **tokens, int cmd)
 		if (!fake_cmd)
 			return ;
 		fake_cmd->type = COMMAND;
-		fake_cmd->value = ini_cmd(g_env_s(NULL));
+		fake_cmd->value = init_cmd();
 		ft_lstadd_back(tokens, ft_lstnew(fake_cmd));
 	}
 }

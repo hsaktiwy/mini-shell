@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/09 19:41:16 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/10 18:10:50 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ int	ft_forking(t_list *cmd, t_list *list, t_fd *fd, t_execve_params *ep)
 		restore_signals_in_child();
 		dup_stdin_and_stdout(cmd, fd);
 		dup_redirections(cmd);
-		execb2(cmd, list);
 		close_open_fds(list);
+		execb2(cmd, list);
 		exec_c(ep, g_env_s(NULL));
 	}
 	wait_4_last_command(cmd, pid);

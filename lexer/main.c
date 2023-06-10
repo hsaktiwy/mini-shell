@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/09 21:32:51 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/10 17:10:02 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ char	*get_input(void)
 		input = ft_strtrim(line, " \t\v\n");
 		free(line);
 	}
+	g_input_line(input);
 	return (input);
 }
 
@@ -140,7 +141,6 @@ int	main(__attribute__((unused)) int ac,
 			add_history(input);
 			// input = expand_input(env_s, input);
 			//printf("our input : %s\n", input);
-			g_input_line(input);
 			if (check_redirection(input))
 				main2(input, env_s);
 		}

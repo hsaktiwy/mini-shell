@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:07:28 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/04 21:16:06 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/10 17:08:42 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-t_cmd	*ini_cmd(t_env *env)
+t_cmd	*init_cmd(void)
 {
 	t_cmd	*cmd;
 
@@ -26,7 +26,6 @@ t_cmd	*ini_cmd(t_env *env)
 	cmd->cmd_out = STDOUT_FILENO;
 	cmd->file_in = NULL;
 	cmd->file_out = NULL;
-	cmd->env = env;
 	cmd->error = 0;
 	return (cmd);
 }
