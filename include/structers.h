@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:02:18 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/10 16:50:16 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/10 23:51:16 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,6 @@ typedef enum types{
 	HERE_DOC,
 	APPEND_REDIRECT,
 }t_token_type;
-
-// // Grammar types 	// INPUT,
-// typedef enum g_types{
-// 	G_COMMAND,
-// 	S_COMMAND,
-// 	PIPELINE,
-// 	G_PIPE,
-// 	REDIRECTION,
-// 	CMD,
-// }t_g_types;
 
 // envirement variable
 typedef struct s_holder
@@ -75,15 +65,8 @@ typedef enum s_arg_type{
 	VARIABLE
 }	t_argument_type;
 
-typedef struct s_argument
-{
-	t_argument_type	arg_type;
-	char			**args;
-}t_arguments;
-
 typedef struct s_file
 {
-	t_argument_type	arg_type;
 	char			*a_file;
 	char			*token_file;
 	int				here_doc_exp;
@@ -92,7 +75,6 @@ typedef struct s_file
 typedef struct s_command
 {
 	char			*cmd;
-	t_argument_type	cmd_type;// this maybe  neeed to be deleted  cmd_type
 	t_list			*arg;
 	size_t			arg_count;
 	int				cmd_in;

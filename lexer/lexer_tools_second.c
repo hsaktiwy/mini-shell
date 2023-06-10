@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 19:09:08 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/08 20:18:19 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/10 16:45:20 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,13 @@ void	handle_arg_helper(char *file, t_token **cmd)
 		if (!*file)
 		{
 			ft_lstadd_back(&(((t_cmd *)(*cmd)->value)->arg),
-				ft_lstnew(creat_arg(ft_strdup(""), WORD)));
+				ft_lstnew(creat_arg(ft_strdup(""))));
 			return ;
 		}
 		tab = ft_split(file, '\n');
 		while (tab[++i])
 			ft_lstadd_back(&(((t_cmd *)(*cmd)->value)->arg),
-				ft_lstnew(creat_arg(tab[i], WORD)));
+				ft_lstnew(creat_arg(tab[i])));
 		free(tab);
 	}
 }
@@ -105,8 +105,7 @@ void	handle_command_helper(t_cmd **cmd, char *args)
 		tab = ft_split(args, '\n');
 		(*cmd)->cmd = tab[0];
 		while (tab[++i])
-			ft_lstadd_back(&((*cmd)->arg), ft_lstnew(creat_arg(tab[i], WORD)));
-		(*cmd)->cmd_type = WORD;
+			ft_lstadd_back(&((*cmd)->arg), ft_lstnew(creat_arg(tab[i])));
 		free(tab);
 	}
 }

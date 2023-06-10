@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 14:11:29 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/10 16:55:22 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/10 23:50:41 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 void	lexer_err(char *str)
 {
-	ft_putstr_fd("\33[33mParse Error near: \33[00m\33[30m", 2);
-	ft_putstr_fd(str, 2);
-	ft_putstr_fd("\33[00m\n", 2);
+	ft_putstr_fd("\33[33mParse Error near: \33[00m\33[30m",
+		STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd("\33[00m\n", STDERR_FILENO);
 }
 
 char	*here_doc_name(char *common, int nbr)
@@ -36,7 +37,7 @@ int	get_start(char *str)
 	char	*res;
 	char	c;
 
-	c= '\0';
+	c = '\0';
 	i = 0;
 	res = ft_strdup("");
 	surpace_whitesspaces(str, &i);

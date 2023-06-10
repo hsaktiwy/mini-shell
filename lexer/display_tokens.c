@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 18:07:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/07 20:30:46 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/10 16:34:21 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,11 @@ void	display_tokens(t_list	*tokens)
 			printf("	type : COMMOND\n");
 			printf("		CMD : |%s|\n", ((t_cmd *)token->value)->cmd);
 			t_list 	*arg = ((t_cmd *)token->value)->arg;
-			printf("	CMD type cmd(token) = %d\n", ((t_cmd *)(token->value))->cmd_type);
 			printf("	CMD count arg = %zu\n", ((t_cmd *)(token->value))->arg_count);
 			printf("		Data :");
 			while (arg)
 			{
-				printf("|%s|->[%d]",(char *)((t_file *)arg->content)->a_file,
-					(int)((t_file *)arg->content)->arg_type);
+				printf("|%s|->",(char *)((t_file *)arg->content)->a_file);
 				arg = arg->next;
 			}
 			printf("\n");

@@ -6,7 +6,7 @@
 #    By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 13:01:11 by hsaktiwy          #+#    #+#              #
-#    Updated: 2023/06/09 21:22:17 by aigounad         ###   ########.fr        #
+#    Updated: 2023/06/10 23:46:25 by aigounad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ PARSER = parser.c parser_tools.c redirection.c redirection_tools.c redirection_s
 
 BUILTINS = cd.c pwd.c echo.c export.c env.c unset.c exit.c common.c
 
-LEXER = main.c ft_get_cmd.c ft_next_arg.c expand_var.c expand_var_tools.c ft_lstfree_t_file.c display_tokens.c \
-		expand.c lexer.c lexer_tools.c expanding_issue.c free_token.c global_functions.c wildcards.c lexer_utils.c \
+LEXER = main.c ft_get_cmd.c ft_next_arg.c expand_var.c expand_var_tools.c display_tokens.c \
+		expand.c lexer.c lexer_tools.c free_token.c global_functions.c wildcards.c lexer_utils.c \
 		lexer_second_utils.c wildcards_utils.c wildcards_second_utils.c global_functions_second.c expand_input.c lexer_tools_second.c \
 		expand_input_tools.c tools.c
 

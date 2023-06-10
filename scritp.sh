@@ -1,13 +1,2 @@
-"           " # pwd
-cat xxx
-ls llll
-/
-# |
-# ><
-xxx
-.
-<ssss
-<| test
-jjjjj
-|
-ls
+exit
+# /usr/bin/printf "%s\n" "."* | sort

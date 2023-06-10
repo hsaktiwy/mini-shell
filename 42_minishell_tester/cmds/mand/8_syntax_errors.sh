@@ -98,7 +98,11 @@ your minishell is perfect
 >>| echo wtf
 
 # >| echo wtf
+<<<<<<< HEAD:42_minishell_tester/cmds/bonus/8_syntax_errors.sh
 /bin/rm -rf echo
+=======
+# /bin/rm -rf echo
+>>>>>>> main:42_minishell_tester/cmds/mand/8_syntax_errors.sh
 
 <| echo wtf
 

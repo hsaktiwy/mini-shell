@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:46:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/10 16:54:55 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/10 23:50:49 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	handle_pipe(t_list **tokens, int *index, int *cmd)
 	add_fake_cmd(tokens, *cmd);
 	token->type = PIPE;
 	token->value = NULL;
-	g_pipe_count(g_pipe_count(-1) + 1);
 	ft_lstadd_back(tokens, ft_lstnew(token));
 	(*index)++;
 	*cmd = 0;

@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 20:44:05 by aigounad          #+#    #+#             */
-/*   Updated: 2023/05/27 22:01:56 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/10 16:37:24 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,20 +93,3 @@ char	*get_next_line(int fd)
 	strs = ft_reject(strs);
 	return (line);
 }
-
-// #include <fcntl.h>
-// #include <stdio.h>
-// int main()
-// {
-// 	char *line;
-// 	int fd = open("/Users/aigounad/Desktop/myshell42/Makefile", O_RDONLY, 0666);
-// 	printf("fd = %d| buf = %d\n", fd, BUFFER_SIZE);
-// 	line = get_next_line(fd);
-// 		printf("%s", line);
-// 		return (0);
-// 	while ((line = get_next_line(fd)))
-// 	{
-// 		printf("%s", line);
-// 		free(line);
-// 	}
-// }

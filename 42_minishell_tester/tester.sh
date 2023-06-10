@@ -3,8 +3,8 @@
 # Change if you store the tester in another PATH
 export MINISHELL_PATH=../
 export EXECUTABLE=minishell
-RUNDIR=$HOME/Desktop/myshell42/42_minishell_tester
-# RUNDIR=$HOME/mini-shell/42_minishell_tester
+# RUNDIR=$HOME/Desktop/myshell42/42_minishell_tester
+RUNDIR=$HOME/mini-shell/42_minishell_tester
 
 NL=$'\n'
 TAB=$'\t'

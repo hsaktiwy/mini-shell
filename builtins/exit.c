@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 19:06:50 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/09 18:35:14 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/10 20:48:56 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	ft_exit(t_cmd *command, t_list *list)
 
 	do_exit = 1;
 	status = g_exit_status;
-	if (ft_lstsize(list) == 1)
+	if (ft_lstsize(list) == 1 && g_script_mode(-1) == 0)
 		write(STDERR_FILENO, "exit\n", 5);
 	if (command->arg_count != 0)
 	{

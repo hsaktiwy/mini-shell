@@ -2,12 +2,12 @@
 #                                   WILDCARDS                                  #
 # **************************************************************************** #
 
-/usr/bin/printf "%s\n" * | sort
+/usr/bin/printf "%s\n" * | sort # valide
 
 export ARG="*"
 /usr/bin/printf "%s\n" $ARG | sort
 
-ls *
+ls *	#valide
 ls 'test'*
 ls "test"*
 
@@ -31,9 +31,9 @@ rm "a" "aa" "aaa"
 
 /usr/bin/printf "%s\n" "Mak"'e'** | sort
 
-/usr/bin/printf "%s\n" ***"Mak"'e'** | sort
+/usr/bin/printf "%s\n" ***"Mak"'e'** | sort #valide
 
-/usr/bin/printf "%s\n" "."* | sort
+/usr/bin/printf "%s\n" "."* | sort #valide
 
 /usr/bin/printf "%s\n" *"." | sort
 
