@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 14:11:29 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/09 16:46:20 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/10 16:06:35 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	get_start(char *str)
 	char	*res;
 	char	c;
 
-	c= '\0';
+	c = '\0';
 	i = 0;
 	res = ft_strdup("");
 	surpace_whitesspaces(str, &i);

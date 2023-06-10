@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:02:18 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/09 16:49:33 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/10 16:09:03 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,6 @@ typedef enum types{
 	HERE_DOC,
 	APPEND_REDIRECT,
 }t_token_type;
-
-// // Grammar types 	// INPUT,
-// typedef enum g_types{
-// 	G_COMMAND,
-// 	S_COMMAND,
-// 	PIPELINE,
-// 	G_PIPE,
-// 	REDIRECTION,
-// 	CMD,
-// }t_g_types;
 
 // envirement variable
 typedef struct s_holder

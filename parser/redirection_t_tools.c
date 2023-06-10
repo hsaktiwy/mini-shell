@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_t_tools.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 19:47:47 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/08 17:29:27 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/10 16:07:41 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,3 @@ int	fack_cmd_next_pipe(t_list *current)
 	}
 	return (0);
 }
-	
