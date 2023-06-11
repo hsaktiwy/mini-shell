@@ -6,34 +6,13 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/10 23:50:22 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/11 00:51:03 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	g_exit_status;
-
-void	set_signal_handlers()
-{
-	// rl_catch_signals = 0;
-
-	signal(SIGINT, signal_handler);
-	signal(SIGQUIT, signal_handler);
-	signal(SIGTSTP, SIG_IGN);
-}
-
-void	restore_stdin(void)
-{
-	if (!isatty(STDIN_FILENO) && g_stdin_fd(-1) != 0)
-	{
-		if (dup2(g_stdin_fd(-1), STDIN_FILENO) == -1)
-			perror("minishell: dup2");
-		if (close(g_stdin_fd(-1)) == -1)
-			perror("minishell: close");
-	}
-	g_stdin_fd(0);
-}
 
 void	main2(char *data, t_env *env)
 {
@@ -60,23 +39,7 @@ void	main2(char *data, t_env *env)
 	free_tokens(&tokens);
 }
 
-char	*get_input(void)
-{
-	char	*input;
-	char	*line;
 
-	if (isatty(STDIN_FILENO))
-		line = readline("minibash-3.2$ ");
-	else
-	{
-		g_script_mode(1);
-		line = get_next_line(STDIN_FILENO);
-	}
-	input = ft_strtrim(line, " \t\v\f\r\n");
-	free(line);
-	g_input_line(input);
-	return (input);
-}
 
 int	main(__attribute__((unused)) int ac, __attribute__((unused)) char **av,
 		char **env)

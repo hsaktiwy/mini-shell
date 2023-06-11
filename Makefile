@@ -6,11 +6,12 @@
 #    By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 13:01:11 by hsaktiwy          #+#    #+#              #
-#    Updated: 2023/06/10 23:46:25 by aigounad         ###   ########.fr        #
+#    Updated: 2023/06/11 01:08:08 by aigounad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
+
 FSAN = -fsanitize=address
 # FLAGS = -Wall -Wextra -Werror -g -I/Users/hsaktiwy/.brew/opt/readline/include -I$(INCLUDE_DIR) $(FSAN)
 FLAGS = -Wall -Wextra -Werror -g -I/Users/aigounad/.brew/opt/readline/include -I$(INCLUDE_DIR) $(FSAN)
@@ -26,15 +27,16 @@ PARSER = parser.c parser_tools.c redirection.c redirection_tools.c redirection_s
 
 BUILTINS = cd.c pwd.c echo.c export.c env.c unset.c exit.c common.c
 
-LEXER = main.c ft_get_cmd.c ft_next_arg.c expand_var.c expand_var_tools.c display_tokens.c \
-		expand.c lexer.c lexer_tools.c free_token.c global_functions.c wildcards.c lexer_utils.c \
-		lexer_second_utils.c wildcards_utils.c wildcards_second_utils.c global_functions_second.c expand_input.c lexer_tools_second.c \
+LEXER = ft_get_cmd.c ft_next_arg.c expand_var.c expand_var_tools.c display_tokens.c \
+		expand.c lexer.c lexer_tools.c free_token.c wildcards.c lexer_utils.c \
+		lexer_second_utils.c wildcards_utils.c wildcards_second_utils.c expand_input.c lexer_tools_second.c \
 		expand_input_tools.c tools.c
 
-EXEC = execute.c execute_utils_1.c execute_utils_2.c execute_utils_3.c execute_utils_4.c builtin_execution.c
+EXEC = main.c main_utils.c execute.c execute_utils_1.c execute_utils_2.c execute_utils_3.c execute_utils.c builtin_execution.c static_functions.c static_functions_1.c
 
 OBJ = $(LEXER:%.c=obj/lexer/%.o) $(BUILTINS:%.c=obj/builtins/%.o) $(ENV:%.c=obj/environment/%.o)  \
 		$(LIBFT:%.c=obj/libft/%.o) $(PARSER:%.c=obj/parser/%.o) $(EXEC:%.c=obj/execution/%.o)
+
 HEADER = include/minishell.h include/structers.h
 NAME = minishell
 INCLUDE_DIR = ./include

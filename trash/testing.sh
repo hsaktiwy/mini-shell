@@ -240,3 +240,21 @@ previously allocated by thread T0 here:
 
 
 // test leals in script mode
+
+
+minibash-3.2$ 
+exit
+
+=================================================================
+==11131==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 560 byte(s) in 10 object(s) allocated from:
+    #0 0x7f17edee2867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+    #1 0x5613dc219ff2 in init_cmd lexer/ft_get_cmd.c:19
+    #2 0x5613dc21f611 in handle_command lexer/lexer_tools.c:86
+    #3 0x5613dc21e9c1 in lexer lexer/lexer.c:108
+    #4 0x5613dc2199c0 in main2 lexer/main.c:50
+    #5 0x5613dc219f30 in main lexer/main.c:129
+    #6 0x7f17edbdbd8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+SUMMARY: AddressSanitizer: 560 byte(s) leaked in 10 allocation(s).

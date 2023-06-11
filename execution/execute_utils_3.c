@@ -1,96 +1,95 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_utils_3.c                                  :+:      :+:    :+:   */
+/*   find_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/24 15:37:22 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/10 23:48:05 by aigounad         ###   ########.fr       */
+/*   Created: 2023/05/24 15:38:32 by aigounad          #+#    #+#             */
+/*   Updated: 2023/06/01 18:54:46 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	get_name_of_signal(int sig)
+void	ft_init_fd(t_fd *fd, int *get_exit)
 {
-	if (sig == 2)
-		ft_putstr_fd("\n", STDERR_FILENO);
-	if (sig == 3)
-		ft_putstr_fd("Quit: 3\n", STDERR_FILENO);
-	if (sig == 6)
-		ft_putstr_fd("Aborted\n", STDERR_FILENO);
-	if (sig == 7)
-		ft_putstr_fd("Bus error\n", STDERR_FILENO);
-	if (sig == 8)
-		ft_putstr_fd("Floating point exception\n", STDERR_FILENO);
-	if (sig == 9)
-		ft_putstr_fd("\n", STDERR_FILENO);
-	if (sig == 10)
-		ft_putstr_fd("User-defined signal 1\n", STDERR_FILENO);
-	if (sig == 11)
-		ft_putstr_fd("Segmentation fault: 11\n", STDERR_FILENO);
-	if (sig == 12)
-		ft_putstr_fd("User-defined signal 2\n", STDERR_FILENO);
-	if (sig == 13)
-		ft_putstr_fd("Broken pipe\n", STDERR_FILENO);
-	if (sig == 14)
-		ft_putstr_fd("Alarm clock\n", STDERR_FILENO);
-	if (sig == 15)
-		ft_putstr_fd("Terminated\n", STDERR_FILENO);
+	*get_exit = 1;
+	fd->fd[0] = -1;
+	fd->fd[1] = -1;
 }
 
-void	restore_signals_in_child(void)
+static void	free_tab(char **pp)
 {
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
-}
+	int	i;
 
-void	signal_handler(int sig)
-{
-	int	fd;
-
-	if (sig == SIGINT)
+	i = 0;
+	while (pp[i])
 	{
-		if (g_heredoc_executing(-1))
-		{
-			printf("^C");
-			fd = dup(STDIN_FILENO);
-			close(STDIN_FILENO);
-			g_cmd_executing(-2);
-			g_stdin_fd(fd);
-		}
-		else if (g_cmd_executing(-1) == 0)
-		{
-			printf("\n");
-			rl_on_new_line();
-			rl_replace_line("", 0);
-			rl_redisplay();
-		}
-		g_exit_status = 1;
+		free(pp[i++]);
 	}
+	free(pp);
 }
 
-void	script_line(void)
+void	append_filename(char *filename, char *path, char *des)
 {
-	if (g_script_mode(-1))
+	int		j;
+	int		k;
+
+	j = -1;
+	while (path[++j])
+		des[j] = path[j];
+	if (des[j - 1] != '/')
+		des[j++] = '/';
+	k = 0;
+	while (filename[k])
+		des[j++] = filename[k++];
+	des[j] = 0;
+}
+
+int	is_a_directory(char *filename)
+{
+	struct stat	file_info;
+
+	if (stat(filename, &file_info) == 0)
 	{
-		write(STDERR_FILENO, "line ", 5);
-		ft_putnbr_fd(g_script_mode(-1), STDERR_FILENO);
-		write(STDERR_FILENO, ": ", 2);
+		if (S_ISDIR(file_info.st_mode))
+			return (1);
+		else if (S_ISREG(file_info.st_mode))
+			return (2);
 	}
+	else
+	{
+		return (-1);
+		perror("minishell: stat");
+	}
+	return (0);
 }
 
-void	before_exiting2(void)
+char	*findcmd(char *filename)
 {
-	t_list	*tokens;
-	t_env	*env;
+	char	**paths;
+	char	path[4096];
+	int		i;
 
-	tokens = g_token_l(NULL);
-	free_tokens(&tokens);
-	free(g_input_line(NULL));
-	env = g_env_s(NULL);
-	ft_free_env(&env);
-	rl_clear_history();
-	exit(2);
+	if (is_builtin(filename) || ft_strchr(filename, '/')
+		|| !ft_getenv(g_env_s(NULL), "PATH"))
+		return (ft_strdup(filename));
+	if (ft_strcmp(filename, ".") == 0 || (ft_strcmp(filename, "..") == 0)
+		|| !*filename)
+		return (NULL);
+	paths = ft_split(ft_getenv(g_env_s(NULL), "PATH"), ':');
+	if (!paths)
+		return (NULL);
+	i = -1;
+	while (paths[++i])
+	{
+		if (!*(paths[i]))
+			continue ;
+		append_filename(filename, paths[i], path);
+		if (access(path, 0) == 0)
+			return (free_tab(paths), ft_strdup(path));
+	}
+	free_tab(paths);
+	return (NULL);
 }

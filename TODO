@@ -1,4 +1,7 @@
-# TODO: remove extern keyword 
+# TODO: remove extern keyword
+# TODO: uncomment rl_cach_signals
+# TODO: remove display tokens
+# TODO: remove testers
 # TODO: check all files and remove comments
 # TODO: check leaks
 # TODO: delete unneeded directories and files

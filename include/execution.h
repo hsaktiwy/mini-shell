@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:06:48 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/09 21:31:17 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/11 00:59:19 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,14 @@ void	ft_init_fd(t_fd *fd, int *get_exit);
 void	sort_env_list(t_list *head);
 char	*shell_init_pwd(char *pwd, int stat);
 int		is_a_directory(char *filename);
-void	signal_handler(int sig);
+//
 void	script_line(void);
 void	before_exiting2(void);
+//main
+void	signal_handler(int sig);
+char	*get_prompt(void);
+char	*get_input(void);
+void	restore_stdin(void);
+void	set_signal_handlers(void);
 
 #endif

@@ -1,81 +1,117 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_utils_1.c                                  :+:      :+:    :+:   */
+/*   execute_utils_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/24 15:59:30 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/10 17:49:38 by aigounad         ###   ########.fr       */
+/*   Created: 2023/05/24 15:31:17 by aigounad          #+#    #+#             */
+/*   Updated: 2023/06/09 18:11:54 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	save_cmd(t_execve_params *ep, t_env *env)
+void	exec_c(t_execve_params *execve_params, t_env *env)
 {
-	char	**args;
-
-	if (!ep->args || !*(ep->args))
-		ft_setenv(&env, "_", ep->path);
+	execve(execve_params->path, execve_params->args, env->env);
+	write(2, "minishell: ", 11);
+	script_line();
+	if (errno == ENOENT)
+	{
+		perror(execve_params->path);
+		exit(127);
+	}
 	else
 	{
-		args = ep->args;
-		while (*args)
+		if (errno == EACCES && is_a_directory(execve_params->path) == 1)
 		{
-			if (!*(args + 1))
-				ft_setenv(&env, "_", *args);
-			args++;
+			write(STDERR_FILENO, execve_params->path,
+				ft_strlen(execve_params->path));
+			write(STDERR_FILENO, ": is a directory\n", 17);
 		}
+		else
+			perror(execve_params->path);
+		exit(126);
 	}
 }
 
-void	close_pipe(t_list *cmd, t_fd *fd)
+void	ft_piping(t_list *cmd, t_fd *fd)
 {
 	if (cmd->next)
-	{
-		if (close(fd->fd[1]) == -1)
-			perror("minishell: close");
-	}
+		if (pipe(fd->fd) == -1)
+			perror("minishell: pipe");
+}
+
+void	dup_stdin_and_stdout(t_list *cmd, t_fd *fd)
+{
 	if (fd->old_fd != -1)
 	{
+		if (dup2(fd->old_fd, STDIN_FILENO) == -1)
+			perror("minishell: dup2");
 		if (close(fd->old_fd) == -1)
 			perror("minishell: close");
 	}
-}
-
-void	wait_4_last_command(t_list *cmd, pid_t pid)
-{
-	if (pid == -1)
-		return ;
-	if (!(cmd->next))
+	if (cmd->next)
 	{
-		if (waitpid(pid, &g_exit_status, 0) == -1)
-			perror("minishell: waitpid");
+		if (close(fd->fd[0]) == -1)
+			perror("minishell: close");
+		dup2(fd->fd[1], STDOUT_FILENO);
+		if (close(fd->fd[1]) == -1)
+			perror("minishell: close");
 	}
 }
 
-void	command_not_found(t_list *cmd, int *get_exit)
+void	dup_redirections(t_list *cmd)
 {
-	char	*p;
-	char	*error1;
-	char	*error2;
+	char	*file;
+	int		fd;
 
-	write(STDERR_FILENO, "minishell: ", 11);
-	script_line();
-	p = ((t_cmd *)((t_token *)(cmd->content))->value)->cmd;
-	if (ft_strcmp(p, ".") == 0)
+	file = ((t_cmd *)(((t_token *)(cmd->content))->value))->file_out;
+	if (file)
 	{
-		error1 = ".: filename argument required\n";
-		error2 = ".: usage: . filename [arguments]\n";
-		write(STDERR_FILENO, error1, 30);
-		write(STDERR_FILENO, error2, 33);
-		g_exit_status = 2;
-		*get_exit = 0;
-		return ;
+		fd = ((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_out;
+		if (dup2(fd, STDOUT_FILENO) == -1)
+			perror("minishell: dup2");
 	}
-	write(STDERR_FILENO, p, ft_strlen(p));
-	write(STDERR_FILENO, ": command not found\n", 20);
-	*get_exit = 0;
-	g_exit_status = 127;
+	file = ((t_cmd *)(((t_token *)(cmd->content))->value))->file_in;
+	if (file)
+	{
+		if (ft_strncmp(file, "/tmp/.here_doc", 9) == 0)
+		{
+			fd = open(file, O_RDONLY, 0666);
+			if (fd == -1)
+				perror("minishell: open");
+			((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_in = fd;
+		}
+		else
+			fd = ((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_in;
+		if (dup2(fd, STDIN_FILENO) == -1)
+			perror("minishell: dup2");
+	}
+}
+
+char	**get_args(t_list *list)
+{
+	char	**args;
+	size_t	size;
+	t_list	*arg_list;
+	char	*curr_arg;
+	size_t	index;
+
+	size = 1 + ((t_cmd *)((t_token *)(list->content))->value)->arg_count;
+	args = malloc(sizeof(char *) * (size + 1));
+	if (!args)
+		return (perror("minishell: malloc"), NULL);
+	arg_list = ((t_cmd *)((t_token *)(list->content))->value)->arg;
+	index = 0;
+	args[index++] = ((t_cmd *)((t_token *)(list->content))->value)->cmd;
+	while (arg_list)
+	{
+		curr_arg = ((t_file *)(arg_list->content))->a_file;
+		args[index++] = curr_arg;
+		arg_list = arg_list->next;
+	}
+	args[index] = 0;
+	return (args);
 }
