@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/10 18:10:50 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/11 05:24:29 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ void	close_open_fds(t_list *list)
 
 	while (list)
 	{
-		if (((t_cmd *)(((t_token *)(list->content))->value))->cmd_in != 0)
+		if (((t_cmd *)(list->content))->cmd_in != 0)
 		{
-			fd = ((t_cmd *)(((t_token *)(list->content))->value))->cmd_in;
+			fd = ((t_cmd *)(list->content))->cmd_in;
 			if (close(fd) == -1)
 				perror("minishell: close");
 		}
-		if (((t_cmd *)(((t_token *)(list->content))->value))->cmd_out != 1)
+		if (((t_cmd *)(list->content))->cmd_out != 1)
 		{
-			fd = ((t_cmd *)(((t_token *)(list->content))->value))->cmd_out;
+			fd = ((t_cmd *)(list->content))->cmd_out;
 			if (close(fd) == -1)
 				perror("minishell: close");
 		}
@@ -77,10 +77,9 @@ int	execute_2(t_list *cmd, t_list *list, int *get_exit, t_fd *fd)
 	t_execve_params	ep;
 
 	ft_piping(cmd, fd);
-	if (((t_cmd *)(((t_token *)(cmd->content))->value))->cmd
-		&& !(((t_cmd *)(((t_token *)(cmd->content))->value))->error))
+	if (((t_cmd *)(cmd->content))->cmd && !((t_cmd *)(cmd->content))->error)
 	{
-		ep.path = findcmd(((t_cmd *)((t_token *)(cmd->content))->value)->cmd);
+		ep.path = findcmd(((t_cmd *)(cmd->content))->cmd);
 		ep.args = get_args(cmd);
 		save_cmd(&ep, g_env_s(NULL));
 		if (!ep.path)
@@ -95,7 +94,7 @@ int	execute_2(t_list *cmd, t_list *list, int *get_exit, t_fd *fd)
 		free(ep.args);
 	}
 	close_pipe(cmd, fd);
-	if ((((t_cmd *)(((t_token *)(cmd->content))->value))->error) && !cmd->next)
+	if ((((t_cmd *)(cmd->content))->error) && !cmd->next)
 		return (*get_exit = 0, g_exit_status = 1, 0);
 	return (0);
 }
@@ -107,10 +106,7 @@ void	execute(t_list *list)
 	t_fd	fd;
 
 	if (g_cmd_executing(-1) == -2)
-	{
-		g_exit_status = 1;
-		return (g_cmd_executing(0), ft_void());
-	}
+		return (g_exit_status = 1, g_cmd_executing(0), ft_void());
 	curr_cmd = list;
 	ft_init_fd(&fd, &get_exit);
 	while (curr_cmd)

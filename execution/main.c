@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/11 00:51:03 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/11 07:18:47 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	main2(char *data, t_env *env)
 		lexer(&tokens, data, env);
 	if (err_lex == -1)
 	{
+		g_token_l(tokens);
 		ini_arg_count(&tokens);
 		list = parser(&tokens, data);
-		g_token_l(tokens);
 		if (list)
 			execute(list);
 		ft_lstclear(&list, NULL);
@@ -40,6 +40,10 @@ void	main2(char *data, t_env *env)
 }
 
 
+// void	l(void)
+// {
+// 	system("leaks minishell");
+// }
 
 int	main(__attribute__((unused)) int ac, __attribute__((unused)) char **av,
 		char **env)
@@ -51,6 +55,7 @@ int	main(__attribute__((unused)) int ac, __attribute__((unused)) char **av,
 	env_s = ft_init_env(env);
 	////////////////////////////////////////////
 	//this part is for tester
+	// atexit(l);
 	if (ac == 3)
 	{
 		if (ft_strcmp(av[1], "-c") == 0)
@@ -87,7 +92,7 @@ int	main(__attribute__((unused)) int ac, __attribute__((unused)) char **av,
 		}
 		if (input && input[0] && input[0] != '#')
 		{
-			add_history(input);
+			// add_history(input);
 			if (check_redirection(input))
 				main2(input, env_s);
 		}

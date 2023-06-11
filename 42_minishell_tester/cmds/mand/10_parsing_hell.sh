@@ -29,25 +29,25 @@ echo '' -n
 
 echo "" "" "" -n -n -n -n
 
-# cat << $USER
-# why
-# not
-# $USER
+cat << $USER
+why
+not
+$USER
 
 export T=">>"
 $T lol
 
-# cat << "$USER"
-# why
-# not
-# $USER
+cat << "$USER"
+why
+not
+$USER
 
-# cat << "$US"E"R"
-# because
-# we
-# love
-# bash
-# $USER
+cat << "$US"E"R"
+because
+we
+love
+bash
+$USER
 
 >> $HOME
 
@@ -295,9 +295,9 @@ echo $/"$/"
 
 echo '$/'
 
-# exit 9223372036854775805
+exit 9223372036854775805
 
-# exit 123"123"
+exit 123"123"
 
 # <| echo ok
 

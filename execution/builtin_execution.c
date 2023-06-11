@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:27:40 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/08 23:20:59 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/11 07:20:13 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,9 @@ void	execb2(t_list *cmd, t_list *list)
 {
 	int	status;
 
-	if (is_builtin(((t_cmd *)(((t_token *)(cmd->content))->value))->cmd))
+	if (is_builtin(((t_cmd *)(cmd->content))->cmd))
 	{
-		status = exec_builtin((t_cmd *)(((t_token *)(cmd->content))->value),
-				list);
+		status = exec_builtin(((t_cmd *)(cmd->content)), list);
 		exit(status);
 	}
 }
@@ -59,17 +58,13 @@ void	execb2(t_list *cmd, t_list *list)
 int	execb1(t_list *cmd, t_list *list, int *get_exit, t_execve_params *ep)
 {
 	size_t	n_commands;
-	char	*cmd_name;
-	t_cmd	*command;
 
 	n_commands = ft_lstsize(list);
-	cmd_name = ((t_cmd *)(((t_token *)(cmd->content))->value))->cmd;
-	if (is_builtin(cmd_name) && n_commands == 1)
+	if (is_builtin(((t_cmd *)(cmd->content))->cmd) && n_commands == 1)
 	{
 		free(ep->args);
 		free(ep->path);
-		command = (t_cmd *)(((t_token *)(cmd->content))->value);
-		g_exit_status = exec_builtin(command, list);
+		g_exit_status = exec_builtin(((t_cmd *)(cmd->content)), list);
 		*get_exit = 0;
 		return (1);
 	}

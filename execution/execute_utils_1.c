@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_utils_2.c                                  :+:      :+:    :+:   */
+/*   execute_utils_1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:31:17 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/09 18:11:54 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/11 05:19:46 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,14 @@ void	dup_redirections(t_list *cmd)
 	char	*file;
 	int		fd;
 
-	file = ((t_cmd *)(((t_token *)(cmd->content))->value))->file_out;
+	file = ((t_cmd *)(cmd->content))->file_out;
 	if (file)
 	{
-		fd = ((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_out;
+		fd = ((t_cmd *)(cmd->content))->cmd_out;
 		if (dup2(fd, STDOUT_FILENO) == -1)
 			perror("minishell: dup2");
 	}
-	file = ((t_cmd *)(((t_token *)(cmd->content))->value))->file_in;
+	file = ((t_cmd *)(cmd->content))->file_in;
 	if (file)
 	{
 		if (ft_strncmp(file, "/tmp/.here_doc", 9) == 0)
@@ -82,10 +82,10 @@ void	dup_redirections(t_list *cmd)
 			fd = open(file, O_RDONLY, 0666);
 			if (fd == -1)
 				perror("minishell: open");
-			((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_in = fd;
+			((t_cmd *)(cmd->content))->cmd_in = fd;
 		}
 		else
-			fd = ((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_in;
+			fd = ((t_cmd *)(cmd->content))->cmd_in;
 		if (dup2(fd, STDIN_FILENO) == -1)
 			perror("minishell: dup2");
 	}
@@ -99,13 +99,13 @@ char	**get_args(t_list *list)
 	char	*curr_arg;
 	size_t	index;
 
-	size = 1 + ((t_cmd *)((t_token *)(list->content))->value)->arg_count;
+	size = 1 + ((t_cmd *)(list->content))->arg_count;
 	args = malloc(sizeof(char *) * (size + 1));
 	if (!args)
 		return (perror("minishell: malloc"), NULL);
-	arg_list = ((t_cmd *)((t_token *)(list->content))->value)->arg;
+	arg_list = ((t_cmd *)(list->content))->arg;
 	index = 0;
-	args[index++] = ((t_cmd *)((t_token *)(list->content))->value)->cmd;
+	args[index++] = ((t_cmd *)(list->content))->cmd;
 	while (arg_list)
 	{
 		curr_arg = ((t_file *)(arg_list->content))->a_file;

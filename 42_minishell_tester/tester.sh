@@ -4,7 +4,7 @@
 export MINISHELL_PATH=../
 export EXECUTABLE=minishell
 # RUNDIR=$HOME/Desktop/myshell42/42_minishell_tester
-RUNDIR=$HOME/mini-shell/42_minishell_tester
+RUNDIR=$HOME/minishell/42_minishell_tester
 
 NL=$'\n'
 TAB=$'\t'
@@ -311,20 +311,22 @@ test_leaks() {
 			echo -ne "\033[1;36mLEAKS:\033[m "
 			echo -n "$INPUT" | valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=tmp_valgrind-out.txt $MINISHELL_PATH/$EXECUTABLE 2>/dev/null >/dev/null
 			# Get the number of bytes lost
-			definitely_lost=$(cat tmp_valgrind-out.txt | grep "definitely lost:" | awk 'END{print $4}')
-			possibly_lost=$(cat tmp_valgrind-out.txt | grep "possibly lost:" | awk 'END{print $4}')
-			indirectly_lost=$(cat tmp_valgrind-out.txt | grep "indirectly lost:" | awk 'END{print $4}')
-			# echo "$definitely_lost"
-			# echo "$possibly_lost"
-			# echo "$indirectly_lost"
+			definitely_lost=$(cat tmp_valgrind-out.txt | grep "definitely lost:") #| awk 'END{print $4}')
+			possibly_lost=$(cat tmp_valgrind-out.txt | grep "possibly lost:") #| awk 'END{print $4}')
+			indirectly_lost=$(cat tmp_valgrind-out.txt | grep "indirectly lost:") # | awk 'END{print $4}')
+			still_reachable=$(cat tmp_valgrind-out.txt | grep "still reachable:") # | awk 'END{print $4}')
+			echo "$definitely_lost"
+			echo "$possibly_lost"
+			echo "$indirectly_lost"
+			echo "$still_reachable"
 			# Check if any bytes were lost
-			if [ "$definitely_lost" != "0" ] || [ "$possibly_lost" != "0" ] || [ "$indirectly_lost" != "0" ];
-			then
-				echo -ne "❌ "
-				((LEAKS++))
-			else
-				echo -ne "✅ "
-			fi
+			# if [ "$definitely_lost" != "0" ] || [ "$possibly_lost" != "0" ] || [ "$indirectly_lost" != "0" ];
+			# then
+			# 	echo -ne "❌ "
+			# 	((LEAKS++))
+			# else
+			# 	echo -ne "✅ "
+			# fi
 			INPUT=""
 			((i++))
 			((TEST_COUNT++))

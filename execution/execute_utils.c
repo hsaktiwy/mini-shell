@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_utils_1.c                                  :+:      :+:    :+:   */
+/*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:59:30 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/10 17:49:38 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/11 05:17:44 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	command_not_found(t_list *cmd, int *get_exit)
 
 	write(STDERR_FILENO, "minishell: ", 11);
 	script_line();
-	p = ((t_cmd *)((t_token *)(cmd->content))->value)->cmd;
+	p = ((t_cmd *)(cmd->content))->cmd;
 	if (ft_strcmp(p, ".") == 0)
 	{
 		error1 = ".: filename argument required\n";

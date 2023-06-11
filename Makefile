@@ -6,15 +6,15 @@
 #    By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 13:01:11 by hsaktiwy          #+#    #+#              #
-#    Updated: 2023/06/11 01:08:08 by aigounad         ###   ########.fr        #
+#    Updated: 2023/06/11 06:21:17 by aigounad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-FSAN = -fsanitize=address
-# FLAGS = -Wall -Wextra -Werror -g -I/Users/hsaktiwy/.brew/opt/readline/include -I$(INCLUDE_DIR) $(FSAN)
-FLAGS = -Wall -Wextra -Werror -g -I/Users/aigounad/.brew/opt/readline/include -I$(INCLUDE_DIR) $(FSAN)
+FSAN = #-fsanitize=address
+# CFLAGS = -Wall -Wextra -Werror -g -I/Users/hsaktiwy/.brew/opt/readline/include -I$(INCLUDE_DIR) $(FSAN)
+CFLAGS = -Wall -Wextra -Werror -g -I/Users/aigounad/.brew/opt/readline/include -I$(INCLUDE_DIR) $(FSAN)
 
 ENV =  ft_getenv.c ft_setenv.c ft_setenv_utils.c ft_init_env.c ft_init_env_utils.c ft_unset_envs.c ft_free_env.c
 
@@ -50,27 +50,27 @@ HEAD_EXE = include/execution.h $(HEADER)
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-	@$(CC) $(FLAGS) $(OBJ) -o $@ -lreadline  -L /Users/hsaktiwy/.brew/opt/readline/lib -L /Users/aigounad/.brew/opt/readline/lib
+	@$(CC) $(CFLAGS) $(OBJ) -o $@ -lreadline  -L /Users/hsaktiwy/.brew/opt/readline/lib -L /Users/aigounad/.brew/opt/readline/lib
 	@echo "Compilation completed."
 
 obj/parser/%.o : parser/%.c $(HEAD_PAR) | obj_dir
 	@echo "Compiling" $<
-	@$(CC) $(FLAGS) -o $@ -c $<
+	@$(CC) $(CFLAGS) -o $@ -c $<
 obj/lexer/%.o : lexer/%.c $(HEAD_LEX) | obj_dir
 	@echo "Compiling" $<
-	@$(CC) $(FLAGS) -o $@ -c $<
+	@$(CC) $(CFLAGS) -o $@ -c $<
 obj/libft/%.o : libft/%.c $(HEAD_LIB) | obj_dir
 	@echo "Compiling" $<
-	@$(CC) $(FLAGS) -o $@ -c $<
+	@$(CC) $(CFLAGS) -o $@ -c $<
 obj/execution/%.o : execution/%.c $(HEAD_EXE) | obj_dir
 	@echo "Compiling" $<
-	@$(CC) $(FLAGS) -o $@ -c $<
+	@$(CC) $(CFLAGS) -o $@ -c $<
 obj/builtins/%.o : builtins/%.c $(HEAD_BUI) | obj_dir
 	@echo "Compiling" $<
-	@$(CC) $(FLAGS) -o $@ -c $<
+	@$(CC) $(CFLAGS) -o $@ -c $<
 obj/environment/%.o : environment/%.c $(HEAD_ENV) | obj_dir
 	@echo "Compiling" $<
-	@$(CC) $(FLAGS) -o $@ -c $<
+	@$(CC) $(CFLAGS) -o $@ -c $<
 
 obj_dir : obj obj/lexer obj/parser obj/libft obj/builtins obj/environment obj/execution
 

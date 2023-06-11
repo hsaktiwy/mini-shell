@@ -3,9 +3,9 @@
 # TODO: remove display tokens
 # TODO: remove testers
 # TODO: check all files and remove comments
-# TODO: check leaks
+<!-- # TODO: check leaks -->
 # TODO: delete unneeded directories and files
-# TODO: testing
+<!-- # TODO: testing -->
 # TODO: norminette
 # TODO: check Makefile
 # TODO: explain your part of the projet

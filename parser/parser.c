@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:48:28 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/10 18:43:16 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/11 05:09:49 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_list	*creat_cmd_list(t_list	**tokens)
 	{
 		token = current->content;
 		if (token->type == COMMAND)
-			ft_lstadd_back(&list, ft_lstnew(token));
+			ft_lstadd_back(&list, ft_lstnew(((t_cmd *)(token->value))));
 		current = current->next;
 	}
 	return (list);
