@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:35:46 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/07 23:54:08 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/11 20:27:29 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		ft_export(t_cmd *command);
 int		ft_env(t_cmd *command);
 int		ft_unset(t_cmd *command);
 int		ft_exit(t_cmd *command, t_list *list);
+void	before_exiting(t_list *list);
 //common functions
 int		check_key(char *key);
 int		f(char *key1, char*key2);

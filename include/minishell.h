@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                       :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:53:21 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/21 17:47:22 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/11 20:26:53 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,15 @@
 # include <dirent.h>
 
 // global variable
-extern int	g_exit_status;
+int		g_exit_status;
 
-//global functions
+//static functions
 int		g_cmd_executing(pid_t newpid);
 int		g_heredoc_executing(int i);
 int		g_stdin_fd(int i);
 t_list	*g_token_l(t_list *tokens);
 char	*g_input_line(char *input);
 int		g_script_mode(int stat);
-
-// if i == 0 output will be 0 i == 1 output will be
-//last output plus 1 (j++, counter) else the stord result will be displayed
 int		g_heredoc_count(int i);
+
 #endif

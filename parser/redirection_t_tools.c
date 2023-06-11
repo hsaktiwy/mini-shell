@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_t_tools.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 19:47:47 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/10 19:27:11 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/11 20:20:16 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,22 @@ char	*get_line(void)
 		free(res);
 	}
 	return (line);
+}
+
+t_token	*next_cmd(t_list *list)
+{
+	t_token	*token;
+	t_list	*current;
+	t_token	*cmd;
+
+	current = list;
+	cmd = NULL;
+	while (current && !cmd)
+	{
+		token = current->content;
+		if (token->type == COMMAND)
+			cmd = token;
+		current = current->next;
+	}
+	return (cmd);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_s_tools.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 15:12:29 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/08 16:38:04 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/11 18:59:03 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	get_true_file(t_file *tmp, int *num)
 		*num = ft_t_strlen(res);
 		free(tmp->a_file);
 		tmp->a_file = ft_strdup(res[0]);
-		fre_tab(res);
+		free_tab(res);
 	}
 }
 
@@ -78,7 +78,7 @@ void	syntax_error_here_doc(t_list **tokens)
 		token = current->content;
 		if (token->type == HERE_DOC)
 		{
-			if (!in_red_cmd(&token, NULL))
+			if (!in_red_cmd(&token, NULL, 1))
 				break ;
 		}
 		else if (!isnext(current))

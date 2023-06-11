@@ -3,115 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/24 15:31:17 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/09 18:11:54 by hsaktiwy         ###   ########.fr       */
+/*   Created: 2023/05/24 15:37:22 by aigounad          #+#    #+#             */
+/*   Updated: 2023/06/11 16:22:32 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec_c(t_execve_params *execve_params, t_env *env)
+void	get_name_of_signal(int sig)
 {
-	execve(execve_params->path, execve_params->args, env->env);
-	write(2, "minishell: ", 11);
-	script_line();
-	if (errno == ENOENT)
+	if (sig == 2)
+		ft_putstr_fd("\n", STDERR_FILENO);
+	if (sig == 3)
+		ft_putstr_fd("Quit: 3\n", STDERR_FILENO);
+	if (sig == 6)
+		ft_putstr_fd("Aborted\n", STDERR_FILENO);
+	if (sig == 7)
+		ft_putstr_fd("Bus error\n", STDERR_FILENO);
+	if (sig == 8)
+		ft_putstr_fd("Floating point exception\n", STDERR_FILENO);
+	if (sig == 9)
+		ft_putstr_fd("\n", STDERR_FILENO);
+	if (sig == 10)
+		ft_putstr_fd("User-defined signal 1\n", STDERR_FILENO);
+	if (sig == 11)
+		ft_putstr_fd("Segmentation fault: 11\n", STDERR_FILENO);
+	if (sig == 12)
+		ft_putstr_fd("User-defined signal 2\n", STDERR_FILENO);
+	if (sig == 13)
+		ft_putstr_fd("Broken pipe\n", STDERR_FILENO);
+	if (sig == 14)
+		ft_putstr_fd("Alarm clock\n", STDERR_FILENO);
+	if (sig == 15)
+		ft_putstr_fd("Terminated\n", STDERR_FILENO);
+}
+
+void	restore_signals_in_child(void)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+}
+
+void	script_line(void)
+{
+	if (g_script_mode(-1))
 	{
-		perror(execve_params->path);
-		exit(127);
-	}
-	else
-	{
-		if (errno == EACCES && is_a_directory(execve_params->path) == 1)
-		{
-			write(STDERR_FILENO, execve_params->path,
-				ft_strlen(execve_params->path));
-			write(STDERR_FILENO, ": is a directory\n", 17);
-		}
-		else
-			perror(execve_params->path);
-		exit(126);
+		write(STDERR_FILENO, "line ", 5);
+		ft_putnbr_fd(g_script_mode(-1), STDERR_FILENO);
+		write(STDERR_FILENO, ": ", 2);
 	}
 }
 
-void	ft_piping(t_list *cmd, t_fd *fd)
+void	before_exiting2(void)
 {
-	if (cmd->next)
-		if (pipe(fd->fd) == -1)
-			perror("minishell: pipe");
-}
+	t_list	*tokens;
+	t_env	*env;
 
-void	dup_stdin_and_stdout(t_list *cmd, t_fd *fd)
-{
-	if (fd->old_fd != -1)
-	{
-		if (dup2(fd->old_fd, STDIN_FILENO) == -1)
-			perror("minishell: dup2");
-		if (close(fd->old_fd) == -1)
-			perror("minishell: close");
-	}
-	if (cmd->next)
-	{
-		if (close(fd->fd[0]) == -1)
-			perror("minishell: close");
-		dup2(fd->fd[1], STDOUT_FILENO);
-		if (close(fd->fd[1]) == -1)
-			perror("minishell: close");
-	}
-}
-
-void	dup_redirections(t_list *cmd)
-{
-	char	*file;
-	int		fd;
-
-	file = ((t_cmd *)(((t_token *)(cmd->content))->value))->file_out;
-	if (file)
-	{
-		fd = ((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_out;
-		if (dup2(fd, STDOUT_FILENO) == -1)
-			perror("minishell: dup2");
-	}
-	file = ((t_cmd *)(((t_token *)(cmd->content))->value))->file_in;
-	if (file)
-	{
-		if (ft_strncmp(file, "/tmp/.here_doc", 9) == 0)
-		{
-			fd = open(file, O_RDONLY, 0666);
-			if (fd == -1)
-				perror("minishell: open");
-			((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_in = fd;
-		}
-		else
-			fd = ((t_cmd *)(((t_token *)(cmd->content))->value))->cmd_in;
-		if (dup2(fd, STDIN_FILENO) == -1)
-			perror("minishell: dup2");
-	}
-}
-
-char	**get_args(t_list *list)
-{
-	char	**args;
-	size_t	size;
-	t_list	*arg_list;
-	char	*curr_arg;
-	size_t	index;
-
-	size = 1 + ((t_cmd *)((t_token *)(list->content))->value)->arg_count;
-	args = malloc(sizeof(char *) * (size + 1));
-	if (!args)
-		return (perror("minishell: malloc"), NULL);
-	arg_list = ((t_cmd *)((t_token *)(list->content))->value)->arg;
-	index = 0;
-	args[index++] = ((t_cmd *)((t_token *)(list->content))->value)->cmd;
-	while (arg_list)
-	{
-		curr_arg = ((t_file *)(arg_list->content))->a_file;
-		args[index++] = curr_arg;
-		arg_list = arg_list->next;
-	}
-	args[index] = 0;
-	return (args);
+	tokens = g_token_l(NULL);
+	free_tokens(&tokens);
+	free(g_input_line(NULL));
+	env = g_env_s(NULL);
+	ft_free_env(&env);
+	rl_clear_history();
+	exit(2);
 }

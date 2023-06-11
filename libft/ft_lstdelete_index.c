@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstdelete_index.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 19:05:27 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/27 22:01:56 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/11 18:45:28 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-void	ft_lstfree_node(t_list **node)
-{
-	if (*node)
-	{
-		free((*node)->content);
-		free((*node));
-		*node = NULL;
-	}
-}
 
 void	ft_lstdelete_index(t_list **list, int index, void (*del)(t_list **))
 {

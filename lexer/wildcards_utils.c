@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcards_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 15:07:39 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/10 20:32:44 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/11 18:14:26 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ int	ft_regx(char *string, char *exp)
 			tmp = tmp + ft_strlen(points[i]);
 	}
 	if (!tmp || (!*tmp && points[i]))
-		return (fre_tab(points), 0);
+		return (free_tab(points), 0);
 	corr = check_exp_edge(points, string, exp, i);
-	return (fre_tab(points), corr);
+	return (free_tab(points), corr);
 }
 
 char	*add_matchs(struct dirent *entry, char *arg, char	*tmp, int *i)
@@ -105,21 +105,4 @@ char	*local_dir(char *tmp)
 		res = str_join(res, ft_strdup(tmp));
 	}
 	return (res);
-}
-
-int	is_spaced_double_single(char *str)
-{
-	int		i;
-	char	c;
-
-	c = '\0';
-	i = -1;
-	while (str[++i])
-	{
-		if (c == '\0' && iswhitespace(str[i]))
-			return (1);
-		else if (str[i] == '\'' || str[i] == '\"')
-			c = double_or_single(str[i], c);
-	}
-	return (0);
 }

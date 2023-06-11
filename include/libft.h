@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:29:04 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/05 15:28:13 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/11 18:47:33 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ t_list	*ft_lstnew(void *content);
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstadd_back(t_list **lst, t_list *new);
 char	*ft_strjoin(char *s1, char *s2);
-void	ft_lstadd_front(t_list **lst, t_list *new);
-void	ft_lstadd_in_index(t_list **list, t_list *new, int index);
 void	ft_lstdelete_index(t_list **list, int index, void (*del)(t_list **));
-void	ft_lstfree_node(t_list **node);
 
 // split
 char	*ft_strdup(const char *s1);
@@ -65,12 +62,11 @@ char	*ft_itoa(int n);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
-int		ft_numlen(int nb);
-size_t	str_len(const char *s);
 void	ft_replace(void *str, char old, char new);
+void	free_tab(char **pp);
 // get next line 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 5
+#  define BUFFER_SIZE 1
 # endif
 
 char	*get_next_line(int fd);

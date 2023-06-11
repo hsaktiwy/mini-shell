@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   wildcards_second_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 15:09:25 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/04 19:20:25 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/11 18:03:41 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	fre_tab(char **pp)
-{
-	int	i;
-
-	i = 0;
-	while (pp[i])
-	{
-		free(pp[i++]);
-	}
-	free(pp);
-}
 
 int	isendwith(char *string)
 {

@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   free_tab.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/19 09:33:28 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/05/27 22:01:56 by hsaktiwy         ###   ########.fr       */
+/*   Created: 2023/06/11 18:00:46 by aigounad          #+#    #+#             */
+/*   Updated: 2023/06/11 20:31:24 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+void	free_tab(char **pp)
 {
-	new->next = *lst;
-	*lst = new;
+	int	i;
+
+	i = 0;
+	while (pp[i])
+	{
+		free(pp[i++]);
+	}
+	free(pp);
 }

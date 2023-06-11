@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structers.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:02:18 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/10 16:39:24 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/11 20:26:13 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ typedef struct s_command
 	int				cmd_out;
 	char			*file_in;
 	char			*file_out;
-	t_env			*env;
 	int				error;
 }t_cmd;
 

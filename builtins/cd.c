@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:50:22 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/09 18:15:40 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/10 18:21:10 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	ft_cd(t_cmd *command)
 		return (1);
 	if (getcwd(cwd, PATH_MAX + 1) == NULL)
 		flag = 1;
-	path = get_path(command, command->env);
+	path = get_path(command, g_env_s(NULL));
 	if (!path || !*path)
 		return (1);
 	if (chdir(path) == -1)
@@ -122,7 +122,7 @@ int	ft_cd(t_cmd *command)
 	if (command->arg_count != 0
 		&& ft_strcmp(((t_file *)(command->arg->content))->a_file, "-") == 0)
 	{
-		oldpwd = ft_getenv(command->env, "OLDPWD");
+		oldpwd = ft_getenv(g_env_s(NULL), "OLDPWD");
 		if (oldpwd)
 			write(command->cmd_out, oldpwd, ft_strlen(oldpwd));
 		write(command->cmd_out, "\n", 1);

@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_second_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 14:14:11 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/10 15:56:01 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/11 18:18:25 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-t_token	*last_cmd(t_list **tokens)
-{
-	t_token	*cmd;
-	t_token	*tmp;
-	t_list	*list;
-
-	cmd = NULL;
-	list = *tokens;
-	while (list)
-	{
-		tmp = list->content;
-		if (tmp->type == COMMAND)
-			cmd = tmp;
-		list = list->next;
-	}
-	return (cmd);
-}
 
 void	ini_count(t_token **token)
 {

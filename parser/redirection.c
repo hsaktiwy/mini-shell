@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 15:13:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/07 17:56:46 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/11 20:18:37 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	out_red_cmd(t_token **red, t_token **command)
+int	out_red_cmd(t_token **red, t_token **command, int r)
 {
 	t_cmd	*cmd;
 	int		fd;
 
 	fd = -1;
-	fd = out_append_red((*red)->value, (*red)->type);
+	if (r == 1)
+		fd = out_append_red((*red)->value, (*red)->type);
 	if (fd == -1)
 		return (0);
 	if (*command)
@@ -30,13 +31,13 @@ int	out_red_cmd(t_token **red, t_token **command)
 	return (1);
 }
 
-int	in_red_cmd(t_token **red, t_token **command)
+int	in_red_cmd(t_token **red, t_token **command, int r)
 {
 	t_cmd	*cmd;
 	int		fd;
 
 	fd = -1;
-	if ((*red)->type == IN_REDIRECT)
+	if ((*red)->type == IN_REDIRECT && r == 1)
 		fd = in_redirection((*red)->value);
 	else if ((*red)->type == HERE_DOC && g_stdin_fd(-1) == 0)
 		fd = here_doc_red((*red)->value);
@@ -57,51 +58,32 @@ int	in_red_cmd(t_token **red, t_token **command)
 int	redirect(t_list **list, t_token **cmd)
 {
 	t_list	*start;
-	t_token	*red;
 	t_token	*tmp;
+	int		r;
 
+	r = 1;
 	start = *list;
 	while (start)
 	{
 		tmp = (start)->content;
 		if (tmp->type == IN_REDIRECT || tmp->type == HERE_DOC)
 		{
-			red = tmp;
-			if (!in_red_cmd(&red, cmd))
-				return (0);
+			if (!in_red_cmd(&tmp, cmd, r) && r == 1)
+				r = 0;
 		}
 		else if (tmp->type == OUT_REDIRECT || tmp->type == APPEND_REDIRECT)
 		{
-			red = tmp;
-			if (!out_red_cmd(&red, cmd))
-				return (0);
+			if (!out_red_cmd(&tmp, cmd, r) && r == 1)
+				r = 0;
 		}
 		else if (tmp->type == PIPE)
 			break ;
 		start = (start)->next;
 	}
-	return (1);
+	return (r);
 }
 
-t_token	*next_cmd(t_list *list)
-{
-	t_token	*token;
-	t_list	*current;
-	t_token	*cmd;
-
-	current = list;
-	cmd = NULL;
-	while (current && !cmd)
-	{
-		token = current->content;
-		if (token->type == COMMAND)
-			cmd = token;
-		current = current->next;
-	}
-	return (cmd);
-}
-
-int	redirection_habdling(t_list **tokens)
+int	redirection_hanbdling(t_list **tokens)
 {
 	t_list	*list;
 	t_token	*token;

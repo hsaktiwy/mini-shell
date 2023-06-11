@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:07:28 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/10 19:00:22 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/11 20:19:59 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "minishell.h"
 
-t_cmd	*ini_cmd(t_env *env)
+t_cmd	*init_cmd(void)
 {
 	t_cmd	*cmd;
 
@@ -25,21 +25,24 @@ t_cmd	*ini_cmd(t_env *env)
 	cmd->cmd_out = STDOUT_FILENO;
 	cmd->file_in = NULL;
 	cmd->file_out = NULL;
-	cmd->env = env;
 	cmd->error = 0;
 	return (cmd);
 }
 
-// int	is_splitable_env(char *str)
-// {
-// 	int	i;
+t_token	*last_cmd(t_list **tokens)
+{
+	t_token	*cmd;
+	t_token	*tmp;
+	t_list	*list;
 
-// 	i = 0;
-// 	while (str[i] && !iswhitespace(str[i]))
-// 	{
-// 		if (str[i] == '$')
-// 			return (1);
-// 		i++;
-// 	}
-// 	return (0);
-// }
+	cmd = NULL;
+	list = *tokens;
+	while (list)
+	{
+		tmp = list->content;
+		if (tmp->type == COMMAND)
+			cmd = tmp;
+		list = list->next;
+	}
+	return (cmd);
+}

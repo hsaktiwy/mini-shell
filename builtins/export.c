@@ -6,18 +6,18 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 11:24:21 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/02 18:10:53 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/10 16:47:13 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_export(t_cmd *command)
+void	print_export(t_cmd *command, t_env *env)
 {
 	t_list	*list;
 
-	list = command->env->l_env;
-	sort_env_list(command->env->l_env);
+	list = env->l_env;
+	sort_env_list(env->l_env);
 	while (list)
 	{
 		if (ft_strcmp(((t_holder *)(list->content))->key, "_") != 0)
@@ -112,7 +112,7 @@ int	ft_export(t_cmd *command)
 	status = 0;
 	arg_list = command->arg;
 	if (command->arg_count == 0)
-		print_export(command);
+		print_export(command, g_env_s(NULL));
 	while (arg_list)
 	{
 		arg = ((t_file *)(arg_list->content))->a_file;
