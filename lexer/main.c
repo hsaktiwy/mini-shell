@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:19:53 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/10 19:56:29 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/11 15:36:11 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	signal_handler(int sig)
 		{
 			printf("\n");
 			rl_on_new_line();
-			rl_replace_line("", 0);
+			// rl_replace_line("", 0);
 			rl_redisplay();
 		}
 		g_exit_status = 1;
