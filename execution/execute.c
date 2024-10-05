@@ -6,7 +6,7 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:01:57 by aigounad          #+#    #+#             */
-/*   Updated: 2023/06/11 17:34:05 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/14 11:01:10 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	ft_forking(t_list *cmd, t_list *list, t_fd *fd, t_execve_params *ep)
 	{
 		perror("minishell: fork");
 		g_exit_status = 1;
+		free(ep->path);
+		free(ep->args);
 		return (1);
 	}
 	else if (pid == 0)
@@ -88,8 +90,7 @@ int	execute_2(t_list *cmd, t_list *list, int *get_exit, t_fd *fd)
 		if (execb1(cmd, list, get_exit, &ep))
 			return (close_pipe(cmd, fd), 0);
 		if (ft_forking(cmd, list, fd, &ep) == 1)
-			return (g_exit_status = 1, *get_exit = 0, close_pipe(cmd, fd),
-				free(ep.path), free(ep.args), 1);
+			return (*get_exit = 0, close_pipe(cmd, fd), 1);
 		free(ep.path);
 		free(ep.args);
 	}

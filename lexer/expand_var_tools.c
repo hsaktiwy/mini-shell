@@ -6,7 +6,7 @@
 /*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 18:17:59 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/08 15:26:40 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/13 20:14:26 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*expand_nor_var(char *res, char *s, int *k)
 	{
 		tmp = ft_itoa(g_exit_status);
 		size = ft_strlen(tmp);
-		re = ft_realloc(res, ft_strlen(res) + size + 1 + 2);
+		re = ft_realloc(res, ft_strlen(res) + size + 1);
 		ft_strncat(re, tmp, size);
 		return (free(v_env), free(tmp), re);
 	}
@@ -72,7 +72,7 @@ char	*expand_nor_var(char *res, char *s, int *k)
 	if (tmp)
 		tmp = encapsulation(tmp);
 	size = ft_strlen(tmp);
-	re = ft_realloc(res, ft_strlen(res) + size + 1 + 2);
+	re = ft_realloc(res, ft_strlen(res) + size + 1);
 	ft_strncat(re, tmp, size);
 	return (free(v_env), free(tmp), re);
 }
@@ -92,7 +92,7 @@ char	*expand_in_brace(char	*s, int *k, char *res)
 	{
 		tmp = ft_itoa(g_exit_status);
 		size = ft_strlen(tmp);
-		re = ft_realloc(res, ft_strlen(res) + size + 1 + 2);
+		re = ft_realloc(res, ft_strlen(res) + size + 1);
 		ft_strncat(re, tmp, size);
 		return (free(tmp_env), free(tmp), re);
 	}
@@ -100,7 +100,7 @@ char	*expand_in_brace(char	*s, int *k, char *res)
 	if (tmp)
 		tmp = encapsulation(tmp);
 	size = ft_strlen(tmp);
-	re = ft_realloc(res, ft_strlen(res) + size + 1 + 2);
+	re = ft_realloc(res, ft_strlen(res) + size + 1);
 	ft_strncat(re, tmp, size);
 	return (free(tmp_env), free(tmp), re);
 }

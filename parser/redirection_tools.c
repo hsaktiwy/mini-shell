@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_tools.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 15:17:19 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/10 19:23:23 by hsaktiwy         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:16:16 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,18 +81,20 @@ int	here_doc_red(t_file *tmp)
 	if (tmp->a_file)
 	{
 		if (tmp->token_file)
-		fd = open(tmp->token_file, O_RDWR | O_CREAT | O_TRUNC, 0666);
+		{
+			unlink(tmp->token_file);
+			fd = open(tmp->token_file, O_RDWR | O_CREAT | O_TRUNC, 0666);
+		}
 		if (fd == -1)
 		{
-				g_exit_status = 1;
-			if (errno == EACCES)
-				g_exit_status = 1;
-			else if (errno == ENOENT)
-				g_exit_status = 1;
 			print_error(NULL, tmp->token_file, 1);
+			return (-1);
 		}
 		else if (!heredoc(tmp->a_file, fd, tmp->here_doc_exp))
-			write(STDERR_FILENO, "minishell : Error: here_doc fail\n", 34);
+		{
+			write(STDERR_FILENO, "minishell : Error: here_doc fail\n", 33);
+			return (-1);
+		}
 	}
 	else
 		return (-1);

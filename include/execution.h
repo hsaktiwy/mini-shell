@@ -6,12 +6,13 @@
 /*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:06:48 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/11 20:27:12 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/14 12:39:08 by aigounad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
 # define EXECUTION_H
+
 # include "minishell.h"
 
 void	execute(t_list *list);
@@ -39,9 +40,9 @@ void	ft_init_fd(t_fd *fd, int *get_exit);
 void	sort_env_list(t_list *head);
 char	*shell_init_pwd(char *pwd, int stat);
 int		is_a_directory(char *filename);
-//
 void	script_line(void);
 void	before_exiting2(void);
+
 //main
 void	signal_handler(int sig);
 char	*get_prompt(void);

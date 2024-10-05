@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaktiwy <hsaktiwy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:46:31 by hsaktiwy          #+#    #+#             */
-/*   Updated: 2023/06/11 18:24:27 by aigounad         ###   ########.fr       */
+/*   Updated: 2023/06/13 20:31:37 by hsaktiwy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,7 @@ int	handle_command(t_list **tokens, t_env *env, char *input, int *index)
 	token->type = COMMAND;
 	r = get_initial_token(&input[*index]);
 	*index += input_arg_size(&input[*index]);
-	tmp = ft_strdup(r);
-	tmp = expand_input(env, tmp);
+	tmp = expand_input(env, r);
 	token->value = init_cmd();
 	if (token->value && tmp)
 	{
@@ -90,10 +89,10 @@ int	handle_command(t_list **tokens, t_env *env, char *input, int *index)
 		if (((t_cmd *)(token->value))->cmd)
 		{
 			ft_lstadd_back(tokens, ft_lstnew(token));
-			return (free(r), free(tmp), 1);
+			return (free(tmp), 1);
 		}
 	}
-	return (free(token), free(r), free(tmp), 0);
+	return (free(token->value), free(token), free(tmp), 0);
 }
 
 void	handle_arg(t_list **tokens, t_env *env, char *input, int *index)
@@ -101,15 +100,12 @@ void	handle_arg(t_list **tokens, t_env *env, char *input, int *index)
 	t_token	*cmd;
 	char	*file;
 	char	*r;
-	char	*tmp;
 
 	cmd = NULL;
 	cmd = last_cmd(tokens);
-	tmp = ft_strdup(&input[*index]);
-	*index += input_arg_size(tmp);
-	r = get_initial_token(tmp);
+	r = get_initial_token(&input[*index]);
+	*index += input_arg_size(&input[*index]);
 	file = expand_input(env, r);
 	arg_filler(&cmd, file);
 	free(file);
-	free(tmp);
 }
