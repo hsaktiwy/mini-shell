@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aigounad <aigounad@student.1337.ma>        +#+  +:+       +#+         #
+#    By: hsaktiwy <hsaktiwy@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 13:01:11 by hsaktiwy          #+#    #+#              #
-#    Updated: 2023/06/14 12:31:04 by aigounad         ###   ########.fr        #
+#    Updated: 2023/06/14 12:31:04 by hsaktiwy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,9 +35,9 @@ OBJ = $(LEXER:%.c=obj/lexer/%.o) $(BUILTINS:%.c=obj/builtins/%.o) $(ENV:%.c=obj/
 		$(LIBFT:%.c=obj/libft/%.o) $(PARSER:%.c=obj/parser/%.o) $(EXEC:%.c=obj/execution/%.o)
 
 HEADER = include/minishell.h include/structers.h
-INCLUDE_DIR = /Users/aigounad/.brew/opt/readline/include
+INCLUDE_DIR = /Users/hsaktiwy/.brew/opt/readline/include
 RL_INCLUDE_DIR = ./include
-RL_DIR = /Users/aigounad/.brew/opt/readline/lib
+RL_DIR = /Users/hsaktiwy/.brew/opt/readline/lib
 HEAD_LEX = include/lexer.h $(HEADER)
 HEAD_BUI = include/builtins.h $(HEADER)
 HEAD_LIB = include/libft.h $(HEADER)
